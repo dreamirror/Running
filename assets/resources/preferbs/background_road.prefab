@@ -137,7 +137,7 @@
     "_id": ""
   },
   {
-    "__type__": "cc.PhysicsBoxCollider",
+    "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -145,11 +145,6 @@
     },
     "_enabled": true,
     "tag": 0,
-    "_density": 1,
-    "_sensor": false,
-    "_friction": 0.2,
-    "_restitution": 0,
-    "body": null,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 50,
@@ -168,7 +163,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "beb4c865-1357-4b15-ad3d-3d0461a85d1d"
     },
     "fileId": "67+jjU05JNE566nbwiDdNP",
     "sync": false

@@ -75,7 +75,7 @@ cc.Class({
      * 跳跃中发生碰撞的CallBack , 此时从外部调用的该函数所以this并不是JumpState！！
      */
     CollisionStartCallBack : function(other, self , InTarget){
-        if (other.node.name == "ground")
+        if (other.node.name == "Background_road")
         {
             InTarget.bFallOnGround = true;
 

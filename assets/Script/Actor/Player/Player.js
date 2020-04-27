@@ -42,6 +42,8 @@ var Player = cc.Class({
         {
             this.RightArmFSMMgr.Update(dt);
         }
+
+        //模拟重力的系统需要添加一个
     },
 
 
