@@ -850,16 +850,16 @@
       "__id__": 18
     },
     "firePrefab": {
-      "__uuid__": "973390ab-7c14-4b8f-a72b-29b053010596"
+      "__uuid__": "a1115d74-4662-4017-ae4d-77513625bd31"
     },
     "swordPrefab": {
-      "__uuid__": "8124bea3-49c0-433e-91a0-c7646c4a6c0c"
+      "__uuid__": "11b84bf7-678f-41c7-9e05-3e6dd72ed470"
     },
     "boxPrefab": {
-      "__uuid__": "1b1b925c-c782-4645-8b00-8f55f125bc5f"
+      "__uuid__": "5b0e1a68-f203-4264-a113-e7f79bd9feb3"
     },
     "roadPrefab": {
-      "__uuid__": "7c0bc2c8-dd82-4835-8432-ff0a546dc2a7"
+      "__uuid__": "beb4c865-1357-4b15-ad3d-3d0461a85d1d"
     },
     "barriers": [],
     "roads": [],
