@@ -7,6 +7,7 @@ var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
 var TestWeaponState = require("TestWeaponState");
 var TestWeaponAttack = require("TestWeaponAttack");
+var GravityManager = require("GravityManager");
 
 var Player = cc.Class({
     extends :ActorBase,
@@ -33,6 +34,10 @@ var Player = cc.Class({
         this.InitVariable();
         this.InitFSM();
 
+        //模拟重力的系统需要添加一个
+        if(this.BUseGravity && GravityManager._instance){
+            GravityManager._instance.RigisterToGravity(this , this.UpdateGravity);
+        }  
     },
 
     update (dt) {
@@ -42,8 +47,6 @@ var Player = cc.Class({
         {
             this.RightArmFSMMgr.Update(dt);
         }
-
-        //模拟重力的系统需要添加一个
     },
 
 

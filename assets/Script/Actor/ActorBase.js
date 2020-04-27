@@ -1,13 +1,20 @@
 /** 
  * 所有角色的一个基类，拥有碰撞体，以及拥有可以注册的碰撞回调方法
  * 拥有可以操控动画的方法等
+ * 如果重载Start方法，记得一定要把注册重力系统加上
 */
+
+var GravityManager = require("GravityManager");
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
+        //每个Actor都有的一个垂直方向加速度，用来计算重力，跳跃等
+        AYSpeed : 0,
 
+        //是否注册重力
+        BUseGravity : false,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -17,9 +24,21 @@ cc.Class({
 
     start () {
         this.InitVariable();
+        
+        if(this.BUseGravity && GravityManager._instance){
+            GravityManager._instance.RigisterToGravity(this , this.UpdateGravity);
+        }    
     },
 
-    // update (dt) {},
+    onDestroy (){
+        //if( GravityManager._instance){
+        //    GravityManager._instance.UnRigisterToGravity(this);
+        //} 
+    },
+
+    update (dt) {
+        
+    },
 
     /**初始化数据 */
     InitVariable : function( ) {
@@ -36,12 +55,15 @@ cc.Class({
 
     /*****************  Player 的方法  *******************/
     //添加碰撞回调
-    AddCollisionStartCall : function( InFunction , Target){
+    AddCollisionStartCall : function( InFunction , Target , Param){
         if(this.CollisionStartCallList.has(InFunction)){
             cc.log("AddCollisionStartCall this Function is Already has!!!");
         }
         else{
-            this.CollisionStartCallList.set(InFunction , Target);
+            var ValTarget = {};
+            ValTarget.Target = Target;
+            ValTarget.Param = Param;
+            this.CollisionStartCallList.set(InFunction , ValTarget);//Target);
         }
         
     },
@@ -50,11 +72,14 @@ cc.Class({
         if(this.CollisionStartCallList.has(InFunction)){
             this.CollisionStartCallList.delete(InFunction);
         }
-        //var DelIndex = this.CollisionStartCallList.indexOf(InFunction);
-        //this.CollisionStartCallList.splice(DelIndex,1);
     },
 
-
+    /**
+     * 重力系统的Update回调
+     */
+    UpdateGravity : function(){
+        cc.log("重力系统回调！");
+    },
 
 
 
@@ -130,7 +155,7 @@ cc.Class({
 
         //分发碰撞事件
         this.CollisionStartCallList.forEach(function(value,key){
-            key(other,self ,value);
+            key(other,self ,value.Target , value.Param);
         });
     },
 
