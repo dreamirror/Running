@@ -48,14 +48,14 @@ var GravityManager = cc.Class({
                 key.AYSpeed = key.AYSpeed - this.GravityVal;
                 //还在空中更新重力位置，此时传回Y加速度更新位置
                 var CurGravityActorData = this.GravityActorList.get(key);
-                CurGravityActorData.CallFunction( key.AYSpeed , false , null );
+                CurGravityActorData.CallFunction( key , key.AYSpeed , false , null );
             }
             
         }
     },
 
     /**
-     * 添加Actor到该重力系统中  InCallFunction( AYSpeed ： 当前Y方向的加速度， bOnGround ： 如果该值为0，则使用第三个参数更新Actor的位置 GroundObj ： 用来更新该Actor的位置)
+     * 添加Actor到该重力系统中  InCallFunction( InActor , AYSpeed ： 当前Y方向的加速度， bOnGround ： 如果该值为0，则使用第三个参数更新Actor的位置 GroundObj ： 用来更新该Actor的位置)
      */
     RigisterToGravity : function( InActor , InCallFunction ){
         //if( InActor instanceof Player){
@@ -115,26 +115,26 @@ var GravityManager = cc.Class({
      * 一个Actor碰撞到物体的回调，会在此判断是否碰撞到了地面,先暂时，在这里设置位置？
      */
     OnActorCollisionCall : function( other, self , InTarget , InActor){
-        if(!this.GravityActorList.has(InActor)){
+        if(!InTarget.GravityActorList.has(InActor)){
             cc.log("error!!!!!! 返回的Actor不在重力系统中");
         }
 
         if (other.node.name == "Background_road")
         {
-            var CurGravityActorData = this.GravityActorList.get(InActor);
+            var CurGravityActorData = InTarget.GravityActorList.get(InActor);
             CurGravityActorData.bOnGround = true;
 
             //再重新设置一下Player的位置
             //var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(other);
             //var TempPos = InActor.node.getPosition();
             //InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
-            CurGravityActorData.CallFunction( 0 , true , other );
+            CurGravityActorData.CallFunction( InActor ,0 , true , other );
 
             //重新设置下List的值
-            this.GravityActorList.set(CurGravityActorData);
+            InTarget.GravityActorList.set(CurGravityActorData);
 
             //将该Actor的碰撞事件中清除监控
-            InActor.RemoveCollisionStartCall( this.OnActorCollisionCall );
+            InActor.RemoveCollisionStartCall( InTarget.OnActorCollisionCall );
         }
 
     }

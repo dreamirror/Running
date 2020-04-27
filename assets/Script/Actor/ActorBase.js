@@ -77,8 +77,10 @@ cc.Class({
     /**
      * 重力系统的Update回调
      */
-    UpdateGravity : function(){
-        cc.log("重力系统回调！");
+    UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj){
+        //cc.log("重力系统回调！");
+        var TempPos = InActor.node.getPosition();
+        InActor.node.setPosition(cc.v2(TempPos.x , TempPos.y + AYSpeed));
     },
 
 
