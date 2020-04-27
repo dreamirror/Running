@@ -6,6 +6,15 @@
 
 var ActorBase = require("ActorBase");
 
+/*
+    如果离开了之前的地面之后，又一次触发了离开地面而并没有踏上新地面，则开启重力下降
+*/
+var EStandNewState = {
+    INITSTATE   :   0,  //该状态为起始状态
+    STANDINGNEW :   1,  //该状态表明，踏上了新的地面
+    LEAVEOLD    :   2,  //该状态表明，离开了之前踩着的地面
+};
+
 var GravityManager = cc.Class({
     extends: cc.Component,
 
@@ -68,11 +77,15 @@ var GravityManager = cc.Class({
                 //Update的时候，会不断的去回调这个CallFunction来修改其加速度
                 TempObj.CallFunction = InCallFunction;
                 TempObj.bOnGround = false;
+                //4.27 新添加，再加一个字段判明，是否已经踩上了新的地面而老地面才离开
+                TempObj.bStandInNewGround = EStandNewState.INITSTATE;
                 this.GravityActorList.set(InActor , TempObj);
 
                 //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面
                 //一旦该Actor站到了地面上，则取消此回调
                 InActor.AddCollisionStartCall( this.OnActorCollisionCall , this, InActor );
+                //再添加一个碰撞结束的回调，如果离开了地面就会触发（掉下悬崖） ,该状态是不删的！只有在清除的时候才删除
+                InActor.AddCollisionEndCall(this.OnActorCollisionEndCall , this ,InActor );
 
                 cc.log("该Actor已经注册");
             }
@@ -86,6 +99,7 @@ var GravityManager = cc.Class({
     UnRigisterToGravity : function(InActor ){
         if( InActor instanceof ActorBase ){
             if(this.GravityActorList.has(InActor)){
+                InActor.RemoveCollisionEndCall(this.OnActorCollisionEndCall);
                 this.GravityActorList.delete(InActor);
             }
         }
@@ -100,14 +114,15 @@ var GravityManager = cc.Class({
         }
 
         var CurGravityActorData = this.GravityActorList.get(InActor);
-        CurGravityActorData.bOnGround = false;      //设置为在天空中
+        //CurGravityActorData.bOnGround = false;      //设置为在天空中  4.27晚上 不设置，由离开Collision来处理
         InActor.AYSpeed = InASpeed;
+        CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
 
         //重新设置下List的值
-        this.GravityActorList.set(CurGravityActorData);
+        //this.GravityActorList.set(InActor , CurGravityActorData);
 
-        //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面
-        InActor.AddCollisionStartCall( this.OnActorCollisionCall , this, InActor );
+        //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面  4.27晚，该注册事件，由离开地面的碰撞回调来触发把
+        //InActor.AddCollisionStartCall( this.OnActorCollisionCall , this, InActor );
     },
 
 
@@ -115,14 +130,19 @@ var GravityManager = cc.Class({
      * 一个Actor碰撞到物体的回调，会在此判断是否碰撞到了地面,先暂时，在这里设置位置？
      */
     OnActorCollisionCall : function( other, self , InTarget , InActor){
+
+        cc.log("Collision Start!!!!!!!");
+
         if(!InTarget.GravityActorList.has(InActor)){
             cc.log("error!!!!!! 返回的Actor不在重力系统中");
         }
 
+        //4.27暂时直接写全名
         if (other.node.name == "Background_road")
         {
             var CurGravityActorData = InTarget.GravityActorList.get(InActor);
             CurGravityActorData.bOnGround = true;
+            CurGravityActorData.bStandInNewGround = EStandNewState.STANDINGNEW;
 
             //再重新设置一下Player的位置
             //var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(other);
@@ -131,12 +151,43 @@ var GravityManager = cc.Class({
             CurGravityActorData.CallFunction( InActor ,0 , true , other );
 
             //重新设置下List的值
-            InTarget.GravityActorList.set(CurGravityActorData);
+            InTarget.GravityActorList.set(InActor , CurGravityActorData);
 
             //将该Actor的碰撞事件中清除监控
-            InActor.RemoveCollisionStartCall( InTarget.OnActorCollisionCall );
+            //InActor.RemoveCollisionStartCall( InTarget.OnActorCollisionCall );
         }
+    },
 
-    }
+    /**
+     * 当一个Actor离开地面碰撞的回调，在此会重新启动
+     */
+    OnActorCollisionEndCall : function(other, self , InTarget , InActor ){
+
+        cc.log("Collision End!!!!!!!");
+
+        if(!InTarget.GravityActorList.has(InActor)){
+            cc.log("error!!!!!! 返回的Actor不在重力系统中");
+        }
+        
+        //4.27暂时直接写全名
+        if (other.node.name == "Background_road"){
+            var CurGravityActorData = InTarget.GravityActorList.get(InActor);
+            //如果没有踏上新的地面，则开启重力
+            if (CurGravityActorData.bStandInNewGround == EStandNewState.LEAVEOLD){
+                CurGravityActorData.bOnGround = false;      //设置为在天空中
+                //重新设置下List的值
+                InTarget.GravityActorList.set(InActor , CurGravityActorData);
+            }
+            else if (CurGravityActorData.bStandInNewGround == EStandNewState.STANDINGNEW)
+            {
+                CurGravityActorData.bStandInNewGround = EStandNewState.LEAVEOLD;
+            }
+            //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面
+            //InActor.AddCollisionStartCall( InTarget.OnActorCollisionCall , InTarget, InActor );
+        }
+    },
+
+
+
 
 });

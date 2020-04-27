@@ -219,7 +219,9 @@
     "node": {
       "__id__": 2
     },
-    "_enabled": true,
+    "_enabled": false,
+    "AYSpeed": 0,
+    "BUseGravity": false,
     "_id": ""
   },
   {
@@ -300,13 +302,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -5.8,
-      "y": 56.5
+      "x": -25.8,
+      "y": 54.1
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 89.9,
-      "height": 110.3
+      "width": 16.1,
+      "height": 115.1
     },
     "_id": ""
   },
@@ -318,6 +320,8 @@
       "__id__": 1
     },
     "_enabled": true,
+    "AYSpeed": 0,
+    "BUseGravity": true,
     "RightArm": {
       "__id__": 2
     },

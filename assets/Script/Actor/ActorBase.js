@@ -54,7 +54,7 @@ cc.Class({
     },
 
     /*****************  Player 的方法  *******************/
-    //添加碰撞回调
+    //添加开始碰撞回调 , Target 是函数拥有者
     AddCollisionStartCall : function( InFunction , Target , Param){
         if(this.CollisionStartCallList.has(InFunction)){
             cc.log("AddCollisionStartCall this Function is Already has!!!");
@@ -67,10 +67,29 @@ cc.Class({
         }
         
     },
-    //删除某一个回调
+    //删除某一个开始碰撞回调
     RemoveCollisionStartCall : function( InFunction ){
         if(this.CollisionStartCallList.has(InFunction)){
             this.CollisionStartCallList.delete(InFunction);
+        }
+    },
+    //添加碰撞结束回调
+    AddCollisionEndCall : function( InFunction , Target , Param){
+        if(this.CollisionEndCallList.has(InFunction)){
+            cc.log("AddCollisionEndCall this Function is Already has!!!");
+        }
+        else{
+            var ValTarget = {};
+            ValTarget.Target = Target;
+            ValTarget.Param = Param;
+            this.CollisionEndCallList.set(InFunction , ValTarget);//Target);
+        }
+        
+    },
+    //删除某一个开始碰撞回调
+    RemoveCollisionEndCall : function( InFunction ){
+        if(this.CollisionEndCallList.has(InFunction)){
+            this.CollisionEndCallList.delete(InFunction);
         }
     },
 
@@ -169,9 +188,9 @@ cc.Class({
     onCollisionStay: function (other, self) {
         //console.log('on collision stay');
         //分发碰撞事件
-        for (var index in this.CollisionStayCallList) {  
-            index(other,self , this.CollisionStayCallList.get(index));  
-        }  
+        this.CollisionStayCallList.forEach(function(value,key){
+            key(other,self ,value.Target , value.Param);
+        });
     },
     /**
      * 当碰撞结束后调用
@@ -182,9 +201,9 @@ cc.Class({
         //console.log('on collision exit');
 
         //分发碰撞事件
-        for (var index in this.CollisionEndCallList) {  
-            index(other,self , this.CollisionEndCallList.get(index));  
-        } 
+        this.CollisionEndCallList.forEach(function(value,key){
+            key(other,self ,value.Target , value.Param);
+        });
     },
 
     /****************** 在此进行一个timer的管理器 *********************/

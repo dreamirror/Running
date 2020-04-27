@@ -8,7 +8,7 @@ var RightArm = cc.Class({
     extends: ActorBase,
 
     properties: {
-
+       
     },
 
 });

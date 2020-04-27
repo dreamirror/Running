@@ -180,7 +180,7 @@
       "array": [
         0,
         0,
-        318.69734859267345,
+        361.99362211368117,
         0,
         0,
         0,
@@ -1257,6 +1257,9 @@
     "_enabled": false,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "Player": {
+      "__id__": 24
+    },
     "_id": "f5w00VfUBDiK9iOSEUqzdL"
   },
   {
@@ -1337,13 +1340,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -5.7,
-      "y": 55.1
+      "x": -25.8,
+      "y": 54.1
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 90.2,
-      "height": 112.9
+      "width": 16.1,
+      "height": 115.1
     },
     "_id": "a7c3jzyytIzp0qPNTVs3Lr"
   },

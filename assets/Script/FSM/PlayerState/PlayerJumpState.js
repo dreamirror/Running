@@ -5,6 +5,7 @@ var FSMUtil = require("FSMUtil");
 var FSMStateBase = require("FSMStateBase");
 var Player = require("Player");
 var FunctionLibrary = require("FunctionLibrary");
+var GravityManager = require("GravityManager");
 
 cc.Class({
     extends: FSMStateBase,
@@ -42,6 +43,10 @@ cc.Class({
 
         //该状态通过向Player中注册一个碰撞的回调，来处理接触地面等的事件
         this.playerJS.AddCollisionStartCall( this.CollisionStartCallBack , this );
+
+        //设置一个跳跃
+        GravityManager._instance.SetJump(this.playerJS , this.JumpInitialSpeed);
+
     },
 
     /** 当落到地面时，结束跳跃状态切换为行走状态
@@ -61,14 +66,13 @@ cc.Class({
 
     //在此模拟一个跳跃的位移
     Update : function(){
-        if ( this.bFallOnGround == false ){
+        /*if ( this.bFallOnGround == false ){
             this.JumpInitialSpeed = FunctionLibrary.CalculateJumpASpeed(this.JumpInitialSpeed);
             var TempPos = this.TargetObj.getPosition();
-            //cc.log( "this.JumpInitialSpeed : " + this.JumpInitialSpeed + "\n");
-            //cc.log( "this.TempPos : " + TempPos.y + "\n");
     
             this.TargetObj.setPosition(cc.v2(TempPos.x , TempPos.y + this.JumpInitialSpeed));
-        };
+        };*/
+        //4.27 修改为使用重力系统的跳跃
     },
 
     /**
@@ -80,10 +84,10 @@ cc.Class({
             InTarget.bFallOnGround = true;
 
             //再重新设置一下Player的位置
-            var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(other);
+            //var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(other);
             
-            var TempPos = InTarget.TargetObj.getPosition();
-            InTarget.TargetObj.setPosition(cc.v2(TempPos.x , Bounds.top));
+            //var TempPos = InTarget.TargetObj.getPosition();
+            //InTarget.TargetObj.setPosition(cc.v2(TempPos.x , Bounds.top));
         }
     },
 
