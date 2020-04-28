@@ -27,12 +27,6 @@ cc.Class({
             displayName : "玩家武器手臂",
         },
 
-        //分享按钮的btn
-        ShareBtn : {
-            default : null,
-            type : cc.Prefab,
-        },
-
         /* 玩家跳跃的初始加速度 */
         InitialSpeed : 10,
     },
@@ -40,19 +34,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        //加载一个分享按钮
-        var BtnShare = cc.instantiate(this.ShareBtn);
-        if (BtnShare)
-        {
-            this.node.addChild(BtnShare);
-            BtnShare.setPosition(12,150);
-            var ShareScript = BtnShare.getComponent('ShareScript');
-            if(ShareScript)
-            {
-                cc.log(' ShareScript . InitShare ~ ');
-                ShareScript.InitShare();
-            }
-        } 
 
         //开启碰撞检测
         var manager = cc.director.getCollisionManager();
