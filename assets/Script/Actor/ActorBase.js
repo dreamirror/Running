@@ -5,6 +5,7 @@
 */
 
 var GravityManager = require("GravityManager");
+var FunctionLibrary = require("FunctionLibrary");
 
 cc.Class({
     extends: cc.Component,
@@ -92,6 +93,25 @@ cc.Class({
             this.CollisionEndCallList.delete(InFunction);
         }
     },
+    //添加碰撞中的回调
+    AddCollisionStayCall : function( InFunction , Target , Param){
+        if(this.CollisionStayCallList.has(InFunction)){
+            cc.log("AddCollisionEndCall this Function is Already has!!!");
+        }
+        else{
+            var ValTarget = {};
+            ValTarget.Target = Target;
+            ValTarget.Param = Param;
+            this.CollisionStayCallList.set(InFunction , ValTarget);//Target);
+        }
+        
+    },
+    //删除某一个碰撞中的回调
+    RemoveCollisionStayCall : function( InFunction ){
+        if(this.CollisionStayCallList.has(InFunction)){
+            this.CollisionStayCallList.delete(InFunction);
+        }
+    },
 
     /**
      * 重力系统的Update回调
@@ -100,6 +120,14 @@ cc.Class({
         //cc.log("重力系统回调！");
         var TempPos = InActor.node.getPosition();
         InActor.node.setPosition(cc.v2(TempPos.x , TempPos.y + AYSpeed));
+
+        if(bOnGround == true )
+        {
+            var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(GroundObj);
+            
+            var TempPos = InActor.node.getPosition();
+            InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
+        }
     },
 
 

@@ -83,9 +83,10 @@ var GravityManager = cc.Class({
 
                 //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面
                 //一旦该Actor站到了地面上，则取消此回调
-                InActor.AddCollisionStartCall( this.OnActorCollisionCall , this, InActor );
+                //InActor.AddCollisionStartCall( this.OnActorCollisionCall , this, InActor );
                 //再添加一个碰撞结束的回调，如果离开了地面就会触发（掉下悬崖） ,该状态是不删的！只有在清除的时候才删除
                 InActor.AddCollisionEndCall(this.OnActorCollisionEndCall , this ,InActor );
+                InActor.AddCollisionStayCall(this.OnActorCollisionStayCall , this ,InActor );
 
                 cc.log("该Actor已经注册");
             }
@@ -99,7 +100,10 @@ var GravityManager = cc.Class({
     UnRigisterToGravity : function(InActor ){
         if( InActor instanceof ActorBase ){
             if(this.GravityActorList.has(InActor)){
+
                 InActor.RemoveCollisionEndCall(this.OnActorCollisionEndCall);
+                InActor.RemoveCollisionStayCall(this.OnActorCollisionStayCall);
+
                 this.GravityActorList.delete(InActor);
             }
         }
@@ -117,12 +121,6 @@ var GravityManager = cc.Class({
         //CurGravityActorData.bOnGround = false;      //设置为在天空中  4.27晚上 不设置，由离开Collision来处理
         InActor.AYSpeed = InASpeed;
         CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
-
-        //重新设置下List的值
-        //this.GravityActorList.set(InActor , CurGravityActorData);
-
-        //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面  4.27晚，该注册事件，由离开地面的碰撞回调来触发把
-        //InActor.AddCollisionStartCall( this.OnActorCollisionCall , this, InActor );
     },
 
 
@@ -163,8 +161,6 @@ var GravityManager = cc.Class({
      */
     OnActorCollisionEndCall : function(other, self , InTarget , InActor ){
 
-        cc.log("Collision End!!!!!!!");
-
         if(!InTarget.GravityActorList.has(InActor)){
             cc.log("error!!!!!! 返回的Actor不在重力系统中");
         }
@@ -172,6 +168,12 @@ var GravityManager = cc.Class({
         //4.27暂时直接写全名
         if (other.node.name == "Background_road"){
             var CurGravityActorData = InTarget.GravityActorList.get(InActor);
+            CurGravityActorData.bOnGround = false;      //设置为在地面上
+            
+            //重新设置下List的值
+            InTarget.GravityActorList.set(InActor , CurGravityActorData);
+
+            /*var CurGravityActorData = InTarget.GravityActorList.get(InActor);
             //如果没有踏上新的地面，则开启重力
             if (CurGravityActorData.bStandInNewGround == EStandNewState.LEAVEOLD){
                 CurGravityActorData.bOnGround = false;      //设置为在天空中
@@ -181,13 +183,32 @@ var GravityManager = cc.Class({
             else if (CurGravityActorData.bStandInNewGround == EStandNewState.STANDINGNEW)
             {
                 CurGravityActorData.bStandInNewGround = EStandNewState.LEAVEOLD;
-            }
+            }*/
             //向该Actor中注册一个碰撞回调，用来判断该Actor是否站到了地面
             //InActor.AddCollisionStartCall( InTarget.OnActorCollisionCall , InTarget, InActor );
         }
     },
 
+    /**
+     * 4.28 修改为，只有当不断的在地面上的时候，才会不更新重力
+     */
+    OnActorCollisionStayCall : function(other, self , InTarget , InActor ){
+        if(!InTarget.GravityActorList.has(InActor)){
+            cc.log("error!!!!!! 返回的Actor不在重力系统中");
+        }
+        
+        //4.27暂时直接写全名
+        if (other.node.name == "Background_road"){
+            var CurGravityActorData = InTarget.GravityActorList.get(InActor);
+            CurGravityActorData.bOnGround = true;      //设置为在地面上
+            
+            //重新设置下List的值
+            InTarget.GravityActorList.set(InActor , CurGravityActorData);
 
+            CurGravityActorData.CallFunction( InActor , 0 , true , other );
+
+        }
+    },
 
 
 });
