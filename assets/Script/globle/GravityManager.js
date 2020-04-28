@@ -5,6 +5,7 @@
  */
 
 var ActorBase = require("ActorBase");
+var FunctionLibrary = require("FunctionLibrary");
 
 /*
     如果离开了之前的地面之后，又一次触发了离开地面而并没有踏上新地面，则开启重力下降
@@ -199,6 +200,12 @@ var GravityManager = cc.Class({
         
         //4.27暂时直接写全名
         if (other.node.name == "Background_road"){
+            var CollisionData = FunctionLibrary.CheckCollisionEdge(self , other);
+            //如果不是下边碰到了地面
+            if(CollisionData.bottom != true){
+                return;
+            }
+
             var CurGravityActorData = InTarget.GravityActorList.get(InActor);
             CurGravityActorData.bOnGround = true;      //设置为在地面上
             
