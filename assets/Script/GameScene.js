@@ -112,11 +112,11 @@ cc.Class({
     initRoad : function(){
         var road = cc.instantiate(this.roadPrefab);
         var width = DesignSize;
-        cc.log("width=="+road.width);
+        //cc.log("width=="+road.width);
         var num = (width / road.width) + 1;
         for(var i = 0;i < num;i++)
         {   
-            cc.log("i=="+i);
+            //cc.log("i=="+i);
             var road = this.spawnRoad(0);
             road.setPosition(road.width * i,0);
         }
@@ -126,7 +126,7 @@ cc.Class({
 
     //跟新roads位置
     updateRoads : function(dis){
-        cc.log("updateRoads dis =="+dis);
+        //cc.log("updateRoads dis =="+dis);
         if(this.roads.length > 0)
         {
             for(var index in this.roads)
@@ -144,7 +144,7 @@ cc.Class({
 
     //更新障碍的位置
     updateBarriers : function(dis) {
-        cc.log("updateBarriers dis =="+dis);
+        //cc.log("updateBarriers dis =="+dis);
         if (this.barriers.length > 0 )
         {
             for(var index in this.barriers)

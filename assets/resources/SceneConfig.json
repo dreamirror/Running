@@ -1,5 +1,5 @@
 {
-    "Speed": 100,
+    "Speed": 150,
     "BgSpeed": 50,
 
     "SpawnBarrierCD":{"100":5,"400":4,"600":3}

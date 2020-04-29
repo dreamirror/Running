@@ -60,8 +60,8 @@ var SceneManager = cc.Class({
 window.Global = {};
 
 window.Global.SceneMnagerIns = new SceneManager();
-cc.log("@@@@@@@@@@@@");
-cc.log(window.Global.SceneMnagerIns.Speed)
+//cc.log("@@@@@@@@@@@@");
+//cc.log(window.Global.SceneMnagerIns.Speed)
 
 
 window.SceneData = {
