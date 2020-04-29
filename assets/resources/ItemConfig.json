@@ -1,0 +1,22 @@
+{
+    "item01":{  
+        "type" : 0,
+        "icon" : "Texture/item01.png",
+        "name" : "药水",
+        "id" : "item01"
+    },
+
+    "item02": {
+        "type" : 0,
+        "icon" : "Texture/item02.png",
+        "name" : "宝物",
+        "id" : "item02"
+    },
+
+    "weapon01":{
+        "type" : 1,
+        "icon" : "Texture/weapon01.png",
+        "name" : "sword",
+        "id" : "weapon01"
+    }
+}
