@@ -4,8 +4,8 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
-cc.Class({
+DesignSize = 960;
+var RoadManager = cc.Class({
     extends: cc.Component,
 
     properties: {
@@ -24,15 +24,12 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        back_1 : {
-            default: null,
-            type: cc.Node
-        },
-        back_2 :{
-            default: null,
-            type: cc.Node
-        },
 
+        roadPerfab_1: {
+
+            default : null,
+            type : cc.Prefab
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -43,17 +40,21 @@ cc.Class({
 
     },
 
-     update (dt) {
-
-        this.back_1.setPosition(this.back_1.getPosition().x -  window.SceneData.Speed * window.SceneData.BgSpeed *dt,0)
-        this.back_2.setPosition(this.back_2.getPosition().x -  window.SceneData.Speed * window.SceneData.BgSpeed *dt,0)
-        if(this.back_1.getPosition().x <= -this.back_1.width)
-        {
-            this.back_1.setPosition(this.back_2.getPosition().x + this.back_1.width,0);
+    initRoad : function(){
+        var road = cc.instantiate(this.roadPrefab);
+        var width = DesignSize;
+        cc.log("width=="+road.width);
+        var num = (width / road.width) + 1;
+        for(var i = 0;i < num;i++)
+        {   
+            cc.log("i=="+i);
+            var road = this.spawnRoad(0);
+            road.setPosition(road.width * i,0);
         }
+    },
 
-        if(this.back_2.getPosition().x <= -this.back_2.width){
-            this.back_2.setPosition(this.back_1.getPosition().x +this.back_2.width,0);
-        }
-     },
+    // update (dt) {},
 });
+
+
+module.exports = RoadManager;

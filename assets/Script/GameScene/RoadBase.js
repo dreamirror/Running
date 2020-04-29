@@ -24,15 +24,6 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        back_1 : {
-            default: null,
-            type: cc.Node
-        },
-        back_2 :{
-            default: null,
-            type: cc.Node
-        },
-
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -43,17 +34,7 @@ cc.Class({
 
     },
 
-     update (dt) {
+    
 
-        this.back_1.setPosition(this.back_1.getPosition().x -  window.SceneData.Speed * window.SceneData.BgSpeed *dt,0)
-        this.back_2.setPosition(this.back_2.getPosition().x -  window.SceneData.Speed * window.SceneData.BgSpeed *dt,0)
-        if(this.back_1.getPosition().x <= -this.back_1.width)
-        {
-            this.back_1.setPosition(this.back_2.getPosition().x + this.back_1.width,0);
-        }
-
-        if(this.back_2.getPosition().x <= -this.back_2.width){
-            this.back_2.setPosition(this.back_1.getPosition().x +this.back_2.width,0);
-        }
-     },
+    // update (dt) {},
 });
