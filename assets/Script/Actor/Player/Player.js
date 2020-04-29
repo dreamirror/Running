@@ -8,6 +8,9 @@ var FSMMgr = require("FSMMgr");
 var TestWeaponState = require("TestWeaponState");
 var TestWeaponAttack = require("TestWeaponAttack");
 var GravityManager = require("GravityManager");
+var FunctionLibrary = require("FunctionLibrary");
+var CommonUtil = require("CommonUtil");
+var GameManager = require("GameManager");
 
 var Player = cc.Class({
     extends :ActorBase,
@@ -38,6 +41,11 @@ var Player = cc.Class({
         if(this.BUseGravity && GravityManager._instance){
             GravityManager._instance.RigisterToGravity(this , this.UpdateGravity);
         }  
+
+        //添加一个碰撞后的反馈函数，用来判断是否死亡之类的
+        this.AddCollisionStartCall( this.PlayerCollisionCall , this , null);
+        
+        this.GameManager = GameManager._instance;
     },
 
     update (dt) {
@@ -79,6 +87,25 @@ var Player = cc.Class({
             cc.log( "RightArmFSMMgr is null!!!!" );
         }
     },
+
+    /**
+     * 碰撞回调
+     */
+    PlayerCollisionCall : function(other, self , Target , Param){
+        var CollisionType = FunctionLibrary.GetCollisionType(other);
+        
+        //如果撞到障碍物，直接死了
+        if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
+        {
+            this.GameManager.GameOver();
+        }
+    },
+
+    /**
+     * 切换武器
+     */
+
+
 });
 
 module.exports = Player;
