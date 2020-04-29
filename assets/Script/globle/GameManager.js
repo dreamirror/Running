@@ -9,8 +9,8 @@ cc.Class({
 
     },
 
-    statics : {
-        _instance : null,
+    statics: {
+        _instance: null,
     },
     // LIFE-CYCLE CALLBACKS:
 

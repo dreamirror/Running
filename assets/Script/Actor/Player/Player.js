@@ -45,7 +45,7 @@ var Player = cc.Class({
         //添加一个碰撞后的反馈函数，用来判断是否死亡之类的
         this.AddCollisionStartCall( this.PlayerCollisionCall , this , null);
         
-        this.GameManager = GameManager._instance;
+        //this.GameManager = GameManager._instance;
     },
 
     update (dt) {
@@ -97,7 +97,14 @@ var Player = cc.Class({
         //如果撞到障碍物，直接死了
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
-            this.GameManager.GameOver();
+            //var container = cc.find("GameContainer");
+            //var GameManager111 = cc.find("GameContainer").getComponent("GameManager");
+            //if(GameManager._instance){
+            //    GameManager._instance.GameOver();
+            //}   
+            cc.director.loadScene("GameScene",function(){
+                cc.log("GameScene launched!");
+            });      
         }
     },
 
