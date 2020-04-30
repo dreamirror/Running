@@ -6,6 +6,7 @@ var FSMStateBase = require("FSMStateBase");
 var Player = require("Player");
 var FunctionLibrary = require("FunctionLibrary");
 var GravityManager = require("GravityManager");
+var CommonUtil = require("CommonUtil");
 
 cc.Class({
     extends: FSMStateBase,
@@ -79,7 +80,8 @@ cc.Class({
      * 跳跃中发生碰撞的CallBack , 此时从外部调用的该函数所以this并不是JumpState！！
      */
     CollisionStartCallBack : function(other, self , InTarget){
-        if (other.node.name == "Background_road")
+        //if (other.node.name == "Background_road")
+        if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ROAD)
         {
             InTarget.bFallOnGround = true;
 

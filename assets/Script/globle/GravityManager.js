@@ -6,6 +6,7 @@
 
 var ActorBase = require("ActorBase");
 var FunctionLibrary = require("FunctionLibrary");
+var CommonUtil = require("CommonUtil");
 
 /*
     如果离开了之前的地面之后，又一次触发了离开地面而并没有踏上新地面，则开启重力下降
@@ -120,6 +121,11 @@ var GravityManager = cc.Class({
 
         var CurGravityActorData = this.GravityActorList.get(InActor);
         //CurGravityActorData.bOnGround = false;      //设置为在天空中  4.27晚上 不设置，由离开Collision来处理
+        //4.30 如果在空中不可以跳跃
+        if ( CurGravityActorData.bOnGround == false){
+            return;
+        }
+             
         InActor.AYSpeed = InASpeed;
         CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
     },
@@ -137,7 +143,8 @@ var GravityManager = cc.Class({
         }
 
         //4.27暂时直接写全名
-        if (other.node.name == "Background_road")
+        //if (other.node.name == "Background_road")
+        if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ROAD)
         {
             var CurGravityActorData = InTarget.GravityActorList.get(InActor);
             CurGravityActorData.bOnGround = true;
@@ -167,7 +174,8 @@ var GravityManager = cc.Class({
         }
         
         //4.27暂时直接写全名
-        if (other.node.name == "Background_road"){
+        //if (other.node.name == "Background_road"){
+        if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ROAD){
             var CurGravityActorData = InTarget.GravityActorList.get(InActor);
             CurGravityActorData.bOnGround = false;      //设置为在地面上
             
@@ -199,7 +207,8 @@ var GravityManager = cc.Class({
         }
         
         //4.27暂时直接写全名
-        if (other.node.name == "Background_road"){
+        //if (other.node.name == "Background_road"){
+        if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ROAD){
             var CollisionData = FunctionLibrary.CheckCollisionEdge(self , other);
             //如果不是下边碰到了地面
             if(CollisionData.bottom != true){

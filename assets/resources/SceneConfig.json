@@ -1,8 +1,37 @@
 {
     "Speed": 150,
-    "BgSpeed": 50,
+    "BgSpeed": 0.5,
 
-    "SpawnBarrierCD":{"100":5,"400":4,"600":3}
+    "SpawnBarrierData":{
+        "100":{"cd":[3,5],
+        "probability":{
+            "ba_1":50,"ba_2":40,"ba_3":10}
+         }
+        ,"200":{"cd":[3,5],
+            "probability":{
+                "ba_1":50,"ba_2":40,"ba_3":10}
+            },
+        "600":{"cd":[3,5],
+            "probability":{
+                "ba_1":90,"ba_2":5,"ba_3":5}}
+            },
+
+        "intervalData":{
+            "100":{"cd":[3,5],
+            "interval":[60,100]}
+
+            ,"200":{"cd":[3,5],
+                "interval":[100,200]}
+                
+            ,"600":{"cd":[3,5],
+                "interval":[100,250]
+                }
+        },
+
+
+    "DisToSpeed" : 0.1,
+    "MaxSpeed":500
+
 
 
 }

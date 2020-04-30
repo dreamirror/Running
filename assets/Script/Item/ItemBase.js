@@ -72,9 +72,7 @@ var SaveItem = cc.Class({
 
     properties : {
         _Item : {
-            default : undefined,
-            type : ItemBase,
-            serializable : false,
+            default : {},
         },
         _Num : 0,
     },
