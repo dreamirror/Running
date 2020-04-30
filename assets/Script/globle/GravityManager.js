@@ -121,6 +121,11 @@ var GravityManager = cc.Class({
 
         var CurGravityActorData = this.GravityActorList.get(InActor);
         //CurGravityActorData.bOnGround = false;      //设置为在天空中  4.27晚上 不设置，由离开Collision来处理
+        //4.30 如果在空中不可以跳跃
+        if ( CurGravityActorData.bOnGround == false){
+            return;
+        }
+             
         InActor.AYSpeed = InASpeed;
         CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
     },

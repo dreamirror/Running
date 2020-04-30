@@ -89,16 +89,17 @@ FunctionLibrary.CheckCollisionEdge = function( CollisionA , CollisionB ){
  * ba_      :   障碍物
  * en_      :   敌人
  * item_    :   道具
+ * weapon_  :   武器
 
  */
 FunctionLibrary.GetCollisionType = function( InCollision ){
     if( InCollision && InCollision.node)
     {
-        if( InCollision.node.name.search("_road") !=-1 )
+        if( InCollision.node.name.search("road_") !=-1 )
         {
             return CommonUtil.EObjType.TYPE_ROAD;
         }
-        else if( InCollision.node.name.search("_sword") !=-1 )
+        else if( InCollision.node.name.search("ba_") !=-1 )
         {
             return CommonUtil.EObjType.TYPE_BARRIER;
         }
@@ -109,6 +110,10 @@ FunctionLibrary.GetCollisionType = function( InCollision ){
         else if( InCollision.node.name.search("item_") !=-1 )
         {
             return CommonUtil.EObjType.TYPE_ITEM;
+        }
+        else if( InCollision.node.name.search("weapon_") !=-1 )
+        {
+            return CommonUtil.EObjType.TYPE_WEAPON;
         }
     }
 };

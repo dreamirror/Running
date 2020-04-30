@@ -99,12 +99,12 @@ var Player = cc.Class({
         {
             //var container = cc.find("GameContainer");
             //var GameManager111 = cc.find("GameContainer").getComponent("GameManager");
-            //if(GameManager._instance){
-            //    GameManager._instance.GameOver();
-            //}   
-            cc.director.loadScene("GameScene",function(){
-                cc.log("GameScene launched!");
-            });      
+            if(GameManager._instance){
+                GameManager._instance.GameOver();
+            }   
+            // cc.director.loadScene("GameScene",function(){
+            //    cc.log("GameScene launched!");
+            //});      
         }
     },
 

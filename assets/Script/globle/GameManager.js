@@ -2,7 +2,7 @@
 // 其他组件获取此组件的方法： 
 // var GameManager = cc.find("GameContainer").getComponent("GameManager");  //4.29 zh 取不到~~~
 
-cc.Class({
+var GameManager = cc.Class({
     extends: cc.Component,
 
     properties: {

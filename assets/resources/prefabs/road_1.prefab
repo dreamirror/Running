@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Background_road",
+    "_name": "road_1",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -163,7 +163,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "beb4c865-1357-4b15-ad3d-3d0461a85d1d"
+      "__uuid__": "0b734ac5-d2e6-45cd-bf38-92512cd23b8d"
     },
     "fileId": "67+jjU05JNE566nbwiDdNP",
     "sync": false
