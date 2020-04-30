@@ -9,12 +9,20 @@ var EObjType = {
     TYPE_WEAPON :   4,
 };
 
-
+/*
+武器类型
+*/
+var WeaponType = {
+    Default     :   0,
+    Sword       :   1,
+    Dart        :   2,  //飞镖
+};
 
 
 
 
 
 module.exports = {
-    EObjType : EObjType,
+    EObjType    : EObjType,
+    WeaponType  : WeaponType,
 };

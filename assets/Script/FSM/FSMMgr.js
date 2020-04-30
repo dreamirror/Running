@@ -119,14 +119,40 @@ cc.Class({
 
     /** 设置当前状态，只在初始化使用 */
     SetCurFSMState : function(InStateID){
-        if ( this.StateMap.has(InStateID) )
-        {
+        if ( this.StateMap.has(InStateID) ){
             this.CurFSMState = this.StateMap.get(InStateID);
         }
         else
         {
             cc.log( '设置当前状态对应的stateID是空的！！' );
         }
+    },
+
+    /** 强行设置状态机状态为指定ID并且结束当前状态机 
+     *  param : InParamObj 是一个切换时传递给下一个状态BeforeEnter使用的参数，内容自行定义
+     *          InExitParam 是一个切换时传递给前一个状态的BeforeExit使用的参数，内容自行定义,
+    */
+    ForceSetFSMState : function (InStateID, InExitParam, InParamObj){
+        if (InStateID == FSMUtil.FSMStateID.NONE){  //该条件并不能转换状态
+            return cc.log( '不能转换为空状态！' );
+        };
+
+        if (!this.StateMap.has(InStateID))
+            return cc.log( '当前状态机中没有要切换的状态ID！' );
+
+        var NextFSMState = this.StateMap.get(InStateID);
+
+        //当前状态执行退出回调
+        this.CurFSMState.BeforeExit(InExitParam);
+        //下一个状态执行进入回调
+        NextFSMState.BeforeEnter(InParamObj);
+
+        //然后清除数据
+        this.CurFSMState.AfterExit();
+
+        this.CurFSMState = NextFSMState;
+
+        return InStateID;
     },
 
     GetCurFSMState : function(){

@@ -1,11 +1,14 @@
 /**
+ * 剑的普通状态
+ */
+/**
  * 测试武器的初始状态
  */
 var FSMUtil = require("FSMUtil");
 var WeaponBaseState = require("WeaponBaseState");
 var RightArm = require("RightArm");
 
-var TestWeaponState = cc.Class({
+var SwordNormalState = cc.Class({
     extends: WeaponBaseState,
 
     ctor: function ( ) {
@@ -23,13 +26,13 @@ var TestWeaponState = cc.Class({
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
 
-            this.ArmJS.PlayAnimation("TestWeaponIdle");
+            this.ArmJS.PlayAnimation("SwordNormal");
         }   
     },
 
     BreakCondition :function( ) {
         if (this.bAttack){
-            this.FSMMgr.TransState(FSMUtil.TransConditionID.DefaultWeaponToAtt, null, this);
+            this.FSMMgr.TransState(FSMUtil.TransConditionID.SwordNormalToAtt, null, this);
 
             return;
         }
@@ -61,4 +64,4 @@ var TestWeaponState = cc.Class({
 });
 
 
-module.exports = TestWeaponState;
+module.exports = SwordNormalState;

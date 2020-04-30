@@ -53,6 +53,11 @@ var TestWeaponAttack = cc.Class({
     /*******************  动画回调   ******************* */
     OnAttackPlayOver : function( data ){
         this.bAttackOver = true;
+        var ArmAnimation = this.ArmJS.GetAnimation();
+        if (ArmAnimation != null)
+        {
+            ArmAnimation.off('finished',  this.OnAttackPlayOver,  this);
+        }
     },
 
 });

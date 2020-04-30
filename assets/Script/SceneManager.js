@@ -12,7 +12,7 @@ var SceneManager = cc.Class({
     extends: cc.Component,
 
     ctor: function () {
-        cc.loader.loadRes("SceneConfig",function(err,object){
+        cc.loader.loadRes("Config/SceneConfig",function(err,object){
             if(err){
                 cc.log(err); 
                 return;
@@ -230,7 +230,7 @@ window.SceneData = {
 };
 
 
-cc.loader.loadRes("SceneConfig",function(err,object){
+cc.loader.loadRes("Config/SceneConfig",function(err,object){
     if(err){
         cc.log(err); 
         return;

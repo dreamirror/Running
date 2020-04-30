@@ -49,7 +49,7 @@ var SaveItem = cc.Class({
 
 
 module.exports = {
-    EItemType,
-    ItemBase,
-    SaveItem,
+    EItemType : EItemType,
+    ItemBase : ItemBase,
+    SaveItem : SaveItem,
 };
