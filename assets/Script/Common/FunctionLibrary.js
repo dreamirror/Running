@@ -1,6 +1,8 @@
 /*
     通用函数库
 */
+
+var CommonUtil = require("CommonUtil");
 var FunctionLibrary = {};
 
 /**
@@ -81,7 +83,35 @@ FunctionLibrary.CheckCollisionEdge = function( CollisionA , CollisionB ){
     return ReturnVal;
 };
 
+/**
+ * 根据碰撞体的名字，获取对应的碰撞物类型 , Param 传入碰撞的Collision
+ * road_    :   陆地
+ * ba_      :   障碍物
+ * en_      :   敌人
+ * item_    :   道具
 
+ */
+FunctionLibrary.GetCollisionType = function( InCollision ){
+    if( InCollision && InCollision.node)
+    {
+        if( InCollision.node.name.search("_road") !=-1 )
+        {
+            return CommonUtil.EObjType.TYPE_ROAD;
+        }
+        else if( InCollision.node.name.search("_sword") !=-1 )
+        {
+            return CommonUtil.EObjType.TYPE_BARRIER;
+        }
+        else if( InCollision.node.name.search("en_") !=-1 )
+        {
+            return CommonUtil.EObjType.TYPE_ENEMY;
+        }
+        else if( InCollision.node.name.search("item_") !=-1 )
+        {
+            return CommonUtil.EObjType.TYPE_ITEM;
+        }
+    }
+};
 
 
 
