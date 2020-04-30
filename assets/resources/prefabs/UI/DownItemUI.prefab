@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "sword",
+    "_name": "DownItemUI",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -36,25 +36,25 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 27,
-      "height": 80
+      "width": 0,
+      "height": 0
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5030876999709408,
-      "y": 0.9975647695520988
+      "x": 0.5,
+      "y": 0.5
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        191,
-        234,
+        -480,
+        -320,
         0,
         0,
         0,
-        0.7078468738262603,
-        0.70636591311755,
+        0,
+        1,
         1,
         1,
         1
@@ -64,7 +64,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 90.12
+      "z": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -74,35 +74,17 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Sprite",
+    "__type__": "e60c34SeyZGgpg24aKGWz/p",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_materials": [
-      {
-        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
-      }
-    ],
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "46451d5e-9c03-47ec-9575-90abafb92080"
+    "OperateNum": 3,
+    "OperatePrefab": {
+      "__uuid__": "f07e2ea6-5572-4220-8574-c4ba9ba2245c"
     },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_atlas": null,
     "_id": ""
   },
   {
@@ -111,9 +93,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "07948668-7a63-4031-9f49-23b7e0a73ecd"
+      "__id__": 0
     },
-    "fileId": "44kpSC93NFrKD3LdmSAMK7",
+    "fileId": "91fHlJeVlIkpMICMX4rKh6",
     "sync": false
   }
 ]

@@ -63,13 +63,6 @@ var GoldItem  = cc.Class({
     },
 });
 
-var Sprite1 = cc.Class({
-    name:"Sprite1",
-    print: function () {
-        cc.log("1111111111111111");
-    }
-});
-
 
 
 
@@ -79,8 +72,7 @@ var SaveItem = cc.Class({
 
     properties : {
         _Item : {
-            default : undefined,
-            //type : ItemBase,
+            default : {},
         },
         _Num : 0,
     },
@@ -94,5 +86,4 @@ module.exports = {
     Weapon,
     GoldItem,
     SaveItem,
-    Sprite1,
 };

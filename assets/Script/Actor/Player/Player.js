@@ -5,12 +5,17 @@
 var ActorBase = require("ActorBase");
 var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
+/* 状态机相关 */
+var SwordNormalState = require("SwordNormalState");
+var SwordAttackState = require("SwordAttackState");
 var TestWeaponState = require("TestWeaponState");
 var TestWeaponAttack = require("TestWeaponAttack");
+/* */
 var GravityManager = require("GravityManager");
 var FunctionLibrary = require("FunctionLibrary");
 var CommonUtil = require("CommonUtil");
 var GameManager = require("GameManager");
+
 
 var Player = cc.Class({
     extends :ActorBase,
@@ -75,11 +80,25 @@ var Player = cc.Class({
             DefaultWeaponAttack.InitVariable(this.RightArmFSMMgr , this.RightArm);
             DefaultWeaponAttack.AddCondition(FSMUtil.TransConditionID.DefaultWeaponAttToNormal , FSMUtil.FSMStateID.ArmDefaultWeapon);         
 
+            /* 剑的状态机，可以在获取道具之后再注册，不过还是这里注册方便点，不需要一直加减删除 */ 
+            var WeaponSwordNormalState = new SwordNormalState();
+            WeaponSwordNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponSwordNormalState.AddCondition(FSMUtil.TransConditionID.SwordNormalToAtt , FSMUtil.FSMStateID.ArmSwordAttack);         
+            
+            var WeaponSwordAttackState = new SwordAttackState();
+            WeaponSwordAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponSwordAttackState.AddCondition(FSMUtil.TransConditionID.SwordAttToNormal , FSMUtil.FSMStateID.ArmSwordNoraml);         
+
             this.RightArmFSMMgr.Init( FSMUtil.FSMStateID.ArmDefaultWeapon , DefaultWeaponState);
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDefaultWeaponAtt, DefaultWeaponAttack );
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmSwordNoraml, WeaponSwordNormalState );    //注册剑的普通状态
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmSwordAttack, WeaponSwordAttackState );    //注册剑的攻击状态
+
             DefaultWeaponState.BeforeEnter();
 
             cc.log( "RightArmFSMMgr Init!" );
+
+            this.RightArm.getComponent("RightArm").SetFSM(this.RightArmFSMMgr);
 
         }
         else

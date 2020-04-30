@@ -4,60 +4,66 @@
 
 
 const ItemBase = require('ItemBase').ItemBase;
-const Weapon = require('ItemBase').weapon;
+const Weapon = require('ItemBase').Weapon;
 const GoldItem = require('ItemBase').GoldItem;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 
 
-
+let self;
 cc.Class({
     extends: cc.Component,
 
     properties: {
         //玩家基本信息(#注意。对象成员，至少要定义一个default 属性 或者，set/get方法，不然编译报错)
         playerInfo: {
-            default: null,
+            default : {},
 
             name: '哟哟',
             gold: 9000,
             weapon: 111,
-            itemArray : {
-                default : [],
-                type : SaveItem,
-            },
+            itemArray : [],
         },
 
         //其他信息
         otherInfo : {
-            default: null,
-            abc : 10,
+            default: {},
         },
+    },
+
+    ctor(){
+        this.playerInfo = {
+            name: '哟哟',
+            gold: 9000,
+            weapon: 111,
+            itemArray : [],
+        };
+        self = this;
     },
 
     //重本地读取记录
     onLoad () {
-        this.getInfoFromLocal();
+        self.getInfoFromLocal();
     },
 
     onDestroy(){
-        this.setInfoToLocal();
+        self.setInfoToLocal();
     },
     ///////////////////////////////////////////////////////
     //获取基本信息
     getPlayerInfo : function (){
-        this.playerInfo;
+        return self.playerInfo;
     },
 
     addPlayerGold : function (num) {
-        this.playerInfo.gold = this.playerInfo.gold + num;
+        self.playerInfo.gold = self.playerInfo.gold + num;
     },
 
     //物品
     addItem : function(_ItemBase , _num) {
         let bAlreadyHave = false;
-        for (let index = 0; index < itemArray.length; index++) {
-            const element = itemArray[index];
+        for (let index = 0; index < self.playerInfo.itemArray.length; index++) {
+            const element = self.playerInfo.itemArray[index];
             if (element && element._Item == _ItemBase) {
                 bAlreadyHave == true;
                 element._Num = element._Num + _num;
@@ -67,14 +73,14 @@ cc.Class({
             let NewItems = new SaveItem();
             NewItems._Item = _ItemBase;
             NewItems._Num = _num; 
-            this.items.push(Item);
+            self.playerInfo.itemArray.push(NewItems);
         }
     },
 
     //增加
     subItem : function(_ItemBase , _num){
-        for (let index = 0; index < itemArray.length; index++) {
-            const element = itemArray[index];
+        for (let index = 0; index < self.playerInfo.itemArray.length; index++) {
+            const element = self.playerInfo.itemArray[index];
             if (element && element._Item == _ItemBase) {
                 element._Num = element._Num - _num;
             }

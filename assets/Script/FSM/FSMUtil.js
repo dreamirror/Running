@@ -9,6 +9,8 @@ var FSMStateID = {
     ArmNormal       : 100,      //没有武器的普通手
     ArmDefaultWeapon   : 101,      //测试武器
     ArmDefaultWeaponAtt: 102,      //测试武器攻击状态
+    ArmSwordNoraml  :   103,        //剑普通状态
+    ArmSwordAttack  :   104,        //剑攻击状态
 };
 
 //玩家转换条件枚举
@@ -21,6 +23,9 @@ var TransConditionID = {
     ArmNormalToDefaultWeapon    :   100,
     DefaultWeaponToAtt          :   101,
     DefaultWeaponAttToNormal    :   102,
+
+    SwordNormalToAtt            :   103,
+    SwordAttToNormal            :   104,
 
 };
 

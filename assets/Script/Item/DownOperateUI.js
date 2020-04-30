@@ -1,9 +1,8 @@
-// Learn cc.Class:
-//  - https://docs.cocos.com/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+const ItemBase = require('ItemBase').ItemBase;
+const Weapon = require('ItemBase').Weapon;
+const GoldItem = require('ItemBase').GoldItem;
+const EItemType = require('ItemBase').EItemType;
+const SaveItem = require('ItemBase').SaveItem;
 
 cc.Class({
     extends: cc.Component,
@@ -21,13 +20,26 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        var self = this;
+        //初始化底部的道具栏
+        this.itemBlock = [];
+        this.weaponBlock;
+        for (let index = 0; index < this.OperateNum; index++) {
+            let pb = cc.instantiate(this.OperatePrefab);
+            pb.parent = this.node;
+            pb.setPosition( 100 + (index * 120), 20 );
+            if (index == 0) {
+                this.weaponBlock = pb;
+            } else {
+                this.itemBlock.push(pb);
+            }
+        }
     },
 
     start () {
+        //更新背包里的道具来更新道具栏
         var GameData = cc.find("GameContainer").getComponent("GameData");
         let info = GameData.getPlayerInfo();
-        if (info) {
+        if (info && info.itemArray) {
             for (let index = 0; index < info.itemArray.length; index++) {
                 if (index > self.OperateNum) {
                     break;
@@ -35,10 +47,37 @@ cc.Class({
 
                 const element = info.itemArray[index];
                 if (element) {
-                    let pb = cc.instantiate(self.OperatePrefab);
-                    pb.parent = self.node;
-                    pb.setPosition( 150 + (index * 80), 20 );
-                    pb.getComponent("OprateItemJS").init(element);
+                    if (element._Item instanceof Weapon) {
+                        let pb1 = this.weaponBlock;
+                        pb1.getComponent("OprateItemJS").init(element);
+                    } else {
+                        let pb2 = this.itemBlock.pop();
+                        pb2.getComponent("OprateItemJS").init(element);
+                    }
+                }
+            }
+        }
+    },
+
+    updateOperateItem(){
+        //更新背包里的道具来更新道具栏
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        let info = GameData.getPlayerInfo();
+        let _index = 0;
+        if (info && info.itemArray) {
+            for (let index = 0; index < info.itemArray.length; index++) {
+                if (index > self.OperateNum) {
+                    break;
+                }
+
+                const element = info.itemArray[index];
+                if (element) {
+                    if (element._Item.type == EItemType.Weapon) {
+                        this.weaponBlock.getComponent("OprateItemJS").init(element);
+                    } else {
+                        this.itemBlock[_index].getComponent("OprateItemJS").init(element);
+                        _index = _index + 1;
+                    }
                 }
             }
         }

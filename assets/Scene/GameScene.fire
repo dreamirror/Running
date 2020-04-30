@@ -180,7 +180,7 @@
       "array": [
         0,
         0,
-        378.4531014537997,
+        378.58841792314104,
         0,
         0,
         0,
@@ -1229,7 +1229,7 @@
       "__id__": 26
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 28
@@ -1269,8 +1269,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -42.338,
-        89.755,
+        -13.338,
+        70.755,
         0,
         0,
         0,
@@ -1345,6 +1345,12 @@
       },
       {
         "__uuid__": "18ae8296-4348-47f6-94a2-fb0f97b36b41"
+      },
+      {
+        "__uuid__": "d6d8f516-324c-42b0-88d0-b5fb8f5fb5ad"
+      },
+      {
+        "__uuid__": "a45090ad-dfe6-4ffa-8388-ceca8906b9ee"
       }
     ],
     "playOnLoad": false,
@@ -1360,6 +1366,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "RightArmFSMMgr": null,
     "_id": "f5w00VfUBDiK9iOSEUqzdL"
   },
   {
@@ -1386,12 +1393,12 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 26
+      "__id__": 27
     },
     "asset": {
-      "__uuid__": "5755b6fe-1000-4ebf-8931-3d54e18b1acd"
+      "__uuid__": "6503706b-caa5-4f25-8456-4dce60a95009"
     },
-    "fileId": "caGvdTGKJHvIhjzdzawvlA",
+    "fileId": "d326E8yWRIGY4OBq8BnwIK",
     "sync": false
   },
   {

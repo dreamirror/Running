@@ -1,6 +1,6 @@
 
 const ItemBase = require('ItemBase').ItemBase;
-const Weapon = require('ItemBase').weapon;
+const Weapon = require('ItemBase').Weapon;
 const GoldItem = require('ItemBase').GoldItem;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
@@ -33,29 +33,33 @@ cc.Class({
     
     init(SaveItem){
         this.OwnedItem = SaveItem;
-    },
+        let self = this;
+        if (self.OwnedItem) {
+            cc.loader.loadRes(this.OwnedItem._Item.icon, function(err,img){
+                if (err) {
+                    cc.log(err);
+                    return;
+                }
+                let mylogo  = new cc.SpriteFrame(img); 
+                self.BgNode.getComponent(cc.Sprite).spriteFrame = mylogo;
+            });
 
-    onLoad () {
-        if (this.OwnedItem) {
-            var realUrl = cc.url.raw(self.OwnedItem._Item.Icon);
-            var texture = cc.textureCache.addImage(realUrl);
-            this.BgNode.getComponent(cc.Sprite).spriteFrame.setTexture(texture);
-
-            this.NumLabe.string = self.OwnedItem._Num;
+            this.NumLabe.string = this.OwnedItem._Num;
         }
     },
 
-
-    // update (dt) {},
 
     ButtonTouch(){
-        var GameData = cc.find("GameContainer").getComponent("GameData");
-        if (this.OwnedItem && this.OwnedItem._Num > 0) {
-            GameData.subItem(this.OwnedItem._Item,1);
+        cc.log("####  item clicked  ##########")
+        if (this.OwnedItem) {
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            if (this.OwnedItem && this.OwnedItem._Num > 0) {
+                GameData.subItem(this.OwnedItem._Item,1);
+            }
+            //广播把
+            let testEvent = new cc.Event.EventCustom("TouchItem", true);//创建自定义事件
+            testEvent.setUserData(this.OwnedItem._Item);    //设置自定义事件中包含的数据
+            this.node.dispatchEvent(testEvent);    //用节点分发事件
         }
-        //广播把
-        let testEvent = new cc.Event.EventCustom("TouchItem", true);//创建自定义事件
-        testEvent.setUserData(this.OwnedItem._Item);    //设置自定义事件中包含的数据
-        this.node.dispatchEvent(testEvent);    //用节点分发事件
     }
 });
