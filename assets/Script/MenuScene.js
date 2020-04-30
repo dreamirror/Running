@@ -24,7 +24,7 @@ cc.Class({
 
     testSpawnItem() {
         
-        cc.loader.loadRes('ItemConfig', function (err, asset) {
+        cc.loader.loadRes('Config/ItemConfig', function (err, asset) {
             if(err){
                 cc.log(err); 
                 return;
