@@ -24,11 +24,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 13
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 14
     },
     "_opacity": 255,
     "_color": {
@@ -99,7 +99,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 11
+      "__id__": 12
     },
     "_opacity": 255,
     "_color": {
@@ -280,7 +280,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f07e2ea6-5572-4220-8574-c4ba9ba2245c"
     },
     "fileId": "57FKmLN6BLerJzNHiijxxJ",
     "sync": false
@@ -387,7 +387,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f07e2ea6-5572-4220-8574-c4ba9ba2245c"
     },
     "fileId": "40jNL2BTVDW68K6JoZGhYf",
     "sync": false
@@ -406,7 +406,11 @@
     "_grayMaterial": null,
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 11
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 0,
@@ -477,12 +481,22 @@
     "_id": ""
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "",
+    "_componentId": "40838zL5SpNHqF370MGqsFc",
+    "handler": "ButtonTouch",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f07e2ea6-5572-4220-8574-c4ba9ba2245c"
     },
     "fileId": "680JOlCJlFTpo1LzhEScMN",
     "sync": false
@@ -513,7 +527,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "f07e2ea6-5572-4220-8574-c4ba9ba2245c"
     },
     "fileId": "2dwEU8QtJJm6D4S7PGS4Gy",
     "sync": false
