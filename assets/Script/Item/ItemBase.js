@@ -81,9 +81,9 @@ var SaveItem = cc.Class({
 
 
 module.exports = {
-    EItemType,
-    ItemBase,
-    Weapon,
-    GoldItem,
-    SaveItem,
+    EItemType : EItemType,
+    ItemBase : ItemBase,
+    Weapon : Weapon,
+    GoldItem : GoldItem,
+    SaveItem : SaveItem,
 };

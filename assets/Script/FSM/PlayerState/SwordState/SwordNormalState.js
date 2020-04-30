@@ -26,13 +26,13 @@ var SwordNormalState = cc.Class({
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
 
-            this.ArmJS.PlayAnimation("TestWeaponIdle");
+            this.ArmJS.PlayAnimation("SwordNormal");
         }   
     },
 
     BreakCondition :function( ) {
         if (this.bAttack){
-            this.FSMMgr.TransState(FSMUtil.TransConditionID.DefaultWeaponToAtt, null, this);
+            this.FSMMgr.TransState(FSMUtil.TransConditionID.SwordNormalToAtt, null, this);
 
             return;
         }

@@ -12,23 +12,24 @@ var RightArm = cc.Class({
         RightArmFSMMgr : {
             default : null,
         },
+
     },
 
     onLoad () {  
         
-        //this.LoadWeaponPrefab();
+        this.LoadWeaponPrefab();
    
     },
 
     update(dt){
         this._super();
-        this.LoadWeaponPrefab();
+        //this.LoadWeaponPrefab();
     },
 
     //加载所有武器
     LoadWeaponPrefab : function( ) {
         //创建一个结构用来存储所有生成的武器
-        this.PlayerWeapons = new Map();
+        this.PlayerPrefabWeapons = new Map();
 
         var self = this;
         /* 先根据配置把预制武器全部都加载出来吧 */
@@ -67,6 +68,14 @@ var RightArm = cc.Class({
                                             CurWeapon.setAnchorPoint(AnchorArr[0], AnchorArr[1]);
                                         }
                                     }
+
+                                    //将该武器存储
+                                    var WeaponData = {
+                                        WeaponCtl   :   CurWeapon,
+                                        WeaponConfig  :   WeaponConfig,
+                                    };
+                                    self.PlayerPrefabWeapons.set(WeaponConfig.id , WeaponData );
+                                    CurWeapon.active = false;
                                 }
                                 
                             }
@@ -85,6 +94,20 @@ var RightArm = cc.Class({
         return this.RightArmFSMMgr;
     },
 
+    //切换武器
+    ChangeWeapon : function( InWeaponID ) {
+        if(this.PlayerPrefabWeapons.has(InWeaponID))
+        {
+            var WeaponData = this.PlayerPrefabWeapons.get(InWeaponID);
+            var WeaponCtl = WeaponData.WeaponCtl;
+            WeaponCtl.active = true;
+
+            //再根据配置切换状态机
+            if(this.RightArmFSMMgr){
+                this.RightArmFSMMgr.ForceSetFSMState(WeaponData.WeaponConfig.NormalStateID , null, null );
+            }
+        }
+    },
 
 });
 
