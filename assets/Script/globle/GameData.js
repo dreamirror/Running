@@ -8,24 +8,24 @@ const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 
 
-let self;
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        //玩家基本信息(#注意。对象成员，至少要定义一个default 属性 或者，set/get方法，不然编译报错)
+        //玩家基本信息(#注意。对象成员，至少要定义一个default 属性 或者，set/get方法，不然编译报错) 需要持久化的。
         playerInfo: {
             default : {},
-
             name: '哟哟',
             gold: 9000,
-            weapon: 111,
             itemArray : [],
         },
 
-        //其他信息
-        otherInfo : {
+        //其他信息（本局游戏的临时信息）
+        tempInfo : {
             default: {},
+
+            buffs : [], //临时属性
+            weapons : [], //捡到的武器
         },
     },
 
@@ -33,25 +33,54 @@ cc.Class({
         this.playerInfo = {
             name: '哟哟',
             gold: 9000,
-            weapon: 111,
             itemArray : [],
         };
-        self = this;
+        this.tempInfo = {
+            buffs : [], //临时属性
+            weapons : [], //捡到的武器
+        };
     },
 
     //重本地读取记录
     onLoad () {
-        self.getInfoFromLocal();
+        this.getInfoFromLocal();
     },
 
     onDestroy(){
-        self.setInfoToLocal();
+        this.setInfoToLocal();
     },
     ///////////////////////////////////////////////////////
     //获取基本信息
     getPlayerInfo : function (){
-        return self.playerInfo;
+        return this.playerInfo;
     },
+
+    //获取临时信息
+    getTempInfo : function (){
+        return this.tempInfo;
+    },
+    
+
+    //添加或替换武器
+    addOrReplaceWeapon(_weapon){
+        //已经有了就捡不起来
+        for (let index = 0; index < this.tempInfo.weapons.length; index++) {
+            const element = self.tempInfo.weapons[index];
+            if (element && element.id == _weapon.id) {
+                return;
+            }
+        }
+
+        if (this.tempInfo.weapons.length < 3) {  //小于3 直接加进去
+            this.tempInfo.weapons.push(_weapon);
+        }
+        else
+        {
+            this.tempInfo.weapons.shift(); //删除第一个
+            this.tempInfo.weapons.push(_weapon);
+        }
+    },
+
 
     addPlayerGold : function (num) {
         self.playerInfo.gold = self.playerInfo.gold + num;
@@ -96,19 +125,19 @@ cc.Class({
     //写数据到本地
     setInfoToLocal : function(){
         cc.sys.localStorage.setItem("playerinfo",JSON.stringify(this.playerInfo));
-        cc.sys.localStorage.setItem("otherinfo",JSON.stringify(this.otherInfo));
+        cc.sys.localStorage.setItem("tempInfo",JSON.stringify(this.tempInfo));
     },
 
     //读取数据并初始化userdata
     getInfoFromLocal : function (){
         cc.sys.localStorage
         let playerinfo = cc.sys.localStorage.getItem("playerinfo");
-        let otherinfo = cc.sys.localStorage.getItem("otherinfo");
+        let tempInfo = cc.sys.localStorage.getItem("tempInfo");
         if (playerinfo != null) {
             this.playerInfo =  JSON.parse(playerinfo);
         }
-        if (otherinfo != null) {
-            this.otherinfo =  JSON.parse(playerinfo);
+        if (tempInfo != null) {
+            this.tempInfo =  JSON.parse(tempInfo);
         }
         
     },

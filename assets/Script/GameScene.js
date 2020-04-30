@@ -214,11 +214,7 @@ cc.Class({
             this.SpawnBarrier();
             //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
             this.CDTime = window.SceneData.getSpawnBarrierCD()
-            
-            //暂时在这儿去加一个生成道具的。 
-            var gs =  cc.find("Canvas/GameScene");
-            var mgr = gs.getComponent("SceneManager");
-            mgr.SpawnItem( this.back_2 );
+
         }
         this.updateBarriers(window.SceneData.Speed *dt);
         this.updateRoads(window.SceneData.Speed *dt);
@@ -260,10 +256,19 @@ cc.Class({
         if(this.back_1.getPosition().x <= -this.back_1.width)
         {
             this.back_1.setPosition(this.back_2.getPosition().x + this.back_1.width,0);
+
+            //临时清除屏幕外的道具
+            this.back_1.removeAllChildren();
+            //暂时在这儿去加一个生成道具的。 
+            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
         }
 
         if(this.back_2.getPosition().x <= -this.back_2.width){
             this.back_2.setPosition(this.back_1.getPosition().x +this.back_2.width,0);
+            //临时清除屏幕外的道具
+            this.back_2.removeAllChildren();
+            //暂时在这儿去加一个生成道具的。 
+            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
         }
 
         this.DisTanceDisplay.string = '距离: ' +  Math.floor(window.SceneData.TaltleDistance);

@@ -21,19 +21,14 @@ cc.Class({
             default : null,
             type : cc.Label,
         },
-
-        OwnedItem : {   
-            default : null,
-            type : SaveItem,
-        },
     },
 
     
-    init(SaveItem){
-        this.OwnedItem = SaveItem;
+    init(_ItemBase){
+        this.OwnedItem = _ItemBase;
         let self = this;
         if (self.OwnedItem) {
-            cc.loader.loadRes(this.OwnedItem._Item.icon, function(err,img){
+            cc.loader.loadRes(this.OwnedItem.icon, function(err,img){
                 if (err) {
                     cc.log(err);
                     return;
@@ -42,7 +37,7 @@ cc.Class({
                 self.BgNode.getComponent(cc.Sprite).spriteFrame = mylogo;
             });
 
-            this.NumLabe.string = this.OwnedItem._Num;
+            this.NumLabe.string = 1;
         }
     },
 
@@ -50,13 +45,9 @@ cc.Class({
     ButtonTouch(){
         cc.log("####  item clicked  ##########")
         if (this.OwnedItem) {
-            var GameData = cc.find("GameContainer").getComponent("GameData");
-            if (this.OwnedItem && this.OwnedItem._Num > 0) {
-                GameData.subItem(this.OwnedItem._Item,1);
-            }
             //广播把
             let testEvent = new cc.Event.EventCustom("TouchItem", true);//创建自定义事件
-            testEvent.setUserData(this.OwnedItem._Item);    //设置自定义事件中包含的数据
+            testEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
             this.node.dispatchEvent(testEvent);    //用节点分发事件
         }
     }

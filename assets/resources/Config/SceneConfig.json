@@ -1,5 +1,5 @@
 {
-    "Speed": 150,
+    "Speed": 250,
     "BgSpeed": 0.5,
 
     "SpawnBarrierData":{
@@ -18,7 +18,7 @@
 
         "intervalData":{
             "100":{"cd":[3,5],
-            "interval":[60,100]}
+            "interval":[0,20]}
 
             ,"200":{"cd":[3,5],
                 "interval":[100,200]}

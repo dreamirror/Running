@@ -31,8 +31,16 @@ cc.Class({
 
     //正常来说 只有主角会碰上道具
     onCollisionEnter:function(_other,_self){
-        //得分 或者 替换武器
-        // var GameData = cc.find("GameContainer").getComponent("GameData");
-        // GameData.addItem( self.ItemInfo,1);
+        cc.log(" ######  collision with item  ##########");
+        var GameContainer = cc.find("GameContainer");
+        if (!GameContainer) {
+            return
+        }
+        if( _other.node.name.search("Player") != -1 ){
+             //广播获得了道具
+             let itemEvent = new cc.Event.EventCustom("GetItem", true);//创建自定义事件
+             itemEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
+             this.node.dispatchEvent(itemEvent);    //用节点分发事件
+        }   
     }
 });

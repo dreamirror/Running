@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        378.58841792314104,
+        535.2036995387831,
         0,
         0,
         0,
@@ -1084,6 +1084,7 @@
     },
     "_enabled": true,
     "Speed": 10,
+    "ItemConfig": null,
     "EntityPrefab": {
       "__uuid__": "01bda98d-60b7-4097-b54c-fb2e1a06bb43"
     },

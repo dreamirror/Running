@@ -7,6 +7,7 @@ var EObjType = {
     TYPE_ENEMY  :   2,
     TYPE_ITEM   :   3,
     TYPE_WEAPON :   4,
+    TYPE_PLAYER :   5,
 };
 
 /*

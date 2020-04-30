@@ -115,6 +115,10 @@ FunctionLibrary.GetCollisionType = function( InCollision ){
         {
             return CommonUtil.EObjType.TYPE_WEAPON;
         }
+        else if( InCollision.node.name.search("Player") != -1 )
+        {
+            return CommonUtil.EObjType.TYPE_PLAYER;
+        }
     }
 };
 

@@ -39,9 +39,9 @@ var SceneManager = cc.Class({
      onLoad () {
          let self = this;
         //random postion
-        self.pos_list = [cc.v2(50,300), cc.v2(100,350), cc.v2(50,400), cc.v2(150,300), cc.v2(150,350)];
+        self.pos_list = [cc.v2(50,200), cc.v2(100,200), cc.v2(50,250), cc.v2(150,150), cc.v2(150,200)];
         
-        cc.loader.loadRes("ItemConfig",function(error,asset){
+        cc.loader.loadRes("Config/ItemConfig",function(error,asset){
             if (error) {
                 cc.log(error)
                 return
@@ -50,9 +50,6 @@ var SceneManager = cc.Class({
         });
      },
 
-    start () {
-
-    },
     /**
      * 根据固定的几个坐标点随机生成道具
      * 传入挂载点 可指定道具名，不指定就随机（随机有个权重）
@@ -101,14 +98,11 @@ var SceneManager = cc.Class({
     RandomByWeight(weights){
         let sum = 0;
         for (let i = 0; i < weights.length; i++) {
-            cc.log(sum)
-            cc.log(weights[i])
             sum = sum + weights[i];
         }
 
         let number_rand = Math.random()*sum;
-        cc.log("number_rand = " + number_rand);
-
+        
         let sum_temp = 0;
         for (let index = 0; index < weights.length; index++)
         {

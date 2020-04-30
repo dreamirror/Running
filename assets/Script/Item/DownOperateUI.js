@@ -19,68 +19,48 @@ cc.Class({
 
     onLoad () {
         //初始化底部的道具栏
-        this.itemBlock = [];
-        this.weaponBlock;
+        this.weaponBlock = [];
         for (let index = 0; index < this.OperateNum; index++) {
             let pb = cc.instantiate(this.OperatePrefab);
             if (pb) {
                 
                 pb.parent = cc.director.getScene();  //加到当前场景
                 pb.setPosition( 100 + (index * 120), 20 );
-                if (index == 0) {
-                    this.weaponBlock = pb;
-                } else {
-                    this.itemBlock.push(pb);
-                }
+                this.weaponBlock.push(pb);
             }
         }
+
+        //监听道具获得
+        this.node.on('GetItem', this.updateOperateItem, this);
     },
 
     start () {
-        if (true) {
-            return;
-        }
-        //更新背包里的道具来更新道具栏
-       // var GameData = cc.find("GameContainer").getComponent("GameData");
-        let info = GameData.getPlayerInfo();
-        if (info && info.itemArray) {
-            for (let index = 0; index < info.itemArray.length; index++) {
-                if (index > self.OperateNum) {
-                    break;
-                }
 
-                const element = info.itemArray[index];
-                if (element) {
-                    if (element._Item.type == EItemType.Weapon ) {
-                        let pb1 = this.weaponBlock;
-                        pb1.getComponent("OprateItemJS").init(element);
-                    } else {
-                        let pb2 = this.itemBlock.pop();
-                        pb2.getComponent("OprateItemJS").init(element);
-                    }
-                }
-            }
-        }
     },
 
-    updateOperateItem(){
-        //更新背包里的道具来更新道具栏
-        var GameData = cc.find("GameContainer").getComponent("GameData");
-        let info = GameData.getPlayerInfo();
-        let _index = 0;
-        if (info && info.itemArray) {
-            for (let index = 0; index < info.itemArray.length; index++) {
-                if (index > self.OperateNum) {
-                    break;
-                }
+    updateOperateItem(ItemInfo){
+        if (!ItemInfo) {
+            return
+        }
+        if (ItemInfo.type == EItemType.GoldItem) {
+            //直接被使用掉
 
-                const element = info.itemArray[index];
-                if (element) {
-                    if (element._Item.type == EItemType.Weapon) {
+        } else {
+            //替换掉当前武器
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            GameData.addOrReplaceWeapon(ItemInfo);
+
+            //更新背包里的道具来更新道具栏
+            let info = GameData.getTempInfo();
+            let _index = 0;
+            if (info && info.weapons) {
+                for (let index = 0; index < info.weapons.length; index++) {
+                    if (index > self.OperateNum) {
+                        break;
+                    }
+                    const element = info.weapons[index];
+                    if (element) {
                         this.weaponBlock.getComponent("OprateItemJS").init(element);
-                    } else {
-                        this.itemBlock[_index].getComponent("OprateItemJS").init(element);
-                        _index = _index + 1;
                     }
                 }
             }
