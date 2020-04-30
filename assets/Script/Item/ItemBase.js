@@ -25,45 +25,13 @@ var ItemBase = cc.Class({
     },
 
     //new之后要初始化
-    init( id,name,icon) {
+    init( id,name,icon,inType) {
         this.ID = id;
         this.ItemName = name;
         this.Icon = icon;
+        this.itemType = inType;
     }
 });
-
-//加技能/动画
-var Weapon  = cc.Class({
-    extends : ItemBase,
-
-    properties : {
-        itemType : {
-            default : EItemType.Weapon,
-            type : cc.Enum(EItemType),
-            override: true,
-        },
-
-        grantedAinm : "",
-        grantedAbility : "",
-    },
-});
-
-//加钱
-var GoldItem  = cc.Class({
-    extends : ItemBase,
-
-    properties : {
-        itemType : {
-            default : EItemType.Gold,
-            type : cc.Enum(EItemType),
-            override: true,
-        },
-
-        grantedGold : 10,
-    },
-});
-
-
 
 
 //某类道具的存储结构
@@ -83,7 +51,5 @@ var SaveItem = cc.Class({
 module.exports = {
     EItemType,
     ItemBase,
-    Weapon,
-    GoldItem,
     SaveItem,
 };

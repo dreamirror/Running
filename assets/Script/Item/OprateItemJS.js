@@ -1,7 +1,5 @@
 
 const ItemBase = require('ItemBase').ItemBase;
-const Weapon = require('ItemBase').Weapon;
-const GoldItem = require('ItemBase').GoldItem;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 

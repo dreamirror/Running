@@ -1,6 +1,4 @@
 const ItemBase = require('ItemBase').ItemBase;
-const Weapon = require('ItemBase').Weapon;
-const GoldItem = require('ItemBase').GoldItem;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 
@@ -8,14 +6,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        EntityPrefab : {
-            default : null,
-            type : cc.Prefab,
-        }
+
     },
 
     start () {
-        this.testSpawnItem();
+        //this.testSpawnItem();
     },
 
     //////////////////////////////////
@@ -30,13 +25,8 @@ cc.Class({
             let index = 0;
             for(var p in asset.json){//遍历json对象的每个key/value对,p为key
                 var iteminfo = asset.json[p];
-                var item;
-               
-                if (iteminfo.type == 0 ) {
-                    item = new Weapon();
-                } else {
-                    item = new GoldItem();
-                }
+                var item = new ItemBase();
+
                 item.init(iteminfo.id,iteminfo.name,iteminfo.icon);
                 var GameData = cc.find("GameContainer").getComponent("GameData");
                 GameData.addItem( iteminfo,1);

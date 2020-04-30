@@ -214,7 +214,11 @@ cc.Class({
             this.SpawnBarrier();
             //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
             this.CDTime = window.SceneData.getSpawnBarrierCD()
-
+            
+            //暂时在这儿去加一个生成道具的。 
+            var gs =  cc.find("Canvas/GameScene");
+            var mgr = gs.getComponent("SceneManager");
+            mgr.SpawnItem( this.back_2 );
         }
         this.updateBarriers(window.SceneData.Speed *dt);
         this.updateRoads(window.SceneData.Speed *dt);

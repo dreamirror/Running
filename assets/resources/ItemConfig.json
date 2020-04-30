@@ -1,22 +1,25 @@
 {
     "item01":{  
-        "type" : 0,
+        "type" : 1,
         "icon" : "Texture/item01",
         "name" : "药水",
-        "id" : "item01"
+        "id" : "item01",
+        "weight" : 10
     },
 
     "item02": {
-        "type" : 0,
+        "type" : 1,
         "icon" : "Texture/item02",
         "name" : "宝物",
-        "id" : "item02"
+        "id" : "item02",
+        "weight" : 10
     },
 
     "weapon01":{
-        "type" : 1,
+        "type" : 0,
         "icon" : "Texture/weapon01",
         "name" : "sword",
-        "id" : "weapon01"
+        "id" : "weapon01",
+        "weight" : 1
     }
 }

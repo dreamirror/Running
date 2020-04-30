@@ -1,6 +1,4 @@
 const ItemBase = require('ItemBase').ItemBase;
-const Weapon = require('ItemBase').Weapon;
-const GoldItem = require('ItemBase').GoldItem;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 
@@ -25,19 +23,25 @@ cc.Class({
         this.weaponBlock;
         for (let index = 0; index < this.OperateNum; index++) {
             let pb = cc.instantiate(this.OperatePrefab);
-            pb.parent = this.node;
-            pb.setPosition( 100 + (index * 120), 20 );
-            if (index == 0) {
-                this.weaponBlock = pb;
-            } else {
-                this.itemBlock.push(pb);
+            if (pb) {
+                
+                pb.parent = cc.director.getScene();  //加到当前场景
+                pb.setPosition( 100 + (index * 120), 20 );
+                if (index == 0) {
+                    this.weaponBlock = pb;
+                } else {
+                    this.itemBlock.push(pb);
+                }
             }
         }
     },
 
     start () {
+        if (true) {
+            return;
+        }
         //更新背包里的道具来更新道具栏
-        var GameData = cc.find("GameContainer").getComponent("GameData");
+       // var GameData = cc.find("GameContainer").getComponent("GameData");
         let info = GameData.getPlayerInfo();
         if (info && info.itemArray) {
             for (let index = 0; index < info.itemArray.length; index++) {
@@ -47,7 +51,7 @@ cc.Class({
 
                 const element = info.itemArray[index];
                 if (element) {
-                    if (element._Item instanceof Weapon) {
+                    if (element._Item.type == EItemType.Weapon ) {
                         let pb1 = this.weaponBlock;
                         pb1.getComponent("OprateItemJS").init(element);
                     } else {

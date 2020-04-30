@@ -6,11 +6,10 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 
-
+const ItemBase = require('ItemBase').ItemBase;
 
 var SceneManager = cc.Class({
     extends: cc.Component,
-
 
     ctor: function () {
         cc.loader.loadRes("SceneConfig",function(err,object){
@@ -23,37 +22,106 @@ var SceneManager = cc.Class({
     },
     
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
         Speed : 0,
+        ItemConfig : {
+            default : null,
+            visible() {return false},
+        },
 
-
+        EntityPrefab : {
+            default : null,
+            type : cc.Prefab,
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
-
-
-
+         let self = this;
+        //random postion
+        self.pos_list = [cc.v2(50,300), cc.v2(100,350), cc.v2(50,400), cc.v2(150,300), cc.v2(150,350)];
+        
+        cc.loader.loadRes("ItemConfig",function(error,asset){
+            if (error) {
+                cc.log(error)
+                return
+            }
+            self.ItemConfig = asset.json;
+        });
      },
 
     start () {
 
     },
+    /**
+     * 根据固定的几个坐标点随机生成道具
+     * 传入挂载点 可指定道具名，不指定就随机（随机有个权重）
+     */
+    SpawnItem(ParentNode,ItemID) {
+        let self = this;
+        if (ParentNode && self.ItemConfig) {
+            if (ItemID) {
+                //todo
+
+            } else {
+                let itemlist = [];
+                let weightlist = [];
+                for(var p in self.ItemConfig){//遍历json对象的每个key/value对,p为key
+                    itemlist.push(self.ItemConfig[p]);
+                    weightlist.push(self.ItemConfig[p].weight);
+                }
+                let randindex = self.RandomByWeight(weightlist);
+                if (randindex == -1) {
+                    cc.log("随机出错了")
+                    return
+                } else {
+                    let randItem = itemlist[randindex];
+                    if (randItem) {
+                        var item = new ItemBase();
+                        item.init(randItem.id,randItem.name,randItem.icon,randItem.type);
+                        
+                        if (self.EntityPrefab) {
+                            let pb = cc.instantiate(self.EntityPrefab);
+                            pb.getComponent("ItemInGame").init(item);
+                            //pb.parent = cc.director.getScene();  //加到当前场景
+                            ParentNode.addChild(pb);                 //加到父节点（这里是canvas）
+                            let pos = Math.floor(self.pos_list.length * Math.random());
+                            pb.setPosition(self.pos_list[pos]);
+                        }
+                    }
+                }   
+            }
+        }
+    },
+    
+    /**
+    * 权重随机
+    * 传入的是权重数组
+    */
+    RandomByWeight(weights){
+        let sum = 0;
+        for (let i = 0; i < weights.length; i++) {
+            cc.log(sum)
+            cc.log(weights[i])
+            sum = sum + weights[i];
+        }
+
+        let number_rand = Math.random()*sum;
+        cc.log("number_rand = " + number_rand);
+
+        let sum_temp = 0;
+        for (let index = 0; index < weights.length; index++)
+        {
+            sum_temp = sum_temp + weights[index];
+            if (number_rand <= sum_temp)
+            {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    
 
     // update (dt) {},
 });
