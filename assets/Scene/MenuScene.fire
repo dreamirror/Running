@@ -277,7 +277,7 @@
       "array": [
         0,
         0,
-        524.1483439935973,
+        455.5293623906148,
         0,
         0,
         0,
@@ -760,9 +760,6 @@
       "__id__": 2
     },
     "_enabled": true,
-    "EntityPrefab": {
-      "__uuid__": "01bda98d-60b7-4097-b54c-fb2e1a06bb43"
-    },
     "_id": "0eYMC85TZDNaIKQtLQlZ6Z"
   },
   {
@@ -871,7 +868,10 @@
       "weapon": 111,
       "itemArray": []
     },
-    "otherInfo": null,
+    "tempInfo": {
+      "buffs": [],
+      "weapons": []
+    },
     "_id": "d0y8MwnfpD858YT4tMPUfT"
   },
   {

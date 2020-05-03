@@ -3,6 +3,7 @@ const ItemBase = require('ItemBase').ItemBase;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 
+const EventName = require("GlobalEventName");
 
 cc.Class({
     extends: cc.Component,
@@ -28,7 +29,7 @@ cc.Class({
         this.OwnedItem = _ItemBase;
         let self = this;
         if (self.OwnedItem) {
-            cc.loader.loadRes(this.OwnedItem.icon, function(err,img){
+            cc.loader.loadRes(this.OwnedItem.Icon, function(err,img){
                 if (err) {
                     cc.log(err);
                     return;
@@ -43,12 +44,15 @@ cc.Class({
 
 
     ButtonTouch(){
-        cc.log("####  item clicked  ##########")
         if (this.OwnedItem) {
             //广播把
-            let testEvent = new cc.Event.EventCustom("TouchItem", true);//创建自定义事件
-            testEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
-            this.node.dispatchEvent(testEvent);    //用节点分发事件
+            //let testEvent = new cc.Event.EventCustom("TouchItem", true);//创建自定义事件
+            //testEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
+            //this.node.dispatchEvent(testEvent);    //用节点分发事件
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            GameData.resortWeapon(this.OwnedItem);
+
+            EventCenter.emit(EventName.GetItem,this.OwnedItem);
         }
     }
 });

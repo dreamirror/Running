@@ -1,6 +1,9 @@
-const ItemBase = require('ItemBase').ItemBase;
+
 const EItemType = require('ItemBase').EItemType;
-const SaveItem = require('ItemBase').SaveItem;
+
+const EventName = require("GlobalEventName");
+
+
 
 cc.Class({
     extends: cc.Component,
@@ -25,13 +28,14 @@ cc.Class({
             if (pb) {
                 
                 pb.parent = cc.director.getScene();  //加到当前场景
-                pb.setPosition( 100 + (index * 120), 20 );
+                pb.setPosition( 100 + (index * 80), 20 );
                 this.weaponBlock.push(pb);
             }
         }
 
         //监听道具获得
-        this.node.on('GetItem', this.updateOperateItem, this);
+        //this.node.on('GetItem', this.updateOperateItem, this);
+        EventCenter.on(EventName.GetItem,this.updateOperateItem,this);
     },
 
     start () {
@@ -42,7 +46,8 @@ cc.Class({
         if (!ItemInfo) {
             return
         }
-        if (ItemInfo.type == EItemType.GoldItem) {
+
+        if (ItemInfo.itemType == EItemType.GoldItem) {
             //直接被使用掉
 
         } else {
@@ -52,15 +57,14 @@ cc.Class({
 
             //更新背包里的道具来更新道具栏
             let info = GameData.getTempInfo();
-            let _index = 0;
             if (info && info.weapons) {
                 for (let index = 0; index < info.weapons.length; index++) {
-                    if (index > self.OperateNum) {
+                    if (index > this.OperateNum) {
                         break;
                     }
                     const element = info.weapons[index];
                     if (element) {
-                        this.weaponBlock.getComponent("OprateItemJS").init(element);
+                        this.weaponBlock[index].getComponent("OprateItemJS").init(element);
                     }
                 }
             }
@@ -68,4 +72,8 @@ cc.Class({
     },
 
     // update (dt) {},
+
+    onDestroy(){
+        EventCenter.off(EventName.GetItem,this.updateOperateItem,this);
+    },
 });

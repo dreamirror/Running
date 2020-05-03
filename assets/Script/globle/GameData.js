@@ -65,8 +65,8 @@ cc.Class({
     addOrReplaceWeapon(_weapon){
         //已经有了就捡不起来
         for (let index = 0; index < this.tempInfo.weapons.length; index++) {
-            const element = self.tempInfo.weapons[index];
-            if (element && element.id == _weapon.id) {
+            const element = this.tempInfo.weapons[index];
+            if (element && element.ID == _weapon.ID) {
                 return;
             }
         }
@@ -81,16 +81,29 @@ cc.Class({
         }
     },
 
+    //点击后重新排序
+    resortWeapon : function (_weapon) {
+        for (let index = 0; index < this.tempInfo.weapons.length; index++) {
+            const element = this.tempInfo.weapons[index];
+            if (element && element.ID == _weapon.ID) {
+                this.tempInfo.weapons.splice(index,1); //先删
+                break;
+            }
+        }
+        //再插入到第一个位置
+        this.tempInfo.weapons.unshift(_weapon);
+    },
+
 
     addPlayerGold : function (num) {
-        self.playerInfo.gold = self.playerInfo.gold + num;
+        this.playerInfo.gold = this.playerInfo.gold + num;
     },
 
     //物品
     addItem : function(_ItemBase , _num) {
         let bAlreadyHave = false;
-        for (let index = 0; index < self.playerInfo.itemArray.length; index++) {
-            const element = self.playerInfo.itemArray[index];
+        for (let index = 0; index < this.playerInfo.itemArray.length; index++) {
+            const element = this.playerInfo.itemArray[index];
             if (element && element._Item == _ItemBase) {
                 bAlreadyHave == true;
                 element._Num = element._Num + _num;
@@ -100,14 +113,14 @@ cc.Class({
             let NewItems = new SaveItem();
             NewItems._Item = _ItemBase;
             NewItems._Num = _num; 
-            self.playerInfo.itemArray.push(NewItems);
+            this.playerInfo.itemArray.push(NewItems);
         }
     },
 
     //增加
     subItem : function(_ItemBase , _num){
-        for (let index = 0; index < self.playerInfo.itemArray.length; index++) {
-            const element = self.playerInfo.itemArray[index];
+        for (let index = 0; index < this.playerInfo.itemArray.length; index++) {
+            const element = this.playerInfo.itemArray[index];
             if (element && element._Item == _ItemBase) {
                 element._Num = element._Num - _num;
             }
@@ -125,20 +138,20 @@ cc.Class({
     //写数据到本地
     setInfoToLocal : function(){
         cc.sys.localStorage.setItem("playerinfo",JSON.stringify(this.playerInfo));
-        cc.sys.localStorage.setItem("tempInfo",JSON.stringify(this.tempInfo));
+       // cc.sys.localStorage.setItem("tempInfo",JSON.stringify(this.tempInfo));
     },
 
     //读取数据并初始化userdata
     getInfoFromLocal : function (){
         cc.sys.localStorage
         let playerinfo = cc.sys.localStorage.getItem("playerinfo");
-        let tempInfo = cc.sys.localStorage.getItem("tempInfo");
         if (playerinfo != null) {
             this.playerInfo =  JSON.parse(playerinfo);
         }
-        if (tempInfo != null) {
-            this.tempInfo =  JSON.parse(tempInfo);
-        }
+        // let tempInfo = cc.sys.localStorage.getItem("tempInfo");
+        // if (tempInfo != null) {
+        //     this.tempInfo =  JSON.parse(tempInfo);
+        // }
         
     },
 });

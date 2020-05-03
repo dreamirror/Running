@@ -4,6 +4,7 @@ const ItemBase = require('ItemBase').ItemBase;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 
+const EventName = require("GlobalEventName");
 
 
 cc.Class({
@@ -31,16 +32,19 @@ cc.Class({
 
     //正常来说 只有主角会碰上道具
     onCollisionEnter:function(_other,_self){
-        cc.log(" ######  collision with item  ##########");
         var GameContainer = cc.find("GameContainer");
         if (!GameContainer) {
             return
         }
         if( _other.node.name.search("Player") != -1 ){
              //广播获得了道具
-             let itemEvent = new cc.Event.EventCustom("GetItem", true);//创建自定义事件
-             itemEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
-             this.node.dispatchEvent(itemEvent);    //用节点分发事件
+            //  let itemEvent = new cc.Event.EventCustom("GetItem", true);//创建自定义事件
+            //  itemEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
+            //  this.node.dispatchEvent(itemEvent);  
+            EventCenter.emit(EventName.GetItem,this.ItemInfo);
+
+            //清除自身
+            this.node.removeFromParent();
         }   
     }
 });
