@@ -1,6 +1,6 @@
 const ItemBase = require('ItemBase').ItemBase;
-const EItemType = require('ItemBase').EItemType;
-const SaveItem = require('ItemBase').SaveItem;
+
+const PopupWin = require('PopupWin');
 
 cc.Class({
     extends: cc.Component,
@@ -47,6 +47,15 @@ cc.Class({
 
 
     touchStartBtn(){
+        // PopupWin.show.call(this,{
+        //                 leftCallback : function(){
+        //                     cc.log("click left");
+        //                 },
+        //                 rightCallback : function(){
+        //                     cc.log("click right");
+        //                 },
+        //             });
+        // return
         var AudioManager = cc.find("GameContainer").getComponent("AudioManager");
         if (AudioManager) {
             AudioManager.playEffect("Sound/sfx_score");
