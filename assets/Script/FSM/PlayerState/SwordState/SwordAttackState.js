@@ -52,22 +52,16 @@ var SwordAttackState = cc.Class({
 
     /*******************  响应点击   ******************* */
     OnTouchStart : function(event){
-        //cc.log("1111");
-        //this._super(event);
     },
 
 	OnTouchEnd : function(event){
-        //cc.log("2222");
-        //this._super(event);
     },
 
     //触摸移开屏幕
     OnTouchCancel : function(event){
-        //this._super(event);
     },
 
     Update : function(dt){
-        //this._super(dt);
     },
 
     /*******************  动画回调   ******************* */
