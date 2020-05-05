@@ -73,6 +73,7 @@ window.EventCenter = {
             var handlers = this._events[eventname];
             for (var index = 0; index < handlers.length; index++) {
                 var handler = handlers[index];
+                //handler.callback.call(handler.target,data);
                 handler.callback.call(handler.target,data);
             }
         }

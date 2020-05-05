@@ -28,7 +28,7 @@ cc.Class({
             if (pb) {
                 
                 pb.parent = cc.director.getScene();  //加到当前场景
-                pb.setPosition( 100 + (index * 80), 20 );
+                pb.setPosition( 100 + (index * 80), 420 );
                 this.weaponBlock.push(pb);
             }
         }

@@ -13,6 +13,8 @@ var FunctionLibrary = require("FunctionLibrary");
 var CommonUtil = require("CommonUtil");
 var GameManager = require("GameManager");
 
+const EventName = require("GlobalEventName");
+
 /* 道具 */
 var ItemBase = require("ItemBase"); 
 
@@ -28,8 +30,6 @@ var PlayerInfo = cc.Class({
     InitPlayerInfo : function (){
         //玩家身上所有道具的List ， Key为道具ID，
         this.ItemList = new Map();
-        //当前玩家拥有的武器List ， Key为武器道具ID
-        this.WeaponList = new Map();
     },
 });
 
@@ -53,22 +53,16 @@ var Player = cc.Class({
             default : null,
             type : cc.Component,
         },
+
+        /* 自身配置数据 */
+        PlayerConfig : null,
     },
 
     onLoad () {  
     },
 
-    /*测试代码，在此加上玩家Info武器测试数据
-    */
-    TestScriptAddWeapon : function (){
-        var WeaponData = new ItemBase.SaveItem();
-        var WeaponItem = new ItemBase.ItemBase();
-        WeaponItem.init("weapon01","Sword",null);
-        WeaponData._Item = WeaponItem;
-        WeaponData.num = -1;
-        WeaponData.name = "weapon01";
-        this.PlayerInfo.WeaponList.set("weapon01", WeaponData);
-        this.aaa = 1;
+    onDestroy(){
+        EventCenter.off(EventName.TouchItem,this.OnTouchItemBtn , this);
     },
 
     start () {
@@ -79,7 +73,7 @@ var Player = cc.Class({
         this.PlayerInfo = new PlayerInfo();
         this.PlayerInfo.InitPlayerInfo();
              
-        this.TestScriptAddWeapon();
+        //this.TestScriptAddWeapon();
 
         //模拟重力的系统需要添加一个
         if(this.BUseGravity && GravityManager._instance){
@@ -88,8 +82,9 @@ var Player = cc.Class({
 
         //添加一个碰撞后的反馈函数，用来判断是否死亡之类的
         this.AddCollisionStartCall( this.PlayerCollisionCall , this , null);
-        
-        //this.GameManager = GameManager._instance;
+
+        //添加一个点击武器的回调
+        EventCenter.on(EventName.TouchItem,this.OnTouchItemBtn , this);
     },
 
     update (dt) {
@@ -156,25 +151,23 @@ var Player = cc.Class({
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
             //var container = cc.find("GameContainer");
-            //var GameManager111 = cc.find("GameContainer").getComponent("GameManager");
-            //if(GameManager._instance){
-            //    GameManager._instance.GameOver();
-            //}   
-            // cc.director.loadScene("GameScene",function(){
-            //    cc.log("GameScene launched!");
-            //});      
-            Target.ChangeWeapon("weapon01");
+            var GameManager = cc.find("GameContainer").getComponent("GameManager");
+            if(GameManager){
+                //GameManager.GameOver();
+            }   
         }
     },
 
     /**
-     * 切换武器
+     * 点击武器按钮的回调
      */
-    ChangeWeapon : function( InWeaponID ) {
+    OnTouchItemBtn: function (InData)
+    {
         if(this.RightArm && this.RightArm.getComponent("RightArm")){
-            this.RightArm.getComponent("RightArm").ChangeWeapon(InWeaponID);
+            this.RightArm.getComponent("RightArm").ChangeWeapon(InData.ID);
         };
     },
+        
 
 });
 

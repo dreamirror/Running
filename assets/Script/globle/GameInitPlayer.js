@@ -49,8 +49,22 @@ cc.Class({
     },
 
     start () {
+        //加载玩家的config数据之后再初始化状态机
+        var self = this;
+        cc.loader.loadRes('Config/PlayerConfig',function (err, asset) {
+            if(err){
+                cc.log("加载玩家数据报错！：" + err); 
+                return;
+            };
+            if( asset && asset.json ){
+                // 初始化状态机
+                self.PlayerJS = self.Player.getComponent("Player");
+                self.PlayerJS.PlayerConfig = asset.json;
+                self.InitFSM();
+            }
+        });
         //4.23 初始化状态机
-        this.InitFSM();
+        //this.InitFSM();
     },
 
     //将人物FSMupdate
@@ -66,6 +80,7 @@ cc.Class({
     InitFSM : function(){
 
         this.PlayerJS = this.Player.getComponent("Player");
+        var PlayerConfig = this.PlayerJS.PlayerConfig;
         this.FSMMgr = new FSMMgr();
         if(this.FSMMgr)
         {
@@ -79,8 +94,8 @@ cc.Class({
             //创建一个跳跃状态
             var playerJumpState = new PlayerJumpState();
             playerJumpState.InitVariable(this.FSMMgr , this.Player);
-            playerJumpState.AddCondition(FSMUtil.TransConditionID.JumpToRun , FSMUtil.FSMStateID.RUN);         
-            playerJumpState.InitJumpData(this.InitialSpeed);
+            playerJumpState.AddCondition(FSMUtil.TransConditionID.JumpToRun , FSMUtil.FSMStateID.RUN);      
+            playerJumpState.InitJumpData(PlayerConfig.InitialSpeed);//this.InitialSpeed);
 
             //设置状态机的初始状态
             this.FSMMgr.Init( FSMUtil.FSMStateID.RUN , playerRunState);

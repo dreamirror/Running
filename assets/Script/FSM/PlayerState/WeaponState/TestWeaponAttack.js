@@ -43,11 +43,16 @@ var TestWeaponAttack = cc.Class({
     
     /*******************  响应点击   ******************* */
     OnTouchStart : function(event){
-        
     },
 
-    Update : function(){
-        
+	OnTouchEnd : function(event){
+    },
+
+    //触摸移开屏幕
+    OnTouchCancel : function(event){
+    },
+
+    Update : function(dt){
     },
 
     /*******************  动画回调   ******************* */
