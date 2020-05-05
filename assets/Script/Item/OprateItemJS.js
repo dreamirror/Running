@@ -52,7 +52,7 @@ cc.Class({
             var GameData = cc.find("GameContainer").getComponent("GameData");
             GameData.resortWeapon(this.OwnedItem);
 
-            EventCenter.emit(EventName.GetItem,this.OwnedItem);
+            EventCenter.emit(EventName.TouchItem,this.OwnedItem);
         }
     }
 });

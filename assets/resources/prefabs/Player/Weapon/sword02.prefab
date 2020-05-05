@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ba_sword",
+    "_name": "sword",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -21,43 +21,40 @@
     "_components": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 3
     },
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 6,
+      "g": 133,
+      "b": 59,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 42,
-      "height": 85
+      "width": 27,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 0.5030876999709408,
+      "y": 0.9975647695520988
     },
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        36,
-        407,
+        191,
+        234,
         0,
         0,
         0,
-        0,
-        1,
+        0.7078468738262603,
+        0.70636591311755,
         1,
         1,
         1
@@ -67,7 +64,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 0
+      "z": 90.12
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -92,7 +89,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "aca929e8-9608-4668-829b-060b317e5758"
+      "__uuid__": "46451d5e-9c03-47ec-9575-90abafb92080"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -109,35 +106,14 @@
     "_id": ""
   },
   {
-    "__type__": "cc.BoxCollider",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "tag": 0,
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 21,
-      "y": 43
-    },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 42,
-      "height": 85
-    },
-    "_id": ""
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "b168d503-a2d5-4c92-94ab-38c521c41f7f"
+      "__uuid__": "71ca1e71-0035-4399-addc-a4350239d14d"
     },
-    "fileId": "82favbjwRNWIk91z6C+uwl",
+    "fileId": "44kpSC93NFrKD3LdmSAMK7",
     "sync": false
   }
 ]

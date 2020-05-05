@@ -33,7 +33,7 @@ var RightArm = cc.Class({
 
         var self = this;
         /* 先根据配置把预制武器全部都加载出来吧 */
-        cc.loader.loadRes('Config/PlayerConfig',function (err, asset) {
+        cc.loader.loadRes('Config/PlayerWeaponConfig',function (err, asset) {
             if(err){
                 cc.log("加载玩家武器报错！：" + err); 
                 return;
@@ -41,29 +41,32 @@ var RightArm = cc.Class({
 
             if( asset && asset.json && asset.json.weapons )
             {
+                var WeaponConfigList = new Map();
                 for(var key in asset.json.weapons){
                     //根据对应的Prefab创建武器，并且加入到手部的武器列表中
                     var WeaponConfig = asset.json.weapons[key];
                     if (WeaponConfig && WeaponConfig.prefab) {
-                        //var CurWeapon = cc.instantiate(WeaponConfig.prefab);
+                        WeaponConfigList.set(WeaponConfig.name , WeaponConfig);
+
                         cc.loader.loadRes(WeaponConfig.prefab ,function (errLoadWeapon, assetWeapon) {
-                            if(assetWeapon){
+                            if(assetWeapon && WeaponConfigList.has(assetWeapon.name)){
+                                var CurWeaponData = WeaponConfigList.get(assetWeapon.name);
                                 var CurWeapon = cc.instantiate(assetWeapon);
                                 if (CurWeapon){
                                     self.node.addChild(CurWeapon);
 
-                                    if(WeaponConfig.Pos){
-                                        var PosArr = WeaponConfig.Pos.split(",");
+                                    if(CurWeaponData.Pos){
+                                        var PosArr = CurWeaponData.Pos.split(",");
                                         if(PosArr){
                                             CurWeapon.setPosition(cc.v2(PosArr[0], PosArr[1]));
                                         }
                                     };
-                                    if(WeaponConfig.Rotaion){
-                                        CurWeapon.angle = WeaponConfig.Rotaion;
+                                    if(CurWeaponData.Rotaion){
+                                        CurWeapon.angle = CurWeaponData.Rotaion;
                                     }
-                                    if( WeaponConfig.Anchor )
+                                    if( CurWeaponData.Anchor )
                                     {
-                                        var AnchorArr = WeaponConfig.Anchor.split(",");
+                                        var AnchorArr = CurWeaponData.Anchor.split(",");
                                         if(AnchorArr){
                                             CurWeapon.setAnchorPoint(AnchorArr[0], AnchorArr[1]);
                                         }
@@ -72,9 +75,9 @@ var RightArm = cc.Class({
                                     //将该武器存储
                                     var WeaponData = {
                                         WeaponCtl   :   CurWeapon,
-                                        WeaponConfig  :   WeaponConfig,
+                                        WeaponConfig  :   CurWeaponData,
                                     };
-                                    self.PlayerPrefabWeapons.set(WeaponConfig.id , WeaponData );
+                                    self.PlayerPrefabWeapons.set(CurWeaponData.id , WeaponData );
                                     CurWeapon.active = false;
                                 }
                                 
@@ -94,7 +97,7 @@ var RightArm = cc.Class({
         return this.RightArmFSMMgr;
     },
 
-    //切换武器
+    //切换武器 ,还要记录上一个的ID，设为不可见
     ChangeWeapon : function( InWeaponID ) {
         if(this.PlayerPrefabWeapons.has(InWeaponID))
         {
@@ -102,10 +105,18 @@ var RightArm = cc.Class({
             var WeaponCtl = WeaponData.WeaponCtl;
             WeaponCtl.active = true;
 
+            if (this.preWeaponId != null || this.preWeaponId != undefined){
+                var PreWeaponData = this.PlayerPrefabWeapons.get(this.preWeaponId);
+                var PreWeaponCtl = PreWeaponData.WeaponCtl;
+                PreWeaponCtl.active = false;
+            }
+
             //再根据配置切换状态机
             if(this.RightArmFSMMgr){
                 this.RightArmFSMMgr.ForceSetFSMState(WeaponData.WeaponConfig.NormalStateID , null, null );
             }
+
+            this.preWeaponId = InWeaponID;
         }
     },
 

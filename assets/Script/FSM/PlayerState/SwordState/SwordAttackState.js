@@ -26,7 +26,7 @@ var SwordAttackState = cc.Class({
 
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
-
+            cc.log("00000");
             this.ArmJS.PlayAnimation("SwordAtt");
             var ArmAnimation = this.ArmJS.GetAnimation();
             if (ArmAnimation != null)
@@ -52,25 +52,29 @@ var SwordAttackState = cc.Class({
 
     /*******************  响应点击   ******************* */
     OnTouchStart : function(event){
-        
-        this._super(event);
+        //cc.log("1111");
+        //this._super(event);
     },
 
 	OnTouchEnd : function(event){
-        this._super(event);
+        //cc.log("2222");
+        //this._super(event);
     },
 
     //触摸移开屏幕
     OnTouchCancel : function(event){
-        this._super(event);
+        //this._super(event);
     },
 
     Update : function(dt){
-        this._super(dt);
+        //this._super(dt);
     },
 
     /*******************  动画回调   ******************* */
     OnAttackPlayOver : function( data ){
+
+        cc.log("3333");
+
         this.bAttackOver = true;
         var ArmAnimation = this.ArmJS.GetAnimation();
         if (ArmAnimation != null)
