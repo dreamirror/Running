@@ -70,13 +70,42 @@ cc.Class({
         SpwanBarrierCD : 5,
         CDTime : 0,
         intervalCD: 0,
+        
+       
 
     },
-
+    
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
 
+        //加载预制体
+        var self = this;
+        var prefabNum = window.SceneData.barrierPath.length;
+        var currentIndex = 0;
+        var tt = "ba_1";
+        //tt["11"] = 11;
+        this.BarriersCache ={};
+        var loadCall = function(){
+            currentIndex++;
+            if(currentIndex>prefabNum)
+            {
+                return;
+            }
+            cc.loader.loadRes(window.SceneData.barrierPath[currentIndex - 1],function(err,object){
+                if(err){
+                    cc.log(err); 
+                    return;
+                } 
+                self.BarriersCache["ba_"+currentIndex] = object
+                loadCall();
+            });
+        }
+
+
+
+
+        loadCall();
 
      },
 
@@ -92,27 +121,24 @@ cc.Class({
 
         var id = window.SceneData.spawnBarrierData();
         var config = {"ba_1":this.swordPrefab,"ba_2":this.firePrefab,"ba_3":this.boxPrefab};
-        var width = DesignSize;
-        var barrier = cc.instantiate(config[id]);
-        this.node.addChild(barrier);
-        var lastRoad = this.roads[this.roads.length - 1];
-        var x = lastRoad.getPosition().x + lastRoad.width / 2
-        barrier.setPosition(cc.v2(x , 50))
-        this.barriers.push(barrier);
+        var baPrefab = this.BarriersCache[id]
 
-        var obj;
+        if(this.BarriersCache && baPrefab)
+        {   
+                    
+            var width = DesignSize;
+            var barrier = cc.instantiate(baPrefab);
+            var lastRoad = this.roads[this.roads.length - 1];
+            lastRoad.addChild(barrier);
+            var x = (lastRoad.width - barrier.width) / 2
+            barrier.setPosition(cc.v2(x , lastRoad.height))
+            this.barriers.push(barrier);
 
-        //cc.loader.loadRes("preferbs/barrier_box",function(err,object){
-           // if(err){
-               // cc.log(err); 
-               // return;
-           // } 
-            //obj = object;
 
-           // });
-        //var barrier2 = cc.instantiate(this.obj);
-        //barrier2.setPosition(cc.v2(0,0));
-        return barrier;
+            return barrier;
+
+        }
+
 
 
     },
@@ -136,11 +162,9 @@ cc.Class({
     initRoad : function(){
         var road = cc.instantiate(this.roadPrefab);
         var width = DesignSize;
-        cc.log("width=="+road.width);
         var num = (width / road.width) + 1;
         for(var i = 0;i < num;i++)
         {   
-            cc.log("i=="+i);
             var road = this.spawnRoad(0);
             road.setPosition(road.width * i,0);
         }
@@ -204,7 +228,8 @@ cc.Class({
         this.back_1.setPosition(this.back_1.getPosition().x - window.SceneData.Speed *dt,0)
         this.back_2.setPosition(this.back_2.getPosition().x -  window.SceneData.Speed * dt,0)
         window.SceneData.TaltleDistance += (window.SceneData.Speed / 100) * dt ;
-
+        window.SceneData.barrierPath
+        this.BarriersCache
         window.SceneData.SpeedReCordDis =  window.SceneData.TaltleDistance;
         //生成BarrierCD 
         this.CDTime -=dt;
@@ -216,7 +241,6 @@ cc.Class({
             this.CDTime = window.SceneData.getSpawnBarrierCD()
 
         }
-        this.updateBarriers(window.SceneData.Speed *dt);
         this.updateRoads(window.SceneData.Speed *dt);
         //生成路
 
@@ -238,7 +262,6 @@ cc.Class({
                     if(this.intervalCD <=0 )
                     {
                         var intervalData = window.SceneData.getIntervalData()
-                        cc.log("intervalData.interval=="+intervalData.interval)
                         this.spawnRoad(lastRoad.x + lastRoad.width,intervalData.interval);
                         this.intervalCD = intervalData.cd
 

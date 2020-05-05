@@ -1,7 +1,7 @@
 {
     "Speed": 250,
     "BgSpeed": 0.5,
-
+    "BarriersPrefabs":["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
     "SpawnBarrierData":{
         "100":{"cd":[3,5],
         "probability":{

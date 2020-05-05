@@ -136,6 +136,7 @@ window.SceneData = {
     OriginSpeed : 0, //出事速度
     barrierData : {},
     intervalData: {},
+    barrierPath :{},
 
 
     random4 : function (n, m){
@@ -236,6 +237,8 @@ cc.loader.loadRes("Config/SceneConfig",function(err,object){
 
     window.SceneData.barrierData = object.json.SpawnBarrierData;
     window.SceneData.intervalData = object.json.intervalData;
+    window.SceneData.barrierPath = object.json.BarriersPrefabs;
+    
     });
 
 
