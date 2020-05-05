@@ -21,6 +21,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {  
+        //this.InitVariable();
     },
 
     start () {
@@ -200,8 +201,10 @@ cc.Class({
      * @param  {Collider} self  产生碰撞的自身的碰撞组件
      */
     onCollisionEnter: function (other, self) {
-        //console.log('on collision enter');
-
+        if(this.CollisionStartCallList == null || this.CollisionStartCallList == undefined){
+            return;
+        }
+            
         //分发碰撞事件
         this.CollisionStartCallList.forEach(function(value,key){
             key(other,self ,value.Target , value.Param);
@@ -214,7 +217,9 @@ cc.Class({
      * @param  {Collider} self  产生碰撞的自身的碰撞组件
      */
     onCollisionStay: function (other, self) {
-        //console.log('on collision stay');
+        if(this.CollisionStayCallList == null || this.CollisionStayCallList == undefined){
+            return;
+        }
         //分发碰撞事件
         this.CollisionStayCallList.forEach(function(value,key){
             key(other,self ,value.Target , value.Param);
@@ -226,7 +231,9 @@ cc.Class({
      * @param  {Collider} self  产生碰撞的自身的碰撞组件
      */
     onCollisionExit: function (other, self) {
-        //console.log('on collision exit');
+        if(this.CollisionEndCallList == null || this.CollisionEndCallList == undefined){
+            return;
+        }
 
         //分发碰撞事件
         this.CollisionEndCallList.forEach(function(value,key){

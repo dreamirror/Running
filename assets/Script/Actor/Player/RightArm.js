@@ -13,6 +13,11 @@ var RightArm = cc.Class({
             default : null,
         },
 
+        CurrentWeaponCtl : {
+            default : null,
+            type : cc.Node,
+        }
+
     },
 
     onLoad () {  
@@ -99,7 +104,7 @@ var RightArm = cc.Class({
 
     //切换武器 ,还要记录上一个的ID，设为不可见
     ChangeWeapon : function( InWeaponID ) {
-        if(this.PlayerPrefabWeapons.has(InWeaponID))
+        if( this.preWeaponId != InWeaponID && this.PlayerPrefabWeapons.has(InWeaponID))
         {
             var WeaponData = this.PlayerPrefabWeapons.get(InWeaponID);
             var WeaponCtl = WeaponData.WeaponCtl;
@@ -117,6 +122,21 @@ var RightArm = cc.Class({
             }
 
             this.preWeaponId = InWeaponID;
+            this.CurrentWeaponCtl = WeaponCtl;
+        }
+    },
+
+    /* 激活攻击状态 */
+    SetAttackType : function(){
+        if (this.CurrentWeaponCtl){
+            this.CurrentWeaponCtl.emit('SetAttackType' , null);
+        }
+    },
+
+    /* 攻击状态结束 */
+    SetAttackOver : function (){
+        if (this.CurrentWeaponCtl){
+            this.CurrentWeaponCtl.emit('SetAttackOver' , null);
         }
     },
 

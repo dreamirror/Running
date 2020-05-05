@@ -66,7 +66,8 @@ var Player = cc.Class({
     },
 
     start () {
-        this.InitVariable();
+        this._super();
+        //this.InitVariable();
         this.InitFSM();
 
         //初始化玩家数据
@@ -76,9 +77,9 @@ var Player = cc.Class({
         //this.TestScriptAddWeapon();
 
         //模拟重力的系统需要添加一个
-        if(this.BUseGravity && GravityManager._instance){
-            GravityManager._instance.RigisterToGravity(this , this.UpdateGravity);
-        }  
+        //if(this.BUseGravity && GravityManager._instance){
+        //    GravityManager._instance.RigisterToGravity(this , this.UpdateGravity);
+        //}  
 
         //添加一个碰撞后的反馈函数，用来判断是否死亡之类的
         this.AddCollisionStartCall( this.PlayerCollisionCall , this , null);

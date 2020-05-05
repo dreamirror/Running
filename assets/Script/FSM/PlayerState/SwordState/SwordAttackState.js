@@ -26,14 +26,18 @@ var SwordAttackState = cc.Class({
 
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
-            cc.log("00000");
+            //cc.log("00000");
             this.ArmJS.PlayAnimation("SwordAtt");
             var ArmAnimation = this.ArmJS.GetAnimation();
             if (ArmAnimation != null)
             {
                 ArmAnimation.on('finished',  this.OnAttackPlayOver,  this);
             }
+
+            //将剑的攻击状态激活
+            this.ArmJS.SetAttackType();
         }   
+        
     },
 
     BreakCondition :function( ) {
@@ -47,6 +51,12 @@ var SwordAttackState = cc.Class({
     BeforeExit :function( InParamObj ) {
         this._super();
 
+        //将剑的攻击状态激活
+        if(this.ArmJS)
+        {
+            this.ArmJS.SetAttackOver();
+        }
+        
         this.bAttackOver = false;
     },
 
@@ -67,7 +77,7 @@ var SwordAttackState = cc.Class({
     /*******************  动画回调   ******************* */
     OnAttackPlayOver : function( data ){
 
-        cc.log("3333");
+        //cc.log("3333");
 
         this.bAttackOver = true;
         var ArmAnimation = this.ArmJS.GetAnimation();
