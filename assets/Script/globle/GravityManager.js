@@ -39,7 +39,7 @@ var GravityManager = cc.Class({
         //<Actor , Obj = { CallFunction , bOnGround } >
         this.GravityActorList = new Map();
 
-
+        
     },
 
     onDestroy (){

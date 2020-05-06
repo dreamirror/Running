@@ -30,8 +30,8 @@
 
 
     "DisToSpeed" : 0.1,
-    "MaxSpeed":500
+    "MaxSpeed":500,
 
-
+    "RoadStartPos":[0,690]
 
 }

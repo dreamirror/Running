@@ -107,8 +107,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 750,
+      "height": 600
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -119,8 +119,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        480,
-        320,
+        375,
+        300,
         0,
         0,
         0,
@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        359.39556858163354,
+        378.4531014537997,
         0,
         0,
         0,
@@ -293,7 +293,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        0,
+        21.491,
         0,
         0,
         0,
@@ -879,6 +879,7 @@
     "roadPrefab": {
       "__uuid__": "0b734ac5-d2e6-45cd-bf38-92512cd23b8d"
     },
+    "SceneManager": null,
     "barriers": [],
     "roads": [],
     "createed": true,
@@ -1100,8 +1101,8 @@
     "_enabled": true,
     "_designResolution": {
       "__type__": "cc.Size",
-      "width": 960,
-      "height": 640
+      "width": 750,
+      "height": 600
     },
     "_fitWidth": false,
     "_fitHeight": true,
@@ -1204,7 +1205,7 @@
       "ctor": "Float64Array",
       "array": [
         140.061,
-        117.06,
+        123.034,
         0,
         0,
         0,
@@ -1374,6 +1375,7 @@
     "AYSpeed": 0,
     "BUseGravity": false,
     "RightArmFSMMgr": null,
+    "CurrentWeaponCtl": null,
     "_id": "f5w00VfUBDiK9iOSEUqzdL"
   },
   {
@@ -1499,6 +1501,7 @@
       "__id__": 27
     },
     "RightArmFSMMgr": null,
+    "PlayerConfig": null,
     "_id": "07b1FqD85NCLP9PTZ7wY1q"
   },
   {
