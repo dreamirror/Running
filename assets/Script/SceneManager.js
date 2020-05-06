@@ -12,13 +12,14 @@ var SceneManager = cc.Class({
     extends: cc.Component,
 
     ctor: function () {
-        cc.loader.loadRes("Config/SceneConfig",function(err,object){
+        /*cc.loader.loadRes("Config/SceneConfig",function(err,object){
             if(err){
                 cc.log(err); 
                 return;
             } 
             this.Speed = object.json.Speed;
-            });
+            this.SceneConfigData = object.json;
+            });*/
     },
     
     properties: {
@@ -32,6 +33,7 @@ var SceneManager = cc.Class({
             default : null,
             type : cc.Prefab,
         },
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -239,6 +241,7 @@ cc.loader.loadRes("Config/SceneConfig",function(err,object){
     window.SceneData.intervalData = object.json.intervalData;
     window.SceneData.barrierPath = object.json.BarriersPrefabs;
     
+    window.SceneData.RoadStartPos = object.json.RoadStartPos;
     });
 
 

@@ -63,6 +63,11 @@ cc.Class({
             type: cc.Prefab
         },
 
+        //zh 5.6 把sceneManager存一下
+        SceneManager : {
+            default : null,
+            type : cc.Node
+        },
 
         barriers :[],
         roads : [],
@@ -101,17 +106,9 @@ cc.Class({
                 loadCall();
             });
         }
-
-
-
-
         loadCall();
-
-     },
-
-    
-
-
+ 
+    },
 
     start () {
         this.initRoad();
@@ -145,14 +142,18 @@ cc.Class({
     spawnRoad : function(x,interval){
         var road = cc.instantiate(this.roadPrefab);
         this.node.addChild(road);
+
+        var RoadPos = [ 0,0 ];
+        RoadPos = window.SceneData.RoadStartPos;
+
         if (this.roads.length == 0 )
         {
-            road.setPosition(0,0);
+            road.setPosition(0,RoadPos[1]);
         }
         else
         {
             var inx = x + interval;
-            road.setPosition(inx,0);
+            road.setPosition(inx,RoadPos[1]);
         }
         this.roads.push(road);
 
@@ -166,7 +167,12 @@ cc.Class({
         for(var i = 0;i < num;i++)
         {   
             var road = this.spawnRoad(0);
-            road.setPosition(road.width * i,0);
+
+            //zh 5.6
+            var RoadY = 0;
+            RoadY = window.SceneData.RoadStartPos[1];
+
+            road.setPosition(road.width * i,RoadY);
         }
     },
 

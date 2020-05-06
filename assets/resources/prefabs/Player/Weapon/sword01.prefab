@@ -112,19 +112,6 @@
     "_id": ""
   },
   {
-    "__type__": "224a2McVqRMUrrBjue/Fwan",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "AYSpeed": 0,
-    "BUseGravity": false,
-    "BInAttack": false,
-    "_id": ""
-  },
-  {
     "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
@@ -146,12 +133,25 @@
     "_id": ""
   },
   {
+    "__type__": "87ac5fVuw1Ce60GlJTLdVVu",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "AYSpeed": 0,
+    "BUseGravity": false,
+    "BInAttack": false,
+    "_id": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "86ccee1e-4e8d-42e0-b39f-3c997b18e027"
+      "__uuid__": "32eb6416-2c5b-47eb-9a95-441d5555ed90"
     },
     "fileId": "44kpSC93NFrKD3LdmSAMK7",
     "sync": false
