@@ -154,7 +154,7 @@ var Player = cc.Class({
             //var container = cc.find("GameContainer");
             var GameManager = cc.find("GameContainer").getComponent("GameManager");
             if(GameManager){
-                //GameManager.GameOver();
+                GameManager.GameOver();
             }   
         }
     },

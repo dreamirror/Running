@@ -31,10 +31,13 @@
     "_components": [
       {
         "__id__": 25
+      },
+      {
+        "__id__": 26
       }
     ],
     "_prefab": {
-      "__id__": 26
+      "__id__": 27
     },
     "_opacity": 255,
     "_color": {
@@ -85,7 +88,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "label",
+    "_name": "Ttile",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -1042,6 +1045,25 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
+    "_id": ""
+  },
+  {
+    "__type__": "d713elWDHRC/5vSvZwE82qh",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "Title": {
+      "__id__": 3
+    },
+    "OKBtn": {
+      "__id__": 13
+    },
+    "CancelBtn": {
+      "__id__": 23
+    },
     "_id": ""
   },
   {
