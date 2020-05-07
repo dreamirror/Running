@@ -1,4 +1,9 @@
 {
     "DeadHeight" : -30,
-    "Gravity" : 0.6
+    "Gravity" : 0.6,
+    "GameOverUIPre":{ 
+        "Prefab" : "prefabs/UI/CommonTipsUI",
+        "Pos" : [213,421]
+    }
+
 }

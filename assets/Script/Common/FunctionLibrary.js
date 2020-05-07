@@ -26,7 +26,8 @@ FunctionLibrary.GetCollisionBoundsByBoxCollision = function( InBoxCollision ){
     }
 
     //先获取Node的坐标和锚点
-    var NodePosition = InBoxCollision.node.getPosition();
+    var NodePosition = InBoxCollision.node.parent.convertToWorldSpaceAR(InBoxCollision.node.position);
+    //var NodePosition = InBoxCollision.node.getPosition();
     var NodeAnchor = InBoxCollision.node.getAnchorPoint();
 
     NodePosition.x = NodePosition.x - InBoxCollision.node.width * NodeAnchor.x;

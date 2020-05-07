@@ -67,7 +67,7 @@ var GravityManager = cc.Class({
 
     /**
      * 添加Actor到该重力系统中  InCallFunction( InActor , AYSpeed ： 当前Y方向的加速度， bOnGround ： 如果该值为0，则使用第三个参数更新Actor的位置 GroundObj ： 用来更新该Actor的位置)
-     */
+    */
     RigisterToGravity : function( InActor , InCallFunction ){
         //if( InActor instanceof Player){
             if(this.GravityActorList.has(InActor)){

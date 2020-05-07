@@ -53,6 +53,10 @@ cc.Class({
         this.CollisionStayCallList = new Map();
         //碰撞结束的回调
         this.CollisionEndCallList = new Map();
+        //保存一份GameManager
+        var GameContainer = cc.find("GameContainer");
+        if (GameContainer)
+            this.GameManager = cc.find("GameContainer").getComponent("GameManager");
     },
 
     /*****************  Player 的方法  *******************/
@@ -118,6 +122,13 @@ cc.Class({
      * 重力系统的Update回调
      */
     UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj){
+        if (InActor.GameManager == null || InActor.GameManager == undefined){
+            var GameContainer = cc.find("GameContainer");
+            if (GameContainer){
+                InActor.GameManager = cc.find("GameContainer").getComponent("GameManager");
+            }
+        }
+
         //cc.log("重力系统回调！");
         var TempPos = InActor.node.getPosition();
         InActor.node.setPosition(cc.v2(TempPos.x , TempPos.y + AYSpeed));
@@ -129,6 +140,15 @@ cc.Class({
             var TempPos = InActor.node.getPosition();
             InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
         }
+
+        //5.7 判断下 当前的Node如果低于死亡高度，则设置角色死亡
+        if (InActor.GameManager != null && InActor.GameManager != undefined){
+            var TempPos = InActor.node.getPosition();
+            if (TempPos.y <= InActor.GameManager.GameConfigData.DeadHeight ){
+                InActor.ActorDead();
+            }
+        }
+        
     },
 
 
@@ -263,5 +283,9 @@ cc.Class({
         this.unschedule(InCallback , InTarget);
     },
 
+    /****************** 角色状态等相关 *********************/
+    ActorDead : function ( ) {
+
+    },
 
 });

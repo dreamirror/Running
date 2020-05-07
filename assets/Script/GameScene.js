@@ -148,12 +148,12 @@ cc.Class({
 
         if (this.roads.length == 0 )
         {
-            road.setPosition(0,RoadPos[1]);
+            road.setPosition(0,70);
         }
         else
         {
             var inx = x + interval;
-            road.setPosition(inx,RoadPos[1]);
+            road.setPosition(inx,70);
         }
         this.roads.push(road);
 
@@ -185,7 +185,7 @@ cc.Class({
             for(var index in this.roads)
             {
                 var item = this.roads[index];
-                item.setPosition(item.getPosition().x - dis,0);
+                item.setPosition(item.getPosition().x - dis,70);
                 if(item.getPosition().x < -item.width)
                 {
                     item.removeFromParent();
