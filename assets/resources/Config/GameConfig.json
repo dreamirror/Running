@@ -3,7 +3,7 @@
     "Gravity" : 0.6,
     "GameOverUIPre":{ 
         "Prefab" : "prefabs/UI/CommonTipsUI",
-        "Pos" : [370,320]
+        "Pos" : [213,421]
     }
 
 }
