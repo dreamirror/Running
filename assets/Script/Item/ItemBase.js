@@ -7,7 +7,8 @@
 
 const EItemType = cc.Enum({
     Weapon : 0,
-    Gold : 1,
+    Gold : 1,  
+    BUFF : 2,  //buff类道具
 });
 
 
@@ -25,11 +26,23 @@ var ItemBase = cc.Class({
     },
 
     //new之后要初始化
-    init( id,name,icon,inType) {
+    init( id ) {
         this.ID = id;
         this.ItemName = name;
         this.Icon = icon;
         this.itemType = inType;
+        let self = this;
+
+        if (inType == EItemType.BUFF) {
+            cc.loader.load("Config/ItemConfig",function(error,asset){
+                if (error) {
+                    cc.log(error)
+                    return
+                }
+                self.buff = asset.json[id].buff;
+                self.buffTime = asset.json[id].buffTime;
+            });
+        }
     }
 });
 
