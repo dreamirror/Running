@@ -39,7 +39,7 @@ var EnemyIdleState = cc.Class({
         }   
     },
 
-    Update : function(){
+    Update :function( ) {
         //根据当前敌人的类型进行判断，判断何时进攻等
         if (this.EnemyJS == null || this.EnemyJS == undefined){
             this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);

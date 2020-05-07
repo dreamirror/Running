@@ -4,6 +4,7 @@
 
  var EnemyBase = require("EnemyBase");
  var CommonUtil = require("CommonUtil");
+ var GravityManager = require("GravityManager");
 
 var EnemyLowBee = cc.Class({
     extends: EnemyBase,
@@ -28,8 +29,9 @@ var EnemyLowBee = cc.Class({
     },
 
     /********************** 状态相关 ***********************/
-    OnAttacked : function(AttackerJS ,Target){
-        Target.OnDead();
+    OnAttacked : function(AttackerJS ,TargetNode){
+        var EnemyLowBee = TargetNode.getComponent( "EnemyLowBee" );
+        EnemyLowBee.OnDead();
     },
 
     /* 死亡动画 */
@@ -40,6 +42,18 @@ var EnemyLowBee = cc.Class({
         {
             ArmAnimation.on('OnDeadFinished',  this.OnDeadPlayOver,  this);
         }
+
+        //关闭自身的Collision组件
+        var BoxCollider = this.node.getComponent(cc.BoxCollider);
+        if (BoxCollider){
+            BoxCollider.active = false;
+        }
+
+        //取消重力注册
+        if(GravityManager._instance){
+            GravityManager._instance.UnRigisterToGravity(this);
+        }  
+        
     },
 
     OnDeadPlayOver : function() {
@@ -48,6 +62,10 @@ var EnemyLowBee = cc.Class({
             ArmAnimation.off('OnDeadFinished',  this.OnDeadPlayOver,  this);
         }
         this.node.destroy();
+    },
+
+    ActorDead : function ( ) {
+        this.OnDeadPlayOver();
     },
     
     /********************** 敌人动画相关 , 具体由各个敌人自己去实现，由此达到播放不同动画的效果 ***********************/

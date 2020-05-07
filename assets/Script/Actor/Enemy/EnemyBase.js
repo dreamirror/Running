@@ -47,7 +47,12 @@ cc.Class({
         this.AI.Init( this.node, this);
     },
 
-    // update (dt) {},
+    update (dt) {
+        if(this.FSMMgr)
+        {
+            this.FSMMgr.Update(dt);
+        }
+    },
 
     /**
      * 请在每一个敌人中重载，设置自身类型以及攻击类型

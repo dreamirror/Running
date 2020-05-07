@@ -100,7 +100,7 @@ var GravityManager = cc.Class({
 
     /*清除一个Actor*/
     UnRigisterToGravity : function(InActor ){
-        if( InActor instanceof ActorBase ){
+        //if( InActor instanceof ActorBase ){
             if(this.GravityActorList.has(InActor)){
 
                 InActor.RemoveCollisionEndCall(this.OnActorCollisionEndCall);
@@ -108,7 +108,7 @@ var GravityManager = cc.Class({
 
                 this.GravityActorList.delete(InActor);
             }
-        }
+        //}
     },
 
     /**
