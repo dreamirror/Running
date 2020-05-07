@@ -95,6 +95,14 @@ var Player = cc.Class({
         {
             this.RightArmFSMMgr.Update(dt);
         }
+
+        //更新检测护盾的效果
+        if (this.needCheckShield) {
+            var GameData = cc.find("GameContainer").GameContainer.getComponent("GameData");
+            if (GameData && GameData.checkPlayerShield() == false) {
+                this.removeShieldEffect();
+            }
+        }
     },
 
 
@@ -148,6 +156,12 @@ var Player = cc.Class({
     PlayerCollisionCall : function(other, self , Target , Param){
         var CollisionType = FunctionLibrary.GetCollisionType(other);
         
+        //如果有护盾。碰啥都死不了
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if (GameData && GameData.checkPlayerShield()) {
+            return;
+        }
+
         //如果撞到障碍物，直接死了
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
@@ -174,8 +188,36 @@ var Player = cc.Class({
         if(GameManager){
             GameManager.GameOver();
         }  
-    }
+    },
 
+    //护盾的效果
+    addShieldEffect : function () {
+        this.needCheckShield = true;
+        let self = this;
+        cc.loader.loadRes('Texture/shield', cc.SpriteFrame,function(err,spriteFrame){
+            if (err) {
+                cc.log(err)
+                return
+            }
+            
+            //创建一个新的节点，因为cc.Sprite是组件不能直接挂载到节点上，只能添加到为节点的一个组件
+            var node = new cc.Node('EffectNode');
+            node.setAnchorPoint(0.5,0);
+            const sprite = node.addComponent(cc.Sprite);
+            sprite.spriteFrame = spriteFrame;
+            self.node.addChild(node);
+
+        });
+    },
+
+    removeShieldEffect : function () {
+        this.needCheckShield = false;
+        let effnode = this.node.getChildByName("EffectNode");
+        if(effnode) {
+            effnode.removeFromParent();
+            effnode.destroy();
+        }
+    },
 });
 
 module.exports = Player;

@@ -49,8 +49,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 104,
-      "height": 112
+      "width": 87,
+      "height": 94
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -61,8 +61,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        140.061,
-        117.06,
+        74.774,
+        465.693,
         0,
         0,
         0,
@@ -134,8 +134,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -17.338,
-        68.755,
+        -13.338,
+        70.755,
         0,
         0,
         0,
@@ -232,6 +232,7 @@
     "AYSpeed": 0,
     "BUseGravity": false,
     "RightArmFSMMgr": null,
+    "CurrentWeaponCtl": null,
     "_id": ""
   },
   {
@@ -258,10 +259,10 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 1
+      "__id__": 2
     },
     "asset": {
-      "__uuid__": "5755b6fe-1000-4ebf-8931-3d54e18b1acd"
+      "__uuid__": "6503706b-caa5-4f25-8456-4dce60a95009"
     },
     "fileId": "d326E8yWRIGY4OBq8BnwIK",
     "sync": false
@@ -285,7 +286,7 @@
       "__uuid__": "406059b5-faa1-4970-9fda-cc16a2e25ac4"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -333,13 +334,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -15.1,
-      "y": 54.1
+      "x": -14.4,
+      "y": 45.2
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 37.6,
-      "height": 115.1
+      "width": 39,
+      "height": 97.2
     },
     "_id": ""
   },
@@ -357,6 +358,7 @@
       "__id__": 2
     },
     "RightArmFSMMgr": null,
+    "PlayerConfig": null,
     "_id": ""
   },
   {

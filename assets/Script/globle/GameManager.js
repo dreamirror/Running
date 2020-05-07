@@ -7,6 +7,7 @@ var GameManager = cc.Class({
 
     properties: {
         GameConfigData : null,
+        EnemyConfigData : null,
     },
 
     statics: {
@@ -29,7 +30,7 @@ var GameManager = cc.Class({
     //update (dt) {},
 
     /**
-     * 加载一份GameConfig的数据供后续使用
+     * 加载一些配置数据供后续使用
      */
     LoadGameConfig : function(){
         var self = this;
@@ -39,7 +40,14 @@ var GameManager = cc.Class({
                 return;
             } 
             self.GameConfigData = object.json;
-            });
+        });
+        cc.loader.loadRes("Config/EnemyConfig",function(err,object){
+            if(err){
+                cc.log(err); 
+                return;
+            } 
+            self.EnemyConfigData = object.json;
+        });
     },
 
     /**

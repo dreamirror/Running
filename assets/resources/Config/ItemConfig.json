@@ -15,6 +15,9 @@
         "weight" : 0
     },
 
+
+
+
     "weapon01":{
         "type" : 0,
         "icon" : "Texture/weapon01",
@@ -37,5 +40,28 @@
         "name" : "sword",
         "id" : "weapon03",
         "weight" : 1
+    },
+    
+
+
+
+    "magnet" : {
+        "type" : 2,
+        "icon" : "Texture/weapon03",
+        "name" : "磁铁",
+        "id" : "magnet",
+        "buff" : "magnet",
+        "buffTime" : 30,
+        "weight" : 0
+    },
+
+    "shield" :{
+        "type" : 2,
+        "icon" : "Texture/weapon03",
+        "name" : "护盾",
+        "id" : "magnet",
+        "buff" : "shield",
+        "buffTime" : 30,
+        "weight" : 0
     }
 }

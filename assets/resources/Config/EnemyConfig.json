@@ -1,0 +1,7 @@
+{
+    "AttackDistance":{  
+        "CloseAttack" : 10,
+        "DartAttack"  : 100
+    }
+
+}

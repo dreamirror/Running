@@ -23,15 +23,23 @@ window.EventCenter = {
     _events: {},
 
     //监听
-    on : function(eventname,callback,target){
+    //@parm : 事件名，回调函数，函数调用者， 事件执行顺序（同一个事件名中的函数之间的先后关系）
+    on : function(eventname,callback,target,order){
         if(this._events[eventname] == undefined)
         {
-            this._events[eventname] = [];
+            this._events[eventname] = new Array(5); //预设5个占位
         }
-        this._events[eventname].push({
-            callback: callback,
-            target: target,
-        });
+        if (order) {
+            this._events[eventname].splice(order,0,{
+                callback: callback,
+                target: target,
+            });
+        } else {
+            this._events[eventname].push({
+                callback: callback,
+                target: target,
+            });
+        }
     },
 
     //移除监听
@@ -39,7 +47,7 @@ window.EventCenter = {
         var handlers = this._events[eventname];
         for (var index = handlers.length - 1; index >= 0; index--) {
             var handler = handlers[index];
-            if(target == handler.target && callback.toString() == handler.callback.toString())
+            if(handler && target == handler.target && callback.toString() == handler.callback.toString())
             {
                 this._events[eventname].splice(index, 1);
             };
@@ -73,8 +81,9 @@ window.EventCenter = {
             var handlers = this._events[eventname];
             for (var index = 0; index < handlers.length; index++) {
                 var handler = handlers[index];
-                //handler.callback.call(handler.target,data);
-                handler.callback.call(handler.target,data);
+                if (handler != undefined) {
+                    handler.callback.call(handler.target,data);
+                }
             }
         }
     },

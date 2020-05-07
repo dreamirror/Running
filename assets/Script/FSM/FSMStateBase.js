@@ -23,6 +23,11 @@ var FSMStateBase = cc.Class({
             default : null,
             type : cc.Node,
         },
+        //是否响应点击，默认为true
+        BResponseTouch : true,
+
+        //对应的Node的JS Name，有需要的状态可以使用这个去获取对应的JS
+        NodeJSComponentName : null,
     },
 
     /**初始化参数 */
@@ -36,6 +41,12 @@ var FSMStateBase = cc.Class({
         /* 当前状态机操控的Component */
         this.TargetObj = InTargetObj;
     },
+
+    //5.7 设置JSComponent的名字，则子类可以通用调用设置，并且可在需要Get的地方获取
+    SetJSComponentName : function (InNodeJSComponentName){
+        this.NodeJSComponentName = InNodeJSComponentName;
+    },
+
     /*******************  设置条件等相关  ******************* */
     /** 添加一个对应的跳转关系，什么条件能够跳转到什么状态 */
 	AddCondition :function( InTransCondition , InState){

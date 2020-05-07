@@ -1,7 +1,7 @@
 /** 
  * 所有角色的一个基类，拥有碰撞体，以及拥有可以注册的碰撞回调方法
  * 拥有可以操控动画的方法等
- * 如果重载Start方法，记得一定要把注册重力系统加上
+ * 如果重载Start方法，记得一定要把注册重力系统加上,或者直接调用this._super();
 */
 
 var GravityManager = require("GravityManager");

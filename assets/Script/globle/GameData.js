@@ -39,6 +39,7 @@ cc.Class({
             buffs : [], //临时属性
             weapons : [], //捡到的武器
         };
+        this.updateTime = 0;
     },
 
     //重本地读取记录
@@ -49,6 +50,8 @@ cc.Class({
     onDestroy(){
         this.setInfoToLocal();
     },
+
+    
     ///////////////////////////////////////////////////////
     //获取基本信息
     getPlayerInfo : function (){
@@ -59,7 +62,37 @@ cc.Class({
     getTempInfo : function (){
         return this.tempInfo;
     },
+
+    getPlayerGold : function() {
+        return this.playerInfo.gold;
+    },
     
+    //获得金币
+    addPlayerGold : function (num) {
+        this.playerInfo.gold = this.playerInfo.gold + num;
+    },
+
+    //是否有磁铁BUFF
+    checkPlayerMagnet : function () {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "magnet") {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    //是否有护盾BUFF
+    checkPlayerShield : function () {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "shield") {
+                return true;
+            }
+        }
+        return false;
+    },
 
     //添加或替换武器
     addOrReplaceWeapon(_weapon){
@@ -94,16 +127,27 @@ cc.Class({
         this.tempInfo.weapons.unshift(_weapon);
     },
 
+    //这里使用道具暂时只做BUFF类道具的。（在playerinfo上加一个buff的标记）
+    useItem : function (_ItemBase) {
+        if (_ItemBase && _ItemBase.itemType == EItemType.BUFF ) {
 
-    addPlayerGold : function (num) {
-        this.playerInfo.gold = this.playerInfo.gold + num;
+            for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+                let element = this.tempInfo.buffs[index];
+                if (element && element.buff == _ItemBase.buff) {
+                    this.tempInfo.buffs[index].buffTime = _ItemBase.buffTime;
+                    return;
+                }
+            }
+
+            this.tempInfo.buffs.push({ buff : _ItemBase.buff, buffTime : _ItemBase.buffTime});
+        }
     },
 
-    //物品
+    //增加物品
     addItem : function(_ItemBase , _num) {
         let bAlreadyHave = false;
         for (let index = 0; index < this.playerInfo.itemArray.length; index++) {
-            const element = this.playerInfo.itemArray[index];
+            let element = this.playerInfo.itemArray[index];
             if (element && element._Item == _ItemBase) {
                 bAlreadyHave == true;
                 element._Num = element._Num + _num;
@@ -117,10 +161,10 @@ cc.Class({
         }
     },
 
-    //增加
+    //减少物品
     subItem : function(_ItemBase , _num){
         for (let index = 0; index < this.playerInfo.itemArray.length; index++) {
-            const element = this.playerInfo.itemArray[index];
+            let element = this.playerInfo.itemArray[index];
             if (element && element._Item == _ItemBase) {
                 element._Num = element._Num - _num;
             }
@@ -131,7 +175,37 @@ cc.Class({
 
 
 
+    //更新BUFF(TODO：先在这儿更新吧。正常来说最好自定义个定时器，不用了就干掉，性能会好点)
+    update(dt){
+        if (this.tempInfo.buffs.length == 0) {
+            return;
+        }
 
+        this.updateTime = this.updateTime + dt;
+
+        if (this.updateTime >= 1) {
+            this.updateTime = 0;
+            //累计满一秒才执行一次逻辑
+
+            for (let index = this.tempInfo.buffs.length - 1; index >= 0 ; index--) {
+                let element = this.tempInfo.buffs[index];
+                if (element) {
+                    this.tempInfo.buffs[index].buffTime = element.buffTime - 1;
+
+                    if ( this.tempInfo.buffs[index].buffTime <= 0 ) {
+                        this.tempInfo.buffs.splice(index,1);
+                    }
+                }
+            }
+        }
+
+
+    },
+
+
+
+
+    
 
     //////////////////////////////////////////////////////////
     

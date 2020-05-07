@@ -39,7 +39,7 @@ var SceneManager = cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
-         let self = this;
+        let self = this;
         //random postion
         self.pos_list = [cc.v2(50,200), cc.v2(100,200), cc.v2(50,250), cc.v2(150,150), cc.v2(150,200)];
         

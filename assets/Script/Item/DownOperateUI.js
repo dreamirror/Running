@@ -35,7 +35,7 @@ cc.Class({
 
         //监听道具获得
         //this.node.on('GetItem', this.updateOperateItem, this);
-        EventCenter.on(EventName.GetItem,this.updateOperateItem,this);
+        EventCenter.on(EventName.GetItem,this.updateOperateItem,this,0);
     },
 
     start () {
@@ -46,13 +46,17 @@ cc.Class({
         if (!ItemInfo) {
             return
         }
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        
 
-        if (ItemInfo.itemType == EItemType.GoldItem) {
+        if (ItemInfo.itemType == EItemType.Gold) {
+            //增加数量
+            GameData.addPlayerGold(1);
+        } else if ( ItemInfo.itemType == EItemType.BUFF ) {
             //直接被使用掉
-
-        } else {
+            GameData.useItem(ItemInfo);
+        }  else if ( ItemInfo.itemType == EItemType.Weapon ) {
             //替换掉当前武器
-            var GameData = cc.find("GameContainer").getComponent("GameData");
             GameData.addOrReplaceWeapon(ItemInfo);
 
             //更新背包里的道具来更新道具栏
