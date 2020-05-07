@@ -47,7 +47,7 @@ window.EventCenter = {
         var handlers = this._events[eventname];
         for (var index = handlers.length - 1; index >= 0; index--) {
             var handler = handlers[index];
-            if(target == handler.target && callback.toString() == handler.callback.toString())
+            if(handler && target == handler.target && callback.toString() == handler.callback.toString())
             {
                 this._events[eventname].splice(index, 1);
             };

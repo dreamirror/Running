@@ -26,7 +26,7 @@ var ItemBase = cc.Class({
     },
 
     //new之后要初始化
-    init( id ) {
+    init( id,name,icon,inType ) {
         this.ID = id;
         this.ItemName = name;
         this.Icon = icon;

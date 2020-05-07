@@ -32,10 +32,6 @@ cc.Class({
 
     //正常来说 只有主角会碰上道具
     onCollisionEnter:function(_other,_self){
-        var GameContainer = cc.find("GameContainer");
-        if (!GameContainer) {
-            return
-        }
         if( _other.node.name.search("Player") != -1 ){
              //广播获得了道具
             //  let itemEvent = new cc.Event.EventCustom("GetItem", true);//创建自定义事件
@@ -46,5 +42,29 @@ cc.Class({
             //清除自身
             this.node.removeFromParent();
         }   
+    },
+
+    //当玩家有磁铁buff的时候，通过更新相距的距离来检测是否会吃掉
+    update(){
+        var GameContainer = cc.find("GameContainer");
+        if (!GameContainer) {
+            return
+        }
+        var GameData = GameContainer.getComponent("GameData");
+        if (!GameData) {
+            return;
+        }
+
+        var pinfo = GameData.getTempInfo();
+        var finded = false;
+        for (let index = 0; index < pinfo.buffs.length; index++) {
+            let element = pinfo.buffs[index];
+            if (element && element.buff == "magnet") {
+                break;
+            }
+        }
+        if (finded) {
+            
+        }
     }
 });

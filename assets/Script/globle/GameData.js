@@ -50,6 +50,8 @@ cc.Class({
     onDestroy(){
         this.setInfoToLocal();
     },
+
+    
     ///////////////////////////////////////////////////////
     //获取基本信息
     getPlayerInfo : function (){
@@ -65,6 +67,32 @@ cc.Class({
         return this.playerInfo.gold;
     },
     
+    //获得金币
+    addPlayerGold : function (num) {
+        this.playerInfo.gold = this.playerInfo.gold + num;
+    },
+
+    //是否有磁铁BUFF
+    checkPlayerMagnet : function () {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "magnet") {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    //是否有护盾BUFF
+    checkPlayerShield : function () {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "shield") {
+                return true;
+            }
+        }
+        return false;
+    },
 
     //添加或替换武器
     addOrReplaceWeapon(_weapon){
@@ -97,10 +125,6 @@ cc.Class({
         }
         //再插入到第一个位置
         this.tempInfo.weapons.unshift(_weapon);
-    },
-
-    addPlayerGold : function (num) {
-        this.playerInfo.gold = this.playerInfo.gold + num;
     },
 
     //这里使用道具暂时只做BUFF类道具的。（在playerinfo上加一个buff的标记）
