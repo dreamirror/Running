@@ -68,7 +68,7 @@ var WeaponBase = cc.Class({
                 other.node.emit( GlobalEventName.PlayerAttack , Target , other.node);
             }
             else if( FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ENEMY ){
-                other.node.emit( GlobalEventName.PlayerAttack , Target , other.node);
+                other.node.emit( GlobalEventName.PlayerAttack , Target , other);
             }
             
         }

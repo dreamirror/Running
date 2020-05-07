@@ -29,8 +29,8 @@ var EnemyLowBee = cc.Class({
     },
 
     /********************** 状态相关 ***********************/
-    OnAttacked : function(AttackerJS ,TargetNode){
-        var EnemyLowBee = TargetNode.getComponent( "EnemyLowBee" );
+    OnAttacked : function(AttackerJS ,TargetCollision){
+        var EnemyLowBee = TargetCollision.node.getComponent( "EnemyLowBee" );
         EnemyLowBee.OnDead();
     },
 
@@ -40,13 +40,14 @@ var EnemyLowBee = cc.Class({
         var ArmAnimation = this.GetAnimation();
         if (ArmAnimation != null)
         {
-            ArmAnimation.on('OnDeadFinished',  this.OnDeadPlayOver,  this);
+            ArmAnimation.on('finished',  this.OnDeadPlayOver,  this);
         }
 
         //关闭自身的Collision组件
         var BoxCollider = this.node.getComponent(cc.BoxCollider);
         if (BoxCollider){
             BoxCollider.active = false;
+            BoxCollider.destroy();
         }
 
         //取消重力注册
@@ -59,7 +60,7 @@ var EnemyLowBee = cc.Class({
     OnDeadPlayOver : function() {
         var ArmAnimation = this.GetAnimation();
         if (ArmAnimation != null){
-            ArmAnimation.off('OnDeadFinished',  this.OnDeadPlayOver,  this);
+            ArmAnimation.off('finished',  this.OnDeadPlayOver,  this);
         }
         this.node.destroy();
     },

@@ -83,7 +83,7 @@ cc.Class({
     },
 
     /********************** 状态相关 ***********************/
-    OnAttacked : function(){
+    OnAttacked : function(AttackerJS ,TargetCollision){
 
     },
 
