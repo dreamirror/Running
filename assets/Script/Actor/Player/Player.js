@@ -151,11 +151,11 @@ var Player = cc.Class({
         //如果撞到障碍物，直接死了
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
-            //var container = cc.find("GameContainer");
-            var GameManager = cc.find("GameContainer").getComponent("GameManager");
+            /*var GameManager = cc.find("GameContainer").getComponent("GameManager");
             if(GameManager){
                 GameManager.GameOver();
-            }   
+            }   */
+            Target.ActorDead();
         }
     },
 
@@ -168,7 +168,13 @@ var Player = cc.Class({
             this.RightArm.getComponent("RightArm").ChangeWeapon(InData.ID);
         };
     },
-        
+    
+    ActorDead : function (){
+        var GameManager = cc.find("GameContainer").getComponent("GameManager");
+        if(GameManager){
+            GameManager.GameOver();
+        }  
+    }
 
 });
 
