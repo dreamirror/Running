@@ -163,27 +163,27 @@ cc.Class({
         return this.CurFSMID;
     },
 
-    /*******************  响应点击  ******************* */
+    /*******************  响应点击  ******************* */  //5.7 添加哦判断是否响应点击
     OnTouchStart : function(event){
-        if (this.CurFSMState != null){
+        if (this.CurFSMState != null && this.CurFSMState.BResponseTouch ){
             this.CurFSMState.OnTouchStart(event);
         }   
     },
 
 	OnTouchMove : function(event){
-        if (this.CurFSMState != null){
+        if (this.CurFSMState != null && this.CurFSMState.BResponseTouch){
             this.CurFSMState.OnTouchMove(event);
         }   
     },
 
 	OnTouchEnd : function(event){
-        if (this.CurFSMState != null){
+        if (this.CurFSMState != null && this.CurFSMState.BResponseTouch){
             this.CurFSMState.OnTouchEnd(event);
         }   
     },
 
 	OnTouchCancel : function(event){
-        if (this.CurFSMState != null){
+        if (this.CurFSMState != null && this.CurFSMState.BResponseTouch){
             this.CurFSMState.OnTouchCancel(event);
         }   
     },

@@ -11,6 +11,15 @@ var FSMStateID = {
     ArmDefaultWeaponAtt: 102,      //测试武器攻击状态
     ArmSwordNoraml  :   103,        //剑普通状态
     ArmSwordAttack  :   104,        //剑攻击状态
+
+
+
+
+    /***************   敌人状态枚举 **************/
+    EnemyIdle       :   500,    //敌人Idle状态
+    EnemyCloseAttack    :   501,    //敌人近程攻击状态
+    EnemyDistanceAttack :   502,    //敌人远程攻击状态
+    EnemyDead       :   503,        //敌人死亡状态
 };
 
 //玩家转换条件枚举
@@ -26,6 +35,15 @@ var TransConditionID = {
 
     SwordNormalToAtt            :   103,
     SwordAttToNormal            :   104,
+
+
+
+    /***************   敌人状态转换条件 **************/
+    EnemyIdelToCloseAttack      :   501,    //敌人Idle状态到近程攻击状态
+    EnemyIdelToDistanceAttack   :   502,    //敌人Idle状态到远程攻击状态
+    EnemyCloseAttackToIdle      :   503,    //近距离攻击转站立
+    EnemyDisAttToIdle           :   504,    //远距离攻击转站立
+    EnemyDisAttToCloseAtt       :   505,    //远距离攻击转近距离攻击
 
 };
 

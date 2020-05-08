@@ -6,6 +6,8 @@ var EventName = {
 
     GetItem : "GetItem",
     TouchItem : "TouchItem",
+
+    PlayerAttack : "OnPlayerAttacked",      //玩家武器攻击到物体
 };
 
 

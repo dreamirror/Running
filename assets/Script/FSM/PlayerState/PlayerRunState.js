@@ -32,7 +32,6 @@ var PlayerRunState = cc.Class({
     },
 
 
-
     /*******************  响应点击   ******************* */
     OnTouchStart : function(event){
         this.LastMoveLocation = event.getLocation();

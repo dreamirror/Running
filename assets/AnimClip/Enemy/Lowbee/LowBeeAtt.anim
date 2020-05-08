@@ -1,0 +1,31 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "LowBeeAtt",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.06666666666666667,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "1f485d6f-9cf1-4fa3-8fbe-8fa7d5c4fc5b"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "863964a2-4d5f-4d2f-b709-64d2c336a3a0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

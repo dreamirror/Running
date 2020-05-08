@@ -277,7 +277,7 @@
       "array": [
         0,
         0,
-        525.6774200971543,
+        378.58841792314104,
         0,
         0,
         0,
@@ -842,6 +842,7 @@
     },
     "_enabled": true,
     "GameConfigData": null,
+    "EnemyConfigData": null,
     "_id": "875cZCq+JPNKbTPJF6B1cd"
   },
   {

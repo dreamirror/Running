@@ -6,6 +6,7 @@
 var ActorBase = require("ActorBase");
 var FunctionLibrary = require("FunctionLibrary");
 var CommonUtil = require("CommonUtil");
+var GlobalEventName = require("GlobalEventName");
 
 var WeaponBase = cc.Class({
     extends: ActorBase,
@@ -53,11 +54,23 @@ var WeaponBase = cc.Class({
     },
 
     CollisionCallBack : function(other, self , Target , Param){
+        var BoxCollider = other.node.getComponent(cc.BoxCollider);
+        if (BoxCollider )
+        {
+            if( BoxCollider.avtive == false ){
+                cc.log("Other 的BoxCollider的激活状态是false！");
+                return;
+            }
+        }
         if(Target.BInAttack == true){
             if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_BARRIER)
             {   
-                other.node.emit( 'OnAttacked' , Target , other.node);
+                other.node.emit( GlobalEventName.PlayerAttack , Target , other.node);
             }
+            else if( FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ENEMY ){
+                other.node.emit( GlobalEventName.PlayerAttack , Target , other);
+            }
+            
         }
     },
 

@@ -4,6 +4,7 @@
 
 */
 var ActorBase = require("ActorBase");
+var GlobalEventName = require("GlobalEventName");
 
 var BarrierBase = cc.Class({
     extends: ActorBase,
@@ -17,7 +18,7 @@ var BarrierBase = cc.Class({
     onLoad () {
         this.BUseGravity = false;
         this._super();
-        this.node.on('OnAttacked', this.OnAttacked ,this );
+        this.node.on(GlobalEventName.PlayerAttack, this.OnAttacked ,this );
     },
 
     start () {
