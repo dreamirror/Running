@@ -22,7 +22,7 @@ var SceneManager = cc.Class({
             });*/
     },
     
-    properties: {
+    properties: { 
         Speed : 0,
         ItemConfig : {
             default : null,
@@ -33,6 +33,12 @@ var SceneManager = cc.Class({
             default : null,
             type : cc.Prefab,
         },
+
+        //这里存一下player,后面要用啊
+        player : {
+            default : null,
+            type : cc.Node,
+        }
 
     },
 
@@ -81,7 +87,7 @@ var SceneManager = cc.Class({
                         
                         if (self.EntityPrefab) {
                             let pb = cc.instantiate(self.EntityPrefab);
-                            pb.getComponent("ItemInGame").init(item);
+                            pb.getComponent("ItemInGame").init(item,self.player);
                             //pb.parent = cc.director.getScene();  //加到当前场景
                             ParentNode.addChild(pb);                 //加到父节点（这里是canvas）
                             let pos = Math.floor(self.pos_list.length * Math.random());

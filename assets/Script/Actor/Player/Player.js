@@ -103,6 +103,14 @@ var Player = cc.Class({
                 this.removeShieldEffect();
             }
         }
+
+         //更新检测磁铁的效果
+        if (this.needCheckMagnet) {
+            var GameData = cc.find("GameContainer").GameContainer.getComponent("GameData");
+            if (GameData && GameData.checkPlayerMagnet() == false) {
+                this.removeMegnetEffect();
+            }
+        }
     },
 
 
@@ -201,7 +209,7 @@ var Player = cc.Class({
             }
             
             //创建一个新的节点，因为cc.Sprite是组件不能直接挂载到节点上，只能添加到为节点的一个组件
-            var node = new cc.Node('EffectNode');
+            var node = new cc.Node('EffectNodeShield');
             node.setAnchorPoint(0.5,0);
             const sprite = node.addComponent(cc.Sprite);
             sprite.spriteFrame = spriteFrame;
@@ -212,7 +220,37 @@ var Player = cc.Class({
 
     removeShieldEffect : function () {
         this.needCheckShield = false;
-        let effnode = this.node.getChildByName("EffectNode");
+        let effnode = this.node.getChildByName("EffectNodeShield");
+        if(effnode) {
+            effnode.removeFromParent();
+            effnode.destroy();
+        }
+    },
+
+    //磁铁的效果
+    addMagnetEffect : function () {
+        this.needCheckMagnet = true;
+        let self = this;
+        cc.loader.loadRes('Texture/magnet', cc.SpriteFrame,function(err,spriteFrame){
+            if (err) {
+                cc.log(err)
+                return
+            }
+            
+            //创建一个新的节点，因为cc.Sprite是组件不能直接挂载到节点上，只能添加到为节点的一个组件
+            var node = new cc.Node('EffectNodeMagnet');
+            node.setAnchorPoint(0.5,0);
+            const sprite = node.addComponent(cc.Sprite);
+            sprite.spriteFrame = spriteFrame;
+            self.node.addChild(node);
+            node.setPosition((node.x + 10),(node.y + 95));
+
+        });
+    },
+
+    removeMegnetEffect : function () {
+        this.needCheckMagnet = false;
+        let effnode = this.node.getChildByName("EffectNodeMagnet");
         if(effnode) {
             effnode.removeFromParent();
             effnode.destroy();
