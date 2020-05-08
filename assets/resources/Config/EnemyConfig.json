@@ -1,6 +1,6 @@
 {
     "AttackDistance":{  
-        "CloseAttack" : 120,
+        "CloseAttack" : 50,
         "DartAttack"  : 150
     }
 

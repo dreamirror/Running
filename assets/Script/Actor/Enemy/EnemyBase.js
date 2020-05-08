@@ -9,6 +9,8 @@ var EnemyAI = require("EnemyAI");
 var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
 var EnemyIdleState = require("EnemyIdleState");
+var EnemyCloseAttState = require("EnemyCloseAttState");
+var GravityManager = require("GravityManager");
 
 cc.Class({
     extends: ActorBase,
@@ -76,8 +78,13 @@ cc.Class({
         IdleState.AddCondition(FSMUtil.TransConditionID.EnemyIdelToDistanceAttack , FSMUtil.FSMStateID.EnemyDistanceAttack);            
         IdleState.SetJSComponentName(InNodeJSComponentName);
 
+        /* jin近距离攻击状态 */
+        var CloseAttState = new EnemyCloseAttState();
+        CloseAttState.InitVariable(this.FSMMgr , this.node);        
+        CloseAttState.SetJSComponentName(InNodeJSComponentName);
+
         this.FSMMgr.Init( FSMUtil.FSMStateID.EnemyIdle , IdleState);
-        //this.FSMMgr.AddState( FSMUtil.FSMStateID.ArmDefaultWeaponAtt, DefaultWeaponAttack );
+        this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyCloseAttack, CloseAttState );
 
         IdleState.BeforeEnter();    
     },
@@ -87,27 +94,83 @@ cc.Class({
 
     },
 
-    /* 死亡动画 */
+    /* 死亡状态 */
     OnDead : function(){
+        this.DeadAnima();
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null)
+        {
+            ArmAnimation.on('finished',  this.OnDeadPlayOver,  this);
+        }
 
+        //关闭自身的Collision组件
+        var BoxCollider = this.node.getComponent(cc.BoxCollider);
+        if (BoxCollider){
+            BoxCollider.active = false;
+            BoxCollider.destroy();
+        }
+
+        //取消重力注册
+        if(GravityManager._instance){
+            GravityManager._instance.UnRigisterToGravity(this);
+        }  
     },
-
+    
     /********************** 敌人动画相关 , 具体由各个敌人自己去实现，由此达到播放不同动画的效果 ***********************/
     Idle : function () {
 
     },
 
-    AttackAnima : function( InCallBack ){
+    AttackAnima : function( InTarget , InCallBack , InParam){
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null)
+        {
+            ArmAnimation.on('finished',  this.OnAttackAnimaOver,  this);
+        }
+
+        this.AttackAnimaCallData = {
+            Target : InTarget,
+            CallBack : InCallBack,
+            Param : InParam,
+        };
+    },
+
+    DeadAnima : function ( ){
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null)
+        {
+            ArmAnimation.on('finished',  this.OnAttackAnimaOver,  this);
+        }
+    },
+
+    /* 攻击动画播放完毕 */
+    OnAttackAnimaOver : function ( ){
+
+        if (this.AttackAnimaCallData != null && this.AttackAnimaCallData != undefined && this.AttackAnimaCallData.Target != null && this.AttackAnimaCallData.Target != undefined ){
+            this.AttackAnimaCallData.CallBack.call( this.AttackAnimaCallData.Target ,  this.AttackAnimaCallData.Param);
+        }
+
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null){
+            ArmAnimation.off('finished',  this.OnAttackAnimaOver,  this);
+        }
 
     },
 
-    DeadAnima : function ( InCallBack ){
-
+    /* 死亡动画播放完毕 */
+    OnDeadPlayOver : function() {
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null){
+            ArmAnimation.off('finished',  this.OnDeadPlayOver,  this);
+        }
+        this.node.destroy();
     },
 
     /******************  敌人AI相关 *******************/
     RunBaseAI : function(){
-        this.AI.RunBaseAI();
+        var result = this.AI.RunBaseAI();
+
+        return result;
     },
 
 });

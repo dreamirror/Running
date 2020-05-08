@@ -36,33 +36,11 @@ var EnemyLowBee = cc.Class({
 
     /* 死亡动画 */
     OnDead : function(){
-        this.DeadAnima();
-        var ArmAnimation = this.GetAnimation();
-        if (ArmAnimation != null)
-        {
-            ArmAnimation.on('finished',  this.OnDeadPlayOver,  this);
-        }
-
-        //关闭自身的Collision组件
-        var BoxCollider = this.node.getComponent(cc.BoxCollider);
-        if (BoxCollider){
-            BoxCollider.active = false;
-            BoxCollider.destroy();
-        }
-
-        //取消重力注册
-        if(GravityManager._instance){
-            GravityManager._instance.UnRigisterToGravity(this);
-        }  
-        
+        this._super();
     },
 
     OnDeadPlayOver : function() {
-        var ArmAnimation = this.GetAnimation();
-        if (ArmAnimation != null){
-            ArmAnimation.off('finished',  this.OnDeadPlayOver,  this);
-        }
-        this.node.destroy();
+        this._super();
     },
 
     ActorDead : function ( ) {
@@ -74,8 +52,9 @@ var EnemyLowBee = cc.Class({
         this.PlayAnimation("LowBeeIdle");
     },
 
-    AttackAnima : function( InCallBack ){
+    AttackAnima : function(  InTarget , InCallBack , InParam ){
         this.PlayAnimation("LowBeeAtt");
+        this._super(InTarget , InCallBack , InParam);
     },
 
     DeadAnima : function ( InCallBack ){
