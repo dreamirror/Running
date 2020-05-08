@@ -95,7 +95,7 @@ cc.Class({
     },
 
     /* 死亡状态 */
-    OnDead : function(){
+    ActorDead : function(){
         this.DeadAnima();
         var ArmAnimation = this.GetAnimation();
         if (ArmAnimation != null)
