@@ -173,6 +173,7 @@
     "EnemyType": 0,
     "EnemyAttackType": 0,
     "FSMMgr": null,
+    "BStartAI": false,
     "_id": ""
   },
   {

@@ -42,7 +42,7 @@ var EnemyLowBee = cc.Class({
     /********************** 状态相关 ***********************/
     OnAttacked : function(AttackerJS ,TargetCollision){
         var EnemyLowBee = TargetCollision.node.getComponent( "EnemyLowBee" );
-        EnemyLowBee.OnDead();
+        EnemyLowBee.ActorDead();
     },
 
     /* 死亡动画 */
