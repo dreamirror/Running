@@ -10,7 +10,7 @@ var WeaponBaseState = cc.Class({
 
     ctor: function ( ) {
         this.bAttack = false;
-        this.CriticalValTime = 0.1;
+        this.CriticalValTime = 0.2;
 
         this.StartTouch = false;
         this.TouchTime = 0;
@@ -35,7 +35,7 @@ var WeaponBaseState = cc.Class({
     },
 
 	OnTouchEnd : function(event){
-        if(this.StartTouch)
+        if(this.StartTouch == true)
         {
             if( this.TouchTime <= this.CriticalValTime )
             {

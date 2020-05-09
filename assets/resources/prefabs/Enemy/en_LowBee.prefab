@@ -150,13 +150,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 53
+      "x": -2,
+      "y": 51.9
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 59,
-      "height": 106
+      "width": 55,
+      "height": 108.4
     },
     "_id": ""
   },

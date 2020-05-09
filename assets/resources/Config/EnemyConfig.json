@@ -8,7 +8,7 @@
     },
 
     "AttackDistance":{  
-        "CloseAttack" : 80,
+        "CloseAttack" : 40,
         "DartAttack"  : 150
     }
 

@@ -48,7 +48,7 @@ var EnemyAI = cc.Class({
         //var PlayerPos = this.TargetPlayer.node.getPosition();
         var PlayerPos = this.TargetPlayer.node.convertToWorldSpaceAR(cc.v2(0, 0));
         //var EnemyPos = this.EnemyNode.getPosition();
-        var EnemyPos = this.TargetPlayer.node.convertToWorldSpaceAR(cc.v2(0, 0));
+        var EnemyPos = this.EnemyNode.convertToWorldSpaceAR(cc.v2(-30, 0));
         var distance = EnemyPos.sub(PlayerPos).mag();
 
         //判断自身类型，如果是近战，则判断玩家是否在攻击距离内
