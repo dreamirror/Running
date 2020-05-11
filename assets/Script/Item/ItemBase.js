@@ -31,17 +31,13 @@ var ItemBase = cc.Class({
         this.ItemName = name;
         this.Icon = icon;
         this.itemType = inType;
-        let self = this;
 
         if (inType == EItemType.BUFF) {
-            cc.loader.load("Config/ItemConfig",function(error,asset){
-                if (error) {
-                    cc.log(error)
-                    return
-                }
-                self.buff = asset.json[id].buff;
-                self.buffTime = asset.json[id].buffTime;
-            });
+            let cfg = cc.find("GameContainer").getComponent("GameManager").ItemConfig;
+            if (cfg != undefined) {
+                self.buff = cfg[id].buff;
+                self.buffTime = cfg[id].buffTime;
+            }
         }
     }
 });

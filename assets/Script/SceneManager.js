@@ -44,18 +44,12 @@ var SceneManager = cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-     onLoad () {
+     start () {
         let self = this;
         //random postion
         self.pos_list = [cc.v2(50,200), cc.v2(100,200), cc.v2(50,250), cc.v2(150,150), cc.v2(150,200)];
-        
-        cc.loader.loadRes("Config/ItemConfig",function(error,asset){
-            if (error) {
-                cc.log(error)
-                return
-            }
-            self.ItemConfig = asset.json;
-        });
+
+        self.ItemConfig = cc.find("GameContainer").getComponent("GameManager").ItemConfig;;
      },
 
     /**
