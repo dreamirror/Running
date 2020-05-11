@@ -34,6 +34,20 @@ var GameManager = cc.Class({
      */
     LoadGameConfig : function(){
         var self = this;
+        //加载整个config
+        cc.loader.loadResDir("Config", function (err, assets) { 
+            if(err){
+                cc.log(err); 
+                return;
+            } 
+            for (const key in assets) {
+                if (assets.hasOwnProperty(key)) {
+                    const element = assets[key];
+                    self[element.name] = element.json;
+                }
+            }
+        });  
+
         cc.loader.loadRes("Config/GameConfig",function(err,object){
             if(err){
                 cc.log(err); 

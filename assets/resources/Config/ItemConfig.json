@@ -59,7 +59,7 @@
         "type" : 2,
         "icon" : "Texture/weapon03",
         "name" : "护盾",
-        "id" : "magnet",
+        "id" : "shield",
         "buff" : "shield",
         "buffTime" : 30,
         "weight" : 0

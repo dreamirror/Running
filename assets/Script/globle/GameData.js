@@ -110,7 +110,7 @@ cc.Class({
         else
         {
             this.tempInfo.weapons.shift(); //删除第一个
-            this.tempInfo.weapons.push(_weapon);
+            this.tempInfo.weapons.unshift(_weapon); //并插入到第一个
         }
     },
 
@@ -171,9 +171,19 @@ cc.Class({
         }
     },
 
+    //添加护盾（重生时加个盾）
+    applyShield : function (){
+        let item = new ItemBase();
+        item.init("shield","shield",null,EItemType.BUFF);
+        this.useItem(item);
+    },
 
 
-
+    //清空身上的临时数据(BUFF和武器)
+    clearTemp : function (params) {
+        this.tempInfo.buffs.splice(0);
+        this.tempInfo.weapons.splice(0);
+    },
 
     //更新BUFF(TODO：先在这儿更新吧。正常来说最好自定义个定时器，不用了就干掉，性能会好点)
     update(dt){

@@ -125,7 +125,29 @@ FunctionLibrary.GetCollisionType = function( InCollision ){
 
 
 
+/**
+* 权重随机
+* 传入的是权重数组
+*/
+FunctionLibrary.RandomByWeight = function(weights){
+    let sum = 0;
+    for (let i = 0; i < weights.length; i++) {
+        sum = sum + weights[i];
+    }
 
+    let number_rand = Math.random()*sum;
+    
+    let sum_temp = 0;
+    for (let index = 0; index < weights.length; index++)
+    {
+        sum_temp = sum_temp + weights[index];
+        if (number_rand <= sum_temp)
+        {
+            return index;
+        }
+    }
+    return -1;
+};
 
 
 

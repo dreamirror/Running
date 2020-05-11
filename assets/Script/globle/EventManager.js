@@ -29,7 +29,7 @@ window.EventCenter = {
         {
             this._events[eventname] = new Array(5); //预设5个占位
         }
-        if (order) {
+        if (order != null) {
             this._events[eventname].splice(order,0,{
                 callback: callback,
                 target: target,

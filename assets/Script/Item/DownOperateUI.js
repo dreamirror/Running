@@ -34,8 +34,8 @@ cc.Class({
         }
 
         //监听道具获得
-        //this.node.on('GetItem', this.updateOperateItem, this);
         EventCenter.on(EventName.GetItem,this.updateOperateItem,this,0);
+        EventCenter.on(EventName.TouchItem,this.refreshOperateItem,this);
     },
 
     start () {
@@ -47,7 +47,6 @@ cc.Class({
             return
         }
         var GameData = cc.find("GameContainer").getComponent("GameData");
-        
 
         if (ItemInfo.itemType == EItemType.Gold) {
             //增加数量
@@ -59,17 +58,22 @@ cc.Class({
             //替换掉当前武器
             GameData.addOrReplaceWeapon(ItemInfo);
 
-            //更新背包里的道具来更新道具栏
-            let info = GameData.getTempInfo();
-            if (info && info.weapons) {
-                for (let index = 0; index < info.weapons.length; index++) {
-                    if (index > this.OperateNum) {
-                        break;
-                    }
-                    const element = info.weapons[index];
-                    if (element) {
-                        this.weaponBlock[index].getComponent("OprateItemJS").init(element);
-                    }
+            this.refreshOperateItem();
+        }
+    },
+
+    refreshOperateItem(){
+        //更新背包里的道具来更新道具栏
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        let info = GameData.getTempInfo();
+        if (info && info.weapons) {
+            for (let index = 0; index < info.weapons.length; index++) {
+                if (index > this.OperateNum) {
+                    break;
+                }
+                const element = info.weapons[index];
+                if (element) {
+                    this.weaponBlock[index].getComponent("OprateItemJS").init(element);
                 }
             }
         }
@@ -79,5 +83,6 @@ cc.Class({
 
     onDestroy(){
         EventCenter.off(EventName.GetItem,this.updateOperateItem,this);
+        EventCenter.off(EventName.TouchItem,this.refreshOperateItem,this);
     },
 });
