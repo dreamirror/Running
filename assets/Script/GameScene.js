@@ -7,7 +7,7 @@
 
 var ActorManager = require( "ActorManager" );
 
-DesignSize = 960;
+var DesignSize = 960;
 cc.Class({
     extends: cc.Component,
 

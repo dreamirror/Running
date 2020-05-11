@@ -1,4 +1,6 @@
 {
+    "DesignSize" : [432,768],
+
     "DeadHeight" : -30,
     "Gravity" : 0.6,
     "GameOverUIPre":{ 

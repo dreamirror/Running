@@ -189,6 +189,8 @@ var Player = cc.Class({
     {
         if(this.RightArm && this.RightArm.getComponent("RightArm")){
             this.RightArm.getComponent("RightArm").ChangeWeapon(InData.ID);
+            /* 切换完毕后重新设置手臂位置 */
+            this.RightArm.setPosition(this.PlayerConfig.RightArmPos[0],this.PlayerConfig.RightArmPos[1]);
         };
     },
     
