@@ -10,6 +10,8 @@ var EnemyLowBee = cc.Class({
     extends: EnemyBase,
 
     properties: {
+
+        BStartAI : false,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -28,23 +30,24 @@ var EnemyLowBee = cc.Class({
         this.EnemyAttackType = CommonUtil.EnemyAttackType.CloseAttack;
     },
 
+    /* 修改一下重力系统，当落到地面时才开始计算AI */
+    UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj ){
+        this._super(InActor , AYSpeed, bOnGround , GroundObj);
+
+        if (bOnGround == true){
+            InActor.BStartAI = true;
+        }
+    },
+
     /********************** 状态相关 ***********************/
     OnAttacked : function(AttackerJS ,TargetCollision){
         var EnemyLowBee = TargetCollision.node.getComponent( "EnemyLowBee" );
-        EnemyLowBee.OnDead();
+        EnemyLowBee.ActorDead();
     },
 
     /* 死亡动画 */
-    OnDead : function(){
+    ActorDead : function(){
         this._super();
-    },
-
-    OnDeadPlayOver : function() {
-        this._super();
-    },
-
-    ActorDead : function ( ) {
-        this.OnDeadPlayOver();
     },
     
     /********************** 敌人动画相关 , 具体由各个敌人自己去实现，由此达到播放不同动画的效果 ***********************/

@@ -45,6 +45,10 @@ var EnemyIdleState = cc.Class({
             this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);
         }
 
+        if (this.EnemyJS.BStartAI == false){
+            return;
+        }
+
         var CurResult = this.EnemyJS.RunBaseAI();
         switch(CurResult){
             case CommonUtil.EnemyRunAIResult.Idle: 

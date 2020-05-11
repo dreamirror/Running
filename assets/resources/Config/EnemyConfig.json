@@ -1,6 +1,14 @@
 {
+    "EnemyType" : {
+        "EnemyLowBee":{
+            "ID" : "EnemyLowBee",
+            "Name" : "en_LowBee",
+            "Prefab" : "prefabs/Enemy/en_LowBee"
+        }
+    },
+
     "AttackDistance":{  
-        "CloseAttack" : 50,
+        "CloseAttack" : 40,
         "DartAttack"  : 150
     }
 

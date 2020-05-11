@@ -138,7 +138,9 @@ cc.Class({
             var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(GroundObj);
             
             var TempPos = InActor.node.getPosition();
-            InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
+            var NodePos = InActor.node.parent.convertToNodeSpaceAR(cc.v2(TempPos.x , Bounds.top));
+            InActor.node.setPosition(TempPos.x , NodePos.y);
+            //InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
         }
 
         //5.7 判断下 当前的Node如果低于死亡高度，则设置角色死亡

@@ -1,4 +1,5 @@
 {
-    "InitialSpeed" : 13
+    "InitialSpeed" : 13,
 
+    "RightArmPos" : [-13,70.75]
 }

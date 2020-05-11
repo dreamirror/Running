@@ -24,6 +24,8 @@ var PlayerInfo = cc.Class({
 
     },
     properties: {
+        /* 当前装备的武器ID */ 
+        CurEquipWeaponID : null,
     },
 
     /* 初始化玩家类并且定义 */
@@ -63,6 +65,7 @@ var Player = cc.Class({
 
     onDestroy(){
         EventCenter.off(EventName.TouchItem,this.OnTouchItemBtn , this);
+        EventCenter.off(EventName.GetItem , this.OnGetWeapon , this);
     },
 
     start () {
@@ -86,6 +89,8 @@ var Player = cc.Class({
 
         //添加一个点击武器的回调
         EventCenter.on(EventName.TouchItem,this.OnTouchItemBtn , this);
+        //添加一个捡起武器的回调，如果当前装备了武器，则永远只会使武器是第一个武器
+        EventCenter.on(EventName.GetItem , this.OnGetWeapon , this);
     },
 
     update (dt) {
@@ -173,29 +178,63 @@ var Player = cc.Class({
         //如果撞到障碍物，直接死了
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
-            /*var GameManager = cc.find("GameContainer").getComponent("GameManager");
-            if(GameManager){
-                GameManager.GameOver();
-            }   */
+            Target.ActorDead();
+        }
+
+        //如果被敌人攻击，直接死
+        if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
             Target.ActorDead();
         }
     },
 
     /**
-     * 点击武器按钮的回调
+     * 点击武器按钮的回调 5.11 修改为一旦点击某一个武器，就去取玩家身上的武器数据的第一个武器
      */
     OnTouchItemBtn: function (InData)
     {
         if(this.RightArm && this.RightArm.getComponent("RightArm")){
-            this.RightArm.getComponent("RightArm").ChangeWeapon(InData.ID);
+
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            var Weapons = GameData.getTempInfo().weapons;
+
+            this.RightArm.getComponent("RightArm").ChangeWeapon( Weapons[0].ID);// InData.ID);
+            /* 切换完毕后重新设置手臂位置 */
+            this.RightArm.setPosition(this.PlayerConfig.RightArmPos[0],this.PlayerConfig.RightArmPos[1]);
+            this.CurEquipWeaponID = Weapons[0].ID;
         };
+    },
+    /**
+     * 捡到场景中的武器
+     */
+    OnGetWeapon : function ( InData){
+        if ( this.CurEquipWeaponID == null || this.CurEquipWeaponID == undefined){
+            return;
+        }
+
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        var Weapons = GameData.getTempInfo().weapons;
+        if ( this.CurEquipWeaponID != Weapons[0].ID){
+            if(this.RightArm && this.RightArm.getComponent("RightArm")){
+                this.RightArm.getComponent("RightArm").ChangeWeapon( Weapons[0].ID);// InData.ID);
+                /* 切换完毕后重新设置手臂位置 */
+                this.RightArm.setPosition(this.PlayerConfig.RightArmPos[0],this.PlayerConfig.RightArmPos[1]);
+                this.CurEquipWeaponID = Weapons[0].ID;
+            };
+        }
+
+
     },
     
     ActorDead : function (){
+        //取消重力注册
+        if(GravityManager._instance){
+            GravityManager._instance.UnRigisterToGravity(this);
+        }  
+
         var GameManager = cc.find("GameContainer").getComponent("GameManager");
         if(GameManager){
             GameManager.GameOver();
-        }  
+        } 
     },
 
     //护盾的效果

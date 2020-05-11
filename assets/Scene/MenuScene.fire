@@ -277,7 +277,7 @@
       "array": [
         0,
         0,
-        386.23968102001095,
+        378.4531014537997,
         0,
         0,
         0,
@@ -843,26 +843,6 @@
     "_enabled": true,
     "GameConfigData": null,
     "EnemyConfigData": null,
-    "JsonConfig": [
-      {
-        "__uuid__": "5bba82fc-f180-4e39-b774-458ef5ebd123"
-      },
-      {
-        "__uuid__": "4fcf9119-090b-4bd7-81c9-8a81059dba98"
-      },
-      {
-        "__uuid__": "2eaaaa12-8229-47b6-b533-c4521ca4e11a"
-      },
-      {
-        "__uuid__": "1f754695-1546-4e21-8b1d-7277e48b9703"
-      },
-      {
-        "__uuid__": "1064fbe1-943b-4f7c-a260-07401fa3c7f5"
-      },
-      {
-        "__uuid__": "aba8acc3-6b3d-4d52-920e-59dff90ff1f1"
-      }
-    ],
     "_id": "875cZCq+JPNKbTPJF6B1cd"
   },
   {

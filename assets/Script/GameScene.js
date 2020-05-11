@@ -5,26 +5,13 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-DesignSize = 960;
+var ActorManager = require( "ActorManager" );
+
+var DesignSize = 960;
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
 
         back_1 : {
             default: null,
@@ -124,7 +111,9 @@ cc.Class({
         {   
                     
             var width = DesignSize;
-            var barrier = cc.instantiate(baPrefab);
+            //var barrier = cc.instantiate(baPrefab);
+            //test
+            var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
             var lastRoad = this.roads[this.roads.length - 1];
             lastRoad.addChild(barrier);
             var x = (lastRoad.width - barrier.width) / 2

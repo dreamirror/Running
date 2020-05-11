@@ -115,7 +115,7 @@ var PlayerRunState = cc.Class({
         this.playerJS = this.TargetObj.getComponent("Player");
 
         //进入时设置Node对象播放跑步动画
-        if(this.playerJS && (this.playerJS instanceof Player)){
+        if(this.playerJS ){//&& (this.playerJS instanceof Player)){
             this.playerJS.PlayAnimation("PlayerRun");
         }   
     },

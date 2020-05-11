@@ -26,7 +26,7 @@ FunctionLibrary.GetCollisionBoundsByBoxCollision = function( InBoxCollision ){
     }
 
     //先获取Node的坐标和锚点
-    var NodePosition = InBoxCollision.node.parent.convertToWorldSpaceAR(InBoxCollision.node.position);
+    var NodePosition = InBoxCollision.node.convertToWorldSpaceAR(cc.v2(0, 0)); //InBoxCollision.node.position);
     //var NodePosition = InBoxCollision.node.getPosition();
     var NodeAnchor = InBoxCollision.node.getAnchorPoint();
 
@@ -134,7 +134,6 @@ FunctionLibrary.RandomByWeight = function(weights){
     for (let i = 0; i < weights.length; i++) {
         sum = sum + weights[i];
     }
-
     let number_rand = Math.random()*sum;
     
     let sum_temp = 0;
@@ -148,8 +147,6 @@ FunctionLibrary.RandomByWeight = function(weights){
     }
     return -1;
 };
-
-
 
 
 module.exports = FunctionLibrary;
