@@ -193,10 +193,15 @@ var Player = cc.Class({
     },
     
     ActorDead : function (){
+        //取消重力注册
+        if(GravityManager._instance){
+            GravityManager._instance.UnRigisterToGravity(this);
+        }  
+
         var GameManager = cc.find("GameContainer").getComponent("GameManager");
         if(GameManager){
             GameManager.GameOver();
-        }  
+        } 
     },
 
     //护盾的效果

@@ -12,6 +12,11 @@ var ActorManager = cc.Class({
             default : null,
             type : cc.Prefab
         },
+
+        Player : {
+            default : null, 
+            type : cc.Prefab,
+        },
         
     },
 
@@ -27,10 +32,15 @@ var ActorManager = cc.Class({
     },
 
     /**
-     * 创建一个玩家Player
+     * 创建一个玩家Player 并直接把玩家加入到当前页面中
      */
     CreatePlayer : function( ) {
         
+        var Player = cc.instantiate(this.Player);
+        if (Player != null && Player != undefined){
+            return Player;
+        }
+
         return null;
     },
 

@@ -4,6 +4,7 @@
     "GameOverUIPre":{ 
         "Prefab" : "prefabs/UI/CommonTipsUI",
         "Pos" : [213,421]
-    }
+    },
 
+    "PlayerStartPos" : [76, 460]
 }

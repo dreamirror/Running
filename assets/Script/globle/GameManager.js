@@ -2,6 +2,8 @@
 // 其他组件获取此组件的方法： 
 // var GameManager = cc.find("GameContainer").getComponent("GameManager");  //4.29 zh 取不到~~~
 
+var GameInitPlayer = require("GameInitPlayer");
+
 var GameManager = cc.Class({
     extends: cc.Component,
 
@@ -92,6 +94,11 @@ var GameManager = cc.Class({
     ShareCall : function(event, InTarget ) {
         cc.director.resume();
         InTarget.GameOverUI.destroy();
+
+        if( GameInitPlayer._instance != null && GameInitPlayer._instance != undefined)
+        {
+            GameInitPlayer._instance.OnReCreatePlayer();
+        }
     },
     
     /**

@@ -1112,7 +1112,7 @@
         "__id__": 24
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 30
@@ -1545,6 +1545,9 @@
     "_enabled": true,
     "EnemyLowBee": {
       "__uuid__": "478816c2-26ac-4ff0-b6b3-c47e71ecc9fb"
+    },
+    "Player": {
+      "__uuid__": "5755b6fe-1000-4ebf-8931-3d54e18b1acd"
     },
     "_id": "0ao/KQtKhCj4KS9E5Nz3cq"
   },

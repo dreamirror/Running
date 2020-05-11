@@ -7,13 +7,14 @@ var FSMMgr = require("FSMMgr");
 var Player = require("Player");
 var TestWeaponState = require("TestWeaponState");
 var TestWeaponAttack = require("TestWeaponAttack");
+var ActorManager = require("ActorManager");
+var GravityManager = require("GravityManager");
 
-
-cc.Class({
+var GameInitPlayer = cc.Class({
     extends: cc.Component,
 
     properties: {
-        Player : {
+        /*Player : {
             default : null,
             type : cc.Node,
             displayName : "玩家",
@@ -25,15 +26,20 @@ cc.Class({
             default : null,
             type : cc.Node,
             displayName : "玩家武器手臂",
-        },
+        },*/
 
         /* 玩家跳跃的初始加速度 */
         InitialSpeed : 10,
     },
 
+    statics: {
+        _instance: null,
+    },
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        GameInitPlayer._instance = this;
 
         //开启碰撞检测
         var manager = cc.director.getCollisionManager();
@@ -45,10 +51,14 @@ cc.Class({
         this.node.on( cc.Node.EventType.TOUCH_MOVE , this.OnTouchMove , this,true);
         this.node.on( cc.Node.EventType.TOUCH_END , this.OnTouchEnd , this,true);
         this.node.on( cc.Node.EventType.TOUCH_CANCEL , this.OnTouchCancel , this,true);
-
     },
 
     start () {
+        /*if (ActorManager._instance != null && ActorManager._instance != undefined)
+        {
+            this.Player = ActorManager._instance.CreatePlayer();
+        }
+
         //加载玩家的config数据之后再初始化状态机
         var self = this;
         cc.loader.loadRes('Config/PlayerConfig',function (err, asset) {
@@ -62,9 +72,10 @@ cc.Class({
                 self.PlayerJS.PlayerConfig = asset.json;
                 self.InitFSM();
             }
-        });
+        });*/
         //4.23 初始化状态机
         //this.InitFSM();
+        this.CreatePlayer();
     },
 
     //将人物FSMupdate
@@ -133,6 +144,54 @@ cc.Class({
         if (this.FSMMgr != null){
             this.FSMMgr.OnTouchCancel(event);
         }   
+    },
+
+    ///////////////重新生成玩家相关/////////////////
+    CreatePlayer : function( InStartPos ){
+        if (ActorManager._instance != null && ActorManager._instance != undefined)
+        {
+            this.Player = ActorManager._instance.CreatePlayer();
+            this.Player.parent = cc.director.getScene();
+            this.GameManager = cc.find("GameContainer").getComponent("GameManager");
+            if (InStartPos != null && InStartPos != undefined){
+                this.Player.setPosition(InStartPos);
+            }
+            else{
+                if (this.GameManager ){
+                    this.Player.setPosition(this.GameManager.GameConfigData.PlayerStartPos[0], this.GameManager.GameConfigData.PlayerStartPos[1]);
+                }
+                else{
+                    this.Player.setPosition(76, 460);
+                }
+            }     
+        }
+
+        //加载玩家的config数据之后再初始化状态机
+        var self = this;
+        cc.loader.loadRes('Config/PlayerConfig',function (err, asset) {
+            if(err){
+                cc.log("加载玩家数据报错！：" + err); 
+                return;
+            };
+            if( asset && asset.json ){
+                // 初始化状态机
+                self.PlayerJS = self.Player.getComponent("Player");
+                self.PlayerJS.PlayerConfig = asset.json;
+                self.InitFSM();
+            }
+        });
+    },
+
+    OnReCreatePlayer : function () {
+        if (this.Player != null && this.Player != undefined ) {
+            //if(GravityManager._instance){
+            //    var PlayerJS = this.Player.getComponent("Player");
+            //    GravityManager._instance.UnRigisterToGravity(this.Player);
+            //}  
+            this.Player.destroy();
+        }
+
+        this.CreatePlayer();
     },
 
 });
