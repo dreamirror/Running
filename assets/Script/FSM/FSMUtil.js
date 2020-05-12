@@ -12,8 +12,8 @@ var FSMStateID = {
     ArmSwordNoraml  :   103,        //剑普通状态
     ArmSwordAttack  :   104,        //剑攻击状态
 
-
-
+    ArmDartNormal   :   105,        //飞镖普通状态
+    ArmDartAttack   :   106,        //飞镖攻击状态
 
     /***************   敌人状态枚举 **************/
     EnemyIdle       :   500,    //敌人Idle状态
@@ -36,7 +36,8 @@ var TransConditionID = {
     SwordNormalToAtt            :   103,
     SwordAttToNormal            :   104,
 
-
+    DartNormalToAtt            :   105,
+    DartAttToNormal            :   106,
 
     /***************   敌人状态转换条件 **************/
     EnemyIdelToCloseAttack      :   501,    //敌人Idle状态到近程攻击状态

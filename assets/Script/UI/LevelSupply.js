@@ -7,6 +7,8 @@
     //弹窗调用
     LevelSupply.show.call(this,{data});
  */
+var FunctionLibrary = require("FunctionLibrary");
+const ItemBase = require('ItemBase').ItemBase;
 
 let LevelSupply = {
     _alert: null,           // prefab
@@ -16,19 +18,20 @@ let LevelSupply = {
 
 //随机道具
 let rondomItem = function() {
+    let SupplyItemConfig = cc.find("GameContainer").getComponent("GameManager").SupplyItemConfig;
     let ItemConfig = cc.find("GameContainer").getComponent("GameManager").ItemConfig;
     let itemlist = [];
     let weightlist = [];
     
-    for(var p in ItemConfig){
-        itemlist.push(ItemConfig[p]);
-        weightlist.push(ItemConfig[p].weight);
+    for(var p in SupplyItemConfig){
+        itemlist.push(SupplyItemConfig[p].id);
+        weightlist.push(SupplyItemConfig[p].weight);
     }
     let index1 = FunctionLibrary.RandomByWeight(weightlist);
     let index2 = FunctionLibrary.RandomByWeight(weightlist);
     let index3 = FunctionLibrary.RandomByWeight(weightlist);
-
-    return [itemlist[index1],itemlist[index2],itemlist[index3]];
+    
+    return [ItemConfig[itemlist[index1]],ItemConfig[itemlist[index2]],ItemConfig[itemlist[index3]]];
 };
 
 let show = function () {
@@ -38,12 +41,14 @@ let show = function () {
             return;
         }
         LevelSupply._alert = cc.instantiate(prefab);
+        cc.director.getScene().addChild(LevelSupply._alert,3);
+
         let arrayItem = rondomItem();
         LevelSupply._itemList = arrayItem;
 
         for (let index = 0; index < 3; index++) {
             const element = arrayItem[index];
-            let item = cc.find("LevelSupplyWin/ItemContent/item" + index);
+            let item = cc.find("LevelSupplyWin/ItemContent/item"+index);
             if (item && element) {
                 cc.loader.loadRes(element.icon, function(err,img){
                     var mylogo  = new cc.SpriteFrame(img); 
@@ -57,7 +62,7 @@ let show = function () {
         }
 
 
-        cc.director.getScene().addChild(LevelSupply._alert,3);
+        
         cc.find("LevelSupplyWin/close").on('click', function (event) {
             close();
         }, this);
@@ -72,7 +77,7 @@ let show = function () {
 let selectItem = function(parm) {
     //todo
     let item = new ItemBase();
-    item.init("shield","shield",null,EItemType.BUFF);
+    item.init(parm.id,parm.name,parm.icon,parm.itemType);
     let GameData = cc.find("GameContainer").getComponent("GameData");
     GameData.useItem(item);
     

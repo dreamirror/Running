@@ -216,6 +216,9 @@
       },
       {
         "__uuid__": "a45090ad-dfe6-4ffa-8388-ceca8906b9ee"
+      },
+      {
+        "__uuid__": "27687d20-865e-4a1e-a2b9-6d18b38e3ced"
       }
     ],
     "playOnLoad": false,
@@ -259,10 +262,10 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 2
+      "__id__": 1
     },
     "asset": {
-      "__uuid__": "6503706b-caa5-4f25-8456-4dce60a95009"
+      "__uuid__": "5755b6fe-1000-4ebf-8931-3d54e18b1acd"
     },
     "fileId": "d326E8yWRIGY4OBq8BnwIK",
     "sync": false

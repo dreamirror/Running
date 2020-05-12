@@ -1,6 +1,6 @@
 // 游戏管理器~ 啥作用呢~ 没想好。
 // 其他组件获取此组件的方法： 
-// var GameManager = cc.find("GameContainer").getComponent("GameManager");  //4.29 zh 取不到~~~
+// var GameManager = cc.find("GameContainer").getComponent("GameManager");  
 
 var GameInitPlayer = require("GameInitPlayer");
 
@@ -133,7 +133,7 @@ var GameManager = cc.Class({
                     var GameOverPlJS = self.GameOverUI.getComponent("CommonTipsPl");
                     if(GameOverPlJS){
                         GameOverPlJS.SetOkBtnCall(self , "GameManager" , "ShareSuccessCallBack" , self);
-                        GameOverPlJS.SetCancelBtnCall(self , "GameManager" , "ShareCancel" , 111);
+                        GameOverPlJS.SetCancelBtnCall(self , "GameManager" , "ShareCancel" , self);
                     }
                 }
             };
@@ -143,7 +143,7 @@ var GameManager = cc.Class({
         if (this.GameData == null || this.GameData == undefined){
             this.GameData = cc.find("GameContainer").getComponent("GameData");
         }
-        //this.GameData.clearTemp();
+        this.GameData.clearTemp();
 
     },
     
@@ -174,10 +174,10 @@ var GameManager = cc.Class({
      * 取消分享
     */
     ShareCancel : function (event, InParam ){
-        if (InTarget.ShareManager == null || InTarget.ShareManager == undefined){
-            InTarget.ShareManager = cc.find("GameContainer").getComponent("ShareManager");
+        if (InParam.ShareManager == null || InParam.ShareManager == undefined){
+            InParam.ShareManager = cc.find("GameContainer").getComponent("ShareManager");
         }
-        InTarget.ShareManager.ClearCurShareData();
+        InParam.ShareManager.ClearCurShareData();
         
         InParam.ReLoadScene();
     },

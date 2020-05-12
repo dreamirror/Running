@@ -48,10 +48,19 @@ var EnemyRunAIResult = {
 
 };
 
+/**
+ * 行走的方向，是向左，还是向右
+ */
+var MoveDirection = {
+    MoveLeft    :   -1,
+    MoveRight   :   1, 
+};
+
 module.exports = {
     EObjType    :   EObjType,
     WeaponType  :   WeaponType,
     EnemyType   :   EnemyType,
     EnemyAttackType :   EnemyAttackType,
     EnemyRunAIResult:   EnemyRunAIResult,
+    MoveDirection : MoveDirection,
 };

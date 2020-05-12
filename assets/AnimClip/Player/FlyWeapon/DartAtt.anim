@@ -1,0 +1,37 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "DartAtt",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.25,
+  "sample": 40,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.125,
+          "value": 127.512
+        },
+        {
+          "frame": 0.25,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": [
+    {
+      "frame": 0.125,
+      "func": "AnimationCustomEventOne",
+      "params": [
+        "11111"
+      ]
+    }
+  ]
+}

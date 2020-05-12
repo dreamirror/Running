@@ -110,6 +110,12 @@ var RightArm = cc.Class({
             var WeaponCtl = WeaponData.WeaponCtl;
             WeaponCtl.active = true;
 
+            //从配置中获取的，要传给武器状态机的参数
+            var TransParam = null;
+            if (WeaponData.WeaponConfig.FSMParam != null && WeaponData.WeaponConfig.FSMParam != undefined){
+                TransParam = WeaponData.WeaponConfig.FSMParam;
+            }
+
             if (this.preWeaponId != null || this.preWeaponId != undefined){
                 var PreWeaponData = this.PlayerPrefabWeapons.get(this.preWeaponId);
                 var PreWeaponCtl = PreWeaponData.WeaponCtl;
@@ -118,7 +124,7 @@ var RightArm = cc.Class({
 
             //再根据配置切换状态机
             if(this.RightArmFSMMgr){
-                this.RightArmFSMMgr.ForceSetFSMState(WeaponData.WeaponConfig.NormalStateID , null, null );
+                this.RightArmFSMMgr.ForceSetFSMState(WeaponData.WeaponConfig.NormalStateID , null, TransParam );
             }
 
             this.preWeaponId = InWeaponID;
