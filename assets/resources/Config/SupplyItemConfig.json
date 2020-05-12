@@ -1,0 +1,21 @@
+[
+    {  
+        "id" : "item01",
+        "weight" : 0
+    },
+
+    {  
+        "id" : "weapon01",
+        "weight" : 0
+    },
+
+    {  
+        "id" : "shield",
+        "weight" : 0
+    },
+
+    {  
+        "id" : "magnet",
+        "weight" : 0
+    }
+]
