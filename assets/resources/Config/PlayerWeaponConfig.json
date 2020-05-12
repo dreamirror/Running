@@ -36,8 +36,8 @@
         },
         "weaponDart":{
             "weapontype" : 2,
-            "prefab" : "prefabs/Item/dart",
-            "name"  : "dart",
+            "prefab" : "prefabs/Player/Weapon/dartInHand",
+            "name"  : "dartInHand",
             "id"    : "weaponDart",
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
@@ -45,8 +45,8 @@
 
             "FSMParam" : {
                 "DartPrefab" : "prefabs/Item/dart",
-                "CD"    :   1,
-                "Speed" :   5,
+                "CD"    :   0.5,
+                "Speed" :   9,
                 "MoveType" : 1,
                 "id" : "weaponDart",
                 "CreatePos" : [50,300] 

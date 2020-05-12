@@ -46,7 +46,7 @@
         "icon" : "Texture/Item/dart",
         "name" : "dart",
         "id" : "weaponDart",
-        "weight" : 20
+        "weight" : 2
     },
 
 

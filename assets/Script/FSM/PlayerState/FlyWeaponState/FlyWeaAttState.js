@@ -91,26 +91,19 @@ var FlyWeaAttState = cc.Class({
 
         this.BeThrowDart = true;
         //创建飞镖
-        var self = this;
-        /*if ( this.WeaponParam.DartPrefab ){
-            cc.loader.loadRes(this.WeaponParam.DartPrefab ,function (errLoadWeapon, assetWeapon) {
-                if(assetWeapon){
-                    var CurWeapon = cc.instantiate(assetWeapon);
-                    if (CurWeapon){
-                        CurWeapon.parent = cc.director.getScene();
-                        CurWeapon.setPosition( self.WeaponParam.CreatePos[0], self.WeaponParam.CreatePos[1]);
-                        CurWeapon.SetWeaponData(self.WeaponParam);
-                    }
-                }
-            });
-        }*/
         if ( this.WeaponParam.id ){
             var CurWeapon = ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
             if (CurWeapon){
                 CurWeapon.parent = cc.director.getScene();
-                CurWeapon.setPosition( self.WeaponParam.CreatePos[0], self.WeaponParam.CreatePos[1]);
+                //获取当前手的位置
+                var ArmPos = this.TargetObj.parent.convertToWorldSpaceAR(cc.v2(0, 0));
+                var ArmSize = this.TargetObj.getContentSize();
+
+                CurWeapon.setPosition(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);//self.WeaponParam.CreatePos[0], self.WeaponParam.CreatePos[1]);
                 var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");
-                FlyWeaponJS.SetWeaponData(self.WeaponParam);
+                FlyWeaponJS.SetWeaponData(this.WeaponParam);
+
+                FlyWeaponJS.SetAttackType();
             }
         }
     },

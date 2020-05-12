@@ -174,10 +174,10 @@ var GameManager = cc.Class({
      * 取消分享
     */
     ShareCancel : function (event, InParam ){
-        if (InTarget.ShareManager == null || InTarget.ShareManager == undefined){
-            InTarget.ShareManager = cc.find("GameContainer").getComponent("ShareManager");
+        if (InParam.ShareManager == null || InParam.ShareManager == undefined){
+            InParam.ShareManager = cc.find("GameContainer").getComponent("ShareManager");
         }
-        InTarget.ShareManager.ClearCurShareData();
+        InParam.ShareManager.ClearCurShareData();
         
         InParam.ReLoadScene();
     },
