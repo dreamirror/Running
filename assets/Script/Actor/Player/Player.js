@@ -7,6 +7,9 @@ var SwordNormalState = require("SwordNormalState");
 var SwordAttackState = require("SwordAttackState");
 var TestWeaponState = require("TestWeaponState");
 var TestWeaponAttack = require("TestWeaponAttack");
+var FlyWeaNormalState = require("FlyWeaNormalState");
+var FlyWeaAttState = require("FlyWeaAttState");
+
 /* */
 var GravityManager = require("GravityManager");
 var FunctionLibrary = require("FunctionLibrary");
@@ -145,10 +148,22 @@ var Player = cc.Class({
             WeaponSwordAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm);
             WeaponSwordAttackState.AddCondition(FSMUtil.TransConditionID.SwordAttToNormal , FSMUtil.FSMStateID.ArmSwordNoraml);         
 
+            /** 添加 飞镖的状态机 */
+            var WeaponFlyWeaponState = new FlyWeaNormalState();
+            WeaponFlyWeaponState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponFlyWeaponState.AddCondition(FSMUtil.TransConditionID.DartNormalToAtt , FSMUtil.FSMStateID.ArmDartAttack);     
+
+            var WeaponFlyWeaAttState = new FlyWeaAttState();
+            WeaponFlyWeaAttState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponFlyWeaAttState.AddCondition(FSMUtil.TransConditionID.DartAttToNormal , FSMUtil.FSMStateID.ArmDartNormal);     
+
+
             this.RightArmFSMMgr.Init( FSMUtil.FSMStateID.ArmDefaultWeapon , DefaultWeaponState);
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDefaultWeaponAtt, DefaultWeaponAttack );
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmSwordNoraml, WeaponSwordNormalState );    //注册剑的普通状态
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmSwordAttack, WeaponSwordAttackState );    //注册剑的攻击状态
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartNormal, WeaponFlyWeaponState );    //注册剑的普通状态
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartAttack, WeaponFlyWeaAttState );    //注册剑的攻击状态          
 
             DefaultWeaponState.BeforeEnter();
 
@@ -183,7 +198,7 @@ var Player = cc.Class({
 
         //如果被敌人攻击，直接死
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            Target.ActorDead();
+            //Target.ActorDead();
         }
     },
 

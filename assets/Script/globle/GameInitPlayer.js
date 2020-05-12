@@ -195,7 +195,7 @@ var GameInitPlayer = cc.Class({
 
         //为其添加一个护盾
         var GameData = cc.find("GameContainer").getComponent("GameData");
-        //GameData.applyShield();
+        GameData.applyShield();
     },
 
 });

@@ -1,8 +1,6 @@
 /*
 * 用来进行Actor的创建等的管理类
 */
-var GameManager = require("GameManager");
-
 var ActorManager = cc.Class({
     extends: cc.Component,
 
@@ -18,6 +16,10 @@ var ActorManager = cc.Class({
             type : cc.Prefab,
         },
         
+        Dart : {
+            default : null,
+            type : cc.Prefab,
+        },
     },
 
     statics: {
@@ -29,6 +31,8 @@ var ActorManager = cc.Class({
         this.EnemyList = new Map();
         this.EnemyList.set("EnemyLowBee" , this.EnemyLowBee);
         
+        this.FlyWeaponList = new Map();
+        this.FlyWeaponList.set("weaponDart" , this.Dart);
     },
 
     /**
@@ -67,8 +71,25 @@ var ActorManager = cc.Class({
         return null;
     },
 
+    /* 根据类型创建一个飞行道具 */
+    CreateFlyWeapon : function ( InType) {
+        var GameManager = cc.find("GameContainer").getComponent("GameManager");
+        if( GameManager.PlayerWeaponConfig ){
+            var WeaponID = null;
+            if (GameManager.PlayerWeaponConfig.weapons[InType]){
+                WeaponID = GameManager.PlayerWeaponConfig.weapons[InType].id;
+            }
 
+            if (WeaponID != null && this.FlyWeaponList.has(WeaponID)){
+                var WeaponInstance = cc.instantiate(this.FlyWeaponList.get(WeaponID));
+                if (WeaponInstance != null && WeaponInstance != undefined){
+                    WeaponInstance.name = GameManager.PlayerWeaponConfig.weapons[InType].name;
+                    return WeaponInstance;
+                }
+            };
+        }
+    },
 
 });
 
-
+module.exports = ActorManager;

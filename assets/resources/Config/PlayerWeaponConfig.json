@@ -33,6 +33,25 @@
             "Anchor" : "0.5,1",
 
             "NormalStateID" : 103
+        },
+        "weaponDart":{
+            "weapontype" : 2,
+            "prefab" : "prefabs/Item/dart",
+            "name"  : "dart",
+            "id"    : "weaponDart",
+            "Pos"   : "-32.295 , -10.375",
+            "Rotaion": "34.78",
+            "Anchor" : "0.5,1",
+
+            "FSMParam" : {
+                "DartPrefab" : "prefabs/Item/dart",
+                "CD"    :   1,
+                "Speed" :   5,
+                "MoveType" : 1,
+                "id" : "weaponDart",
+                "CreatePos" : [50,300] 
+            },
+            "NormalStateID" : 105
         }
     }
 

@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        378.4531014537997,
+        378.58841792314104,
         0,
         0,
         0,
@@ -1515,12 +1515,6 @@
       "__id__": 2
     },
     "_enabled": true,
-    "Player": {
-      "__id__": 23
-    },
-    "RightArm": {
-      "__id__": 24
-    },
     "InitialSpeed": 10,
     "_id": "46AnazaH9GsKR57gyP1qXC"
   },
@@ -1548,6 +1542,9 @@
     },
     "Player": {
       "__uuid__": "5755b6fe-1000-4ebf-8931-3d54e18b1acd"
+    },
+    "Dart": {
+      "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
     },
     "_id": "0ao/KQtKhCj4KS9E5Nz3cq"
   },

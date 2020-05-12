@@ -216,6 +216,45 @@ cc.Class({
         return clip;
     },
 
+    /**
+     * 向在预先预留好的函数中，设置回调事件
+     */ 
+    SetAnimationCustomEventOneCallBack : function( InTarget , InFunction ){
+        this.CustomEventOneCallBack = {
+            Target : InTarget,
+            Function : InFunction
+        }
+    },
+    RemoveAnimationCustomEventOneCallBack : function( InTarget , InFunction ){
+        this.CustomEventOneCallBack = null;
+    },
+    SetAnimationCustomEventTwoCallBack : function( InTarget , InFunction ){
+        this.CustomEventTwoCallBack = {
+            Target : InTarget,
+            Function : InFunction
+        }
+    },
+    RemoveAnimationCustomEventTwoCallBack : function( InTarget , InFunction ){
+        this.CustomEventTwoCallBack = null;
+    },
+
+    /**
+     * 预先预留好的回调函数1 ， 在动画中插入事件时可以回调到
+     */
+    AnimationCustomEventOne : function( InString ,InNumber , InBoolean){
+        if (this.CustomEventOneCallBack != null){
+            this.CustomEventOneCallBack.Function.call(this.CustomEventOneCallBack.Target, InString ,InNumber , InBoolean)
+        }
+    },
+    /**
+     * 预先预留好的回调函数2 ， 在动画中插入事件时可以回调到
+     */
+    AnimationCustomEventTwo : function( InString ,InNumber , InBoolean){
+        if (this.CustomEventTwoCallBack != null){
+            this.CustomEventTwoCallBack.Function.call(this.CustomEventOneCallBack.Target, InString ,InNumber , InBoolean)
+        }
+    },
+
     /*****************  碰撞相关  *******************/
     /**
      * 当碰撞产生的时候调用

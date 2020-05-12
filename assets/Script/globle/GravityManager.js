@@ -90,7 +90,7 @@ var GravityManager = cc.Class({
                 InActor.AddCollisionEndCall(this.OnActorCollisionEndCall , this ,InActor );
                 InActor.AddCollisionStayCall(this.OnActorCollisionStayCall , this ,InActor );
 
-                cc.log("该Actor已经注册");
+                //cc.log("该Actor已经注册");
             }
         //}
         //else{
