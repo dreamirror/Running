@@ -64,6 +64,7 @@ var Player = cc.Class({
     },
 
     onLoad () {  
+        this.node.name = "Player";
     },
 
     onDestroy(){
