@@ -3,6 +3,7 @@
 // var GameManager = cc.find("GameContainer").getComponent("GameManager");  
 
 var GameInitPlayer = require("GameInitPlayer");
+const LevelSupply = require('LevelSupply');
 
 var GameManager = cc.Class({
     extends: cc.Component,
@@ -193,5 +194,14 @@ var GameManager = cc.Class({
     },
 
 
-
+    /**
+     * 暂停并弹出道具补给窗
+     */
+    showSupplyWinAndPause : function(){
+        let callback = function(){
+            cc.director.resume();
+        };
+        cc.director.pause();
+        LevelSupply.show.call(this,callback);
+    },
 });

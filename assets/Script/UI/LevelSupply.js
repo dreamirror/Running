@@ -5,7 +5,7 @@
     let LevelSupply = require('LevelSupply');
     
     //弹窗调用
-    LevelSupply.show.call(this,{data});
+    LevelSupply.show.call(this);
  */
 var FunctionLibrary = require("FunctionLibrary");
 const ItemBase = require('ItemBase').ItemBase;
@@ -14,6 +14,8 @@ let LevelSupply = {
     _alert: null,           // prefab
     _itemList : [],         // 道具数组
     _animSpeed: 0.3,        // 弹窗动画速度
+
+    _callback : undefined,
 };
 
 //随机道具
@@ -34,13 +36,14 @@ let rondomItem = function() {
     return [ItemConfig[itemlist[index1]],ItemConfig[itemlist[index2]],ItemConfig[itemlist[index3]]];
 };
 
-let show = function () {
+let show = function (callback) {
     cc.loader.loadRes("prefabs/LevelSupplyWin",cc.Prefab, function (error, prefab){
         if (error){
             cc.error(error);
             return;
         }
         LevelSupply._alert = cc.instantiate(prefab);
+        LevelSupply._callback = callback;
         cc.director.getScene().addChild(LevelSupply._alert,3);
 
         let arrayItem = rondomItem();
@@ -112,6 +115,10 @@ let close = function () {
 // 弹出动画完成回调
 let onFadeOutFinish = function () {
     onDestroy();
+
+    if (LevelSupply._callback != undefined) {
+        LevelSupply._callback.call(this);
+    }
 };
  
 let onDestroy = function () {

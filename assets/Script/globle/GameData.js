@@ -136,7 +136,7 @@ cc.Class({
     useWeapon : function (weapon_id) {
         for (let index = 0; index < this.tempInfo.weapons.length; index++) {
             const element = this.tempInfo.weapons[index];
-            if (element && element.ID == _weapon.ID) {
+            if (element && element.ID == weapon_id) {
 
                 this.tempInfo.weapons[index].count--;
 
