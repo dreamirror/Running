@@ -140,15 +140,15 @@ cc.Class({
 
                 this.tempInfo.weapons[index].count--;
 
-                //广播下武器数量变化
-                EventCenter.emit(EventName.OnWeaponCount,this);
-
                 if (this.tempInfo.weapons[index].count <= 0 ) {
                     this.tempInfo.weapons.splice(index,1);
                     
                     //广播下武器清0
                     EventCenter.emit(EventName.OnWeaponClear,this);
                 }
+                
+                //广播下武器数量变化
+                EventCenter.emit(EventName.OnWeaponCount,this);
                 return;
             }
         }
