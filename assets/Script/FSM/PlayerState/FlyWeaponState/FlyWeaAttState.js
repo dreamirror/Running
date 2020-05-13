@@ -107,6 +107,7 @@ var FlyWeaAttState = cc.Class({
                 FlyWeaponJS.InitWeaponData(this.WeaponParam);
 
                 FlyWeaponJS.SetAttackType();
+                FlyWeaponJS.ReduceWeaponCount();
             }
             //PoolManager.
         }

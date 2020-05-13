@@ -65,15 +65,26 @@ var WeaponBase = cc.Class({
         this.BInAttack = true;
 
         //减少武器的使用次数
-        var GameData = cc.find("GameContainer").getComponent("GameData");
+        /*var GameData = cc.find("GameContainer").getComponent("GameData");
         if( GameData != null && GameData != undefined){
             GameData.useWeapon(this.WeaponData.id);
-        }
+        }*/
     },
 
     /* 攻击状态结束 */
     SetAttackOver : function (){
         this.BInAttack = false;
+
+        //减少武器的使用次数
+        this.ReduceWeaponCount();
+    },
+
+    /* 减少武器使用次数 */
+    ReduceWeaponCount : function() {
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if( GameData != null && GameData != undefined){
+            GameData.useWeapon(this.WeaponData.id);
+        }
     },
 
     CollisionCallBack : function(other, self , Target , Param){
