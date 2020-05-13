@@ -199,6 +199,7 @@ var Player = cc.Class({
         //如果被敌人攻击，直接死
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
             Target.ActorDead();
+            
         }
     },
 
@@ -245,6 +246,8 @@ var Player = cc.Class({
         if(GravityManager._instance){
             GravityManager._instance.UnRigisterToGravity(this);
         }  
+
+        EventCenter.emit(EventName.PlayerDead,this);
 
         var GameManager = cc.find("GameContainer").getComponent("GameManager");
         if(GameManager){

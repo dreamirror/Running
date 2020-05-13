@@ -8,6 +8,8 @@ var EventName = {
     TouchItem : "TouchItem",
 
     PlayerAttack : "OnPlayerAttacked",      //玩家武器攻击到物体
+
+    PlayerDead : "OnPlayerDead",            //玩家死亡
 };
 
 
