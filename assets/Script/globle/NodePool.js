@@ -39,9 +39,13 @@ var NodePool = cc.Class({
     request ()  {
         --this.idx;
         if ( this.idx < 0 ) {
-            cc.log ("Error: the pool do not have enough free item.");
-            return null;
+            cc.log ("Warn: the pool do not have enough free item.");
+            //新建一个对象，但是不放到池里
+            let obj = cc.instantiate(this.prefab);
+            obj.active = true;
+            return obj;
         }
+
         let obj = this.list[this.idx];
         if ( obj ) {
             obj.active = true;
@@ -52,6 +56,11 @@ var NodePool = cc.Class({
     
     return ( obj ) {
         ++this.idx;
+        //多于之前的初始化的就不放进来了
+        if(this.idx >= this.size ){
+            return;
+        }
+
         obj.active = false;
         if (obj.parent) {
             obj.removeFromParent();
