@@ -6,6 +6,7 @@
 const ItemBase = require('ItemBase').ItemBase;
 const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
+const EventName = require("GlobalEventName");
 
 
 cc.Class({
@@ -100,6 +101,10 @@ cc.Class({
         for (let index = 0; index < this.tempInfo.weapons.length; index++) {
             const element = this.tempInfo.weapons[index];
             if (element && element.ID == _weapon.ID) {
+                this.tempInfo.weapons[index].count += _weapon.count;
+
+                //广播下武器数量变化
+                EventCenter.emit(EventName.OnWeaponCount,this);
                 return;
             }
         }
@@ -125,6 +130,28 @@ cc.Class({
         }
         //再插入到第一个位置
         this.tempInfo.weapons.unshift(_weapon);
+    },
+
+    //使用武器。次数减1.武器都带次数限制。
+    useWeapon : function (weapon_id) {
+        for (let index = 0; index < this.tempInfo.weapons.length; index++) {
+            const element = this.tempInfo.weapons[index];
+            if (element && element.ID == _weapon.ID) {
+
+                this.tempInfo.weapons[index].count--;
+
+                //广播下武器数量变化
+                EventCenter.emit(EventName.OnWeaponCount,this);
+
+                if (this.tempInfo.weapons[index].count <= 0 ) {
+                    this.tempInfo.weapons.splice(index,1);
+                    
+                    //广播下武器清0
+                    EventCenter.emit(EventName.OnWeaponClear,this);
+                }
+                return;
+            }
+        }
     },
 
     //这里使用道具暂时只做BUFF类道具的。（在playerinfo上加一个buff的标记）

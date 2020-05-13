@@ -1,6 +1,4 @@
 
-const EItemType = require('ItemBase').EItemType;
-
 const EventName = require("GlobalEventName");
 
 
@@ -26,40 +24,16 @@ cc.Class({
         for (let index = 0; index < this.OperateNum; index++) {
             let pb = cc.instantiate(this.OperatePrefab);
             if (pb) {
-                
                 pb.parent = cc.director.getScene();  //加到当前场景
-                pb.setPosition( 100 + (index * 80), 420 );
+                pb.setPosition( 50 + (index * 80), 200 );
                 this.weaponBlock.push(pb);
             }
         }
 
         //监听道具获得
-        EventCenter.on(EventName.GetItem,this.updateOperateItem,this,0);
+        EventCenter.on(EventName.GetItem,this.refreshOperateItem,this);
         EventCenter.on(EventName.TouchItem,this.refreshOperateItem,this);
-    },
-
-    start () {
-
-    },
-
-    updateOperateItem(ItemInfo){
-        if (!ItemInfo) {
-            return
-        }
-        var GameData = cc.find("GameContainer").getComponent("GameData");
-
-        if (ItemInfo.itemType == EItemType.Gold) {
-            //增加数量
-            GameData.addPlayerGold(1);
-        } else if ( ItemInfo.itemType == EItemType.BUFF ) {
-            //直接被使用掉
-            GameData.useItem(ItemInfo);
-        }  else if ( ItemInfo.itemType == EItemType.Weapon ) {
-            //替换掉当前武器
-            GameData.addOrReplaceWeapon(ItemInfo);
-
-            this.refreshOperateItem();
-        }
+        EventCenter.on(EventName.OnWeaponCount,this.refreshOperateItem,this);
     },
 
     refreshOperateItem(){
@@ -67,13 +41,12 @@ cc.Class({
         var GameData = cc.find("GameContainer").getComponent("GameData");
         let info = GameData.getTempInfo();
         if (info && info.weapons) {
-            for (let index = 0; index < info.weapons.length; index++) {
-                if (index > this.OperateNum) {
-                    break;
-                }
+            for (let index = 0; index < this.OperateNum; index++) {
                 const element = info.weapons[index];
                 if (element) {
                     this.weaponBlock[index].getComponent("OprateItemJS").init(element);
+                } else {
+                    this.weaponBlock[index].getComponent("OprateItemJS").reset();
                 }
             }
         }
@@ -82,7 +55,8 @@ cc.Class({
     // update (dt) {},
 
     onDestroy(){
-        EventCenter.off(EventName.GetItem,this.updateOperateItem,this);
+        EventCenter.off(EventName.GetItem,this.refreshOperateItem,this);
         EventCenter.off(EventName.TouchItem,this.refreshOperateItem,this);
+        EventCenter.off(EventName.OnWeaponCount,this.refreshOperateItem,this);
     },
 });

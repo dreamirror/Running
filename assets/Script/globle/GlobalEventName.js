@@ -10,6 +10,11 @@ var EventName = {
     PlayerAttack : "OnPlayerAttacked",      //玩家武器攻击到物体
 
     PlayerDead : "OnPlayerDead",            //玩家死亡
+
+    OnWeaponCount : "OnWeaponCount",      // 武器数量变化
+    OnWeaponClear : "OnWeaponClear",     // 武器用完
+
+    
 };
 
 

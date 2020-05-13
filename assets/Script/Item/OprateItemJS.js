@@ -35,11 +35,19 @@ cc.Class({
                     return;
                 }
                 let mylogo  = new cc.SpriteFrame(img); 
-                self.BgNode.getComponent(cc.Sprite).spriteFrame = mylogo;
+                if (self.BgNode) {
+                    self.BgNode.getComponent(cc.Sprite).spriteFrame = mylogo;
+                }
             });
 
-            this.NumLabe.string = 1;
+            this.NumLabe.string = this.OwnedItem.count;
         }
+    },
+
+    reset(){
+        this.OwnedItem = undefined;
+        this.NumLabe.string = "";
+        this.BgNode.getComponent(cc.Sprite).spriteFrame = undefined;
     },
 
 

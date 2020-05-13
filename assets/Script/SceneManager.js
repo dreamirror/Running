@@ -77,7 +77,7 @@ var SceneManager = cc.Class({
                     let randItem = itemlist[randindex];
                     if (randItem) {
                         var item = new ItemBase();
-                        item.init(randItem.id,randItem.name,randItem.icon,randItem.type);
+                        item.init(randItem.id);
                         
                         if (self.EntityPrefab) {
                             let pb = cc.instantiate(self.EntityPrefab);

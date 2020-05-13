@@ -6,8 +6,8 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 const EItemType = cc.Enum({
-    Weapon : 0,
-    Gold : 1,  
+    Weapon : 0,  //武器道具
+    Gold : 1,  //金币道具
     BUFF : 2,  //buff类道具
 });
 
@@ -18,6 +18,7 @@ var ItemBase = cc.Class({
         ID : 0,
         ItemName : "物品",
         Icon: "",
+        count : 0,
 
         itemType : {
             default : EItemType.Weapon,
@@ -25,19 +26,19 @@ var ItemBase = cc.Class({
         },
     },
 
-    //new之后要初始化
-    init( id,name,icon,inType ) {
+    //new之后要初始化 
+    init( id ) {
         this.ID = id;
-        this.ItemName = name;
-        this.Icon = icon;
-        this.itemType = inType;
+        
+        let cfg = cc.find("GameContainer").getComponent("GameManager").ItemConfig;
+        if (cfg != undefined && cfg[id] != undefined) {
+            this.ItemName = cfg[id].name;
+            this.Icon = cfg[id].icon;
+            this.itemType = cfg[id].type;
+            this.count = cfg[id].count ? cfg[id].count : 0;
 
-        if (inType == EItemType.BUFF) {
-            let cfg = cc.find("GameContainer").getComponent("GameManager").ItemConfig;
-            if (cfg != undefined) {
-                self.buff = cfg[id].buff;
-                self.buffTime = cfg[id].buffTime;
-            }
+            this.buff = cfg[id].buff;
+            this.buffTime = cfg[id].buffTime;
         }
     }
 });

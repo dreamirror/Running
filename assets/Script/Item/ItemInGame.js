@@ -2,6 +2,8 @@
 
 const EventName = require("GlobalEventName");
 
+const EItemType = require('ItemBase').EItemType;
+
 
 cc.Class({
     extends: cc.Component,
@@ -35,6 +37,19 @@ cc.Class({
             //  let itemEvent = new cc.Event.EventCustom("GetItem", true);//创建自定义事件
             //  itemEvent.setUserData(this.OwnedItem);    //设置自定义事件中包含的数据
             //  this.node.dispatchEvent(itemEvent);  
+
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            if (this.ItemInfo.itemType == EItemType.Gold) {
+                //增加数量
+                GameData.addPlayerGold(1);
+            } else if ( this.ItemInfo.itemType == EItemType.BUFF ) {
+                //直接被使用掉
+                GameData.useItem(ItemInfo);
+            }  else if ( this.ItemInfo.itemType == EItemType.Weapon ) {
+                //替换掉当前武器
+                GameData.addOrReplaceWeapon(this.ItemInfo);
+            }
+
             EventCenter.emit(EventName.GetItem,this.ItemInfo);
 
             //清除自身

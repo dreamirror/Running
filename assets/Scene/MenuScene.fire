@@ -277,7 +277,7 @@
       "array": [
         0,
         0,
-        378.58841792314104,
+        526.5434455009387,
         0,
         0,
         0,
@@ -887,20 +887,18 @@
       "__id__": 18
     },
     "_enabled": true,
-    "ItemPools": [
+    "PBPools": [
       {
         "__id__": 23
       }
     ],
-    "EnemyPools": [],
     "_id": "6cMn8mz0NExr32uD/gc52P"
   },
   {
     "__type__": "NodePool",
-    "prefab": {
-      "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
-    },
-    "size": 10
+    "prefab": null,
+    "size": 0,
+    "poolName": "default"
   },
   {
     "__type__": "6d751eGnZ1EO7XsBLu8ygn0",
