@@ -82,14 +82,14 @@ cc.Class({
         this.FSMMgr.InitVariable();
 
         var IdleState = new EnemyIdleState();
-        IdleState.InitVariable(this.FSMMgr , this.node);
+        IdleState.InitVariable(this.FSMMgr , this.node , FSMUtil.FSMStateID.EnemyIdle);
         IdleState.AddCondition(FSMUtil.TransConditionID.EnemyIdelToCloseAttack , FSMUtil.FSMStateID.EnemyCloseAttack); 
         IdleState.AddCondition(FSMUtil.TransConditionID.EnemyIdelToDistanceAttack , FSMUtil.FSMStateID.EnemyDistanceAttack);            
         IdleState.SetJSComponentName(InNodeJSComponentName);
 
         /* jin近距离攻击状态 */
         var CloseAttState = new EnemyCloseAttState();
-        CloseAttState.InitVariable(this.FSMMgr , this.node);        
+        CloseAttState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyCloseAttack);        
         CloseAttState.SetJSComponentName(InNodeJSComponentName);
 
         this.FSMMgr.Init( FSMUtil.FSMStateID.EnemyIdle , IdleState);

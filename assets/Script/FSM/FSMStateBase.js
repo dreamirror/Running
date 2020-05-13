@@ -31,13 +31,13 @@ var FSMStateBase = cc.Class({
     },
 
     /**初始化参数 */
-    InitVariable : function(InFSMMgr , InTargetObj ) {
+    InitVariable : function(InFSMMgr , InTargetObj , FSMStateID ) {
         //当前FSM 状态机
         this.FSMMgr = InFSMMgr;
         //当前可变换条件Map
         this.TransTOStateMap = new Map();
         /* 当前StateID */
-        this.CurStateID = FSMUtil.FSMStateID.NONE;
+        this.CurStateID = FSMStateID;
         /* 当前状态机操控的Component */
         this.TargetObj = InTargetObj;
     },

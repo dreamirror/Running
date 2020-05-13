@@ -138,29 +138,29 @@ var Player = cc.Class({
 
             //初始化的时候，都是默认的武器和一个默认的手，具体攻击时对应哪个，让RightArmRunState去根据配置调用对应的状态了
             var DefaultWeaponState = new TestWeaponState();
-            DefaultWeaponState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            DefaultWeaponState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDefaultWeapon);
             DefaultWeaponState.AddCondition(FSMUtil.TransConditionID.DefaultWeaponToAtt , FSMUtil.FSMStateID.ArmDefaultWeaponAtt);         
             
             var DefaultWeaponAttack = new TestWeaponAttack();
-            DefaultWeaponAttack.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            DefaultWeaponAttack.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDefaultWeaponAtt);
             DefaultWeaponAttack.AddCondition(FSMUtil.TransConditionID.DefaultWeaponAttToNormal , FSMUtil.FSMStateID.ArmDefaultWeapon);         
 
             /* 剑的状态机，可以在获取道具之后再注册，不过还是这里注册方便点，不需要一直加减删除 */ 
             var WeaponSwordNormalState = new SwordNormalState();
-            WeaponSwordNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponSwordNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmSwordNoraml);
             WeaponSwordNormalState.AddCondition(FSMUtil.TransConditionID.SwordNormalToAtt , FSMUtil.FSMStateID.ArmSwordAttack);         
             
             var WeaponSwordAttackState = new SwordAttackState();
-            WeaponSwordAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponSwordAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmSwordAttack);
             WeaponSwordAttackState.AddCondition(FSMUtil.TransConditionID.SwordAttToNormal , FSMUtil.FSMStateID.ArmSwordNoraml);         
 
             /** 添加 飞镖的状态机 */
             var WeaponFlyWeaponState = new FlyWeaNormalState();
-            WeaponFlyWeaponState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponFlyWeaponState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
             WeaponFlyWeaponState.AddCondition(FSMUtil.TransConditionID.DartNormalToAtt , FSMUtil.FSMStateID.ArmDartAttack);     
 
             var WeaponFlyWeaAttState = new FlyWeaAttState();
-            WeaponFlyWeaAttState.InitVariable(this.RightArmFSMMgr , this.RightArm);
+            WeaponFlyWeaAttState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartAttack);
             WeaponFlyWeaAttState.AddCondition(FSMUtil.TransConditionID.DartAttToNormal , FSMUtil.FSMStateID.ArmDartNormal);     
 
 

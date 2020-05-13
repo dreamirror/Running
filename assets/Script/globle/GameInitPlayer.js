@@ -99,12 +99,12 @@ var GameInitPlayer = cc.Class({
 
             //创建一个普通的跑路状态
             var playerRunState = new PlayerRunState();
-            playerRunState.InitVariable(this.FSMMgr , this.Player);
+            playerRunState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.RUN);
             playerRunState.AddCondition(FSMUtil.TransConditionID.RunToJump , FSMUtil.FSMStateID.JUMP);         
         
             //创建一个跳跃状态
             var playerJumpState = new PlayerJumpState();
-            playerJumpState.InitVariable(this.FSMMgr , this.Player);
+            playerJumpState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.JUMP);
             playerJumpState.AddCondition(FSMUtil.TransConditionID.JumpToRun , FSMUtil.FSMStateID.RUN);      
             playerJumpState.InitJumpData(PlayerConfig.InitialSpeed);//this.InitialSpeed);
 
