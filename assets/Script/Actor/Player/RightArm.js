@@ -8,6 +8,8 @@ var RightArm = cc.Class({
     extends: ActorBase,
 
     properties: {
+        
+        PlayerJS : null,
 
         RightArmFSMMgr : {
             default : null,
@@ -90,7 +92,7 @@ var RightArm = cc.Class({
                                         WeaponJS.InitWeaponData(CurWeaponData);
                                     }
                                     //设置一下初始武器
-                                    self.ChangeWeapon("defaultWeapon");
+                                    self.ChangeWeapon( self.PlayerJS.PlayerConfig.DefaultWeaponID );//"defaultWeapon");
                                 }
                                 
                             }

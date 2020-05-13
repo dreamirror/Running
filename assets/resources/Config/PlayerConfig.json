@@ -1,5 +1,7 @@
 {
     "InitialSpeed" : 13,
 
+    "DefaultWeaponID" : "defaultWeapon",
+
     "RightArmPos" : [-13,70.75]
 }

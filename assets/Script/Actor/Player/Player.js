@@ -69,6 +69,7 @@ var Player = cc.Class({
     onDestroy(){
         EventCenter.off(EventName.TouchItem,this.OnTouchItemBtn , this);
         EventCenter.off(EventName.GetItem , this.OnGetWeapon , this);
+        EventCenter.off(EventName.OnWeaponClear, this.OnWeaponClear , this);
     },
 
     start () {
@@ -94,6 +95,8 @@ var Player = cc.Class({
         EventCenter.on(EventName.TouchItem,this.OnTouchItemBtn , this);
         //添加一个捡起武器的回调，如果当前装备了武器，则永远只会使武器是第一个武器
         EventCenter.on(EventName.GetItem , this.OnGetWeapon , this);
+        //添加一个武器用完的回调，切换回第一个武器
+        EventCenter.on(EventName.OnWeaponClear, this.OnWeaponClear , this);
     },
 
     update (dt) {
@@ -170,10 +173,8 @@ var Player = cc.Class({
             cc.log( "RightArmFSMMgr Init!" );
 
             this.RightArmJS = this.RightArm.getComponent("RightArm");
+            this.RightArmJS.PlayerJS = this;
             this.RightArmJS.SetFSM(this.RightArmFSMMgr);
-            //this.RightArmJS.ChangeWeapon("DefaultWeapon");
-            
-
         }
         else
         {
@@ -201,7 +202,7 @@ var Player = cc.Class({
 
         //如果被敌人攻击，直接死
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            Target.ActorDead();
+            //Target.ActorDead();
             
         }
     },
@@ -226,6 +227,11 @@ var Player = cc.Class({
      * 捡到场景中的武器
      */
     OnGetWeapon : function ( InData){
+        //如果当前是初始武器，不更改
+        if( this.CurEquipWeaponID == this.PlayerConfig.DefaultWeaponID ){
+            return;
+        }      
+
         if ( this.CurEquipWeaponID == null || this.CurEquipWeaponID == undefined){
             return;
         }
@@ -240,8 +246,32 @@ var Player = cc.Class({
                 this.CurEquipWeaponID = Weapons[0].ID;
             };
         }
+    },
 
+    /**
+     * 武器次数用完了回调
+     */
+    OnWeaponClear : function( ){
+        if ( this.CurEquipWeaponID == null || this.CurEquipWeaponID == undefined){
+            return;
+        }
 
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        var Weapons = GameData.getTempInfo().weapons;
+        if (Weapons.length > 0){
+            if(this.CurEquipWeaponID != Weapons[0].ID){
+                if(this.RightArm && this.RightArm.getComponent("RightArm")){
+                    this.RightArm.getComponent("RightArm").ChangeWeapon( Weapons[0].ID);// InData.ID);
+                    /* 切换完毕后重新设置手臂位置 */
+                    this.RightArm.setPosition(this.PlayerConfig.RightArmPos[0],this.PlayerConfig.RightArmPos[1]);
+                    this.CurEquipWeaponID = Weapons[0].ID;
+                };
+            }
+        }
+        else{
+            this.RightArm.getComponent("RightArm").ChangeWeapon(this.PlayerConfig.DefaultWeaponID);
+            this.CurEquipWeaponID = this.PlayerConfig.DefaultWeaponID;
+        }
     },
     
     ActorDead : function (){

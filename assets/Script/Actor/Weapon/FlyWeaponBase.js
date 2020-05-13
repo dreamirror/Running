@@ -32,7 +32,22 @@ var FlyWeaponBase = cc.Class({
     update (dt) {
         //根据飞行方向与速度等进行飞行  
         var Pos = this.node.getPosition();
-        this.node.setPosition( Pos.x + this.MoveSpeed * this.MoveDirection, Pos.y );
+        var MoveToX = Pos.x + this.MoveSpeed * this.MoveDirection;
+
+        this.node.setPosition( MoveToX, Pos.y );
+
+        //如果超出屏幕，清除
+        var windowSize=cc.view.getVisibleSize();
+        if( this.MoveDirection == CommonUtils.MoveDirection.MoveRight){
+            if (  windowSize.width < MoveToX - this.node.getContentSize().width ){
+                this.node.destroy();
+            }
+        }
+        else{
+            if ( MoveToX - this.node.getContentSize().width < 0 ){
+                this.node.destroy();
+            }
+        }
     },
 });
 

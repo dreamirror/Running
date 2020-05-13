@@ -63,6 +63,12 @@ var WeaponBase = cc.Class({
     /* 激活攻击状态 */
     SetAttackType : function(){
         this.BInAttack = true;
+
+        //减少武器的使用次数
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if( GameData != null && GameData != undefined){
+            GameData.useWeapon(this.WeaponData.id);
+        }
     },
 
     /* 攻击状态结束 */
