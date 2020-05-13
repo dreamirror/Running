@@ -2,9 +2,9 @@
     "item01":{  
         "type" : 1,
         "icon" : "Texture/item01",
-        "name" : "药水",
+        "name" : "金币",
         "id" : "item01",
-        "weight" : 0
+        "weight" : 1
     },
 
     "item02": {
@@ -61,16 +61,16 @@
         "id" : "magnet",
         "buff" : "magnet",
         "buffTime" : 30,
-        "weight" : 0
+        "weight" : 1
     },
 
     "shield" :{
         "type" : 2,
-        "icon" : "Texture/weapon03",
+        "icon" : "Texture/item02",
         "name" : "护盾",
         "id" : "shield",
         "buff" : "shield",
-        "buffTime" : 30,
-        "weight" : 0
+        "buffTime" : 5,
+        "weight" : 1
     }
 }

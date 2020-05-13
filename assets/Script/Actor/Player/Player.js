@@ -70,6 +70,7 @@ var Player = cc.Class({
         EventCenter.off(EventName.TouchItem,this.OnTouchItemBtn , this);
         EventCenter.off(EventName.GetItem , this.OnGetWeapon , this);
         EventCenter.off(EventName.OnWeaponClear, this.OnWeaponClear , this);
+        EventCenter.off(EventName.GetBuff , this.OnGetBuffs , this);
     },
 
     start () {
@@ -97,6 +98,8 @@ var Player = cc.Class({
         EventCenter.on(EventName.GetItem , this.OnGetWeapon , this);
         //添加一个武器用完的回调，切换回第一个武器
         EventCenter.on(EventName.OnWeaponClear, this.OnWeaponClear , this);
+
+        EventCenter.on(EventName.GetBuff , this.OnGetBuffs , this);
     },
 
     update (dt) {
@@ -109,7 +112,7 @@ var Player = cc.Class({
 
         //更新检测护盾的效果
         if (this.needCheckShield) {
-            var GameData = cc.find("GameContainer").GameContainer.getComponent("GameData");
+            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerShield() == false) {
                 this.removeShieldEffect();
             }
@@ -117,7 +120,7 @@ var Player = cc.Class({
 
          //更新检测磁铁的效果
         if (this.needCheckMagnet) {
-            var GameData = cc.find("GameContainer").GameContainer.getComponent("GameData");
+            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerMagnet() == false) {
                 this.removeMegnetEffect();
             }
@@ -249,13 +252,23 @@ var Player = cc.Class({
     },
 
     /**
+     * 获得buFF 
+     */
+    OnGetBuffs: function(){
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if (GameData && GameData.checkPlayerShield() == true) {
+            this.addShieldEffect();
+        }
+        if (GameData && GameData.checkPlayerMagnet() == true) {
+            this.addMagnetEffect();
+        }    },
+    /**
      * 武器次数用完了回调
      */
     OnWeaponClear : function( ){
         if ( this.CurEquipWeaponID == null || this.CurEquipWeaponID == undefined){
             return;
         }
-
         var GameData = cc.find("GameContainer").getComponent("GameData");
         var Weapons = GameData.getTempInfo().weapons;
         if (Weapons.length > 0){

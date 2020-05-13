@@ -22,6 +22,11 @@ cc.Class({
             default : null,
             type : cc.Label,
         },
+
+        defaultSpriteFrame : {
+            default : null,
+            type : cc.SpriteFrame,
+        }
     },
 
     
@@ -47,7 +52,7 @@ cc.Class({
     reset(){
         this.OwnedItem = undefined;
         this.NumLabe.string = "";
-        this.BgNode.getComponent(cc.Sprite).spriteFrame = undefined;
+        this.BgNode.getComponent(cc.Sprite).spriteFrame = this.defaultSpriteFrame;
     },
 
 

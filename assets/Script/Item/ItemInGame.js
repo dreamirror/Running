@@ -44,7 +44,7 @@ cc.Class({
                 GameData.addPlayerGold(1);
             } else if ( this.ItemInfo.itemType == EItemType.BUFF ) {
                 //直接被使用掉
-                GameData.useItem(ItemInfo);
+                GameData.useItem(this.ItemInfo);
             }  else if ( this.ItemInfo.itemType == EItemType.Weapon ) {
                 //替换掉当前武器
                 GameData.addOrReplaceWeapon(this.ItemInfo);

@@ -167,6 +167,9 @@ cc.Class({
             }
 
             this.tempInfo.buffs.push({ buff : _ItemBase.buff, buffTime : _ItemBase.buffTime});
+            
+            //广播下BUFF
+            EventCenter.emit(EventName.GetBuff,this);
         }
     },
 
