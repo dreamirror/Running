@@ -23,7 +23,6 @@ var RightArm = cc.Class({
     onLoad () {  
         
         this.LoadWeaponPrefab();
-   
     },
 
     update(dt){
@@ -84,6 +83,14 @@ var RightArm = cc.Class({
                                     };
                                     self.PlayerPrefabWeapons.set(CurWeaponData.id , WeaponData );
                                     CurWeapon.active = false;
+                                    
+                                    //5.13 获取武器参数并且设置到武器上
+                                    var WeaponJS = CurWeapon.getComponent("WeaponBase");
+                                    if (WeaponJS != null && WeaponJS != undefined){
+                                        WeaponJS.InitWeaponData(CurWeaponData);
+                                    }
+                                    //设置一下初始武器
+                                    self.ChangeWeapon("defaultWeapon");
                                 }
                                 
                             }

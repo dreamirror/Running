@@ -90,6 +90,9 @@ var FlyWeaAttState = cc.Class({
         this.ArmJS.RemoveAnimationCustomEventOneCallBack(this , this.OnAttAnimationThrow);
 
         this.BeThrowDart = true;
+
+        var PoolManager = cc.find("GameContainer").getComponent("PoolManager");  
+
         //创建飞镖
         if ( this.WeaponParam.id ){
             var CurWeapon = ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
@@ -101,11 +104,17 @@ var FlyWeaAttState = cc.Class({
 
                 CurWeapon.setPosition(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);//self.WeaponParam.CreatePos[0], self.WeaponParam.CreatePos[1]);
                 var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");
-                FlyWeaponJS.SetWeaponData(this.WeaponParam);
+                FlyWeaponJS.InitWeaponData(this.WeaponParam);
 
                 FlyWeaponJS.SetAttackType();
             }
+            //PoolManager.
         }
     },
+
+    //var WeaponJS = CurWeapon.getComponent("WeaponBase");
+    //                                if (WeaponJS != null && WeaponJS != undefined){
+    //                                    WeaponJS.InitWeaponData(CurWeaponData);
+    //                               }
 
 });

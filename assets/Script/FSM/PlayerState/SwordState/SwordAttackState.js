@@ -51,9 +51,8 @@ var SwordAttackState = cc.Class({
     BeforeExit :function( InParamObj ) {
         this._super();
 
-        //将剑的攻击状态激活
-        if(this.ArmJS)
-        {
+        //将剑的攻击状态解除激活
+        if(this.ArmJS){
             this.ArmJS.SetAttackOver();
         }
         

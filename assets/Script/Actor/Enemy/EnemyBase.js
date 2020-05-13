@@ -23,6 +23,12 @@ cc.Class({
 
         //状态机
         FSMMgr : null,
+
+        //HP 
+        HP      :   2,
+
+        //敌人的配置
+        EmenyData : null,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -35,7 +41,7 @@ cc.Class({
 
     start () {
         this._super();
-        this.InitEnemyType();
+        //this.InitEnemyType();
         this.InitFSM();
 
         //获取一份GameContainer
@@ -57,10 +63,13 @@ cc.Class({
     },
 
     /**
-     * 请在每一个敌人中重载，设置自身类型以及攻击类型
+     * 5.13 修改为统一通过配置进行获取
     */
-    InitEnemyType : function(){
-
+    InitEnemyType : function( InEnemyData ){
+        this.EmenyData = InEnemyData;
+        this.HP = InEnemyData.HP;
+        this.EnemyType = InEnemyData.EnemyType;
+        this.EnemyAttackType = InEnemyData.EnemyType.EnemyAttackType;
     },
 
     /*************************     状态机相关     ************************/
@@ -90,8 +99,12 @@ cc.Class({
     },
 
     /********************** 状态相关 ***********************/
+    /* 被武器攻击的回调，应该在此扣除血量 */
     OnAttacked : function(AttackerJS ,TargetCollision){
-
+        this.HP -= AttackerJS.ATK;
+        if (this.HP <= 0){
+            this.ActorDead();
+        }   
     },
 
     /* 死亡状态 */

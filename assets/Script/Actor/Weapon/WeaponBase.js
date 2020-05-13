@@ -15,6 +15,11 @@ var WeaponBase = cc.Class({
 
         BInAttack : false,
 
+        //攻击力
+        ATK      : 0,
+
+        //武器data
+        WeaponData : null,
     },
 
     onLoad () {
@@ -39,6 +44,18 @@ var WeaponBase = cc.Class({
 
         this.node.off('SetAttackType', this.SetAttackType , this );
         this.node.off('SetAttackOver', this.SetAttackOver , this );
+    },
+
+    /* 初始化参数Data */
+    InitWeaponData : function ( InWeaponData){
+        this.WeaponData = InWeaponData;
+        if (InWeaponData.ATK == null || InWeaponData.ATK == undefined){
+            this.ATK = InWeaponData.FSMParam.ATK;
+        }
+        else{
+            this.ATK = InWeaponData.ATK;
+        }
+        
     },
 
     // update (dt) {},

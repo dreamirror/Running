@@ -24,11 +24,11 @@ var EnemyLowBee = cc.Class({
 
     // update (dt) {},
 
-    InitEnemyType : function (){
+    /*InitEnemyType : function (){
         this.EnemyType = CommonUtil.EnemyType.LowBee;
 
         this.EnemyAttackType = CommonUtil.EnemyAttackType.CloseAttack;
-    },
+    },*/
 
     /* 修改一下重力系统，当落到地面时才开始计算AI */
     UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj ){
@@ -41,8 +41,9 @@ var EnemyLowBee = cc.Class({
 
     /********************** 状态相关 ***********************/
     OnAttacked : function(AttackerJS ,TargetCollision){
-        var EnemyLowBee = TargetCollision.node.getComponent( "EnemyLowBee" );
-        EnemyLowBee.ActorDead();
+        this._super(AttackerJS ,TargetCollision);
+        //var EnemyLowBee = TargetCollision.node.getComponent( "EnemyLowBee" );
+        //EnemyLowBee.ActorDead();
     },
 
     /* 死亡动画 */

@@ -3,7 +3,10 @@
         "EnemyLowBee":{
             "ID" : "EnemyLowBee",
             "Name" : "en_LowBee",
-            "Prefab" : "prefabs/Enemy/en_LowBee"
+            "Prefab" : "prefabs/Enemy/en_LowBee",
+            "HP" : 2,
+            "EnemyType" : 1,
+            "EnemyAttackType" : 1
         }
     },
 
