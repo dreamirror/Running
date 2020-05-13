@@ -261,7 +261,8 @@ var Player = cc.Class({
         }
         if (GameData && GameData.checkPlayerMagnet() == true) {
             this.addMagnetEffect();
-        }    },
+        }    
+    },
     /**
      * 武器次数用完了回调
      */
