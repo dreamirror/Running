@@ -23,6 +23,7 @@
         "icon" : "Texture/weapon01",
         "name" : "light",
         "id" : "weapon01",
+        "count" : 20,
         "weight" : 1
     },
 
@@ -31,6 +32,7 @@
         "icon" : "Texture/weapon02",
         "name" : "sword",
         "id" : "weapon02",
+        "count" : 20,
         "weight" : 1
     },
 
@@ -39,6 +41,7 @@
         "icon" : "Texture/weapon03",
         "name" : "sword",
         "id" : "weapon03",
+        "count" : 20,
         "weight" : 1
     },
     "weaponDart":{
@@ -46,6 +49,7 @@
         "icon" : "Texture/Item/dart",
         "name" : "dart",
         "id" : "weaponDart",
+        "count" : 20,
         "weight" : 1
     },
 
