@@ -7,8 +7,8 @@ var FSMStateID = {
 
     /********* 以下为手臂武器状态相关 **********/
     ArmNormal       : 100,      //没有武器的普通手
-    ArmDefaultWeapon   : 101,      //测试武器
-    ArmDefaultWeaponAtt: 102,      //测试武器攻击状态
+    ArmDefaultWeapon   : 101,      //初始武器
+    ArmDefaultWeaponAtt: 102,      //初始武器攻击状态
     ArmSwordNoraml  :   103,        //剑普通状态
     ArmSwordAttack  :   104,        //剑攻击状态
 

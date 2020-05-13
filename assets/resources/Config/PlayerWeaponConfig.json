@@ -1,6 +1,23 @@
 {
     "InitialSpeed" : 15,
     "weapons" : {
+        "defaultWeapon":{
+            "weapontype" : 1,
+            "prefab" : "prefabs/Player/Weapon/defaultWeapon",
+            "name"  : "defaultWeapon",
+            "id"    : "defaultWeapon",
+            "Pos"   : "-15.45 , -19.45",
+            "Rotaion": "-50",
+            "Anchor" : "0.1,0.5",
+            "ATK"   : 2,
+            
+            "FSMParam" : {
+                "ATK"   : 2
+            },
+
+            "NormalStateID" : 101
+        },
+
         "weapon01":{
             "weapontype" : 1,
             "prefab" : "prefabs/Player/Weapon/sword",
@@ -9,6 +26,11 @@
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
+            "ATK"   : 2,
+            
+            "FSMParam" : {
+                "ATK"   : 2
+            },
 
             "NormalStateID" : 103
         },
@@ -20,6 +42,11 @@
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
+            "ATK"   : 2,
+            
+            "FSMParam" : {
+                "ATK"   : 2
+            },
 
             "NormalStateID" : 103
         },
@@ -31,6 +58,11 @@
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
+            "ATK"   : 2,
+
+            "FSMParam" : {
+                "ATK"   : 2
+            },    
 
             "NormalStateID" : 103
         },
@@ -42,6 +74,7 @@
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
+            
 
             "FSMParam" : {
                 "DartPrefab" : "prefabs/Item/dart",
@@ -49,6 +82,7 @@
                 "Speed" :   9,
                 "MoveType" : 1,
                 "id" : "weaponDart",
+                "ATK"   : 1,
                 "CreatePos" : [50,300] 
             },
             "NormalStateID" : 105

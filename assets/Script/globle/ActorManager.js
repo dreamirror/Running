@@ -63,6 +63,13 @@ var ActorManager = cc.Class({
                 var EnemyInstance = cc.instantiate(this.EnemyList.get(EnemyID));
                 if (EnemyInstance != null && EnemyInstance != undefined){
                     EnemyInstance.name = GameManager.EnemyConfigData.EnemyType[InType].Name;
+
+                    //5.13 尝试能否通过基类获取对应的Component
+                    var EnemyJS = EnemyInstance.getComponent("EnemyBase");
+                    if(EnemyJS != null){
+                        EnemyJS.InitEnemyType(GameManager.EnemyConfigData.EnemyType[InType]); //EmenyData = GameManager.EnemyConfigData.EnemyType[InType];
+                    }
+
                     return EnemyInstance;
                 }
             };

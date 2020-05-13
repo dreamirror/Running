@@ -23,9 +23,10 @@ var FlyWeaponBase = cc.Class({
     },
 
     //设置武器的参数
-    SetWeaponData : function( InWeaponParam ){
-        this.MoveDirection = InWeaponParam.MoveType;
-        this.MoveSpeed = InWeaponParam.Speed;
+    InitWeaponData : function ( InWeaponData){
+        this._super(InWeaponData);
+        this.MoveDirection = InWeaponData.MoveType;
+        this.MoveSpeed = InWeaponData.Speed;
     },
 
     update (dt) {

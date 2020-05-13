@@ -30,6 +30,9 @@ var TestWeaponAttack = cc.Class({
             {
                 ArmAnimation.on('finished',  this.OnAttackPlayOver,  this);
             }
+
+            //将剑的攻击状态激活
+            this.ArmJS.SetAttackType();
         }   
     },
 
@@ -38,6 +41,14 @@ var TestWeaponAttack = cc.Class({
             this.FSMMgr.TransState(FSMUtil.TransConditionID.DefaultWeaponAttToNormal, null, this);
             this.bAttackOver = false
             return;
+        }
+    },
+
+    BeforeExit: function(){
+        this._super();
+        //将剑的攻击状态解除激活
+        if(this.ArmJS){
+            this.ArmJS.SetAttackOver();
         }
     },
     

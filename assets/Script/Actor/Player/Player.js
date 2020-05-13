@@ -169,7 +169,10 @@ var Player = cc.Class({
 
             cc.log( "RightArmFSMMgr Init!" );
 
-            this.RightArm.getComponent("RightArm").SetFSM(this.RightArmFSMMgr);
+            this.RightArmJS = this.RightArm.getComponent("RightArm");
+            this.RightArmJS.SetFSM(this.RightArmFSMMgr);
+            //this.RightArmJS.ChangeWeapon("DefaultWeapon");
+            
 
         }
         else
