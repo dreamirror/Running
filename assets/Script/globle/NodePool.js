@@ -3,7 +3,8 @@ var NodePool = cc.Class({
     name: 'NodePool',
     properties: {
         prefab: cc.Prefab,
-        size: 0
+        size: 0,
+        poolName : "default"
     },
 
     ctor () {
@@ -18,7 +19,7 @@ var NodePool = cc.Class({
             this.initList[i] = obj;
             this.list[i] = obj;
         }
-        this.idx = this.size - 1;
+        this.idx = this.size;
     },
 
     reset () {
@@ -32,10 +33,11 @@ var NodePool = cc.Class({
                 obj.removeFromParent();
             }
         }
-        this.idx = this.size - 1;
+        this.idx = this.size;
     },
 
     request ()  {
+        --this.idx;
         if ( this.idx < 0 ) {
             cc.log ("Error: the pool do not have enough free item.");
             return null;
@@ -44,7 +46,7 @@ var NodePool = cc.Class({
         if ( obj ) {
             obj.active = true;
         }
-        --this.idx;
+
         return obj;
     },
     
