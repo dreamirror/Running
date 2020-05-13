@@ -13,6 +13,7 @@ var EventName = {
 
     OnWeaponCount : "OnWeaponCount",      // 武器数量变化
     OnWeaponClear : "OnWeaponClear",     // 武器用完
+    GetBuff : "GetBuff",                //获得buff
 
     
 };

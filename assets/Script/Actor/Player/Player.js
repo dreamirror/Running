@@ -69,6 +69,7 @@ var Player = cc.Class({
     onDestroy(){
         EventCenter.off(EventName.TouchItem,this.OnTouchItemBtn , this);
         EventCenter.off(EventName.GetItem , this.OnGetWeapon , this);
+        EventCenter.off(EventName.GetBuff , this.OnGetBuffs , this);
     },
 
     start () {
@@ -94,6 +95,8 @@ var Player = cc.Class({
         EventCenter.on(EventName.TouchItem,this.OnTouchItemBtn , this);
         //添加一个捡起武器的回调，如果当前装备了武器，则永远只会使武器是第一个武器
         EventCenter.on(EventName.GetItem , this.OnGetWeapon , this);
+
+        EventCenter.on(EventName.GetBuff , this.OnGetBuffs , this);
     },
 
     update (dt) {
@@ -106,7 +109,7 @@ var Player = cc.Class({
 
         //更新检测护盾的效果
         if (this.needCheckShield) {
-            var GameData = cc.find("GameContainer").GameContainer.getComponent("GameData");
+            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerShield() == false) {
                 this.removeShieldEffect();
             }
@@ -114,7 +117,7 @@ var Player = cc.Class({
 
          //更新检测磁铁的效果
         if (this.needCheckMagnet) {
-            var GameData = cc.find("GameContainer").GameContainer.getComponent("GameData");
+            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerMagnet() == false) {
                 this.removeMegnetEffect();
             }
@@ -240,8 +243,20 @@ var Player = cc.Class({
                 this.CurEquipWeaponID = Weapons[0].ID;
             };
         }
+    },
 
+    /**
+     * 获得buFF 
+     */
+    OnGetBuffs: function(){
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if (GameData && GameData.checkPlayerShield() == true) {
+            this.addShieldEffect();
+        }
 
+        if (GameData && GameData.checkPlayerMagnet() == true) {
+            this.addMagnetEffect();
+        }
     },
     
     ActorDead : function (){

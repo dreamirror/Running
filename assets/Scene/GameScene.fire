@@ -1801,6 +1801,8 @@
     "EnemyType": 0,
     "EnemyAttackType": 0,
     "FSMMgr": null,
+    "HP": 2,
+    "EmenyData": null,
     "BStartAI": false,
     "_id": "95wx/5yddJo4jEFoUBKt6y"
   },
