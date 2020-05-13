@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        526.5434455009387,
+        359.4005425705421,
         0,
         0,
         0,
@@ -883,11 +883,18 @@
       "__uuid__": "4dcff7c1-3db0-4dbf-80d8-3d784403cd9c"
     },
     "roadPrefab": {
-      "__uuid__": "0b734ac5-d2e6-45cd-bf38-92512cd23b8d"
+      "__uuid__": "5317110a-1fa0-44ae-9a5f-ffefd5c60e7d"
     },
     "SceneManager": null,
+    "leftRoad": {
+      "__uuid__": "9fd2c291-74bf-4290-8f6f-831992e89e0f"
+    },
+    "rightRoad": {
+      "__uuid__": "ba044aba-36f3-4990-a301-b44bc89d7563"
+    },
     "barriers": [],
     "roads": [],
+    "golds": [],
     "createed": true,
     "SpwanBarrierCD": 5,
     "CDTime": 0,
@@ -1322,6 +1329,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "PlayerJS": null,
     "RightArmFSMMgr": null,
     "CurrentWeaponCtl": null,
     "_id": "f5w00VfUBDiK9iOSEUqzdL"
@@ -1801,6 +1809,8 @@
     "EnemyType": 0,
     "EnemyAttackType": 0,
     "FSMMgr": null,
+    "HP": 2,
+    "EmenyData": null,
     "BStartAI": false,
     "_id": "95wx/5yddJo4jEFoUBKt6y"
   },

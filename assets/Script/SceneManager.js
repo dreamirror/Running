@@ -92,6 +92,19 @@ var SceneManager = cc.Class({
             }
         }
     },
+    //生成N个金币
+    SpawnGold(ParentNode,id,name,icon,type) {
+        let self = this;
+        var item = new ItemBase();
+        item.init("item01");
+                        
+        if (self.EntityPrefab) {
+            let pb = cc.instantiate(self.EntityPrefab);
+            pb.getComponent("ItemInGame").init(item,self.player);
+            ParentNode.addChild(pb);                 
+            return pb
+        }
+    },
     
     /**
     * 权重随机

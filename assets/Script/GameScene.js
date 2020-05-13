@@ -6,6 +6,15 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 var ActorManager = require( "ActorManager" );
+const ItemBase = require('ItemBase').ItemBase;
+const EItemType = require('ItemBase').EItemType;
+
+var SpecialPosRange = {
+
+    start:0,
+    end:0
+
+}
 
 var DesignSize = 960;
 cc.Class({
@@ -56,8 +65,21 @@ cc.Class({
             type : cc.Node
         },
 
+        //精灵
+        leftRoad :{
+            default:null,
+            type:cc.Prefab
+        },
+
+        rightRoad :{
+            default:null,
+            type:cc.Prefab
+        },
+
         barriers :[],
         roads : [],
+        golds:[],
+        SpecialPosRanges:[],
         createed:true,
         SpwanBarrierCD : 5,
         CDTime : 0,
@@ -70,6 +92,13 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
+        cc.director.getPhysicsManager().enabled = true;
+        cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
+    cc.PhysicsManager.DrawBits.e_pairBit |
+    cc.PhysicsManager.DrawBits.e_centerOfMassBit |
+    cc.PhysicsManager.DrawBits.e_jointBit |
+    cc.PhysicsManager.DrawBits.e_shapeBit
+    ;
 
         //加载预制体
         var self = this;
@@ -94,6 +123,7 @@ cc.Class({
             });
         }
         loadCall();
+        
  
     },
 
@@ -129,7 +159,28 @@ cc.Class({
 
     },
     spawnRoad : function(x,interval){
-        var road = cc.instantiate(this.roadPrefab);
+        var road =null;
+        if(interval > 0 )
+        {
+            road = cc.instantiate(this.rightRoad);
+        }
+        else{
+            road = cc.instantiate(this.roadPrefab);
+        }
+
+        var lastRoad =  this.roads[this.roads.length- 1]
+        
+        var self = this;
+        if (lastRoad && interval >0)
+        {
+            var newRoad = cc.instantiate(this.leftRoad);
+            newRoad.setPosition(cc.v2(lastRoad.getPosition().x,lastRoad.getPosition().y));
+            this.node.removeChild(lastRoad);
+            this.node.addChild(newRoad);
+            self.roads[self.roads.length- 1] = newRoad;
+        }
+
+
         this.node.addChild(road);
 
         var RoadPos = [ 0,0 ];
@@ -137,16 +188,42 @@ cc.Class({
 
         if (this.roads.length == 0 )
         {
-            road.setPosition(0,70);
+            road.setPosition(0,0);
         }
         else
         {
             var inx = x + interval;
-            road.setPosition(inx,70);
+            if(interval>0)//間隔大於0的時候存起來用作金幣的弧線
+            {
+                var Range = {};
+                Range.start = x;
+                Range.end =  x + interval;
+                this.SpecialPosRanges.push(Range);
+
+            }
+            road.setPosition(inx,0);
         }
         this.roads.push(road);
 
+        
+
         return road;
+    },
+
+    updateRanges(inx){
+        if(this.SpecialPosRanges.length > 0 )
+        {
+            for(var index in this.SpecialPosRanges)
+            {
+                var range = this.SpecialPosRanges[index]
+                if(range)
+                {
+                    range.start -=inx;
+                    range.end -=inx;
+                }
+            }
+        }
+
     },
 
     initRoad : function(){
@@ -174,7 +251,7 @@ cc.Class({
             for(var index in this.roads)
             {
                 var item = this.roads[index];
-                item.setPosition(item.getPosition().x - dis,70);
+                item.setPosition(item.getPosition().x - dis,0);
                 if(item.getPosition().x < -item.width)
                 {
                     item.removeFromParent();
@@ -218,6 +295,76 @@ cc.Class({
 
     },
 
+    //生成金币
+    spawnGold(num,width){
+
+        var lastRoad = this.roads[this.roads.length - 1];
+        var offsety = 0
+        var interval = 50
+        
+        if(lastRoad)
+        {
+            for(var i =0;i<num;i++)
+            {
+                var gold = cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnGold(this.node,i,"金币","Texture/Item/gold",EItemType.Gold );
+                var x = i*interval +lastRoad.getPosition().x;
+                var y = lastRoad.width + offsety +lastRoad.getPosition().y +lastRoad.height;
+                gold.setPosition(cc.v2(x,y ));
+                this.golds.push(gold);
+            }
+        }
+
+
+    },
+
+    //更新金币
+    updateGlod(inx){
+        var rayLength = -100;
+        if(this.golds.length > 0)
+        {   
+            var originY ;
+            for(var index in this.golds)
+            {   
+
+                var gold = this.golds[index];
+                var goldX = gold.getPosition().x
+                var goldY = gold.getPosition().y;
+                if(index == 0)
+                {
+                    originY = goldY;
+                }
+
+                if (gold)   
+                {
+                    if(goldX>0)
+                    {
+                       gold.setPosition(cc.v2(goldX - inx,goldY));
+                       if(this.SpecialPosRanges.length >0)
+                       {
+                            for(var i in this.SpecialPosRanges)
+                            {
+                                var range = this.SpecialPosRanges[i]
+                                if(range)
+                                {
+                                    if(goldX>range.start && goldX<range.end)
+                                    {
+                                        cc.log("@@@@@@@@@@@@@@@")
+                                        gold.setPosition(cc.v2(goldX - inx,originY + 20))
+                                    }
+                                }
+                            }
+                       }
+                    }
+                    else{
+                        gold.removeFromParent();
+                        this.golds.splice(index,1);
+                    }
+                   
+                }
+            }
+        }
+    },
+
 
      update (dt) {
         this.back_1.setPosition(this.back_1.getPosition().x - window.SceneData.Speed *dt,0)
@@ -229,9 +376,16 @@ cc.Class({
         //生成BarrierCD 
         this.CDTime -=dt;
 
+        //更新金币位置
+        this.updateGlod(window.SceneData.Speed *dt);
+
+        //更新间隔的数据
+        this.updateRanges(window.SceneData.Speed *dt)
         if(this.CDTime <=0 )
         {
-            this.SpawnBarrier();
+            //this.SpawnBarrier(); //先屏蔽生成障碍物方便调试
+            this.spawnGold(6);
+
             //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
             this.CDTime = window.SceneData.getSpawnBarrierCD()
 
@@ -257,7 +411,7 @@ cc.Class({
                     if(this.intervalCD <=0 )
                     {
                         var intervalData = window.SceneData.getIntervalData()
-                        this.spawnRoad(lastRoad.x + lastRoad.width,intervalData.interval);
+                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,100);
                         this.intervalCD = intervalData.cd
 
                     }

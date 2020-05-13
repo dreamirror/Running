@@ -1,7 +1,7 @@
 {
     "item01":{  
         "type" : 1,
-        "icon" : "Texture/item01",
+        "icon" : "Texture/Item/gold",
         "name" : "金币",
         "id" : "item01",
         "weight" : 1
