@@ -1,0 +1,83 @@
+{
+    "barrierPrafabs" :["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
+    "1" : {
+        "Speed": 250,
+        "BgSpeed": 0.5,
+        "BarriersPrefabs":["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
+        "SpawnBarrierData":{
+            "100":{"cd":[3,5],
+            "probability":{
+                "ba_1":50,"ba_2":40,"ba_3":10}
+             }
+            ,"200":{"cd":[3,5],
+                "probability":{
+                    "ba_1":50,"ba_2":40,"ba_3":10}
+                },
+            "600":{"cd":[3,5],
+                "probability":{
+                    "ba_1":90,"ba_2":5,"ba_3":5}}
+                },
+    
+            "intervalData":{
+                "100":{"cd":[3,5],
+                "interval":[0,20]}
+    
+                ,"200":{"cd":[3,5],
+                    "interval":[100,200]}
+                    
+                ,"600":{"cd":[3,5],
+                    "interval":[100,250]
+                    }
+            },
+    
+    
+        "DisToSpeed" : 0.1,
+        "MaxSpeed":500,
+    
+        "RoadStartPos":[0,690],
+
+
+        "bossDis" : 300
+    
+    },
+    "2" : {
+        "Speed": 250,
+        "BgSpeed": 0.5,
+        "BarriersPrefabs":["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
+        "SpawnBarrierData":{
+            "100":{"cd":[3,5],
+            "probability":{
+                "ba_1":50,"ba_2":40,"ba_3":10}
+             }
+            ,"200":{"cd":[3,5],
+                "probability":{
+                    "ba_1":50,"ba_2":40,"ba_3":10}
+                },
+            "600":{"cd":[3,5],
+                "probability":{
+                    "ba_1":90,"ba_2":5,"ba_3":5}}
+                },
+    
+            "intervalData":{
+                "100":{"cd":[3,5],
+                "interval":[0,20]}
+    
+                ,"200":{"cd":[3,5],
+                    "interval":[100,200]}
+                    
+                ,"600":{"cd":[3,5],
+                    "interval":[100,250]
+                    }
+            },
+    
+    
+        "DisToSpeed" : 0.1,
+        "MaxSpeed":500,
+    
+        "RoadStartPos":[0,690],
+        "bossDis" : 300
+    
+    }
+
+
+}
