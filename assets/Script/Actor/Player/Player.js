@@ -211,6 +211,11 @@ var Player = cc.Class({
         }
     },
 
+    /* 切换武器 */
+    ChangeWeapon : function ( InID){
+        this.RightArm.getComponent("RightArm").ChangeWeapon( InID);
+    },
+
     /**
      * 点击武器按钮的回调 5.11 修改为一旦点击某一个武器，就去取玩家身上的武器数据的第一个武器
      */
@@ -294,6 +299,7 @@ var Player = cc.Class({
         //if(GravityManager._instance){
         //    GravityManager._instance.UnRigisterToGravity(this);
         //}  
+        this.AYSpeed = 0;
 
         EventCenter.emit(EventName.PlayerDead,this);
 
