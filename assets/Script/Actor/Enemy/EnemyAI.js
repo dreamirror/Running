@@ -53,7 +53,7 @@ var EnemyAI = cc.Class({
     RunBaseAI : function() {
         //获取一下Player
         if(this.TargetPlayer == null || this.TargetPlayer == undefined){
-            var player = cc.find("Player");
+            var player = cc.find("Canvas/GameScene/PlayerScene/Player");
             if (player != null && player != undefined){
                 this.TargetPlayer = player.getComponent("Player");
             }

@@ -35,7 +35,7 @@ let show = function (data) {
             return;
         }
         PopupWin._alert = cc.instantiate(prefab);
-        cc.director.getScene().addChild(PopupWin._alert,3);
+        cc.find(cc.Canvas).addChild(PopupWin._alert,3);
         cc.find("PopWin/title").getComponent(cc.Label).string = data.titleStr ? data.titleStr : "标题为空";
         cc.find("PopWin/tips").getComponent(cc.Label).string = data.tipStr ? data.tipStr : "提示内容为空";
         cc.find("PopWin/leftbtn/btnstr").getComponent(cc.Label).string = data.leftStr ? data.leftStr : "OK";

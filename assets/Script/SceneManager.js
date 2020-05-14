@@ -45,7 +45,7 @@ var SceneManager = cc.Class({
         self.ItemConfig = cc.find("GameContainer").getComponent("GameManager").ItemConfig;
         
         //引用下玩家
-        self.player = cc.find("Player");
+        self.player = cc.find("Canvas/GameScene/PlayerScene/Player");
      },
 
     /**
@@ -77,7 +77,7 @@ var SceneManager = cc.Class({
                         
                         if (self.EntityPrefab) {
                             let pb = cc.instantiate(self.EntityPrefab);
-                            pb.getComponent("ItemInGame").init(item,self.player);
+                            pb.getComponent("ItemInGame").init(item);
                             //pb.parent = cc.director.getScene();  //加到当前场景
                             ParentNode.addChild(pb);                 //加到父节点（这里是canvas）
                             let pos = Math.floor(self.pos_list.length * Math.random());
@@ -89,14 +89,14 @@ var SceneManager = cc.Class({
         }
     },
     //生成N个金币
-    SpawnGold(ParentNode,id,name,icon,type) {
+    SpawnGold(ParentNode) {
         let self = this;
         var item = new ItemBase();
         item.init("item01");
                         
         if (self.EntityPrefab) {
             let pb = cc.instantiate(self.EntityPrefab);
-            pb.getComponent("ItemInGame").init(item,self.player);
+            pb.getComponent("ItemInGame").init(item);
             ParentNode.addChild(pb);                 
             return pb
         }

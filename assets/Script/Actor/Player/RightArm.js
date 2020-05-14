@@ -93,7 +93,7 @@ var RightArm = cc.Class({
                                     }
                                     //设置一下初始武器
                                     if (self.PlayerJS == null || self.PlayerJS == undefined){
-                                        self.PlayerJS = cc.find("Player").getComponent("Player");
+                                        self.PlayerJS = cc.find("Canvas/GameScene/PlayerScene/Player").getComponent("Player");
                                     }
                                     self.ChangeWeapon( self.PlayerJS.PlayerConfig.DefaultWeaponID );//"defaultWeapon");
                                 }

@@ -44,7 +44,7 @@ let show = function (callback) {
         }
         LevelSupply._alert = cc.instantiate(prefab);
         LevelSupply._callback = callback;
-        cc.director.getScene().addChild(LevelSupply._alert,3);
+        cc.find(cc.Canvas).addChild(LevelSupply._alert,3);
 
         let arrayItem = rondomItem();
         LevelSupply._itemList = arrayItem;
@@ -70,8 +70,6 @@ let show = function (callback) {
             close();
         }, this);
         
-        //设置parent 为当前场景的Canvas ，position跟随父节点
-        LevelSupply._alert.parent = cc.find("Canvas");
         startFadeIn();
     });
 };
