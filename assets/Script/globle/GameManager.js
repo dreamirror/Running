@@ -127,7 +127,7 @@ var GameManager = cc.Class({
                 self.GameOverUI = cc.instantiate(assetUI);
                 if(self.GameOverUI)
                 {
-                    self.GameOverUI.parent = cc.find("Canvas/GameScene/PlayerScene");//cc.director.getScene();
+                    self.GameOverUI.parent = cc.find("Canvas/UIScene");//cc.director.getScene();
                     self.GameOverUI.setPosition(self.GameConfigData.GameOverUIPre.Pos[0],self.GameConfigData.GameOverUIPre.Pos[1]);
                     
                     //再为UI的两个按钮绑定两个回调

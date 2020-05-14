@@ -5,7 +5,7 @@
     "Gravity" : 0.6,
     "GameOverUIPre":{ 
         "Prefab" : "prefabs/UI/CommonTipsUI",
-        "Pos" : [213,421]
+        "Pos" : [0,0]
     },
 
     "PlayerStartPos" : [76, 160]
