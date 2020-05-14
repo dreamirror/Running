@@ -29,6 +29,9 @@ cc.Class({
 
         //敌人的配置
         EmenyData : null,
+        
+        //是否开始计算AI
+        BStartAI : false,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -41,7 +44,6 @@ cc.Class({
 
     start () {
         this._super();
-        //this.InitEnemyType();
         this.InitFSM();
 
         //获取一份GameContainer
@@ -59,6 +61,15 @@ cc.Class({
         if(this.FSMMgr)
         {
             this.FSMMgr.Update(dt);
+        }
+    },
+
+    /* 修改一下重力系统，当落到地面时才开始计算AI */
+    UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj ){
+        this._super(InActor , AYSpeed, bOnGround , GroundObj);
+
+        if (bOnGround == true){
+            InActor.BStartAI = true;
         }
     },
 
@@ -152,15 +163,31 @@ cc.Class({
         var ArmAnimation = this.GetAnimation();
         if (ArmAnimation != null)
         {
-            ArmAnimation.on('finished',  this.OnAttackAnimaOver,  this);
+            ArmAnimation.on('finished',  this.OnDeadPlayOver,  this);
         }
     },
 
+    PoisedAnima : function( InTarget , InCallBack , InParam ){
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null)
+        {
+            ArmAnimation.on('finished',  this.OnPoisedOver,  this);
+        }
+
+        this.PoisedAnimaCallData = {
+            Target : InTarget,
+            CallBack : InCallBack,
+            Param : InParam,
+        };
+    },
+
+    /*****************************  动画播放完毕回调  ******************************/
     /* 攻击动画播放完毕 */
     OnAttackAnimaOver : function ( ){
 
         if (this.AttackAnimaCallData != null && this.AttackAnimaCallData != undefined && this.AttackAnimaCallData.Target != null && this.AttackAnimaCallData.Target != undefined ){
             this.AttackAnimaCallData.CallBack.call( this.AttackAnimaCallData.Target ,  this.AttackAnimaCallData.Param);
+            this.AttackAnimaCallData = null;
         }
 
         var ArmAnimation = this.GetAnimation();
@@ -179,9 +206,29 @@ cc.Class({
         this.node.destroy();
     },
 
+    /** 蓄力播放完毕 */
+    OnPoisedOver : function(){
+
+        if (this.PoisedAnimaCallData != null && this.PoisedAnimaCallData != undefined && this.PoisedAnimaCallData.Target != null && this.PoisedAnimaCallData.Target != undefined ){
+            this.PoisedAnimaCallData.CallBack.call( this.PoisedAnimaCallData.Target ,  this.PoisedAnimaCallData.Param);
+            this.PoisedAnimaCallData = null;
+        }
+
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null){
+            ArmAnimation.off('finished',  this.OnPoisedOver,  this);
+        }
+    },
+
     /******************  敌人AI相关 *******************/
     RunBaseAI : function(){
         var result = this.AI.RunBaseAI();
+
+        return result;
+    },
+
+    RunBossAI : function() {
+        var result =  this.AI.RunBossAI();
 
         return result;
     },

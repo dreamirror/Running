@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "CloseAtt",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.23333333333333334,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "BossFist": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 97.676
+            },
+            {
+              "frame": 0.1,
+              "value": 14.97
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": -141.253
+            },
+            {
+              "frame": 0.23333333333333334,
+              "value": -233.149
+            }
+          ],
+          "y": [
+            {
+              "frame": 0,
+              "value": -41.508
+            },
+            {
+              "frame": 0.1,
+              "value": -156.378
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": -87.456
+            },
+            {
+              "frame": 0.23333333333333334,
+              "value": -30.021
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

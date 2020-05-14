@@ -78,6 +78,36 @@ var ActorManager = cc.Class({
         return null;
     },
 
+    /**
+     * 根据传入的Type创建一个Boss
+     * */
+    CreateBoss : function( InType) {
+        var GameManager = cc.find("GameContainer").getComponent("GameManager");
+        if( GameManager.EnemyConfigData ){
+            var EnemyID = null;
+            if (GameManager.EnemyConfigData.BossConfig[InType]){
+                EnemyID = GameManager.EnemyConfigData.BossConfig[InType].ID;
+            }
+            
+            if (EnemyID != null && this.EnemyList.has(EnemyID)){
+                var EnemyInstance = cc.instantiate(this.EnemyList.get(EnemyID));
+                if (EnemyInstance != null && EnemyInstance != undefined){
+                    EnemyInstance.name = GameManager.EnemyConfigData.BossConfig[InType].Name;
+
+                    //5.13 尝试能否通过基类获取对应的Component
+                    var EnemyJS = EnemyInstance.getComponent("EnemyBase");
+                    if(EnemyJS != null){
+                        EnemyJS.InitEnemyType(GameManager.EnemyConfigData.BossConfig[InType]); //EmenyData = GameManager.EnemyConfigData.EnemyType[InType];
+                    }
+
+                    return EnemyInstance;
+                }
+            };
+        }
+
+        return null;
+    },
+
     /* 根据类型创建一个飞行道具 */
     CreateFlyWeapon : function ( InType) {
         var GameManager = cc.find("GameContainer").getComponent("GameManager");

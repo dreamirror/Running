@@ -11,7 +11,7 @@ var EnemyLowBee = cc.Class({
 
     properties: {
 
-        BStartAI : false,
+        //BStartAI : false,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -31,13 +31,13 @@ var EnemyLowBee = cc.Class({
     },*/
 
     /* 修改一下重力系统，当落到地面时才开始计算AI */
-    UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj ){
+    /*UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj ){
         this._super(InActor , AYSpeed, bOnGround , GroundObj);
 
         if (bOnGround == true){
             InActor.BStartAI = true;
         }
-    },
+    },*/
 
     /********************** 状态相关 ***********************/
     OnAttacked : function(AttackerJS ,TargetCollision){
