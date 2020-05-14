@@ -44,7 +44,7 @@ var GameInitPlayer = cc.Class({
         //开启碰撞检测
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        manager.enabledDebugDraw = false;
+        manager.enabledDebugDraw = true;
 
         //开启点击
         this.node.on( cc.Node.EventType.TOUCH_START , this.OnTouchStart , this,true);
@@ -151,7 +151,7 @@ var GameInitPlayer = cc.Class({
         if (ActorManager._instance != null && ActorManager._instance != undefined)
         {
             this.Player = ActorManager._instance.CreatePlayer();
-            this.Player.parent = cc.director.getScene();
+            this.Player.parent = cc.find("Canvas/GameScene/PlayerScene")
             this.GameManager = cc.find("GameContainer").getComponent("GameManager");
             if (InStartPos != null && InStartPos != undefined){
                 this.Player.setPosition(InStartPos);
@@ -188,16 +188,10 @@ var GameInitPlayer = cc.Class({
             //    var PlayerJS = this.Player.getComponent("Player");
             //    GravityManager._instance.UnRigisterToGravity(this.Player);
             //}  
-            //this.Player.name = "Destroy_Player";
-            //this.Player.destroy();
-            //5.14 不然重新修改一下位置就好
-            this.Player.setPosition(this.GameManager.GameConfigData.PlayerStartPos[0],this.GameManager.GameConfigData.PlayerStartPos[1]);
+            this.Player.destroy();
         }
 
-        //this.CreatePlayer();
-
-        //重新设置一下武器状态
-        this.PlayerJS.ChangeWeapon(this.PlayerJS.PlayerConfig.DefaultWeaponID);
+        this.CreatePlayer();
 
         //为其添加一个护盾
         var GameData = cc.find("GameContainer").getComponent("GameData");

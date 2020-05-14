@@ -335,8 +335,8 @@ cc.Class({
                 {
                     originY = goldY;
                 }
-
-                if (gold)   
+                var tt = gold.getComponent("ItemInGame");
+                if (gold && gold.getComponent("ItemInGame").NeedFly == false)   
                 {
                     if(goldX>0)
                     {
@@ -354,20 +354,29 @@ cc.Class({
                                     if(goldX>range.start && goldX<range.end)
                                     {
 
-                                        gold.setPosition(cc.v2(goldX - inx,originY + 20))
+                                        //gold.setPosition(cc.v2(goldX - inx,originY + 20))
                                         adjust.push(gold);
                                     }
                                 }
                             }
-                            //for(var i in adjust)
-                           // {
-                               // var gold = adjust[i]
-                               // if(gold)
-                               // {
-                                   // gold.setPosition(cc.v2(goldX - inx,originY + upInterval * (i +1)))
-//
-                               // }
-                            //}
+                            var half= adjust.length / 2;
+
+                            for(var i in adjust)
+                            {
+                                var gold = adjust[i]
+                                if(gold)
+                                {
+                                    //gold.setPosition(cc.v2(goldX - inx,originY + upInterval * (i +1)))
+                                    var intervalNum = 0
+                                    if(i<half)
+                                    {
+                                        intervalNum = 0;
+                                    }else{
+                                        intervalNum = adjust.length - i;
+                                    }
+                                  gold.setPosition(cc.v2(goldX - inx,originY + upInterval * (intervalNum +1)))
+                                }
+                            }
                        }
                     }
                     else{
