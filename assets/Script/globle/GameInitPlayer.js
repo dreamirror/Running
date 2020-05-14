@@ -188,10 +188,17 @@ var GameInitPlayer = cc.Class({
             //    var PlayerJS = this.Player.getComponent("Player");
             //    GravityManager._instance.UnRigisterToGravity(this.Player);
             //}  
-            this.Player.destroy();
+            //this.Player.name = "Destroy_Player";
+            //this.Player.destroy();
+            //5.14 不然重新修改一下位置就好
+            this.Player.setPosition(this.GameManager.GameConfigData.PlayerStartPos[0],this.GameManager.GameConfigData.PlayerStartPos[1]);
+
         }
 
-        this.CreatePlayer();
+        //this.CreatePlayer();
+        //重新设置一下武器状态
+        this.PlayerJS.ChangeWeapon(this.PlayerJS.PlayerConfig.DefaultWeaponID);
+
 
         //为其添加一个护盾
         var GameData = cc.find("GameContainer").getComponent("GameData");
