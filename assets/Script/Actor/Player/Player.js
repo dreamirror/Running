@@ -206,7 +206,7 @@ var Player = cc.Class({
 
         //如果被敌人攻击，直接死
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            //Target.ActorDead();
+            Target.ActorDead();
             
         }
     },
@@ -290,10 +290,10 @@ var Player = cc.Class({
     },
     
     ActorDead : function (){
-        //取消重力注册
-        if(GravityManager._instance){
-            GravityManager._instance.UnRigisterToGravity(this);
-        }  
+        //取消重力注册   5.14 修改为重新设置位置
+        //if(GravityManager._instance){
+        //    GravityManager._instance.UnRigisterToGravity(this);
+        //}  
 
         EventCenter.emit(EventName.PlayerDead,this);
 
