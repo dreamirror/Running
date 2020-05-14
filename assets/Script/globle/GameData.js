@@ -260,7 +260,11 @@ cc.Class({
         cc.sys.localStorage
         let playerinfo = cc.sys.localStorage.getItem("playerinfo");
         if (playerinfo != null) {
-            this.playerInfo =  JSON.parse(playerinfo);
+            var ParseData = JSON.parse(playerinfo);
+            if(ParseData != null && ParseData != undefined){
+                this.playerInfo = ParseData;
+            }
+            
         }
         // let tempInfo = cc.sys.localStorage.getItem("tempInfo");
         // if (tempInfo != null) {
