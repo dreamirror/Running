@@ -33,13 +33,6 @@ var SceneManager = cc.Class({
             default : null,
             type : cc.Prefab,
         },
-
-        //这里存一下player,后面要用啊
-        player : {
-            default : null,
-            type : cc.Node,
-        }
-
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -49,7 +42,10 @@ var SceneManager = cc.Class({
         //random postion
         self.pos_list = [cc.v2(50,200), cc.v2(100,200), cc.v2(50,250), cc.v2(150,150), cc.v2(150,200)];
 
-        self.ItemConfig = cc.find("GameContainer").getComponent("GameManager").ItemConfig;;
+        self.ItemConfig = cc.find("GameContainer").getComponent("GameManager").ItemConfig;
+        
+        //引用下玩家
+        self.player = cc.find("Player");
      },
 
     /**

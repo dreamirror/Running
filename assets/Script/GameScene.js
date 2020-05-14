@@ -348,7 +348,7 @@ cc.Class({
                                 {
                                     if(goldX>range.start && goldX<range.end)
                                     {
-                                        cc.log("@@@@@@@@@@@@@@@")
+                                        //cc.log("@@@@@@@@@@@@@@@")
                                         gold.setPosition(cc.v2(goldX - inx,originY + 20))
                                     }
                                 }

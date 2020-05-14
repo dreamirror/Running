@@ -8,9 +8,9 @@ const EItemType = require('ItemBase').EItemType;
 cc.Class({
     extends: cc.Component,
 
-    init(itemBase,player){
+    init(itemBase){
         this.ItemInfo = itemBase;
-        this.GamePlayer = player;
+        this.GamePlayer = cc.find("Player");
         let self = this;  
 
         let manager = cc.director.getCollisionManager();
@@ -94,7 +94,7 @@ cc.Class({
         dir.normalizeSelf();
     
         //根据方向向量移动位置
-        var moveSpeed = 850;
+        var moveSpeed = 950;
         this.node.x += dt * dir.x * moveSpeed;
         this.node.y += dt * dir.y * moveSpeed;
 

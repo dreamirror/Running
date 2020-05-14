@@ -12,7 +12,7 @@
         "icon" : "Texture/item02",
         "name" : "宝物",
         "id" : "item02",
-        "weight" : 0
+        "weight" : 1
     },
 
 
@@ -24,7 +24,7 @@
         "name" : "light",
         "id" : "weapon01",
         "count" : 20,
-        "weight" : 1
+        "weight" : 0
     },
 
     "weapon02":{
@@ -33,7 +33,7 @@
         "name" : "sword",
         "id" : "weapon02",
         "count" : 20,
-        "weight" : 1
+        "weight" : 0
     },
 
     "weapon03":{
@@ -42,26 +42,26 @@
         "name" : "sword",
         "id" : "weapon03",
         "count" : 20,
-        "weight" : 1
+        "weight" : 0
     },
     "weaponDart":{
         "type" : 0,
         "icon" : "Texture/Item/dart",
         "name" : "dart",
         "id" : "weaponDart",
-        "count" : 20,
-        "weight" : 1
+        "count" : 120,
+        "weight" : 2
     },
 
 
     "magnet" : {
         "type" : 2,
-        "icon" : "Texture/weapon03",
+        "icon" : "Texture/magnet",
         "name" : "磁铁",
         "id" : "magnet",
         "buff" : "magnet",
-        "buffTime" : 30,
-        "weight" : 1
+        "buffTime" : 300,
+        "weight" : 20
     },
 
     "shield" :{
@@ -71,6 +71,6 @@
         "id" : "shield",
         "buff" : "shield",
         "buffTime" : 5,
-        "weight" : 1
+        "weight" : 0
     }
 }
