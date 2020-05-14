@@ -97,12 +97,17 @@ var FlyWeaAttState = cc.Class({
         if ( this.WeaponParam.id ){
             var CurWeapon = ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
             if (CurWeapon){
-                CurWeapon.parent = cc.director.getScene();
+                CurWeapon.parent = cc.find("Canvas/GameScene/PlayerScene")//cc.director.getScene();
                 //获取当前手的位置
                 var ArmPos = this.TargetObj.parent.convertToWorldSpaceAR(cc.v2(0, 0));
                 var ArmSize = this.TargetObj.getContentSize();
 
-                CurWeapon.setPosition(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);//self.WeaponParam.CreatePos[0], self.WeaponParam.CreatePos[1]);
+                //计算下位置再转回来
+                var WeaponPos = cc.v2(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
+                var PlayerScene = cc.find("Canvas/GameScene/PlayerScene");
+                WeaponPos = PlayerScene.convertToNodeSpace(WeaponPos);
+
+                CurWeapon.setPosition(WeaponPos);//(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
                 var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");
                 FlyWeaponJS.InitWeaponData(this.WeaponParam);
 
