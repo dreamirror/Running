@@ -15,7 +15,7 @@ cc.Class({
 
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;     //开启碰撞检测
-        cc.director.getCollisionManager().enabledDebugDraw = true;
+        cc.director.getCollisionManager().enabledDebugDraw = false;
 
         if (self.ItemInfo) {
             cc.loader.loadRes(self.ItemInfo.Icon, function(err,img){

@@ -8,15 +8,15 @@ var LoadMgr = require("LoadMgr")
 var LevelMgr = cc.Class({
 
 
+    properties : {
+        bLevelDataLoaded : false,
+        bLevelResLoaded : false,
+        bReadyPlay : false,
+        currentLevel : 1,
 
-    bLevelDataLoaded : false,
-    bLevelResLoaded : false,
-    bReadyPlay : false,
-    currentLevel : 1,
-
-    barrierPrefabsCatch:{
-
+        barrierPrefabsCatch:null,
     },
+    
 
     faceBg_1 :null,
     faceBg_2 :null,
