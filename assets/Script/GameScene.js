@@ -320,6 +320,8 @@ cc.Class({
     //更新金币
     updateGlod(inx){
         var rayLength = -100;
+        var upInterval = 20
+
         if(this.golds.length > 0)
         {   
             var originY ;
@@ -341,6 +343,9 @@ cc.Class({
                        gold.setPosition(cc.v2(goldX - inx,goldY));
                        if(this.SpecialPosRanges.length >0)
                        {
+                           //需要调整位置的的金币
+                           var adjust = [];
+
                             for(var i in this.SpecialPosRanges)
                             {
                                 var range = this.SpecialPosRanges[i]
@@ -348,11 +353,21 @@ cc.Class({
                                 {
                                     if(goldX>range.start && goldX<range.end)
                                     {
-                                        //cc.log("@@@@@@@@@@@@@@@")
+
                                         gold.setPosition(cc.v2(goldX - inx,originY + 20))
+                                        adjust.push(gold);
                                     }
                                 }
                             }
+                            //for(var i in adjust)
+                           // {
+                               // var gold = adjust[i]
+                               // if(gold)
+                               // {
+                                   // gold.setPosition(cc.v2(goldX - inx,originY + upInterval * (i +1)))
+//
+                               // }
+                            //}
                        }
                     }
                     else{
@@ -384,7 +399,7 @@ cc.Class({
         if(this.CDTime <=0 )
         {
             //this.SpawnBarrier(); //先屏蔽生成障碍物方便调试
-            this.spawnGold(6);
+            this.spawnGold(16);
 
             //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
             this.CDTime = window.SceneData.getSpawnBarrierCD()

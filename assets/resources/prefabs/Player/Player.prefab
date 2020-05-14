@@ -49,8 +49,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 87,
-      "height": 94
+      "width": 62,
+      "height": 67
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -61,8 +61,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        74.774,
-        465.693,
+        62,
+        466,
         0,
         0,
         0,
@@ -122,8 +122,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 41,
-      "height": 58
+      "width": 29,
+      "height": 41
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -134,8 +134,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -13.338,
-        70.755,
+        -20,
+        36,
         0,
         0,
         0,
@@ -178,7 +178,7 @@
       "__uuid__": "78f2fdff-f83c-4e00-becc-5b0387e736f0"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -234,6 +234,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "PlayerJS": null,
     "RightArmFSMMgr": null,
     "CurrentWeaponCtl": null,
     "_id": ""
@@ -245,7 +246,7 @@
     "node": {
       "__id__": 2
     },
-    "_enabled": true,
+    "_enabled": false,
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
@@ -337,13 +338,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": -14.4,
-      "y": 45.2
+      "x": -15,
+      "y": 32
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 39,
-      "height": 97.2
+      "width": 37,
+      "height": 70
     },
     "_id": ""
   },

@@ -25,7 +25,7 @@ cc.Class({
             let pb = cc.instantiate(this.OperatePrefab);
             if (pb) {
                 pb.parent = cc.director.getScene();  //加到当前场景
-                pb.setPosition( 50 + (index * 80), 200 );
+                pb.setPosition( 50 + (index * 80) - 20, 80 );
                 this.weaponBlock.push(pb);
             }
         }
