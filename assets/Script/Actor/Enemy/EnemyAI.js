@@ -125,10 +125,10 @@ var EnemyAI = cc.Class({
             var AttValAround = this.DisAttCount + (this.DisAttCount * this.DisAttWeightAdd);
             //如果随机值落在这个区间，则进行远距离攻击
             if (RandomResult <= AttValAround){
-                return CommonUtil.DistanceAttack;
+                return CommonUtil.EnemyRunAIResult.DistanceAttack;
             }
             else{   //否则BOSS进行向近距离的移动
-                return CommonUtil.MoveToClose;
+                return CommonUtil.EnemyRunAIResult.MoveToClose;
             }
         }
         //如果当前是在近程攻击
@@ -137,10 +137,10 @@ var EnemyAI = cc.Class({
             var AttValAround = this.ClossAttWeight + (this.ClossAttCount * this.ClossAttWeightAdd);
             //如果随机值落在这个区间，则进行近距离攻击
             if (RandomResult <= AttValAround){
-                return CommonUtil.CloseAttack;
+                return CommonUtil.EnemyRunAIResult.CloseAttack;
             }
             else{   //否则BOSS进行向远距离的移动
-                return CommonUtil.MoveToDistance;
+                return CommonUtil.EnemyRunAIResult.MoveToDistance;
             }   
         }
 
