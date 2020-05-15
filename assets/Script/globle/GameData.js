@@ -75,7 +75,6 @@ cc.Class({
 
     //是否有磁铁BUFF
     checkPlayerMagnet : function () {
-        return true
         for (let index = 0; index < this.tempInfo.buffs.length; index++) {
             let element = this.tempInfo.buffs[index];
             if (element && element.buff == "magnet") {
