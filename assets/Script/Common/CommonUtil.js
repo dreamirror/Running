@@ -43,19 +43,11 @@ var EnemyAttackType = {
  */
 var EnemyRunAIResult = {
     Idle            :   0,  //原地不动
-    CloseAttack     :   1,  //近战攻击
-    DistanceAttack  :   2,  //远程攻击
-
-};
-
-/**
- * Boss的AI计算结果定义
- */
-var BossRunAIResult = {
     CloseAttack     :   1,  //近距离攻击
     DistanceAttack  :   2,  //远距离攻击
     MoveToDistance  :   3,  //走向远处
     MoveToClose     :   4,  //走向近处
+
 };
 
 /**
@@ -73,5 +65,4 @@ module.exports = {
     EnemyAttackType :   EnemyAttackType,
     EnemyRunAIResult:   EnemyRunAIResult,
     MoveDirection : MoveDirection,
-    BossRunAIResult :   BossRunAIResult,
 };

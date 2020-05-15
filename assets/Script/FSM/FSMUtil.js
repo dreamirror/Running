@@ -20,6 +20,9 @@ var FSMStateID = {
     EnemyCloseAttack    :   501,    //敌人近程攻击状态
     EnemyDistanceAttack :   502,    //敌人远程攻击状态
     EnemyDead       :   503,        //敌人死亡状态
+    EnemyMoveToDistance :   504,    //敌人移动到远处
+    EnemyMoveToClose    :   505,    //敌人移动到近处
+    EnemyPoised         :   506,    //敌人攻击前的蓄力
 };
 
 //玩家转换条件枚举
@@ -45,6 +48,7 @@ var TransConditionID = {
     EnemyCloseAttackToIdle      :   503,    //近距离攻击转站立
     EnemyDisAttToIdle           :   504,    //远距离攻击转站立
     EnemyDisAttToCloseAtt       :   505,    //远距离攻击转近距离攻击
+    //其余转换条件不写了，都可以强制转换
 
 };
 

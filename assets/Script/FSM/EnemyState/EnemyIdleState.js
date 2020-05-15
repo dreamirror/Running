@@ -24,6 +24,8 @@ var EnemyIdleState = cc.Class({
 
         bTransCloseAttack : false,
         bTransDistanceAttack : false,
+        bTransToDisatnce : false,   //是否移动到远处
+        bTranToClose    : false,    //是否移动到近处
     },
 
     // update (dt) {},
@@ -31,7 +33,7 @@ var EnemyIdleState = cc.Class({
     /*******************  状态运行相关  ******************* */
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
-        this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);
+        this.EnemyJS = this.TargetObj.getComponent("EnemyBase");//this.TargetObj.getComponent(this.NodeJSComponentName);
 
         //进入时设置Node对象播放跑步动画
         if(this.EnemyJS ){//&& (this.EnemyJS instanceof EnemyBase)){
@@ -42,24 +44,39 @@ var EnemyIdleState = cc.Class({
     Update :function( ) {
         //根据当前敌人的类型进行判断，判断何时进攻等
         if (this.EnemyJS == null || this.EnemyJS == undefined){
-            this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);
+            this.EnemyJS = this.TargetObj.getComponent("EnemyBase");//this.TargetObj.getComponent(this.NodeJSComponentName);
         }
 
         if (this.EnemyJS.BStartAI == false){
             return;
         }
 
-        var CurResult = this.EnemyJS.RunBaseAI();
+        var CurResult = null;// = this.EnemyJS.RunBaseAI();
+        if (this.EnemyJS.EmenyData.BBoss == true){
+            CurResult = this.EnemyJS.RunBaseAI();
+        }
+        else{
+            CurResult = this.EnemyJS.RunBossAI();
+        }
+        //var CurResult = this.EnemyJS.RunBaseAI();
         switch(CurResult){
             case CommonUtil.EnemyRunAIResult.Idle: 
                 break;
-
+            //如果是近距离攻击，切换到近距离攻击状态
             case CommonUtil.EnemyRunAIResult.CloseAttack: 
                 this.bTransCloseAttack = true;
                 break;
-
+            //切换到远距离攻击状态
             case CommonUtil.EnemyRunAIResult.DistanceAttack: 
                 this.bTransDistanceAttack = true;
+                break;
+            //从近处走向远处
+            case CommonUtil.EnemyRunAIResult.MoveToDistance: 
+                this.bTransToDisatnce = true;
+                break;
+            //从远处走向近处
+            case CommonUtil.EnemyRunAIResult.MoveToClose: 
+                this.bTranToClose = true;
                 break;
         };
 
@@ -74,6 +91,14 @@ var EnemyIdleState = cc.Class({
 
         if (this.bTransDistanceAttack == true){
             this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyDistanceAttack, null, this);
+            return;
+        }
+        if (this.bTransToDisatnce == true){
+            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyMoveToDistance, null, this);
+            return;
+        }
+        if (this.bTranToClose == true){
+            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyMoveToClose, null, this);
             return;
         }
     },

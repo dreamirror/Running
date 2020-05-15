@@ -18,6 +18,7 @@
     "BossConfig" : {
         "TestBoss" : {
             "ID": "TestBoss",
+            "BBoss" : true,
             "Name" : "初级设计BOSS",
             "HP" : 100,
             "InitPos" : [ 300,300 ],
