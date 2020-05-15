@@ -484,7 +484,7 @@ var GameScene = cc.Class({
                     if(this.intervalCD <=0 )
                     {
                         var intervalData = window.SceneData.getIntervalData()
-                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,100);
+                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,intervalData.interval);
                         this.intervalCD = intervalData.cd
 
                     }
