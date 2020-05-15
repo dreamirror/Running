@@ -82,10 +82,10 @@ var GameInitPlayer = cc.Class({
         });*/
         //4.23 初始化状态机
         //this.InitFSM();
-        this.CreatePlayer();
+        //this.CreatePlayer();
 
         //5.15 测试添加一个BOSS
-        /*if (ActorManager._instance != null && ActorManager._instance != undefined)
+        if (ActorManager._instance != null && ActorManager._instance != undefined)
         {
             this.TestBoss = ActorManager._instance.CreateBoss("TestBoss");
             this.TestBoss.parent = cc.find("Canvas/GameScene/EnemyScene")
@@ -93,7 +93,7 @@ var GameInitPlayer = cc.Class({
             
             this.TestBoss.setPosition(100, 10);
    
-        }*/
+        }
     },
 
     //将人物FSMupdate
