@@ -128,7 +128,8 @@ var EnemyAI = cc.Class({
                 return CommonUtil.EnemyRunAIResult.DistanceAttack;
             }
             else{   //否则BOSS进行向近距离的移动
-                return CommonUtil.EnemyRunAIResult.MoveToClose;
+                //return CommonUtil.EnemyRunAIResult.MoveToClose;
+                return CommonUtil.EnemyRunAIResult.DistanceAttack;
             }
         }
         //如果当前是在近程攻击
@@ -140,7 +141,8 @@ var EnemyAI = cc.Class({
                 return CommonUtil.EnemyRunAIResult.CloseAttack;
             }
             else{   //否则BOSS进行向远距离的移动
-                return CommonUtil.EnemyRunAIResult.MoveToDistance;
+                //return CommonUtil.EnemyRunAIResult.MoveToDistance;
+                return CommonUtil.EnemyRunAIResult.CloseAttack;
             }   
         }
 

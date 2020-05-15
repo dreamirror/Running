@@ -26,7 +26,7 @@ var EnemyDisAttState = cc.Class({
     /*******************  状态运行相关  ******************* */
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
-        this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);
+        this.EnemyJS = this.TargetObj.getComponent(EnemyBase);
         this.bAttackOver = false;
 
         //根据传入的飞行道具参数，初始化攻击状态

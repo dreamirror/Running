@@ -241,14 +241,14 @@ cc.Class({
     },
 
     /******************  敌人AI相关 *******************/
-    RunBaseAI : function(){
-        var result = this.AI.RunBaseAI();
+    RunBaseAI : function(dt){
+        var result = this.AI.RunBaseAI(dt);
 
         return result;
     },
 
-    RunBossAI : function() {
-        var result =  this.AI.RunBossAI();
+    RunBossAI : function(dt) {
+        var result =  this.AI.RunBossAI(dt);
 
         return result;
     },

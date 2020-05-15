@@ -24,6 +24,8 @@ var TestBoss = cc.Class({
 
     start () {
         this._super();
+
+        this.AI.InitBossAI(this.EmenyData);
     },
 
     // update (dt) {},

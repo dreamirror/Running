@@ -24,7 +24,7 @@
             "InitPos" : [ 300,300 ],
             "MaxDistance" : 300,
             "MinDistance" : 150,
-            "ActionCD" : 10,
+            "ActionCD" : 5,
     
             "PoisedTime" : 5,
             

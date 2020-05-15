@@ -33,7 +33,7 @@ var EnemyIdleState = cc.Class({
     /*******************  状态运行相关  ******************* */
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
-        this.EnemyJS = this.TargetObj.getComponent("EnemyBase");//this.TargetObj.getComponent(this.NodeJSComponentName);
+        this.EnemyJS = this.TargetObj.getComponent("EnemyBase");
 
         //进入时设置Node对象播放跑步动画
         if(this.EnemyJS ){//&& (this.EnemyJS instanceof EnemyBase)){
@@ -41,10 +41,10 @@ var EnemyIdleState = cc.Class({
         }   
     },
 
-    Update :function( ) {
+    Update :function( dt ) {
         //根据当前敌人的类型进行判断，判断何时进攻等
         if (this.EnemyJS == null || this.EnemyJS == undefined){
-            this.EnemyJS = this.TargetObj.getComponent("EnemyBase");//this.TargetObj.getComponent(this.NodeJSComponentName);
+            this.EnemyJS = this.TargetObj.getComponent("EnemyBase");
         }
 
         if (this.EnemyJS.BStartAI == false){
@@ -53,10 +53,10 @@ var EnemyIdleState = cc.Class({
 
         var CurResult = null;// = this.EnemyJS.RunBaseAI();
         if (this.EnemyJS.EmenyData.BBoss != true){
-            CurResult = this.EnemyJS.RunBaseAI();
+            CurResult = this.EnemyJS.RunBaseAI(dt);
         }
         else{
-            CurResult = this.EnemyJS.RunBossAI();
+            CurResult = this.EnemyJS.RunBossAI(dt);
         }
         //var CurResult = this.EnemyJS.RunBaseAI();
         switch(CurResult){

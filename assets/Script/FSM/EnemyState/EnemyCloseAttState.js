@@ -28,7 +28,7 @@ var EnemyCloseAttState = cc.Class({
     /*******************  状态运行相关  ******************* */
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
-        this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);
+        this.EnemyJS = this.TargetObj.getComponent("EnemyBase");
 
         //进入时设置Node对象播放跑步动画
         if(this.EnemyJS ){//&& (this.EnemyJS instanceof EnemyBase)){
@@ -39,11 +39,13 @@ var EnemyCloseAttState = cc.Class({
     /* 对简单的敌人，可以切换为攻击状态或是死亡状态 */
     BreakCondition :function( ) {
         if(this.bTransIdle == true){
+            this.EnemyJS.SetBossActionOver();
             this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyIdle, null, this);
             return;
         }
 
         if (this.bTransDistanceAttack == true){
+            this.EnemyJS.SetBossActionOver();
             this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyDistanceAttack, null, this);
             return;
         }

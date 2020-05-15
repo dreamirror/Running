@@ -26,7 +26,7 @@ var EnemyPoisedState = cc.Class({
     //这里的BeforeEnter应该传入蓄力完后需要调用的StateID，是近战还是远程,还需要传入蓄力时间
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
-        this.EnemyJS = this.TargetObj.getComponent(this.NodeJSComponentName);
+        this.EnemyJS = this.TargetObj.getComponent(EnemyBase);
         this.bAttackOver = false;
 
         this.PoisedData = InParamObj;
