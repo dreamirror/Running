@@ -145,8 +145,19 @@ var GameScene = cc.Class({
             //test
             //var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
             var lastRoad = this.roads[this.roads.length - 1];
+            var backIndex = 0;
+            //如果当前的路是有间隔的就往左边再选一个路知道没有间隔或者选得次数超过最大次数
+            if(lastRoad.bInterval)
+            {
+                while(backIndex < 4 && lastRoad.interval)
+                {
+                    lastRoad = this.roads[this.roads.length - backIndex - 1];
+                    backIndex++
+                }
+            }
+            
             lastRoad.addChild(barrier);
-            var x = (lastRoad.width - barrier.width) / 2
+            var x = (lastRoad.width - barrier.width) 
             barrier.setPosition(cc.v2(x , lastRoad.height / 2))
             this.barriers.push(barrier);
 
@@ -183,6 +194,7 @@ var GameScene = cc.Class({
             this.node.removeChild(lastRoad);
             this.node.addChild(newRoad);
             self.roads[self.roads.length- 1] = newRoad;
+            road.bInterval = true;
         }
 
 
@@ -256,6 +268,7 @@ var GameScene = cc.Class({
             for(var index in this.roads)
             {
                 var item = this.roads[index];
+  
                 item.setPosition(item.getPosition().x - dis,0);
                 if(item.getPosition().x < -item.width)
                 {
