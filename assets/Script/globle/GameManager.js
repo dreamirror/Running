@@ -162,13 +162,16 @@ var GameManager = cc.Class({
     
     /* 分享成功的回调 */
     ShareSuccessCallBack : function(event, InTarget ){
+        //事件就不要冒泡了
+        event.stopPropagation();
+
         console.log(" Share Succeed!!!!!!!");
         cc.director.resume();
         InTarget.GameOverUI.destroy();
 
         if( GameInitPlayer._instance != null && GameInitPlayer._instance != undefined)
         {
-            GameInitPlayer._instance.OnReCreatePlayer();
+            GameInitPlayer._instance.OnReCreatePlayer(true);
         }
     },
     
@@ -176,6 +179,10 @@ var GameManager = cc.Class({
      * 取消分享
     */
     ShareCancel : function (event, InParam ){
+
+        //事件就不要冒泡了
+        event.stopPropagation();
+
         if (InParam.ShareManager == null || InParam.ShareManager == undefined){
             InParam.ShareManager = cc.find("GameContainer").getComponent("ShareManager");
         }
@@ -190,11 +197,14 @@ var GameManager = cc.Class({
     ReLoadScene : function(event, InParam ){
         //重置速度等参数
         GameScene._instance.clearGameData();
-
+        
         cc.director.resume();
-        cc.director.loadScene("GameScene",function(){
-            cc.log("GameScene launched!");
-        });
+        if( GameInitPlayer._instance != null && GameInitPlayer._instance != undefined)
+        {
+            GameInitPlayer._instance.OnReCreatePlayer();
+        }
+
+        this.GameOverUI.destroy();
     },
 
 

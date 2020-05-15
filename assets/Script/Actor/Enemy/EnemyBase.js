@@ -159,6 +159,20 @@ cc.Class({
         };
     },
 
+    DisAttAnima : function(InTarget , InCallBack , InParam) {
+        var ArmAnimation = this.GetAnimation();
+        if (ArmAnimation != null)
+        {
+            ArmAnimation.on('finished',  this.OnAttackAnimaOver,  this);
+        }
+
+        this.AttackAnimaCallData = {
+            Target : InTarget,
+            CallBack : InCallBack,
+            Param : InParam,
+        };
+    },
+
     DeadAnima : function ( ){
         var ArmAnimation = this.GetAnimation();
         if (ArmAnimation != null)
@@ -233,4 +247,8 @@ cc.Class({
         return result;
     },
 
+    //设置一个行为结束
+    SetBossActionOver :function() {
+        this.AI.BossAIRunOver();
+    },
 });
