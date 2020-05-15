@@ -6,7 +6,7 @@
             "Prefab" : "prefabs/Enemy/en_LowBee",
             "HP" : 1,
             "EnemyType" : 1,
-            "EnemyAttackType" : 1
+            "EnemyAttackType" : [1]
         }
     },
 
@@ -19,7 +19,7 @@
         "TestBoss" : {
             "id": "TestBoss",
             "BBoss" : true,
-            "Name" : "初级设计BOSS",
+            "Name" : "en_TestBoss",
             "HP" : 100,
             "InitPos" : [ 300,300 ],
             "MaxDistance" : 300,
@@ -27,6 +27,8 @@
             "ActionCD" : 10,
     
             "PoisedTime" : 5,
+            
+            "EnemyAttackType" : [1,2],
 
             "DisAttackParam" : {
                 "id" : "dart"

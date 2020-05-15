@@ -52,7 +52,7 @@ var EnemyIdleState = cc.Class({
         }
 
         var CurResult = null;// = this.EnemyJS.RunBaseAI();
-        if (this.EnemyJS.EmenyData.BBoss == true){
+        if (this.EnemyJS.EmenyData.BBoss != true){
             CurResult = this.EnemyJS.RunBaseAI();
         }
         else{

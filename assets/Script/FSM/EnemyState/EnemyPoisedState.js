@@ -6,7 +6,7 @@ var FSMStateBase = require("FSMStateBase");
 var EnemyBase = require("EnemyBase");
 
 var EnemyPoisedState = cc.Class({
-    extends: cc.Component,
+    extends: FSMStateBase,
 
     ctor: function ( ) {
     },

@@ -1,6 +1,17 @@
 /*
 * 用来进行Actor的创建等的管理类
 */
+var ActorItem = cc.Class({
+    properties: {
+        prefab: cc.Prefab,
+        id : "NULL",
+    },
+
+    ctor () {
+    },
+
+});
+
 var ActorManager = cc.Class({
     extends: cc.Component,
 
@@ -20,6 +31,16 @@ var ActorManager = cc.Class({
             default : null,
             type : cc.Prefab,
         },
+
+        Boss : {
+            default : null,
+            type : cc.Prefab,
+        },
+        //之后改成这个，暂时用上面的
+        /*EnemyList : {
+            default: [],
+            type : ActorItem
+        }*/
     },
 
     statics: {
@@ -30,6 +51,7 @@ var ActorManager = cc.Class({
         ActorManager._instance = this;
         this.EnemyList = new Map();
         this.EnemyList.set("EnemyLowBee" , this.EnemyLowBee);
+        this.EnemyList.set("TestBoss" , this.Boss);
         
         this.FlyWeaponList = new Map();
         this.FlyWeaponList.set("weaponDart" , this.Dart);
@@ -86,7 +108,7 @@ var ActorManager = cc.Class({
         if( GameManager.EnemyConfigData ){
             var EnemyID = null;
             if (GameManager.EnemyConfigData.BossConfig[InType]){
-                EnemyID = GameManager.EnemyConfigData.BossConfig[InType].ID;
+                EnemyID = GameManager.EnemyConfigData.BossConfig[InType].id;
             }
             
             if (EnemyID != null && this.EnemyList.has(EnemyID)){

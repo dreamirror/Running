@@ -87,20 +87,12 @@ var GameInitPlayer = cc.Class({
         //5.15 测试添加一个BOSS
         /*if (ActorManager._instance != null && ActorManager._instance != undefined)
         {
-            this.TestBoss = ActorManager._instance.CreateBoss();
+            this.TestBoss = ActorManager._instance.CreateBoss("TestBoss");
             this.TestBoss.parent = cc.find("Canvas/GameScene/EnemyScene")
             this.GameManager = cc.find("GameContainer").getComponent("GameManager");
-            if (InStartPos != null && InStartPos != undefined){
-                this.TestBoss.setPosition(InStartPos);
-            }
-            else{
-                if (this.GameManager ){
-                    this.TestBoss.setPosition(400, 400);
-                }
-                else{
-                    this.TestBoss.setPosition(76, 460);
-                }
-            }     
+            
+            this.TestBoss.setPosition(100, 10);
+   
         }*/
     },
 

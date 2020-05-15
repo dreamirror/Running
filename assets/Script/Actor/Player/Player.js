@@ -201,12 +201,12 @@ var Player = cc.Class({
         //如果撞到障碍物，直接死了
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
-            Target.ActorDead();
+            //Target.ActorDead();
         }
 
         //如果被敌人攻击，直接死
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            Target.ActorDead();
+            //Target.ActorDead();
             
         }
     },

@@ -22,23 +22,6 @@ var EnemyLowBee = cc.Class({
         this._super();
     },
 
-    // update (dt) {},
-
-    /*InitEnemyType : function (){
-        this.EnemyType = CommonUtil.EnemyType.LowBee;
-
-        this.EnemyAttackType = CommonUtil.EnemyAttackType.CloseAttack;
-    },*/
-
-    /* 修改一下重力系统，当落到地面时才开始计算AI */
-    /*UpdateGravity : function( InActor , AYSpeed, bOnGround , GroundObj ){
-        this._super(InActor , AYSpeed, bOnGround , GroundObj);
-
-        if (bOnGround == true){
-            InActor.BStartAI = true;
-        }
-    },*/
-
     /********************** 状态相关 ***********************/
     OnAttacked : function(AttackerJS ,TargetCollision){
         this._super(AttackerJS ,TargetCollision);

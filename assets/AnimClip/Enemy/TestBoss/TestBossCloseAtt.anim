@@ -1,6 +1,6 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "CloseAtt",
+  "_name": "TestBossCloseAtt",
   "_objFlags": 0,
   "_native": "",
   "_duration": 0.23333333333333334,
@@ -18,33 +18,33 @@
             },
             {
               "frame": 0.1,
-              "value": 14.97
+              "value": 48.205
             },
             {
               "frame": 0.16666666666666666,
-              "value": -141.253
+              "value": -27.795
             },
             {
               "frame": 0.23333333333333334,
-              "value": -233.149
+              "value": -114.549
             }
           ],
           "y": [
             {
               "frame": 0,
-              "value": -41.508
+              "value": 141.321
             },
             {
               "frame": 0.1,
-              "value": -156.378
+              "value": 73.208
             },
             {
               "frame": 0.16666666666666666,
-              "value": -87.456
+              "value": 61.019
             },
             {
               "frame": 0.23333333333333334,
-              "value": -30.021
+              "value": 89.698
             }
           ]
         }

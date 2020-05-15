@@ -4,7 +4,9 @@
 
 var EnemyBase = require("EnemyBase");
 var CommonUtil = require("CommonUtil");
-var GravityManager = require("GravityManager");
+var EnemyPoisedState = require("EnemyPoisedState");
+var EnemyDisAttState = require("EnemyDisAttState");
+var FSMUtil = require("FSMUtil");
 
 var TestBoss = cc.Class({
     extends: EnemyBase,
@@ -28,11 +30,16 @@ var TestBoss = cc.Class({
 
     /********************** 敌人动画相关 , 具体由各个敌人自己去实现，由此达到播放不同动画的效果 ***********************/
     Idle : function () {
-        this.PlayAnimation("LowBeeIdle");
+        this.PlayAnimation("TestBossIdle");
     },
 
     AttackAnima : function(  InTarget , InCallBack , InParam ){
-        this.PlayAnimation("LowBeeAtt");
+        this.PlayAnimation("TestBossCloseAtt");
+        this._super(InTarget , InCallBack , InParam);
+    },
+
+    DisAttAnima : function (  InTarget , InCallBack , InParam ){
+        this.PlayAnimation("TestBossDisAtt");
         this._super(InTarget , InCallBack , InParam);
     },
 
@@ -41,7 +48,7 @@ var TestBoss = cc.Class({
     },
 
     PoisedAnima : function( InTarget , InCallBack , InParam ){
-        this.PlayAnimation("LowBeeAtt");
+        this.PlayAnimation("TestBossPoised");
         this._super(InTarget , InCallBack , InParam);
     },
 
@@ -49,10 +56,18 @@ var TestBoss = cc.Class({
     InitFSM : function(  ){
         this._super("EnemyLowBee");
 
-        //添加远距离攻击状态机
-        
-        //添加近战蓄力攻击状态机
+        //远距离攻击状态机
+        var DisAttState = new EnemyDisAttState();
+        DisAttState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyDistanceAttack);        
 
+        //蓄力状态机
+        var PoisedState = new EnemyPoisedState();
+        PoisedState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyPoised);      
+
+        //添加远距离攻击状态机
+        this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyDistanceAttack, DisAttState );
+        //添加近战蓄力攻击状态机
+        this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyPoised, PoisedState );
 
     },
 

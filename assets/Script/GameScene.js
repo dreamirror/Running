@@ -466,12 +466,12 @@ var GameScene = cc.Class({
 
                 //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
                 this.intervalCD -= dt;
-                if((lastRoad.x + lastRoad.width)<( width + 100))
+                if((lastRoad.x + lastRoad.width)<( width + 0))
                 {   
                     if(this.intervalCD <=0 )
                     {
                         var intervalData = window.SceneData.getIntervalData()
-                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,100);
+                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,0);
                         this.intervalCD = intervalData.cd
 
                     }

@@ -79,7 +79,7 @@ var EnemyAI = cc.Class({
         var distance = EnemyPos.sub(PlayerPos).mag();
 
         //判断自身类型，如果是近战，则判断玩家是否在攻击距离内
-        if (this.EnemyJS.EnemyAttackType == CommonUtil.EnemyAttackType.CloseAttack)
+        if (this.EnemyJS.EnemyAttackType.has(CommonUtil.EnemyAttackType.CloseAttack))
         {
             if (this.GameManager.EnemyConfigData.AttackDistance.CloseAttack >= distance )
             {
@@ -88,7 +88,7 @@ var EnemyAI = cc.Class({
 
         }
         //如果是扔飞镖
-        else if(this.EnemyJS.EnemyAttackType == CommonUtil.EnemyAttackType.DartAttack)
+        if(this.EnemyJS.EnemyAttackType.has( CommonUtil.EnemyAttackType.DartAttack))
         {
             if (this.GameManager.EnemyConfigData.AttackDistance.DartAttack >= distance )
             {

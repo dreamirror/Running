@@ -19,7 +19,7 @@ cc.Class({
 
         EnemyType : CommonUtil.EnemyType.Default,
 
-        EnemyAttackType : CommonUtil.EnemyAttackType.None,
+        EnemyAttackType : null,//CommonUtil.EnemyAttackType.None,
 
         //状态机
         FSMMgr : null,
@@ -80,7 +80,13 @@ cc.Class({
         this.EmenyData = InEnemyData;
         this.HP = InEnemyData.HP;
         this.EnemyType = InEnemyData.EnemyType;
-        this.EnemyAttackType = InEnemyData.EnemyType.EnemyAttackType;
+
+        this.EnemyAttackType = new Map();
+        for( var AttackTypeCount = 0 ; AttackTypeCount < InEnemyData.EnemyAttackType.length ; AttackTypeCount++){
+            this.EnemyAttackType.set(InEnemyData.EnemyAttackType[AttackTypeCount] , InEnemyData.EnemyAttackType[AttackTypeCount]);
+        }
+
+        //this.EnemyAttackType = InEnemyData.EnemyType.EnemyAttackType;
     },
 
     /*************************     状态机相关     ************************/

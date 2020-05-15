@@ -139,13 +139,14 @@ cc.Class({
             
             var TempPos = InActor.node.getPosition();
             var NodePos = InActor.node.parent.convertToNodeSpaceAR(cc.v2(TempPos.x , Bounds.top));
+
             InActor.node.setPosition(TempPos.x , NodePos.y);
             //InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
         }
 
         //5.7 判断下 当前的Node如果低于死亡高度，则设置角色死亡
         if (InActor.GameManager != null && InActor.GameManager != undefined){
-            var TempPos = InActor.node.getPosition();
+            var TempPos = InActor.node.convertToWorldSpaceAR(cc.v2(0,0)); // 5.15 修改为世界坐标 InActor.node.getPosition();
             if (TempPos.y <= InActor.GameManager.GameConfigData.DeadHeight ){
                 InActor.ActorDead();
             }
