@@ -10,12 +10,12 @@ cc.Class({
 
     init(itemBase){
         this.ItemInfo = itemBase;
-        this.GamePlayer = cc.find("Player");
+        this.GamePlayer = cc.find("Canvas/GameScene/PlayerScene/Player");
         let self = this;  
 
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;     //开启碰撞检测
-        cc.director.getCollisionManager().enabledDebugDraw = false;
+        //cc.director.getCollisionManager().enabledDebugDraw = false;
 
         if (self.ItemInfo) {
             cc.loader.loadRes(self.ItemInfo.Icon, function(err,img){
@@ -69,8 +69,10 @@ cc.Class({
             this.NeedFly = true;
             //将原来的节点移至和player同一层，再执行飞向player的过程
             var pos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
-            this.node.parent = cc.director.getScene()
-            this.node.setPosition(pos)
+            var playerlayer = cc.find("Canvas/GameScene/PlayerScene");
+            this.node.parent = playerlayer;
+            var newpos = playerlayer.convertToNodeSpaceAR(pos);
+            this.node.setPosition(newpos)
             return;
         }
 
@@ -94,7 +96,7 @@ cc.Class({
         dir.normalizeSelf();
     
         //根据方向向量移动位置
-        var moveSpeed = 950;
+        var moveSpeed = 850;
         this.node.x += dt * dir.x * moveSpeed;
         this.node.y += dt * dir.y * moveSpeed;
 
