@@ -145,8 +145,19 @@ var GameScene = cc.Class({
             //test
             //var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
             var lastRoad = this.roads[this.roads.length - 1];
+            var backIndex = 0;
+            //如果当前的路是有间隔的就往左边再选一个路知道没有间隔或者选得次数超过最大次数
+            if(lastRoad.bInterval)
+            {
+                while(backIndex < 4 && lastRoad.interval)
+                {
+                    lastRoad = this.roads[this.roads.length - backIndex - 1];
+                    backIndex++
+                }
+            }
+            
             lastRoad.addChild(barrier);
-            var x = (lastRoad.width - barrier.width) / 2
+            var x = (lastRoad.width - barrier.width) 
             barrier.setPosition(cc.v2(x , lastRoad.height / 2))
             this.barriers.push(barrier);
 
@@ -183,6 +194,7 @@ var GameScene = cc.Class({
             this.node.removeChild(lastRoad);
             this.node.addChild(newRoad);
             self.roads[self.roads.length- 1] = newRoad;
+            road.bInterval = true;
         }
 
 
@@ -256,6 +268,7 @@ var GameScene = cc.Class({
             for(var index in this.roads)
             {
                 var item = this.roads[index];
+  
                 item.setPosition(item.getPosition().x - dis,0);
                 if(item.getPosition().x < -item.width)
                 {
@@ -466,12 +479,12 @@ var GameScene = cc.Class({
 
                 //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
                 this.intervalCD -= dt;
-                if((lastRoad.x + lastRoad.width)<( width + 0))
+                if((lastRoad.x + lastRoad.width)<( width + 100))
                 {   
                     if(this.intervalCD <=0 )
                     {
                         var intervalData = window.SceneData.getIntervalData()
-                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,0);
+                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,intervalData.interval);
                         this.intervalCD = intervalData.cd
 
                     }
@@ -492,7 +505,7 @@ var GameScene = cc.Class({
             //临时清除屏幕外的道具
             this.back_1.removeAllChildren();
             //暂时在这儿去加一个生成道具的。 
-            //cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
+            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
         }
 
         if(this.back_2.getPosition().x <= -this.back_2.width){
@@ -500,7 +513,7 @@ var GameScene = cc.Class({
             //临时清除屏幕外的道具
             this.back_2.removeAllChildren();
             //暂时在这儿去加一个生成道具的。 
-            //cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
+            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
         }
 
         this.DisTanceDisplay.string = '距离: ' +  Math.floor(window.SceneData.TaltleDistance);
