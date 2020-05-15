@@ -190,11 +190,12 @@ var GameManager = cc.Class({
     ReLoadScene : function(event, InParam ){
         //重置速度等参数
         GameScene._instance.clearGameData();
-
+        this.GameOverUI.destroy();
         cc.director.resume();
-        cc.director.loadScene("GameScene",function(){
-            cc.log("GameScene launched!");
-        });
+        if( GameInitPlayer._instance != null && GameInitPlayer._instance != undefined)
+        {
+            GameInitPlayer._instance.OnReCreatePlayer();
+        }
     },
 
 

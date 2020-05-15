@@ -310,6 +310,7 @@ var GameScene = cc.Class({
                 gold.removeFromParent();
             }
         }
+        this.initRoad();
     },
 
     //根据概率来判断发生还是不发生
