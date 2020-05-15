@@ -59,30 +59,28 @@ cc.Class({
 
     //当玩家有磁铁buff的时候，通过更新相距的距离来检测是否会吃掉
     update(dt){
-        if ( this.NeedFly ) {
-            this.onFly(dt);
-            return;
-        }
-
          // 每帧判断和主角之间的距离是否小于收集距离
-        if (cc.find("GameContainer").getComponent("GameData").checkPlayerMagnet() == true && this.getPlayerDistance() < this.pickRadius) {
+        if (this.NeedFly == false && cc.find("GameContainer").getComponent("GameData").checkPlayerMagnet() == true && this.getPlayerDistance() < this.pickRadius) {
             this.NeedFly = true;
             //将原来的节点移至和player同一层，再执行飞向player的过程
             var pos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
             var playerlayer = cc.find("Canvas/GameScene/PlayerScene");
             this.node.parent = playerlayer;
             var newpos = playerlayer.convertToNodeSpaceAR(pos);
-            this.node.setPosition(newpos)
-            return;
+            this.node.setPosition(newpos);
         }
 
+        if ( this.NeedFly == true) {
+            this.onFly(dt);
+            return;
+        }
     },
 
     //检查距离玩家的距离
     getPlayerDistance: function () {
-        var playerPos = this.GamePlayer.convertToWorldSpaceAR(this.GamePlayer.position);
+        var playerPos = this.GamePlayer.convertToWorldSpaceAR(cc.v2(0,0));
         // 根据两点位置计算两点之间距离
-        let nodeWorldPos = this.node.convertToWorldSpaceAR(this.node.position);
+        let nodeWorldPos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
         var dist = nodeWorldPos.sub(playerPos).mag();
         return dist;
     },

@@ -491,7 +491,7 @@ var GameScene = cc.Class({
             //临时清除屏幕外的道具
             this.back_1.removeAllChildren();
             //暂时在这儿去加一个生成道具的。 
-            //cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
+            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
         }
 
         if(this.back_2.getPosition().x <= -this.back_2.width){
@@ -499,7 +499,7 @@ var GameScene = cc.Class({
             //临时清除屏幕外的道具
             this.back_2.removeAllChildren();
             //暂时在这儿去加一个生成道具的。 
-            //cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
+            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
         }
 
         this.DisTanceDisplay.string = '距离: ' +  Math.floor(window.SceneData.TaltleDistance);
