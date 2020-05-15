@@ -189,43 +189,28 @@ window.SceneData = {
         return id;
     },
 
+    getConfigData : function(){
+        var speedIndex = (Math.floor(window.SceneData.SpeedReCordDis / 100) +1) * 100;
+        return window.SceneData.barrierData[speedIndex.toString()];
+
+    },
     getSpawnBarrierCD : function()
     {
 
-        var barrierData;
-        
-        for(var index in window.SceneData.barrierData)
-        {
-            
-            var speedIndes = parseInt(index); 
-            if(window.SceneData.SpeedReCordDis < speedIndes)
-            {   
-                barrierData =  window.SceneData.barrierData[index];
-                break;
-            }
-
-        }
+        var barrierData = this.getConfigData();
         
         return this.random4(barrierData.cd[0],barrierData.cd[1]);
+    },
+
+    getSpawnItemCD:function(){
+        var barrierData = this.getConfigData();
+        return this.random4(barrierData.itemCD[0],barrierData.itemCD[1]);
     },
 
     getSpawnGoldCD : function()
     {
 
-        var barrierData;
-        
-        for(var index in window.SceneData.barrierData)
-        {
-            
-            var speedIndes = parseInt(index); 
-            if(window.SceneData.SpeedReCordDis < speedIndes)
-            {   
-                barrierData =  window.SceneData.barrierData[index];
-                break;
-            }
-
-        }
-        
+        var barrierData = this.getConfigData();
         return this.random4(barrierData.goldCD[0],barrierData.goldCD[1]);
     },
 

@@ -83,9 +83,9 @@ var GameScene = cc.Class({
         createed:true,
         SpwanBarrierCD : 5,
         CDTime : 4,
-        goldCD :4,
+        goldCD :7,
         intervalCD: 0,
-        
+        itemCD: 9,
        
 
     },
@@ -437,18 +437,19 @@ var GameScene = cc.Class({
         this.back_1.setPosition(this.back_1.getPosition().x - window.SceneData.Speed *dt,0)
         this.back_2.setPosition(this.back_2.getPosition().x -  window.SceneData.Speed * dt,0)
         window.SceneData.TaltleDistance += (window.SceneData.Speed / 100) * dt ;
-        window.SceneData.barrierPath
         window.SceneData.SpeedReCordDis =  window.SceneData.TaltleDistance;
-        //生成BarrierCD 
+        //各种CD 的跟新 
         this.CDTime -=dt;
         this.goldCD -=dt;
+        this.itemCD -=dt;
+
         //更新金币位置
         this.updateGlod(window.SceneData.Speed *dt);
 
         //生成金币
         if(this.goldCD <=0)
         {
-            this.goldCD = 5//window.SceneData.getSpawnGoldCD()
+            this.goldCD = window.SceneData.getSpawnGoldCD()
             this.spawnGold(16);
         }
 
@@ -466,15 +467,20 @@ var GameScene = cc.Class({
         this.updateRoads(window.SceneData.Speed *dt);
         //生成路
 
-
-
-
         if(this.roads.length == 0)
         {
             this.spawnRoad(0);
         }
         else{
             var lastRoad = this.roads[this.roads.length - 1]
+
+            //生成道具
+            if(this.itemCD <=0)
+            {   
+                this.itemCD = window.SceneData.getSpawnItemCD();
+                cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( lastRoad );
+            }
+
             var width = DesignSize;
 
                 //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
@@ -504,16 +510,13 @@ var GameScene = cc.Class({
 
             //临时清除屏幕外的道具
             this.back_1.removeAllChildren();
-            //暂时在这儿去加一个生成道具的。 
-            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
+           
         }
 
         if(this.back_2.getPosition().x <= -this.back_2.width){
             this.back_2.setPosition(this.back_1.getPosition().x +this.back_2.width,0);
             //临时清除屏幕外的道具
             this.back_2.removeAllChildren();
-            //暂时在这儿去加一个生成道具的。 
-            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
         }
 
         this.DisTanceDisplay.string = '距离: ' +  Math.floor(window.SceneData.TaltleDistance);
