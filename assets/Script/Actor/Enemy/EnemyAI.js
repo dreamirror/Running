@@ -42,7 +42,7 @@ var EnemyAI = cc.Class({
         this.BossAttType = BossAttPos.ClossAtt;
         
         //每一个行动的CD时长,单位是秒
-        this.ActionInterval   =   5;
+        this.ActionInterval   =   InBossConfig.ActionCD;
         //当前的行动CD时间
         this.CurCDTime        =   0;
     },

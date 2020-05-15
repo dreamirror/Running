@@ -53,6 +53,13 @@ var GameInitPlayer = cc.Class({
         this.node.on( cc.Node.EventType.TOUCH_CANCEL , this.OnTouchCancel , this,true);
     },
 
+    onDestroy () {
+        this.node.off( cc.Node.EventType.TOUCH_START , this.OnTouchStart , this,true);
+        this.node.off( cc.Node.EventType.TOUCH_MOVE , this.OnTouchMove , this,true);
+        this.node.off( cc.Node.EventType.TOUCH_END , this.OnTouchEnd , this,true);
+        this.node.off( cc.Node.EventType.TOUCH_CANCEL , this.OnTouchCancel , this,true);
+    },
+
     start () {
         /*if (ActorManager._instance != null && ActorManager._instance != undefined)
         {
@@ -76,6 +83,25 @@ var GameInitPlayer = cc.Class({
         //4.23 初始化状态机
         //this.InitFSM();
         this.CreatePlayer();
+
+        //5.15 测试添加一个BOSS
+        /*if (ActorManager._instance != null && ActorManager._instance != undefined)
+        {
+            this.TestBoss = ActorManager._instance.CreateBoss();
+            this.TestBoss.parent = cc.find("Canvas/GameScene/EnemyScene")
+            this.GameManager = cc.find("GameContainer").getComponent("GameManager");
+            if (InStartPos != null && InStartPos != undefined){
+                this.TestBoss.setPosition(InStartPos);
+            }
+            else{
+                if (this.GameManager ){
+                    this.TestBoss.setPosition(400, 400);
+                }
+                else{
+                    this.TestBoss.setPosition(76, 460);
+                }
+            }     
+        }*/
     },
 
     //将人物FSMupdate
@@ -182,7 +208,7 @@ var GameInitPlayer = cc.Class({
         });
     },
 
-    OnReCreatePlayer : function () {
+    OnReCreatePlayer : function ( BAddShield) {
         if (this.Player != null && this.Player != undefined ) {
             //if(GravityManager._instance){
             //    var PlayerJS = this.Player.getComponent("Player");
@@ -201,8 +227,11 @@ var GameInitPlayer = cc.Class({
 
 
         //为其添加一个护盾
-        var GameData = cc.find("GameContainer").getComponent("GameData");
-        GameData.applyShield();
+        if (BAddShield == true){
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            GameData.applyShield();
+        }
+        
     },
 
 });

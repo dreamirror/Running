@@ -25,7 +25,9 @@
             "MaxDistance" : 300,
             "MinDistance" : 150,
             "ActionCD" : 10,
-            
+    
+            "PoisedTime" : 5,
+
             "DisAttackParam" : {
                 "id" : "dart"
 

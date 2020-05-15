@@ -18,13 +18,13 @@
 
         "intervalData":{
             "100":{"cd":[3,5],
-            "interval":[0,20]}
+            "interval":[0,1]}
 
             ,"200":{"cd":[3,5],
-                "interval":[100,200]}
+                "interval":[0,1]}
                 
             ,"600":{"cd":[3,5],
-                "interval":[100,250]
+                "interval":[0,1]
                 }
         },
 

@@ -36,12 +36,8 @@ var EnemyDisAttState = cc.Class({
 
         //进入时设置Node对象播放远程攻击动作
         if(this.EnemyJS && (this.EnemyJS instanceof EnemyBase)){
-            this.EnemyJS.PlayAnimation("TestBossDisAtt");
-            var ArmAnimation = this.EnemyJS.GetAnimation();
-            if (ArmAnimation != null)
-            {
-                ArmAnimation.on('finished',  this.OnAttackPlayOver,  this);
-            }
+
+            this.EnemyJS.DisAttAnima(this, this.OnAttackPlayOver , this);
 
             //向预定义的动画回调一中注册事件，扔出飞镖
             this.EnemyJS.SetAnimationCustomEventOneCallBack( this,  this.OnAttAnimationThrow);
@@ -50,19 +46,14 @@ var EnemyDisAttState = cc.Class({
 
     /* 对简单的敌人，可以切换为攻击状态或是死亡状态 */
     BreakCondition :function( ) {
-        if(this.bTransIdle == true){
+        if(this.bAttackOver == true){
+            this.EnemyJS.SetBossActionOver();
             this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyIdle, null, this);
-            return;
-        }
-
-        if (this.bTransDistanceAttack == true){
-            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyDistanceAttack, null, this);
             return;
         }
     },
 
     BeforeExit :function( InParamObj ) {
-        this.bTransDistanceAttack = false;
         this.bTransIdle = false;
     },
 
@@ -85,3 +76,5 @@ var EnemyDisAttState = cc.Class({
     },
 
 });
+
+module.exports = EnemyDisAttState;
