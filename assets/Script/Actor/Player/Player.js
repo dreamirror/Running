@@ -325,7 +325,7 @@ var Player = cc.Class({
             const sprite = node.addComponent(cc.Sprite);
             sprite.spriteFrame = spriteFrame;
             self.node.addChild(node);
-
+            node.setPosition(0,-20);
         });
     },
 
@@ -354,8 +354,7 @@ var Player = cc.Class({
             const sprite = node.addComponent(cc.Sprite);
             sprite.spriteFrame = spriteFrame;
             self.node.addChild(node);
-            node.setPosition((node.x + 10),(node.y + 95));
-
+            node.setPosition((node.x + 10),(node.y + 70));
         });
     },
 

@@ -177,7 +177,6 @@ window.SceneData = {
         var record = 0;
         var id
         var random = Math.floor(Math.random()*(100-1+1)+1);
-        cc.log(" spawnBarrierData random=="+random);
         for(var index in barrierData.probability)
         {   
             record += parseInt(barrierData.probability[index]); 
@@ -256,21 +255,23 @@ window.SceneData = {
 };
 
 
-cc.loader.loadRes("Config/SceneConfig",function(err,object){
+cc.loader.loadRes("Config/LevelConfig",function(err,object){
     if(err){
         cc.log(err); 
         return;
     } 
-    window.SceneData.OriginSpeed = object.json.Speed;
-    window.SceneData.BgSpeed = object.json.BgSpeed;
-    window.SceneData.DisToSpeed = object.json.DisToSpeed;
-    window.SceneData.MaxSpeed = object.json.MaxSpeed;
 
-    window.SceneData.barrierData = object.json.SpawnBarrierData;
-    window.SceneData.intervalData = object.json.intervalData;
-    window.SceneData.barrierPath = object.json.BarriersPrefabs;
+    var currentLevelData = object.json['1']
+    window.SceneData.OriginSpeed = currentLevelData.Speed;
+    window.SceneData.BgSpeed = currentLevelData.BgSpeed;
+    window.SceneData.DisToSpeed = currentLevelData.DisToSpeed;
+    window.SceneData.MaxSpeed = currentLevelData.MaxSpeed;
+
+    window.SceneData.barrierData = currentLevelData.SpawnBarrierData;
+    window.SceneData.intervalData = currentLevelData.intervalData;
+    window.SceneData.barrierPath = currentLevelData.BarriersPrefabs;
     
-    window.SceneData.RoadStartPos = object.json.RoadStartPos;
+    window.SceneData.RoadStartPos = currentLevelData.RoadStartPos;
     });
 
 
