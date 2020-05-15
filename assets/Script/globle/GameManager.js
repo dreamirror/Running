@@ -4,6 +4,7 @@
 
 var GameInitPlayer = require("GameInitPlayer");
 const LevelSupply = require('LevelSupply');
+var GameScene = require("GameScene");
 
 var GameManager = cc.Class({
     extends: cc.Component,
@@ -187,6 +188,9 @@ var GameManager = cc.Class({
      * 重新加载场景
     */ 
     ReLoadScene : function(event, InParam ){
+        //重置速度等参数
+        GameScene._instance.clearGameData();
+
         cc.director.resume();
         cc.director.loadScene("GameScene",function(){
             cc.log("GameScene launched!");

@@ -17,7 +17,7 @@ var SpecialPosRange = {
 }
 
 var DesignSize = 960;
-cc.Class({
+var GameScene = cc.Class({
     extends: cc.Component,
 
     properties: {
@@ -89,10 +89,16 @@ cc.Class({
        
 
     },
+
+    statics : {
+        _instance : null,
+    },
     
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
+
+        GameScene._instance = this;
 
         //加载预制体
         var self = this;
@@ -509,3 +515,5 @@ cc.Class({
 
      },
 });
+
+module.exports = GameScene;
