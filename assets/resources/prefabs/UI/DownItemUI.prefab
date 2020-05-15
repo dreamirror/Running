@@ -48,8 +48,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -480,
-        -320,
+        0,
+        0,
         0,
         0,
         0,
@@ -93,7 +93,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "cd8e8b7d-efc6-4484-b925-d9fa9543c8fb"
     },
     "fileId": "91fHlJeVlIkpMICMX4rKh6",
     "sync": false

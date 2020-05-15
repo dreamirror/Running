@@ -24,8 +24,8 @@ cc.Class({
         for (let index = 0; index < this.OperateNum; index++) {
             let pb = cc.instantiate(this.OperatePrefab);
             if (pb) {
-                pb.parent = cc.find(cc.Canvas);  //加到当前场景
-                pb.setPosition( 50 + (index * 80) - 20, 80 );
+                pb.parent = this.node;  //加到当前场景
+                pb.setPosition( 50 + (index * 80) - 20, 0 );
                 this.weaponBlock.push(pb);
             }
         }

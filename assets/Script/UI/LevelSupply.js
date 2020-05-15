@@ -44,7 +44,7 @@ let show = function (callback) {
         }
         LevelSupply._alert = cc.instantiate(prefab);
         LevelSupply._callback = callback;
-        cc.find(cc.Canvas).addChild(LevelSupply._alert,3);
+        cc.find('Canvas').addChild(LevelSupply._alert,3);
 
         let arrayItem = rondomItem();
         LevelSupply._itemList = arrayItem;
