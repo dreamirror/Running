@@ -377,7 +377,9 @@
     "HP": 2,
     "EmenyData": null,
     "BStartAI": false,
-    "HandNode": null,
+    "HandNode": {
+      "__id__": 2
+    },
     "_id": ""
   },
   {

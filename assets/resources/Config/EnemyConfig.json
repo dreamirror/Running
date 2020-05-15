@@ -24,14 +24,14 @@
             "InitPos" : [ 300,300 ],
             "MaxDistance" : 300,
             "MinDistance" : 150,
-            "ActionCD" : 5,
+            "ActionCD" : 2,
     
             "PoisedTime" : 5,
             
             "EnemyAttackType" : [1,2],
 
             "DisAttackParam" : {
-                "id" : "dart"
+                "id" : "BossDart"
 
             }
         }

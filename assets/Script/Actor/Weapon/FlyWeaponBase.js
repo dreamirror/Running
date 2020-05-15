@@ -38,14 +38,20 @@ var FlyWeaponBase = cc.Class({
 
         //如果超出屏幕，清除
         var windowSize=cc.view.getVisibleSize();
+        var WorldJudgePos = this.node.parent.convertToWorldSpaceAR(cc.v2( MoveToX , 0));
+
+        var PoolManager = cc.find("GameContainer").getComponent("PoolManager");  
+
         if( this.MoveDirection == CommonUtils.MoveDirection.MoveRight){
-            if (  windowSize.width < MoveToX - this.node.getContentSize().width ){
-                this.node.destroy();
+            if (  windowSize.width < WorldJudgePos.x - this.node.getContentSize().width ){ //MoveToX - this.node.getContentSize().width ){
+                //this.node.destroy();
+                PoolManager.return(this.WeaponData.id);
             }
         }
         else{
-            if ( MoveToX - this.node.getContentSize().width < 0 ){
-                this.node.destroy();
+            if ( WorldJudgePos.x + this.node.getContentSize().width  < 0 ){//MoveToX - this.node.getContentSize().width < 0 ){
+                //this.node.destroy();
+                PoolManager.return(this.WeaponData.id , this.node);
             }
         }
     },

@@ -903,14 +903,14 @@
       "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
     },
     "size": 5,
-    "poolName": "dart"
+    "poolName": "weaponDart"
   },
   {
     "__type__": "NodePool",
     "prefab": {
       "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
     },
-    "size": 3,
+    "size": 1,
     "poolName": "BossDart"
   },
   {

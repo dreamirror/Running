@@ -1012,6 +1012,7 @@
     "CDTime": 0,
     "goldCD": 4,
     "intervalCD": 0,
+    "itemCD": 9,
     "_id": "37CImuRoBA7ZPZWn/BNlvc"
   },
   {
@@ -1811,6 +1812,9 @@
     },
     "Dart": {
       "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
+    },
+    "Boss": {
+      "__uuid__": "95a13202-2f27-4dec-8e35-98c396076c98"
     },
     "_id": "0ao/KQtKhCj4KS9E5Nz3cq"
   },
