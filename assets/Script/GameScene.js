@@ -82,7 +82,8 @@ cc.Class({
         SpecialPosRanges:[],
         createed:true,
         SpwanBarrierCD : 5,
-        CDTime : 0,
+        CDTime : 4,
+        goldCD :4,
         intervalCD: 0,
         
        
@@ -92,13 +93,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
      onLoad () {
-        cc.director.getPhysicsManager().enabled = true;
-        cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
-    cc.PhysicsManager.DrawBits.e_pairBit |
-    cc.PhysicsManager.DrawBits.e_centerOfMassBit |
-    cc.PhysicsManager.DrawBits.e_jointBit |
-    cc.PhysicsManager.DrawBits.e_shapeBit
-    ;
 
         //加载预制体
         var self = this;
@@ -141,15 +135,20 @@ cc.Class({
         {   
                     
             var width = DesignSize;
-            //var barrier = cc.instantiate(baPrefab);
+            var barrier = cc.instantiate(baPrefab);
             //test
-            var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
+            //var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
             var lastRoad = this.roads[this.roads.length - 1];
             lastRoad.addChild(barrier);
             var x = (lastRoad.width - barrier.width) / 2
-            barrier.setPosition(cc.v2(x , lastRoad.height))
+            barrier.setPosition(cc.v2(x , lastRoad.height / 2))
             this.barriers.push(barrier);
 
+
+            var Range = {};
+            Range.start = x;
+            Range.end =  x + barrier.width;
+            this.SpecialPosRanges.push(Range)
 
             return barrier;
 
@@ -399,16 +398,23 @@ cc.Class({
         window.SceneData.SpeedReCordDis =  window.SceneData.TaltleDistance;
         //生成BarrierCD 
         this.CDTime -=dt;
-
+        this.goldCD -=dt;
         //更新金币位置
         this.updateGlod(window.SceneData.Speed *dt);
+
+        //生成金币
+        if(this.goldCD <=0)
+        {
+            this.goldCD = 5//window.SceneData.getSpawnGoldCD()
+            this.spawnGold(16);
+        }
 
         //更新间隔的数据
         this.updateRanges(window.SceneData.Speed *dt)
         if(this.CDTime <=0 )
         {
-            //this.SpawnBarrier(); //先屏蔽生成障碍物方便调试
-            this.spawnGold(16);
+            this.SpawnBarrier(); //先屏蔽生成障碍物方便调试
+            //this.spawnGold(16);
 
             //this.CDTime = this.SpwanBarrierCD +Math.random(dt);
             this.CDTime = window.SceneData.getSpawnBarrierCD()
@@ -456,7 +462,7 @@ cc.Class({
             //临时清除屏幕外的道具
             this.back_1.removeAllChildren();
             //暂时在这儿去加一个生成道具的。 
-            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
+            //cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_1 );
         }
 
         if(this.back_2.getPosition().x <= -this.back_2.width){
@@ -464,7 +470,7 @@ cc.Class({
             //临时清除屏幕外的道具
             this.back_2.removeAllChildren();
             //暂时在这儿去加一个生成道具的。 
-            cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
+            //cc.find("Canvas/GameScene").getComponent("SceneManager").SpawnItem( this.back_2 );
         }
 
         this.DisTanceDisplay.string = '距离: ' +  Math.floor(window.SceneData.TaltleDistance);
@@ -476,19 +482,7 @@ cc.Class({
         }
          var self = this;
          self.obj = null;
-      //  cc.loader.loadRes("preferbs/barrier_sword",function(err,object){
-           // if(err){
-              //  cc.log(err); 
-               // return;
-           // } 
-               // cc.log(object)
-               // self.obj = cc.instantiate( object);
-               // self.obj.setPosition(cc.v2(0,0))
 
-          //  });
-
-           // var barrier2 = 
-           // barrier2.setPosition(cc.v2(0,0));
 
      },
 });

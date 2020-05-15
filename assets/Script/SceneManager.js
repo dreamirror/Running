@@ -210,6 +210,26 @@ window.SceneData = {
         return this.random4(barrierData.cd[0],barrierData.cd[1]);
     },
 
+    getSpawnGoldCD : function()
+    {
+
+        var barrierData;
+        
+        for(var index in window.SceneData.barrierData)
+        {
+            
+            var speedIndes = parseInt(index); 
+            if(window.SceneData.SpeedReCordDis < speedIndes)
+            {   
+                barrierData =  window.SceneData.barrierData[index];
+                break;
+            }
+
+        }
+        
+        return this.random4(barrierData.goldCD[0],barrierData.goldCD[1]);
+    },
+
     getIntervalData : function()
     {
         var intervalData;

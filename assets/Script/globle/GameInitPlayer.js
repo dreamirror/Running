@@ -44,7 +44,7 @@ var GameInitPlayer = cc.Class({
         //开启碰撞检测
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
-        manager.enabledDebugDraw = true;
+        manager.enabledDebugDraw = false;
 
         //开启点击
         this.node.on( cc.Node.EventType.TOUCH_START , this.OnTouchStart , this,true);

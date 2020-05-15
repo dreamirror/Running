@@ -45,7 +45,7 @@ cc.Class({
     //切换关卡的时候生成一大遮挡的背景
     changeLevel(){
 
-        
+
     },
 
     updateTree(inx)
@@ -76,10 +76,9 @@ cc.Class({
         }
     },
 
-     update (dt) {
-
+    spawnTree(dt)
+    {   
         this.cd -=dt;
-        this.updateTree(window.SceneData.Speed *dt)
         if(this.cd <0)
         {   
             var index = this.random4(0,2);
@@ -89,5 +88,14 @@ cc.Class({
             this.TreeCache.push(tree)
             this.cd = 5;
         }
+    },
+
+
+     update (dt) {
+        //生成树
+       // this.spawnTree(dt);
+        //更新树的位置
+        //this.updateTree(window.SceneData.Speed *dt)
+        
      },
 });

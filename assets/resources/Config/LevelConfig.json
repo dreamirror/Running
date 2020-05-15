@@ -5,15 +5,15 @@
         "BgSpeed": 0.5,
         "BarriersPrefabs":["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
         "SpawnBarrierData":{
-            "100":{"cd":[3,5],
+            "100":{"cd":[3,5],"goldCD":[3,5],
             "probability":{
                 "ba_1":50,"ba_2":40,"ba_3":10}
              }
-            ,"200":{"cd":[3,5],
+            ,"200":{"cd":[3,5],"goldCD":[3,5],
                 "probability":{
                     "ba_1":50,"ba_2":40,"ba_3":10}
                 },
-            "600":{"cd":[3,5],
+            "600":{"cd":[3,5],"goldCD":[3,5],
                 "probability":{
                     "ba_1":90,"ba_2":5,"ba_3":5}}
                 },
@@ -45,15 +45,15 @@
         "BgSpeed": 0.5,
         "BarriersPrefabs":["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
         "SpawnBarrierData":{
-            "100":{"cd":[3,5],
+            "100":{"cd":[3,5],"goldCD":[3,5],
             "probability":{
                 "ba_1":50,"ba_2":40,"ba_3":10}
              }
-            ,"200":{"cd":[3,5],
+            ,"200":{"cd":[3,5],"goldCD":[3,5],
                 "probability":{
                     "ba_1":50,"ba_2":40,"ba_3":10}
                 },
-            "600":{"cd":[3,5],
+            "600":{"cd":[3,5],"goldCD":[3,5],
                 "probability":{
                     "ba_1":90,"ba_2":5,"ba_3":5}}
                 },
