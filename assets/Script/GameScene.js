@@ -282,6 +282,30 @@ cc.Class({
         return random;
     },
 
+    clearGameData:function()
+    {
+        window.SceneData.TaltleDistance = 0;
+        window.SceneData.Speed =window.SceneData.OriginSpeed;
+        
+        if(this.barriers.length > 0)
+        {
+            for(var index in this.barriers)
+            {
+                var ba = this.barriers[index]
+                ba.removeFromParent();
+            }
+        }
+
+        if(this.golds.length > 0)
+        {
+            for(var index in this.golds)
+            {
+                var gold = this.golds[index]
+                gold.removeFromParent();
+            }
+        }
+    },
+
     //根据概率来判断发生还是不发生
     resultBYPercent:function(percent)
     {
@@ -394,7 +418,6 @@ cc.Class({
         this.back_2.setPosition(this.back_2.getPosition().x -  window.SceneData.Speed * dt,0)
         window.SceneData.TaltleDistance += (window.SceneData.Speed / 100) * dt ;
         window.SceneData.barrierPath
-        this.BarriersCache
         window.SceneData.SpeedReCordDis =  window.SceneData.TaltleDistance;
         //生成BarrierCD 
         this.CDTime -=dt;
