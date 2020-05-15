@@ -95,7 +95,7 @@ var FlyWeaAttState = cc.Class({
 
         //创建飞镖
         if ( this.WeaponParam.id ){
-            var CurWeapon = ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
+            var CurWeapon = PoolManager.request(this.WeaponParam.id);//ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
             if (CurWeapon){
                 CurWeapon.parent = cc.find("Canvas/GameScene/PlayerScene")//cc.director.getScene();
                 //获取当前手的位置
@@ -117,10 +117,5 @@ var FlyWeaAttState = cc.Class({
             //PoolManager.
         }
     },
-
-    //var WeaponJS = CurWeapon.getComponent("WeaponBase");
-    //                                if (WeaponJS != null && WeaponJS != undefined){
-    //                                    WeaponJS.InitWeaponData(CurWeaponData);
-    //                               }
 
 });

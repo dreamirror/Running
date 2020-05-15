@@ -1,7 +1,7 @@
 {
     "EnemyType" : {
         "EnemyLowBee":{
-            "ID" : "EnemyLowBee",
+            "id" : "EnemyLowBee",
             "Name" : "en_LowBee",
             "Prefab" : "prefabs/Enemy/en_LowBee",
             "HP" : 1,
@@ -17,15 +17,19 @@
 
     "BossConfig" : {
         "TestBoss" : {
-            "ID": "TestBoss",
+            "id": "TestBoss",
             "BBoss" : true,
             "Name" : "初级设计BOSS",
             "HP" : 100,
             "InitPos" : [ 300,300 ],
             "MaxDistance" : 300,
             "MinDistance" : 150,
-            "desc" : "该字段是对下一字段的解释说明，不读取，"
+            "ActionCD" : 10,
+            
+            "DisAttackParam" : {
+                "id" : "dart"
 
+            }
         }
     }
 

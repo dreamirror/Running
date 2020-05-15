@@ -111,16 +111,16 @@ var ActorManager = cc.Class({
     /* 根据类型创建一个飞行道具 */
     CreateFlyWeapon : function ( InType) {
         var GameManager = cc.find("GameContainer").getComponent("GameManager");
-        if( GameManager.PlayerWeaponConfig ){
+        if( GameManager.WeaponConfig ){
             var WeaponID = null;
-            if (GameManager.PlayerWeaponConfig.weapons[InType]){
-                WeaponID = GameManager.PlayerWeaponConfig.weapons[InType].id;
+            if (GameManager.WeaponConfig.weapons[InType]){
+                WeaponID = GameManager.WeaponConfig.weapons[InType].id;
             }
 
             if (WeaponID != null && this.FlyWeaponList.has(WeaponID)){
                 var WeaponInstance = cc.instantiate(this.FlyWeaponList.get(WeaponID));
                 if (WeaponInstance != null && WeaponInstance != undefined){
-                    WeaponInstance.name = GameManager.PlayerWeaponConfig.weapons[InType].name;
+                    WeaponInstance.name = GameManager.WeaponConfig.weapons[InType].name;
                     return WeaponInstance;
                 }
             };

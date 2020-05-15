@@ -201,7 +201,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 6
@@ -344,6 +344,15 @@
     "_clips": [
       {
         "__uuid__": "1fd33063-4a8f-4b72-896c-c9c42d1d95d3"
+      },
+      {
+        "__uuid__": "acfe12d8-9e44-4b40-b6fd-7b344df64a08"
+      },
+      {
+        "__uuid__": "e827b254-9b52-4b84-8a48-28f756ec9b28"
+      },
+      {
+        "__uuid__": "9795ced2-c922-4531-8078-b11f2ebc495d"
       }
     ],
     "playOnLoad": false,

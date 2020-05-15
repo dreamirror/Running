@@ -10,11 +10,8 @@
             "Rotaion": "-50",
             "Anchor" : "0.1,0.5",
             "ATK"   : 2,
+            "WeaponBelong" : 2,
             
-            "FSMParam" : {
-                "ATK"   : 2
-            },
-
             "NormalStateID" : 101
         },
 
@@ -27,10 +24,7 @@
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
             "ATK"   : 2,
-            
-            "FSMParam" : {
-                "ATK"   : 2
-            },
+            "WeaponBelong" : 2,
 
             "NormalStateID" : 103
         },
@@ -43,10 +37,7 @@
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
             "ATK"   : 2,
-            
-            "FSMParam" : {
-                "ATK"   : 2
-            },
+            "WeaponBelong" : 2,
 
             "NormalStateID" : 103
         },
@@ -59,10 +50,7 @@
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
             "ATK"   : 2,
-
-            "FSMParam" : {
-                "ATK"   : 2
-            },    
+            "WeaponBelong" : 2,
 
             "NormalStateID" : 103
         },
@@ -74,17 +62,34 @@
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
-            
+            "WeaponBelong" : 2,   
 
-            "FSMParam" : {
-                "DartPrefab" : "prefabs/Item/dart",
-                "CD"    :   0.5,
-                "Speed" :   9,
-                "MoveType" : 1,
-                "id" : "weaponDart",
-                "ATK"   : 1,
-                "CreatePos" : [50,300] 
-            },
+            "DartPrefab" : "prefabs/Item/dart",
+            "CD"    :   0.5,
+            "Speed" :   9,
+            "MoveType" : 1,
+            "ATK"   : 1,
+            "CreatePos" : [50,300],
+            "NormalStateID" : 105
+        },
+
+        "BossDart":{
+            "weapontype" : 2,
+            "prefab" : "prefabs/Player/Weapon/dart",
+            "name"  : "dartInHand",
+            "id"    : "BossDart",
+            "Pos"   : "-32.295 , -10.375",
+            "Rotaion": "34.78",
+            "Anchor" : "0.5,1",
+            "WeaponBelong" : 1,   
+
+            "DartPrefab" : "prefabs/Item/dart",
+            "CD"    :   0.5,
+            "Speed" :   9,
+            "MoveType" : -1,
+            "ATK"   : 1,
+            "CreatePos" : [50,300],
+
             "NormalStateID" : 105
         }
     }

@@ -1,0 +1,63 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "TestBossDisAtt",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.16,
+  "sample": 50,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "BossFist": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 97.676
+            },
+            {
+              "frame": 0.1,
+              "value": -30.261
+            },
+            {
+              "frame": 0.16,
+              "value": -201.648
+            }
+          ],
+          "y": [
+            {
+              "frame": 0,
+              "value": -41.508
+            },
+            {
+              "frame": 0.02,
+              "value": 108.154
+            },
+            {
+              "frame": 0.06,
+              "value": 211.952
+            },
+            {
+              "frame": 0.1,
+              "value": 59.876
+            },
+            {
+              "frame": 0.16,
+              "value": -99.442
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.12,
+      "func": "AnimationCustomEventOne",
+      "params": [
+        "Att"
+      ]
+    }
+  ]
+}

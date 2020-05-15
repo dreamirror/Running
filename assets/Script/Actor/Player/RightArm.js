@@ -39,7 +39,7 @@ var RightArm = cc.Class({
 
         var self = this;
         /* 先根据配置把预制武器全部都加载出来吧 */
-        cc.loader.loadRes('Config/PlayerWeaponConfig',function (err, asset) {
+        cc.loader.loadRes('Config/WeaponConfig',function (err, asset) {
             if(err){
                 cc.log("加载玩家武器报错！：" + err); 
                 return;
@@ -50,8 +50,8 @@ var RightArm = cc.Class({
                 var WeaponConfigList = new Map();
                 for(var key in asset.json.weapons){
                     //根据对应的Prefab创建武器，并且加入到手部的武器列表中
-                    var WeaponConfig = asset.json.weapons[key];
-                    if (WeaponConfig && WeaponConfig.prefab) {
+                    var WeaponConfig = asset.json.weapons[key];     
+                    if (WeaponConfig && WeaponConfig.prefab && WeaponConfig.WeaponBelong >= 2) {    //5.15 新添加，敌人武器不添加
                         WeaponConfigList.set(WeaponConfig.name , WeaponConfig);
 
                         cc.loader.loadRes(WeaponConfig.prefab ,function (errLoadWeapon, assetWeapon) {
@@ -124,8 +124,8 @@ var RightArm = cc.Class({
 
             //从配置中获取的，要传给武器状态机的参数
             var TransParam = null;
-            if (WeaponData.WeaponConfig.FSMParam != null && WeaponData.WeaponConfig.FSMParam != undefined){
-                TransParam = WeaponData.WeaponConfig.FSMParam;
+            if (WeaponData.WeaponConfig != null && WeaponData.WeaponConfig != undefined){
+                TransParam = WeaponData.WeaponConfig;
             }
 
             if (this.preWeaponId != null || this.preWeaponId != undefined){

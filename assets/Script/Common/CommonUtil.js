@@ -19,6 +19,14 @@ var WeaponType = {
     Dart        :   2,  //飞镖
 };
 
+/*  武器是属于敌人还是属于玩家
+*/
+var WeaponBelong = {  
+    Enemy       :   1,
+    Player      :   2,
+    Both        :   3,
+};
+
 /*
 * 敌人种类
 */
@@ -65,4 +73,5 @@ module.exports = {
     EnemyAttackType :   EnemyAttackType,
     EnemyRunAIResult:   EnemyRunAIResult,
     MoveDirection : MoveDirection,
+    WeaponBelong    :   WeaponBelong,
 };
