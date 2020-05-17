@@ -82,7 +82,7 @@ var GameInitPlayer = cc.Class({
         });*/
         //4.23 初始化状态机
         //this.InitFSM();
-        //this.CreatePlayer();
+        this.CreatePlayer();
 
         //5.15 测试添加一个BOSS
         if (ActorManager._instance != null && ActorManager._instance != undefined)

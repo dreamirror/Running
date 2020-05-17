@@ -105,7 +105,7 @@ var FlyWeaAttState = cc.Class({
                 //计算下位置再转回来
                 var WeaponPos = cc.v2(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
                 var PlayerScene = cc.find("Canvas/GameScene/PlayerScene");
-                WeaponPos = PlayerScene.convertToNodeSpace(WeaponPos);
+                WeaponPos = PlayerScene.convertToNodeSpaceAR(WeaponPos);
 
                 CurWeapon.setPosition(WeaponPos);//(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
                 var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");

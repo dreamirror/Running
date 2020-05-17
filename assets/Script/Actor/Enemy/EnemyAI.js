@@ -33,13 +33,13 @@ var EnemyAI = cc.Class({
         //远距离攻击了的次数
         this.DisAttCount = 0;
         //初始近距离攻击占比
-        this.ClossAttWeight = 40;
+        this.ClossAttWeight = 90;
         this.ClossAttWeightAdd = 10;
-        this.DisAttCount = 30;
+        this.DisAttWeight = 90;
         this.DisAttWeightAdd = 10;
         
         //当前BOSS是在近距离还是在远距离,一开始是在远距离
-        this.BossAttType = BossAttPos.ClossAtt;
+        this.BossAttType = BossAttPos.DisAtt;
         
         //每一个行动的CD时长,单位是秒
         this.ActionInterval   =   InBossConfig.ActionCD;
@@ -120,29 +120,32 @@ var EnemyAI = cc.Class({
         this.CurCDTime = 1000000;
 
         //如果当前是在远程攻击
-        if( this.BossAttType == BossAttPos.ClossAtt ){
+        if( this.BossAttType == BossAttPos.DisAtt ){
             //当前进行攻击的区间值
-            var AttValAround = this.DisAttCount + (this.DisAttCount * this.DisAttWeightAdd);
+            var AttValAround = this.DisAttWeight - (this.DisAttCount * this.DisAttWeightAdd);
             //如果随机值落在这个区间，则进行远距离攻击
             if (RandomResult <= AttValAround){
+                this.DisAttCount++;
                 return CommonUtil.EnemyRunAIResult.DistanceAttack;
             }
             else{   //否则BOSS进行向近距离的移动
-                //return CommonUtil.EnemyRunAIResult.MoveToClose;
-                return CommonUtil.EnemyRunAIResult.DistanceAttack;
+
+                return CommonUtil.EnemyRunAIResult.MoveToClose;
+                //return CommonUtil.EnemyRunAIResult.DistanceAttack;
             }
         }
         //如果当前是在近程攻击
         else{
             //当前进行攻击的区间值
-            var AttValAround = this.ClossAttWeight + (this.ClossAttCount * this.ClossAttWeightAdd);
+            var AttValAround = this.ClossAttWeight - (this.ClossAttCount * this.ClossAttWeightAdd);
             //如果随机值落在这个区间，则进行近距离攻击
             if (RandomResult <= AttValAround){
+                this.ClossAttCount++;
                 return CommonUtil.EnemyRunAIResult.CloseAttack;
             }
             else{   //否则BOSS进行向远距离的移动
-                //return CommonUtil.EnemyRunAIResult.MoveToDistance;
-                return CommonUtil.EnemyRunAIResult.CloseAttack;
+                return CommonUtil.EnemyRunAIResult.MoveToDistance;
+                //return CommonUtil.EnemyRunAIResult.CloseAttack;
             }   
         }
 
@@ -152,6 +155,13 @@ var EnemyAI = cc.Class({
      */
     BossAIRunOver : function() {
         this.CurCDTime = this.ActionInterval;
+    },
+
+    //设置Boss攻击类型
+    SetBossAttPosType : function( InType) {
+        this.BossAttType = InType;
+        this.DisAttCount = 0;
+        this.ClossAttCount = 0;
     },
 
 });

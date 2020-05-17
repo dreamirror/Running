@@ -21,14 +21,18 @@
             "BBoss" : true,
             "Name" : "en_TestBoss",
             "HP" : 100,
-            "InitPos" : [ 300,300 ],
+            "InitPos" : [ 320,300 ],
             "MaxDistance" : 300,
             "MinDistance" : 150,
-            "ActionCD" : 2,
+            "ActionCD" : 1.5,
     
-            "PoisedTime" : 5,
+            "PoisedTime" : 1.5,
             
             "EnemyAttackType" : [1,2],
+
+            "MoveCloseX" : 207,
+            "MoveDistanceX" : 340,
+            "MoveSpeed" : 1,
 
             "DisAttackParam" : {
                 "id" : "BossDart"

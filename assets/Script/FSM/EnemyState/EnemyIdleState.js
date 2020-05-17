@@ -85,7 +85,9 @@ var EnemyIdleState = cc.Class({
     /* 对简单的敌人，可以切换为攻击状态或是死亡状态 */
     BreakCondition :function( ) {
         if(this.bTransCloseAttack == true){
-            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyCloseAttack, null, this);
+            //应该先切换到Hold状态
+            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyPoised, null, this);
+            //this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyCloseAttack, null, this);
             return;
         }
 
@@ -106,6 +108,8 @@ var EnemyIdleState = cc.Class({
     BeforeExit :function( InParamObj ) {
         this.bTransCloseAttack = false;
         this.bTransDistanceAttack = false;
+        this.bTranToClose = false;
+        this.bTransToDisatnce = false;
     },
 
 
