@@ -201,6 +201,11 @@ cc.Class({
         };
     },
 
+    //行走循环动画
+    MoveAnima : function (  ){
+
+    },
+
     /*****************************  动画播放完毕回调  ******************************/
     /* 攻击动画播放完毕 */
     OnAttackAnimaOver : function ( ){
@@ -251,6 +256,10 @@ cc.Class({
         var result =  this.AI.RunBossAI(dt);
 
         return result;
+    },
+
+    SetBossAttPosType : function( InType) {
+        this.AI.SetBossAttPosType(InType);
     },
 
     //设置一个行为结束

@@ -31,24 +31,33 @@ var EnemyPoisedState = cc.Class({
 
         this.PoisedData = InParamObj;
 
+        this.PoisedTime = this.EnemyJS.EmenyData.PoisedTime;
+
         //进入时设置Node对象播放远程攻击动作
         if(this.EnemyJS && (this.EnemyJS instanceof EnemyBase)){
-            this.EnemyJS.DisAttAnima(this , this.OnAttackAnimaOver , null);
+            this.EnemyJS.PoisedAnima();
         }   
     },
 
     Update :function( dt ) {
         //在此更新蓄力时间，时间到了之后，结束蓄力状态
-        if (this.PoisedData.PoisedTime > 0){
-            this.PoisedData.PoisedTime -= dt;
+        if (this.PoisedTime > 0){
+            this.PoisedTime -= dt;
+        }
+        else{
+            this.bAttackOver = true;
         }
     },
 
-    /************************   动画相关 */
-    /* 攻击动画播放完毕 */
-    OnAttackAnimaOver : function ( ){
-        
+    /* 行动完后切换到等待状态 */
+    BreakCondition :function( ) {
+        if(this.bAttackOver == true){
+            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyCloseAttack, null, this.PoisedData);
+            return;
+        }
     },
+    /************************   动画相关 */
+    
 
 });
 

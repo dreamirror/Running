@@ -1,0 +1,54 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "TestBossMove",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6333333333333333,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "y": []
+    },
+    "paths": {
+      "BossFist": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": 141.321
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 199.9
+            },
+            {
+              "frame": 0.3,
+              "value": 169.216
+            },
+            {
+              "frame": 0.43333333333333335,
+              "value": 88.321
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": 155.269
+            },
+            {
+              "frame": 0.6333333333333333,
+              "value": 141.321
+            }
+          ],
+          "x": [
+            {
+              "frame": 0,
+              "value": 97.676
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

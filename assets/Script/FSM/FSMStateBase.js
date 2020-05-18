@@ -85,7 +85,7 @@ var FSMStateBase = cc.Class({
 
     /*******************  状态运行相关  ******************* */
     /** 运行状态 */
-    Update :function( ) {
+    Update :function( dt ) {
 
     },
     /**运行退出状态  */

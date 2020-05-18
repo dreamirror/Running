@@ -6,6 +6,8 @@ var EnemyBase = require("EnemyBase");
 var CommonUtil = require("CommonUtil");
 var EnemyPoisedState = require("EnemyPoisedState");
 var EnemyDisAttState = require("EnemyDisAttState");
+var EnMoveCloseState = require("EnMoveCloseState");
+var EnMoveDisState = require("EnMoveDisState");
 var FSMUtil = require("FSMUtil");
 
 var TestBoss = cc.Class({
@@ -49,9 +51,13 @@ var TestBoss = cc.Class({
         this.PlayAnimation("LowBeeDead");
     },
 
-    PoisedAnima : function( InTarget , InCallBack , InParam ){
+    PoisedAnima : function(  ){
         this.PlayAnimation("TestBossPoised");
-        this._super(InTarget , InCallBack , InParam);
+        //this._super(InTarget , InCallBack , InParam);
+    },
+
+    MoveAnima : function( ){
+        this.PlayAnimation("TestBossMove");
     },
 
     /*************************     状态机相关     ************************/
@@ -66,10 +72,21 @@ var TestBoss = cc.Class({
         var PoisedState = new EnemyPoisedState();
         PoisedState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyPoised);      
 
+        //走向近处状态
+        var CloseState = new EnMoveCloseState();
+        CloseState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyMoveToClose); 
+
+        //走向远处状态
+        var DistanceState = new EnMoveDisState();
+        DistanceState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyMoveToDistance);
+
         //添加远距离攻击状态机
         this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyDistanceAttack, DisAttState );
         //添加近战蓄力攻击状态机
         this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyPoised, PoisedState );
+
+        this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyMoveToClose, CloseState );
+        this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyMoveToDistance, DistanceState );
 
     },
 
@@ -98,7 +115,7 @@ var TestBoss = cc.Class({
                 //计算下位置再转回来
                 var WeaponPos = cc.v2(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
                 var EnemyScene = cc.find("Canvas/GameScene/EnemyScene");
-                WeaponPos = EnemyScene.convertToNodeSpace(WeaponPos);
+                WeaponPos = EnemyScene.convertToNodeSpaceAR(WeaponPos);
 
                 CurWeapon.setPosition(WeaponPos);//(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
                 var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");
