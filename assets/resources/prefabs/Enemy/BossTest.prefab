@@ -91,7 +91,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "BossFist",
+    "_name": "en_BossFist",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -397,7 +397,7 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 90
+      "y": 106
     },
     "_size": {
       "__type__": "cc.Size",
