@@ -8,6 +8,8 @@ const EItemType = require('ItemBase').EItemType;
 const SaveItem = require('ItemBase').SaveItem;
 const EventName = require("GlobalEventName");
 
+const MaxActivePoint = 5;   //体力上限
+const ActivePointRecoverTime = 3600000; //体力回复间隔1小时，毫秒
 
 cc.Class({
     extends: cc.Component,
@@ -16,8 +18,10 @@ cc.Class({
         //玩家基本信息(#注意。对象成员，至少要定义一个default 属性 或者，set/get方法，不然编译报错) 需要持久化的。
         playerInfo: {
             default : {},
-            name: '哟哟',
-            gold: 9000,
+            name: 'Player',
+            gold: 0,
+            activePoint: 5, //行动点（体力）
+            activePointTimeStamp : 0, //体力开始回复的时间戳，每次开始回复一点体力的时候更新一次。
             itemArray : [],
         },
 
@@ -32,8 +36,10 @@ cc.Class({
 
     ctor(){
         this.playerInfo = {
-            name: '哟哟',
-            gold: 9000,
+            name: 'Player',
+            gold: 0,
+            activePoint: 5, 
+            activePointTimeStamp : 0, 
             itemArray : [],
         };
         this.tempInfo = {
@@ -41,17 +47,25 @@ cc.Class({
             weapons : [], //捡到的武器
         };
         this.updateTime = 0;
+
+        this.recoverActivePointTag = false;  //是否在回复体力
+        this.nextRecoverTime = 0; //毫秒
+
+        this.setInfoToLocal();
     },
 
     //重本地读取记录
     onLoad () {
         this.getInfoFromLocal();
-    },
+        let self = this;
 
-    onDestroy(){
-        this.setInfoToLocal();
-    },
+        cc.game.on(cc.game.EVENT_HIDE, function(){
+    　　　　 cc.log("游戏进入后台");
+            self.setInfoToLocal();
+    　　},this);
 
+        this.checkOfflineActivePoint();
+    },
     
     ///////////////////////////////////////////////////////
     //获取基本信息
@@ -215,17 +229,26 @@ cc.Class({
         this.tempInfo.weapons.splice(0);
     },
 
-    //更新BUFF(TODO：先在这儿更新吧。正常来说最好自定义个定时器，不用了就干掉，性能会好点)
+    //更新BUFF和体力回复(TODO：先在这儿更新吧。正常来说最好自定义个定时器，不用了就干掉，性能会好点)
     update(dt){
+        //体力回复的逻辑
+        if (this.recoverActivePointTag == true) {
+            this.nextRecoverTime -= dt;
+            if (this.nextRecoverTime <= 0) {
+                this.doRecoverPoint();
+            }
+        }
+
+
+        //下面是BUFF的逻辑
         if (this.tempInfo.buffs.length == 0) {
             return;
         }
-
         this.updateTime = this.updateTime + dt;
 
+        //累计满一秒才执行一次逻辑
         if (this.updateTime >= 1) {
             this.updateTime = 0;
-            //累计满一秒才执行一次逻辑
 
             for (let index = this.tempInfo.buffs.length - 1; index >= 0 ; index--) {
                 let element = this.tempInfo.buffs[index];
@@ -238,14 +261,81 @@ cc.Class({
                 }
             }
         }
+    },
 
 
+
+    //检查离线回复的体力
+    checkOfflineActivePoint() {
+        if (this.playerInfo.activePoint < MaxActivePoint) {
+            let recoverP = Math.floor((this.getNowTimestamp() - this.playerInfo.activePointTimeStamp) / ActivePointRecoverTime); //离线已回复点数
+            let recoverTime = (this.getNowTimestamp() - this.playerInfo.activePointTimeStamp) % ActivePointRecoverTime;     //离线已回复整点数之外的 已回复时间
+
+            this.playerInfo.activePoint += recoverP;
+            if (this.playerInfo.activePoint >= MaxActivePoint) {
+                this.playerInfo.activePoint = MaxActivePoint;
+                return;
+            }
+
+            this.recoverActivePointTag = true; //需要回复。
+            this.nextRecoverTime = ActivePointRecoverTime - recoverTime; //下一点还要回复的时间。
+        }
+    },
+
+    //恢复一点并检查还要回复不
+    doRecoverPoint: function() {
+        if (this.playerInfo.activePoint < MaxActivePoint) {
+            this.playerInfo.activePoint += 1;
+            if (this.playerInfo.activePoint >= MaxActivePoint) {
+                this.recoverActivePointTag = false;
+                this.nextRecoverTime = 0;
+            } else {
+                this.recoverActivePointTag = true;
+                this.nextRecoverTime = ActivePointRecoverTime;
+                //重置时间戳
+                this.playerInfo.activePointTimeStamp = this.getNowTimestamp(); 
+            }
+            
+            EventCenter.emit(EventName.ActivePointChange,this);
+
+            return;
+        }
+        this.recoverActivePointTag = false;
+        this.nextRecoverTime = 0;
+    },
+
+    //消耗一点体力并检查回复
+    //消耗的时候设置下时间戳。防止下线后不知道什么时候开始回复的
+    costActivePoint : function() {
+        if (this.playerInfo.activePoint > 0) {
+            this.playerInfo.activePoint -= 1;
+
+            EventCenter.emit(EventName.ActivePointChange,this);
+
+            //正处于回复状态就不管
+            if (this.recoverActivePointTag == true) {
+                return;
+            }
+
+            //不在正回复，则开始回复倒计时
+            this.recoverActivePointTag = true;
+            this.nextRecoverTime = ActivePointRecoverTime;
+            this.playerInfo.activePointTimeStamp = this.getNowTimestamp();
+        }
+    },
+
+    //获取当前时间戳
+    getNowTimestamp : function()
+    {
+        return (new Date).getTime();
     },
 
 
 
 
-    
+
+
+
 
     //////////////////////////////////////////////////////////
     
@@ -257,15 +347,18 @@ cc.Class({
 
     //读取数据并初始化userdata
     getInfoFromLocal : function (){
-        cc.sys.localStorage
         let playerinfo = cc.sys.localStorage.getItem("playerinfo");
-        if (playerinfo != null) {
+        if (playerinfo != null && playerinfo != undefined) {
             var ParseData = JSON.parse(playerinfo);
             if(ParseData != null && ParseData != undefined){
-                this.playerInfo = ParseData;
+                //this.playerInfo = ParseData;  //直接整个覆盖的话 新增属性就不好加。
+                for (const key in ParseData) { 
+                    const element = ParseData[key];
+                    this.playerInfo[key] = element;    
+                }
             }
-            
         }
+
         // let tempInfo = cc.sys.localStorage.getItem("tempInfo");
         // if (tempInfo != null) {
         //     this.tempInfo =  JSON.parse(tempInfo);

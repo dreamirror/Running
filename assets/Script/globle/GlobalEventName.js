@@ -15,6 +15,7 @@ var EventName = {
     OnWeaponClear : "OnWeaponClear",     // 武器用完
     GetBuff : "GetBuff",                //获得buff
 
+    ActivePointChange : "_ActivePointChange", //体力变化
     
 };
 

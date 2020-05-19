@@ -146,7 +146,8 @@ var GameManager = cc.Class({
             this.GameData = cc.find("GameContainer").getComponent("GameData");
         }
         this.GameData.clearTemp();
-
+        //每次gameover 存一次数据
+        this.GameData.setInfoToLocal();
     },
     
     /**
