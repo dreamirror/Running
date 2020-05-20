@@ -16,12 +16,6 @@ var ActorManager = cc.Class({
     extends: cc.Component,
 
     properties: {
-        
-        EnemyLowBee : {
-            default : null,
-            type : cc.Prefab
-        },
-
         Player : {
             default : null, 
             type : cc.Prefab,
@@ -31,16 +25,18 @@ var ActorManager = cc.Class({
             default : null,
             type : cc.Prefab,
         },
-
-        Boss : {
-            default : null,
-            type : cc.Prefab,
-        },
-        //之后改成这个，暂时用上面的
-        /*EnemyList : {
+        
+        EnemyPrefabList : {
             default: [],
             type : ActorItem
-        }*/
+        },
+        WeaponPrefabList : {
+            default: [],
+            type : ActorItem
+        },
+
+        //创建出来的敌人列表
+        EnemyInstanceList : null,
     },
 
     statics: {
@@ -49,13 +45,42 @@ var ActorManager = cc.Class({
 
     onLoad () {  
         ActorManager._instance = this;
-        this.EnemyList = new Map();
-        this.EnemyList.set("EnemyLowBee" , this.EnemyLowBee);
-        this.EnemyList.set("TestBoss" , this.Boss);
-        
-        this.FlyWeaponList = new Map();
-        this.FlyWeaponList.set("weaponDart" , this.Dart);
+
+        this.InitInstanceList();
+
+        this.DealPrefabList();
+
+        //this.FlyWeaponList = new Map();
+        //this.FlyWeaponList.set("weaponDart" , this.Dart);
     },
+
+    /** 创建一些用来存储实例的Array*/
+    InitInstanceList : function(){
+        this.EnemyInstanceList = new Array();
+        
+    },
+
+    /*
+    遍历一下，将Prefab的List对应转化成Map方便查询
+    */
+    DealPrefabList : function() {
+
+        //处理敌人Prefab
+        this.EnemyList = new Map();
+        for (let index = 0; index < this.EnemyPrefabList.length; index++) {
+            const element = this.EnemyPrefabList[index];
+            this.EnemyList.set(element.id,element.prefab);
+        }
+
+        //处理下武器的PrefabList
+        this.FlyWeaponList = new Map();
+        for (let index = 0; index < this.WeaponPrefabList.length; index++) {
+            const element = this.WeaponPrefabList[index];
+            this.FlyWeaponList.set(element.id,element.prefab);
+        }
+        
+    },
+
 
     /**
      * 创建一个玩家Player 并直接把玩家加入到当前页面中
@@ -92,6 +117,7 @@ var ActorManager = cc.Class({
                         EnemyJS.InitEnemyType(GameManager.EnemyConfigData.EnemyType[InType]); //EmenyData = GameManager.EnemyConfigData.EnemyType[InType];
                     }
 
+                    this.EnemyInstanceList.push(EnemyInstance);
                     return EnemyInstance;
                 }
             };
@@ -99,6 +125,23 @@ var ActorManager = cc.Class({
 
         return null;
     },
+    /* 传入一个敌人并且删除 */
+    DeleteEnemy : function( InEnemyInstance ){
+        var pos = this.EnemyInstanceList.indexOf(InEnemyInstance);
+        if (pos != undefined && pos != -1){
+            this.EnemyInstanceList.splice(pos, 1);
+            InEnemyInstance.destroy();
+        }
+    },
+    /* 获取当前场景中的敌人 */
+    GetEnemy : function ( Index ){
+        if( Index != null && Index != undefined && Index > -1 && this.EnemyInstanceList.length > Index){
+            return this.EnemyInstanceList[Index];
+        }
+        
+        return this.EnemyInstanceList;
+    },
+
 
     /**
      * 根据传入的Type创建一个Boss
