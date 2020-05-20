@@ -34,6 +34,9 @@ var ActorManager = cc.Class({
             default: [],
             type : ActorItem
         },
+
+        //创建出来的敌人列表
+        EnemyInstanceList : null,
     },
 
     statics: {
@@ -42,10 +45,19 @@ var ActorManager = cc.Class({
 
     onLoad () {  
         ActorManager._instance = this;
+
+        this.InitInstanceList();
+
         this.DealPrefabList();
 
         //this.FlyWeaponList = new Map();
         //this.FlyWeaponList.set("weaponDart" , this.Dart);
+    },
+
+    /** 创建一些用来存储实例的Array*/
+    InitInstanceList : function(){
+        this.EnemyInstanceList = new Array();
+        
     },
 
     /*
@@ -105,6 +117,7 @@ var ActorManager = cc.Class({
                         EnemyJS.InitEnemyType(GameManager.EnemyConfigData.EnemyType[InType]); //EmenyData = GameManager.EnemyConfigData.EnemyType[InType];
                     }
 
+                    this.EnemyInstanceList.push(EnemyInstance);
                     return EnemyInstance;
                 }
             };
@@ -112,6 +125,23 @@ var ActorManager = cc.Class({
 
         return null;
     },
+    /* 传入一个敌人并且删除 */
+    DeleteEnemy : function( InEnemyInstance ){
+        var pos = this.EnemyInstanceList.indexOf(InEnemyInstance);
+        if (pos != undefined && pos != -1){
+            this.EnemyInstanceList.splice(pos, 1);
+            InEnemyInstance.destroy();
+        }
+    },
+    /* 获取当前场景中的敌人 */
+    GetEnemy : function ( Index ){
+        if( Index != null && Index != undefined && Index > -1 && this.EnemyInstanceList.length > Index){
+            return this.EnemyInstanceList[Index];
+        }
+        
+        return this.EnemyInstanceList;
+    },
+
 
     /**
      * 根据传入的Type创建一个Boss
