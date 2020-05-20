@@ -69,8 +69,8 @@ cc.Class({
 
 
     touchStartBtn(){
-        this._gameData.costActivePoint()
-        return
+        //this._gameData.costActivePoint()
+        //return
         var AudioManager = cc.find("GameContainer").getComponent("AudioManager");
         if (AudioManager) {
             AudioManager.playEffect("Sound/sfx_score");
