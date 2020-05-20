@@ -1,5 +1,9 @@
 {
     "barrierPrafabs" :["prefabs/ba_box","prefabs/ba_fire","prefabs/ba_sword"],
+    "goldOffset":10,
+    "itemOffset" : 5,
+    "itemPosition":[50,150,200,250],
+
     "1" : {
         "Speed": 350,
         "BgSpeed": 0.5,

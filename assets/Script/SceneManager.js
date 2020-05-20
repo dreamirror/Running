@@ -81,7 +81,15 @@ var SceneManager = cc.Class({
                             //pb.parent = cc.director.getScene();  //加到当前场景
                             ParentNode.addChild(pb);                 //加到父节点（这里是canvas）
                             let pos = Math.floor(self.pos_list.length * Math.random());
-                            pb.setPosition(self.pos_list[pos]);
+
+                            var random4  = function (n, m){
+                                var random = Math.floor(Math.random()*(m-n+1)+n);
+                                return random;
+                            }
+
+                            var x = random4(window.SceneData.itemPosition[0],window.SceneData.itemPosition[1])
+                            var y = random4(window.SceneData.itemPosition[2],window.SceneData.itemPosition[3])
+                            pb.setPosition(cc.v2(x,y));
                         }
                     }
                 }   
@@ -148,7 +156,9 @@ window.SceneData = {
     barrierData : {},
     intervalData: {},
     barrierPath :{},
-
+    goldOffset : 0,
+    itemOffset : 0,
+    itemPosition :null,
 
     random4 : function (n, m){
         var random = Math.floor(Math.random()*(m-n+1)+n);
@@ -262,6 +272,9 @@ cc.loader.loadRes("Config/LevelConfig",function(err,object){
     window.SceneData.barrierPath = currentLevelData.BarriersPrefabs;
     
     window.SceneData.RoadStartPos = currentLevelData.RoadStartPos;
+    window.SceneData.goldOffset =  object.json.goldOffset
+    window.SceneData.itemOffset = object.json.itemOffset;
+    window.SceneData.itemPosition = object.json.itemPosition;
     });
 
 

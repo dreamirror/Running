@@ -354,7 +354,7 @@ var GameScene = cc.Class({
     spawnGold(num,width){
 
         var lastRoad = this.roads[this.roads.length - 1];
-        var offsety = 0
+        var offsety = window.SceneData.goldOffset
         var interval = 50
         
         if(lastRoad)
