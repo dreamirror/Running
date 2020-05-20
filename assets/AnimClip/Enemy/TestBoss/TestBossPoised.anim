@@ -9,7 +9,31 @@
   "wrapMode": 2,
   "curveData": {
     "paths": {
-      "BossFist": {
+      "AttTips": {
+        "props": {
+          "active": [
+            {
+              "frame": 0,
+              "value": true
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.125,
+              "value": 100
+            },
+            {
+              "frame": 0.25,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "en_BossFist": {
         "props": {
           "x": [
             {
@@ -61,30 +85,6 @@
             {
               "frame": 0.25,
               "value": 146.878
-            }
-          ]
-        }
-      },
-      "AttTips": {
-        "props": {
-          "active": [
-            {
-              "frame": 0,
-              "value": true
-            }
-          ],
-          "opacity": [
-            {
-              "frame": 0,
-              "value": 255
-            },
-            {
-              "frame": 0.125,
-              "value": 100
-            },
-            {
-              "frame": 0.25,
-              "value": 255
             }
           ]
         }

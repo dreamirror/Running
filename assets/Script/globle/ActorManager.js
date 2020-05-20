@@ -16,12 +16,6 @@ var ActorManager = cc.Class({
     extends: cc.Component,
 
     properties: {
-        
-        EnemyLowBee : {
-            default : null,
-            type : cc.Prefab
-        },
-
         Player : {
             default : null, 
             type : cc.Prefab,
@@ -31,16 +25,15 @@ var ActorManager = cc.Class({
             default : null,
             type : cc.Prefab,
         },
-
-        Boss : {
-            default : null,
-            type : cc.Prefab,
-        },
-        //之后改成这个，暂时用上面的
-        /*EnemyList : {
+        
+        EnemyPrefabList : {
             default: [],
             type : ActorItem
-        }*/
+        },
+        WeaponPrefabList : {
+            default: [],
+            type : ActorItem
+        },
     },
 
     statics: {
@@ -49,13 +42,33 @@ var ActorManager = cc.Class({
 
     onLoad () {  
         ActorManager._instance = this;
-        this.EnemyList = new Map();
-        this.EnemyList.set("EnemyLowBee" , this.EnemyLowBee);
-        this.EnemyList.set("TestBoss" , this.Boss);
-        
-        this.FlyWeaponList = new Map();
-        this.FlyWeaponList.set("weaponDart" , this.Dart);
+        this.DealPrefabList();
+
+        //this.FlyWeaponList = new Map();
+        //this.FlyWeaponList.set("weaponDart" , this.Dart);
     },
+
+    /*
+    遍历一下，将Prefab的List对应转化成Map方便查询
+    */
+    DealPrefabList : function() {
+
+        //处理敌人Prefab
+        this.EnemyList = new Map();
+        for (let index = 0; index < this.EnemyPrefabList.length; index++) {
+            const element = this.EnemyPrefabList[index];
+            this.EnemyList.set(element.id,element.prefab);
+        }
+
+        //处理下武器的PrefabList
+        this.FlyWeaponList = new Map();
+        for (let index = 0; index < this.WeaponPrefabList.length; index++) {
+            const element = this.WeaponPrefabList[index];
+            this.FlyWeaponList.set(element.id,element.prefab);
+        }
+        
+    },
+
 
     /**
      * 创建一个玩家Player 并直接把玩家加入到当前页面中
