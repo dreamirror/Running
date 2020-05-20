@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 43
+        "__id__": 42
       }
     ],
     "_active": false,
@@ -189,7 +189,7 @@
       "array": [
         0,
         0,
-        377.5870760500153,
+        476.3139720814413,
         0,
         0,
         0,
@@ -1003,6 +1003,30 @@
     "rightRoad": {
       "__uuid__": "ba044aba-36f3-4990-a301-b44bc89d7563"
     },
+    "rightRoads": [
+      {
+        "__uuid__": "ba044aba-36f3-4990-a301-b44bc89d7563"
+      },
+      {
+        "__uuid__": "305c2914-cdb8-4a18-bca8-f1865fa5364e"
+      }
+    ],
+    "leftRoads": [
+      {
+        "__uuid__": "9fd2c291-74bf-4290-8f6f-831992e89e0f"
+      },
+      {
+        "__uuid__": "5e0c7c49-a690-4258-a67e-174f0b7f6978"
+      }
+    ],
+    "midleRoads": [
+      {
+        "__uuid__": "5317110a-1fa0-44ae-9a5f-ffefd5c60e7d"
+      },
+      {
+        "__uuid__": "0fd3b9ac-08ff-4472-bd73-357716cbdaab"
+      }
+    ],
     "barriers": [],
     "roads": [],
     "golds": [],
@@ -1013,6 +1037,9 @@
     "goldCD": 4,
     "intervalCD": 0,
     "itemCD": 9,
+    "hightChangeCD": 10,
+    "CurrentLevel": 1,
+    "hightOffset": 0,
     "_id": "37CImuRoBA7ZPZWn/BNlvc"
   },
   {
@@ -1413,6 +1440,7 @@
       }
     ],
     "TreeCache": [],
+    "ChangeMasks": [],
     "cd": 3,
     "_id": "f5uj8WYPRN7KxT7UKalo6Y"
   },
@@ -1826,16 +1854,14 @@
     ],
     "WeaponPrefabList": [
       {
-        "__id__": 42
+        "id": "weaponDart",
+        "prefab": {
+          "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
+        }
       }
     ],
+    "EnemyInstanceList": null,
     "_id": "0ao/KQtKhCj4KS9E5Nz3cq"
-  },
-  {
-    "prefab": {
-      "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
-    },
-    "id": "weaponDart"
   },
   {
     "__type__": "cc.Node",
@@ -1848,6 +1874,9 @@
     "_active": false,
     "_components": [
       {
+        "__id__": 43
+      },
+      {
         "__id__": 44
       },
       {
@@ -1855,13 +1884,10 @@
       },
       {
         "__id__": 46
-      },
-      {
-        "__id__": 47
       }
     ],
     "_prefab": {
-      "__id__": 48
+      "__id__": 47
     },
     "_opacity": 255,
     "_color": {
@@ -1915,7 +1941,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 43
+      "__id__": 42
     },
     "_enabled": true,
     "_materials": [
@@ -1949,7 +1975,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 43
+      "__id__": 42
     },
     "_enabled": true,
     "_defaultClip": null,
@@ -1972,7 +1998,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 43
+      "__id__": 42
     },
     "_enabled": true,
     "tag": 0,
@@ -1993,7 +2019,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 43
+      "__id__": 42
     },
     "_enabled": true,
     "AYSpeed": 0,
@@ -2009,7 +2035,7 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 43
+      "__id__": 42
     },
     "asset": {
       "__uuid__": "478816c2-26ac-4ff0-b6b3-c47e71ecc9fb"

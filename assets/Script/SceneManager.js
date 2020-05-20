@@ -211,7 +211,9 @@ window.SceneData = {
     {
 
         var barrierData = this.getConfigData();
-        return this.random4(barrierData.goldCD[0],barrierData.goldCD[1]);
+        var cd = this.random4(barrierData.goldCD[0],barrierData.goldCD[1]);
+        var num = this.random4(barrierData.goldNum[0],barrierData.goldNum[1]);
+        return {"cd":cd,"num":num}
     },
 
     getIntervalData : function()
@@ -232,7 +234,10 @@ window.SceneData = {
 
         var cd = this.random4(intervalData.cd[0],intervalData.cd[1])
         var interval = this.random4(intervalData.interval[0],intervalData.interval[1])
-        return {"cd":cd,"interval":interval};
+        var hightCD = this.random4(intervalData.hightChangeCD[0],intervalData.hightChangeCD[1])
+        var hight = intervalData.height[this.random4(0,intervalData.height.length - 1)]
+
+        return {"cd":cd,"interval":interval,"hightCD":hightCD,"hight":hight};
 
     }
 

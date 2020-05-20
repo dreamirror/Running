@@ -26,6 +26,8 @@ cc.Class({
         // },
         Trees : [cc.Prefab],
         TreeCache :[],
+        ChangeMasks:[],
+
         cd : 3,
     },
 
@@ -44,8 +46,42 @@ cc.Class({
 
     //切换关卡的时候生成一大遮挡的背景
     changeLevel(){
+        if(this.mask == null)
+        {
+            cc.log("切换场景")
+            var mask = cc.instantiate(this.Trees[0]);
+            this.node.addChild(mask);
+            mask.setPosition(cc.v2(900,0));
+            this.mask = mask;
+        }
 
 
+    },
+    updateChangeMask(inx){
+        if(this.mask)
+        {
+            var x = this.mask.getPosition().x
+            var y = this.mask.getPosition().y;
+            this.mask.setPosition(cc.v2(x - inx,y));
+            if(x < -this.mask.width)
+            {
+                cc.log("切换场景遮罩结束");
+                this.cancelMask();
+            }
+
+            //切换场景
+            if(x<0)
+            {
+                cc.find("Canvas/GameScene/BackGround").getComponent("GameScene").changeLevel();
+            }
+        }
+    },
+    cancelMask(){
+        if(this.mask)
+        {
+            this.mask.removeFromParent();
+            this.mask = null;
+        }
     },
 
     updateTree(inx)
@@ -93,9 +129,10 @@ cc.Class({
 
      update (dt) {
         //生成树
-       // this.spawnTree(dt);
+        //this.spawnTree(dt);
         //更新树的位置
         //this.updateTree(window.SceneData.Speed *dt)
+        this.updateChangeMask(window.SceneData.Speed *dt)
         
      },
 });

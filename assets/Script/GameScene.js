@@ -75,6 +75,9 @@ var GameScene = cc.Class({
             default:null,
             type:cc.Prefab
         },
+        rightRoads:[cc.Prefab],
+        leftRoads:[cc.Prefab],
+        midleRoads:[cc.Prefab],
 
         barriers :[],
         roads : [],
@@ -86,7 +89,9 @@ var GameScene = cc.Class({
         goldCD :7,
         intervalCD: 0,
         itemCD: 9,
-       
+        hightChangeCD : 2,
+       CurrentLevel : 1,
+       hightOffset : 0,
 
     },
 
@@ -129,6 +134,10 @@ var GameScene = cc.Class({
 
     start () {
         this.initRoad();
+    },
+
+    updateCurrentLevel(){
+
     },
 
     SpawnBarrier : function(){
@@ -174,14 +183,16 @@ var GameScene = cc.Class({
 
 
     },
-    spawnRoad : function(x,interval){
+    spawnRoad : function(x,interval,hightOffset){
+        cc.log("生成路interval="+interval);
+        cc.log(this.hightOffset)
         var road =null;
         if(interval > 0 )
         {
-            road = cc.instantiate(this.rightRoad);
+            road = cc.instantiate(this.rightRoads[this.CurrentLevel - 1]);
         }
         else{
-            road = cc.instantiate(this.roadPrefab);
+            road = cc.instantiate(this.midleRoads[this.CurrentLevel - 1]);
         }
 
         var lastRoad =  this.roads[this.roads.length- 1]
@@ -189,8 +200,10 @@ var GameScene = cc.Class({
         var self = this;
         if (lastRoad && interval >0)
         {
-            var newRoad = cc.instantiate(this.leftRoad);
-            newRoad.setPosition(cc.v2(lastRoad.getPosition().x,lastRoad.getPosition().y));
+            
+            var newRoad = cc.instantiate(this.leftRoads[this.CurrentLevel - 1]);
+            newRoad.setPosition(cc.v2(lastRoad.getPosition().x,this.hightOffset));
+            this.hightOffset = hightOffset || this.hightOffset;
             this.node.removeChild(lastRoad);
             this.node.addChild(newRoad);
             self.roads[self.roads.length- 1] = newRoad;
@@ -218,7 +231,7 @@ var GameScene = cc.Class({
                 this.SpecialPosRanges.push(Range);
 
             }
-            road.setPosition(inx,0);
+            road.setPosition(inx,this.hightOffset || 0);
         }
         this.roads.push(road);
 
@@ -244,7 +257,7 @@ var GameScene = cc.Class({
     },
 
     initRoad : function(){
-        var road = cc.instantiate(this.roadPrefab);
+        var road = cc.instantiate(this.midleRoads[this.CurrentLevel - 1]);
         var width = DesignSize;
         var num = (width / road.width) + 1;
         for(var i = 0;i < num;i++)
@@ -253,7 +266,6 @@ var GameScene = cc.Class({
 
             //zh 5.6
             var RoadY = 0;
-            RoadY = window.SceneData.RoadStartPos[1];
 
             road.setPosition(road.width * i,RoadY);
         }
@@ -268,8 +280,8 @@ var GameScene = cc.Class({
             for(var index in this.roads)
             {
                 var item = this.roads[index];
-  
-                item.setPosition(item.getPosition().x - dis,0);
+                var y = item.getPosition().y
+                item.setPosition(item.getPosition().x - dis,y);
                 if(item.getPosition().x < -item.width)
                 {
                     item.removeFromParent();
@@ -381,6 +393,7 @@ var GameScene = cc.Class({
                 var tt = gold.getComponent("ItemInGame");
                 if (gold && gold.getComponent("ItemInGame").NeedFly == false)   
                 {
+
                     if(goldX>0)
                     {
                        gold.setPosition(cc.v2(goldX - inx,goldY));
@@ -432,6 +445,10 @@ var GameScene = cc.Class({
         }
     },
 
+    changeLevel(){
+        this.CurrentLevel = 2
+    },
+
 
      update (dt) {
         this.back_1.setPosition(this.back_1.getPosition().x - window.SceneData.Speed *dt,0)
@@ -442,6 +459,9 @@ var GameScene = cc.Class({
         this.CDTime -=dt;
         this.goldCD -=dt;
         this.itemCD -=dt;
+        this.hightChangeCD -=dt;
+
+        //切换
 
         //更新金币位置
         this.updateGlod(window.SceneData.Speed *dt);
@@ -449,8 +469,10 @@ var GameScene = cc.Class({
         //生成金币
         if(this.goldCD <=0)
         {
-            this.goldCD = window.SceneData.getSpawnGoldCD()
-            this.spawnGold(16);
+            var goldData = window.SceneData.getSpawnGoldCD()
+            this.goldCD = goldData.cd
+
+            this.spawnGold(goldData.num);
         }
 
         //更新间隔的数据
@@ -490,8 +512,17 @@ var GameScene = cc.Class({
                     if(this.intervalCD <=0 )
                     {
                         var intervalData = window.SceneData.getIntervalData()
-                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,intervalData.interval);
                         this.intervalCD = intervalData.cd
+                        var offset;
+                        if(this.hightChangeCD <= 0)
+                        {
+                            this.hightChangeCD = intervalData.hightCD;
+                            offset = intervalData.hight;
+                            cc.log("--------------")
+                        }
+                        
+                        this.spawnRoad(lastRoad.x + lastRoad.width - 2,intervalData.interval,offset);
+
 
                     }
                     else{
@@ -528,6 +559,14 @@ var GameScene = cc.Class({
         }
          var self = this;
          self.obj = null;
+
+
+         //切换关卡的测试
+         if(this.changeLevelTag == null && window.SceneData.TaltleDistance > 10)
+         {
+            this.changeLevelTag = true;
+            //cc.find("Canvas/GameScene/FrontBg").getComponent("FrontBg").changeLevel();
+         }
 
 
      },
