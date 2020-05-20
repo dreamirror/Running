@@ -149,6 +149,28 @@ FunctionLibrary.RandomByWeight = function(weights){
 };
 
 
+/**
+ * 毫秒转 00:00:00
+ */
+FunctionLibrary.get_time_hour_min_sec = function(mile_seconds){
+    let seconds  =  mile_seconds / 1000;
+    let hour = Math.floor(seconds / 3600);
+    let minute = Math.floor((seconds % 3600) / 60);
+    let second = Math.floor(seconds % 3600 % 60);
+
+    if (hour < 10){
+        hour = "0" + hour;
+    }
+    if (minute < 10){
+        minute = "0" + minute;
+    }
+
+    if (second < 10){
+        second = "0" + second;
+    }
+    return hour + ":" + minute + ":" + second;
+}
+
 module.exports = FunctionLibrary;
 
 

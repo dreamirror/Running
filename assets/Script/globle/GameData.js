@@ -63,7 +63,7 @@ cc.Class({
     　　　　 cc.log("游戏进入后台");
             self.setInfoToLocal();
     　　},this);
-
+        this.MaxActivePoint = MaxActivePoint;
         this.checkOfflineActivePoint();
     },
     
@@ -82,9 +82,16 @@ cc.Class({
         return this.playerInfo.gold;
     },
     
-    //获得金币
+    //获得金币(传负数就是扣除金币)
+    //返回操作成功或失败
     addPlayerGold : function (num) {
+        if (num < 0 && this.playerInfo.gold < Math.abs(num)) {
+            cc.log("## 金币不足 ##")
+            return false;
+        }
         this.playerInfo.gold = this.playerInfo.gold + num;
+        EventCenter.emit(EventName.GoldChange,this);
+        return true;
     },
 
     //是否有磁铁BUFF
@@ -233,7 +240,7 @@ cc.Class({
     update(dt){
         //体力回复的逻辑
         if (this.recoverActivePointTag == true) {
-            this.nextRecoverTime -= dt;
+            this.nextRecoverTime -= (dt*1000);
             if (this.nextRecoverTime <= 0) {
                 this.doRecoverPoint();
             }

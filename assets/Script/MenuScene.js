@@ -1,6 +1,6 @@
-const ItemBase = require('ItemBase').ItemBase;
 
-const PopupWin = require('PopupWin');
+const FunctionLibrary = require("FunctionLibrary");
+const EventName = require("GlobalEventName");
 
 cc.Class({
     extends: cc.Component,
@@ -10,52 +10,67 @@ cc.Class({
     },
 
     start () {
-        //this.testSpawnItem();
+        this._gameData = cc.find("GameContainer").getComponent("GameData");
+
+        this.refreshActivePoint();
+        this.refreshGold();
+
+        EventCenter.on(EventName.ActivePointChange,this.refreshActivePoint,this);
+        EventCenter.on(EventName.GoldChange,this.refreshGold,this);
+    },
+
+
+    update(){
+        this.tickRecoverTime();
+    },
+
+    onDestroy(){
+        EventCenter.off(EventName.ActivePointChange,this.refreshActivePoint,this);
+        EventCenter.off(EventName.GoldChange,this.refreshGold,this);
     },
 
     //////////////////////////////////
-
-    testSpawnItem() {
-        let self = this;
-        cc.loader.loadRes('Config/ItemConfig', function (err, asset) {
-            if(err){
-                cc.log(err); 
-                return;
-            } 
-            let index = 0;
-            for(var p in asset.json){//遍历json对象的每个key/value对,p为key
-                var iteminfo = asset.json[p];
-                var item = new ItemBase();
-
-                item.init(iteminfo.id,iteminfo.name,iteminfo.icon);
-                var GameData = cc.find("GameContainer").getComponent("GameData");
-                GameData.addItem( iteminfo,1);
-
-                if (self.EntityPrefab) {
-                    let pb = cc.instantiate(self.EntityPrefab);
-                    pb.getComponent("ItemInGame").init(item);
-                    //pb.parent = cc.director.getScene();  //加到当前场景
-                    self.node.addChild(pb);                 //加到父节点（这里是canvas）
-                    let x = index * 150 - 50;
-                    pb.setPosition(cc.v2(x,0));
-                }
-                
-                index = index + 1;
+    tickRecoverTime(){
+        if (this._gameData.getPlayerInfo().activePoint < this._gameData.MaxActivePoint) {
+            const timenode = cc.find("Canvas/TitleContainer/titlepower/recover_time");
+            let timenum = timenode.getComponent(cc.Label);
+            if (this._gameData.nextRecoverTime) {
+                timenum.string = FunctionLibrary.get_time_hour_min_sec(this._gameData.nextRecoverTime);
             }
-        });
+        }
+    },
+
+    refreshActivePoint(){
+        let now_point = this._gameData.getPlayerInfo().activePoint;
+        for (let index = 1; index <= this._gameData.MaxActivePoint; index++) {
+            const element = cc.find("Canvas/TitleContainer/titlepower/icon_tili" + index);
+            if (now_point >= index) {
+                element.active = true;
+            }
+            else
+            {
+                element.active = false;
+            }
+        }
+        //回复时间
+        if (now_point >= this._gameData.MaxActivePoint) {
+            const timenode = cc.find("Canvas/TitleContainer/titlepower/recover_time");
+            let timenum = timenode.getComponent(cc.Label);
+            timenum.string = "";
+        }
+    },
+
+    refreshGold(){
+        let goldnum = cc.find("Canvas/TitleContainer/titlegold/goldnum");
+        if (goldnum) {
+            goldnum.getComponent(cc.Label).string = this._gameData.getPlayerGold();
+        }
     },
 
 
     touchStartBtn(){
-        // PopupWin.show.call(this,{
-        //                 leftCallback : function(){
-        //                     cc.log("click left");
-        //                 },
-        //                 rightCallback : function(){
-        //                     cc.log("click right");
-        //                 },
-        //             });
-        // return
+        this._gameData.costActivePoint()
+        return
         var AudioManager = cc.find("GameContainer").getComponent("AudioManager");
         if (AudioManager) {
             AudioManager.playEffect("Sound/sfx_score");
@@ -64,5 +79,18 @@ cc.Class({
         cc.director.loadScene("GameScene",function(){
             cc.log("GameScene launched!");
         });
+    },
+
+
+    //点击体力加
+    touchAddActivePoint(){
+        cc.log("### touch active potin ###")
+        //体力没满就看广告。
+        var GameData = this._gameData;
+        if (GameData.getPlayerInfo().activePoint < GameData.MaxActivePoint ) {
+            //看广告。
+
+            //GameData.doRecoverPoint();
+        }
     },
 });

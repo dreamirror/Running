@@ -16,6 +16,7 @@ var EventName = {
     GetBuff : "GetBuff",                //获得buff
 
     ActivePointChange : "_ActivePointChange", //体力变化
+    GoldChange : "_GoldChange", //金币变化
     
 };
 
