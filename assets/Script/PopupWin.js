@@ -36,29 +36,26 @@ let show = function (data) {
         }
         PopupWin._alert = cc.instantiate(prefab);
         cc.find('Canvas').addChild(PopupWin._alert,3);
-        cc.find("PopWin/title").getComponent(cc.Label).string = data.titleStr ? data.titleStr : "标题为空";
-        cc.find("PopWin/tips").getComponent(cc.Label).string = data.tipStr ? data.tipStr : "提示内容为空";
-        cc.find("PopWin/leftbtn/btnstr").getComponent(cc.Label).string = data.leftStr ? data.leftStr : "OK";
-        cc.find("PopWin/rightbtn/btnstr").getComponent(cc.Label).string = data.rightStr ? data.rightStr : "NO";
+
+        cc.find("Canvas/PopWin/title").getComponent(cc.Label).string = data.titleStr ? data.titleStr : "标题为空";
+        cc.find("Canvas/PopWin/tips").getComponent(cc.Label).string = data.tipStr ? data.tipStr : "提示内容为空";
+        cc.find("Canvas/PopWin/leftbtn/btnstr").getComponent(cc.Label).string = data.leftStr ? data.leftStr : "OK";
+        cc.find("Canvas/PopWin/rightbtn/btnstr").getComponent(cc.Label).string = data.rightStr ? data.rightStr : "NO";
         
-        cc.find("PopWin/leftbtn").on('click', function (event) {
+        cc.find("Canvas/PopWin/leftbtn").on('click', function (event) {
             dismiss();
             if(data.leftCallback){
                 data.leftCallback();
             }
         }, this);
         
-
-    
-        cc.find("PopWin/rightbtn").on('click', function (event) {
+        cc.find("Canvas/PopWin/rightbtn").on('click', function (event) {
             dismiss();
             if(data.rightCallback){
                 data.rightCallback();
             }
         }, this);
-    
-        //设置parent 为当前场景的Canvas ，position跟随父节点
-        PopupWin._alert.parent = cc.find("Canvas");
+
         startFadeIn();
     });
 };

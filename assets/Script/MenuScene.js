@@ -2,6 +2,8 @@
 const FunctionLibrary = require("FunctionLibrary");
 const EventName = require("GlobalEventName");
 
+let PopupWin = require('PopupWin');
+
 cc.Class({
     extends: cc.Component,
 
@@ -69,8 +71,20 @@ cc.Class({
 
 
     touchStartBtn(){
-        this._gameData.costActivePoint()
-        return
+        if (this._gameData.getPlayerInfo().activePoint < 0) { 
+            let watchAD = function(){
+
+            };
+            let data = {
+                titleStr : "提示",
+                tipStr : "体力不足，每日前3次观看广告可增加体力哟",
+                leftStr : "勉强看看",
+                rightStr : "先不看了",
+                leftCallback : watchAD
+            }
+            PopupWin.show.call(this,data);
+            return;
+        }
         var AudioManager = cc.find("GameContainer").getComponent("AudioManager");
         if (AudioManager) {
             AudioManager.playEffect("Sound/sfx_score");

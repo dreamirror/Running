@@ -171,6 +171,17 @@ FunctionLibrary.get_time_hour_min_sec = function(mile_seconds){
     return hour + ":" + minute + ":" + second;
 }
 
+/**
+ * 看广告的接口
+ */
+FunctionLibrary.WatchAds = function(callback){
+
+    if (callback) {
+        callback.call(this);
+    }
+    return false;
+}
+
 module.exports = FunctionLibrary;
 
 

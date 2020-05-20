@@ -330,8 +330,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 270,
-      "height": 90.4
+      "width": 300,
+      "height": 90
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -383,8 +383,8 @@
     "_useOriginalSize": false,
     "_string": "重新来过？观看广告\n可原地复活。",
     "_N$string": "重新来过？观看广告\n可原地复活。",
-    "_fontSize": 30,
-    "_lineHeight": 40,
+    "_fontSize": 25,
+    "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -395,7 +395,7 @@
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0,
+    "_N$overflow": 1,
     "_N$cacheMode": 0,
     "_id": ""
   },
@@ -532,7 +532,7 @@
         1,
         1,
         1,
-        0
+        1
       ]
     },
     "_eulerAngles": {
