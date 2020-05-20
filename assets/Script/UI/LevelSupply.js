@@ -51,7 +51,7 @@ let show = function (callback) {
 
         for (let index = 0; index < 3; index++) {
             const element = arrayItem[index];
-            let item = cc.find("LevelSupplyWin/ItemContent/item"+index);
+            let item = cc.find("Canvas/LevelSupplyWin/ItemContent/item"+index);
             if (item && element) {
                 cc.loader.loadRes(element.icon, function(err,img){
                     var mylogo  = new cc.SpriteFrame(img); 
@@ -66,7 +66,7 @@ let show = function (callback) {
 
 
         
-        cc.find("LevelSupplyWin/close").on('click', function (event) {
+        cc.find("Canvas/LevelSupplyWin/close").on('click', function (event) {
             close();
         }, this);
         
