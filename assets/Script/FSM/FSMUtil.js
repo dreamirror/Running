@@ -15,6 +15,9 @@ var FSMStateID = {
     ArmDartNormal   :   105,        //飞镖普通状态
     ArmDartAttack   :   106,        //飞镖攻击状态
 
+    FlySwordNormalTag   :  107,  //飞剑
+    FlySwordAttackTag   :  108,
+
     ArmThunderNormal   :   110,     //雷电普通状态
     ArmThunderAttack   :   111,     //雷电攻击状态
 

@@ -59,7 +59,14 @@ var RightArm = cc.Class({
                                 var CurWeaponData = WeaponConfigList.get(assetWeapon.name);
                                 var CurWeapon = cc.instantiate(assetWeapon);
                                 if (CurWeapon){
-                                    self.node.addChild(CurWeapon);
+                                    
+                                    if (CurWeaponData.addToBack != undefined && CurWeaponData.addToBack != null) {
+                                        //添加到后背上
+                                        self.node.getParent().getChildByName("Back").addChild(CurWeapon);
+                                    } else {
+                                        //添加到手上
+                                        self.node.addChild(CurWeapon);
+                                    }
 
                                     if(CurWeaponData.Pos){
                                         var PosArr = CurWeaponData.Pos.split(",");

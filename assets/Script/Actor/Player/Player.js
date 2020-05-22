@@ -12,6 +12,9 @@ var FlyWeaAttState = require("FlyWeaAttState");
 var ThunderNormalState = require("ThunderNormalState");
 var ThunderAttackState = require("ThunderAttackState");
 
+var FlySwordNormalST = require("FlySwordNormalST");
+var FlySwordAttackST = require("FlySwordAttackST");
+
 /* */
 var GravityManager = require("GravityManager");
 var FunctionLibrary = require("FunctionLibrary");
@@ -172,6 +175,12 @@ var Player = cc.Class({
             
             var ThunderWeAttackState = new ThunderAttackState();
             ThunderWeAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
+
+            /*添加 飞剑的状态机 */
+            var FlySwordNormalState = new FlySwordNormalST();
+            FlySwordNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.FlySwordNormalTag);
+            var FlySwordAttState = new FlySwordAttackST();
+            FlySwordAttState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.FlySwordAttackTag);
             
             this.RightArmFSMMgr.Init( FSMUtil.FSMStateID.ArmDefaultWeapon , DefaultWeaponState);
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDefaultWeaponAtt, DefaultWeaponAttack );
@@ -181,7 +190,10 @@ var Player = cc.Class({
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartAttack, WeaponFlyWeaAttState );  
 
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderNormal, ThunderWeNormalState );    
-            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderAttack, ThunderWeAttackState );                      
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderAttack, ThunderWeAttackState ); 
+            
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.FlySwordNormalTag, FlySwordNormalState );    
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.FlySwordAttackTag, FlySwordAttState )
 
             DefaultWeaponState.BeforeEnter();
 
