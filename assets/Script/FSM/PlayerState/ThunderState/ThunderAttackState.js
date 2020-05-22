@@ -5,6 +5,7 @@
 var FSMUtil = require("FSMUtil");
 var WeaponBaseState = require("WeaponBaseState");
 var RightArm = require("RightArm");
+var ActorManager = require("ActorManager");
 
 var ThunderAttackState = cc.Class({
     extends: WeaponBaseState,
@@ -92,9 +93,15 @@ var ThunderAttackState = cc.Class({
 
         var PoolManager = cc.find("GameContainer").getComponent("PoolManager");  
 
+        //获取当前场景中的敌人
+        var TargetEnemy = ActorManager._instance.GetEnemy(0);
+        if (TargetEnemy == null || TargetEnemy == undefined){
+            return;
+        }
+            
         //创建飞镖
         if ( this.WeaponParam.id ){
-            var CurWeapon = PoolManager.request(this.WeaponParam.id);//ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
+            var CurWeapon = ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id); //PoolManager.request(this.WeaponParam.id);//
             if (CurWeapon){
                 CurWeapon.parent = cc.find("Canvas/GameScene/PlayerScene")//cc.director.getScene();
                 //获取当前手的位置

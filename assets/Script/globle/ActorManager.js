@@ -169,6 +169,7 @@ var ActorManager = cc.Class({
                         EnemyJS.InitEnemyType(GameManager.EnemyConfigData.BossConfig[InType]); //EmenyData = GameManager.EnemyConfigData.EnemyType[InType];
                     }
 
+                    this.EnemyInstanceList.push(EnemyInstance);
                     return EnemyInstance;
                 }
             };
