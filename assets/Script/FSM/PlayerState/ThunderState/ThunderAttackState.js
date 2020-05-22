@@ -65,7 +65,7 @@ var ThunderAttackState = cc.Class({
     BreakCondition :function( ) {
         if (this.bAttackOver){
             this.BAttSendCD = true;
-            this.FSMMgr.ForceSetFSMState(FSMUtil.TransConditionID.DartAttToNormal, null, this);
+            this.FSMMgr.ForceSetFSMState(FSMUtil.TransConditionID.ArmThunderNormal, null, this);
             this.bAttackOver = false;
             this.BeThrowDart = false;
             return;

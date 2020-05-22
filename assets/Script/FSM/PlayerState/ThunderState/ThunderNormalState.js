@@ -32,7 +32,7 @@ var ThunderNormalState = cc.Class({
 
     BreakCondition :function( ) {
         if (this.bAttack){
-            this.FSMMgr.ForceSetFSMState(FSMUtil.TransConditionID.DartNormalToAtt, null, this);
+            this.FSMMgr.ForceSetFSMState(FSMUtil.TransConditionID.ArmThunderAttack, null, this);
 
             return;
         }
