@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "4f023c95-7b78-4b45-9682-ba85a75c5260",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 34,
+  "height": 150,
+  "platformSettings": {},
+  "subMetas": {
+    "flySword": {
+      "ver": "1.0.4",
+      "uuid": "96d21d09-ad3a-4f8d-b0c6-0adee3083ce2",
+      "rawTextureUuid": "4f023c95-7b78-4b45-9682-ba85a75c5260",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -0.5,
+      "trimX": 0,
+      "trimY": 1,
+      "width": 34,
+      "height": 149,
+      "rawWidth": 34,
+      "rawHeight": 150,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

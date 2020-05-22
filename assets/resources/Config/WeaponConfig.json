@@ -89,6 +89,21 @@
             "NormalStateID" : 110
         },
 
+        "weaponFlySword":{
+            "weapontype" : 2,
+            "prefab" : "prefabs/Player/Weapon/FlySword",
+            "name"  : "FlySword",
+            "id"    : "weaponFlySword",
+            "Pos"   : "0 , 0",
+            "Rotaion": "0",
+            "Anchor" : "0.5,0.5",
+            "WeaponBelong" : 2,
+            "addToBack" : true,
+
+            "ATK"   : 3,
+            "NormalStateID" : 107
+        },
+
         "BossDart":{
             "weapontype" : 2,
             "prefab" : "prefabs/Player/Weapon/dart",

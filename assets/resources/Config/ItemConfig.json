@@ -4,17 +4,8 @@
         "icon" : "Texture/Item/gold",
         "name" : "金币",
         "id" : "item01",
-        "weight" : 1
+        "weight" : 0
     },
-
-    "item02": {
-        "type" : 1,
-        "icon" : "Texture/item02",
-        "name" : "宝物",
-        "id" : "item02",
-        "weight" : 1
-    },
-
 
 
 
@@ -50,7 +41,7 @@
         "name" : "dart",
         "id" : "weaponDart",
         "count" : 120,
-        "weight" : 2
+        "weight" : 0
     },
     "weaponThunder":{
         "type" : 0,
@@ -58,8 +49,18 @@
         "name" : "dart",
         "id" : "weaponThunder",
         "count" : 120,
+        "weight" : 0
+    },
+    "weaponFlySword":{
+        "type" : 0,
+        "icon" : "Texture/Item/flySword",
+        "name" : "dart",
+        "id" : "weaponFlySword",
+        "count" : 12,
         "weight" : 200
     },
+
+
 
 
     "magnet" : {
@@ -69,7 +70,7 @@
         "id" : "magnet",
         "buff" : "magnet",
         "buffTime" : 300,
-        "weight" : 20
+        "weight" : 0
     },
 
     "shield" :{

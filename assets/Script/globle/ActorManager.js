@@ -73,14 +73,14 @@ var ActorManager = cc.Class({
         this.EnemyList = new Map();
         for (let index = 0; index < this.EnemyPrefabList.length; index++) {
             const element = this.EnemyPrefabList[index];
-            this.EnemyList.set(element.id,element.prefab);
+            this.EnemyList.set(element.id,element.ActorPrefab);
         }
 
         //处理下武器的PrefabList
         this.FlyWeaponList = new Map();
         for (let index = 0; index < this.WeaponPrefabList.length; index++) {
             const element = this.WeaponPrefabList[index];
-            this.FlyWeaponList.set(element.id,element.prefab);
+            this.FlyWeaponList.set(element.id,element.ActorPrefab);
         }
         
     },
@@ -107,7 +107,7 @@ var ActorManager = cc.Class({
         if( GameManager.EnemyConfigData ){
             var EnemyID = null;
             if (GameManager.EnemyConfigData.EnemyType[InType]){
-                EnemyID = GameManager.EnemyConfigData.EnemyType[InType].ID;
+                EnemyID = GameManager.EnemyConfigData.EnemyType[InType].id;
             }
             
             if (EnemyID != null && this.EnemyList.has(EnemyID)){
