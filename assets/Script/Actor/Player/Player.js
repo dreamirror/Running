@@ -214,6 +214,8 @@ var Player = cc.Class({
     /* 切换武器 */
     ChangeWeapon : function ( InID){
         this.RightArm.getComponent("RightArm").ChangeWeapon( InID);
+
+        //this.playerFlash();
     },
 
     /**
@@ -267,7 +269,9 @@ var Player = cc.Class({
         }
         if (GameData && GameData.checkPlayerMagnet() == true) {
             this.addMagnetEffect();
-        }    
+        }
+        
+        
     },
     /**
      * 武器次数用完了回调
@@ -365,6 +369,26 @@ var Player = cc.Class({
             effnode.removeFromParent();
             effnode.destroy();
         }
+    },
+
+    //冲刺的效果
+    playerFlash:function(){
+        cc.log("冲刺")
+        var originPos = this.node.getPosition();
+        let action = cc.moveTo(0.1, this.node.getPosition().x + 50, this.node.getPosition().y)
+        this.node.runAction(action);
+        var originSpeed = window.SceneData.Speed;
+        var self = this;
+        let callBack = function(){
+            cc.log("冲刺结束")
+            window.SceneData.Speed = window.SceneData.Speed * 0.8
+            var call2 = function(){ window.SceneData.Speed = originSpeed};
+            let action = cc.moveTo(0.5,originPos.x, originPos.y)
+            self.node.runAction(cc.sequence(action,cc.callFunc(call2)));
+            
+        }
+
+        this.node.runAction(cc.sequence(action,cc.callFunc(callBack)))
     },
 });
 
