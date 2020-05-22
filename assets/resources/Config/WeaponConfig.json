@@ -72,6 +72,22 @@
             "CreatePos" : [50,300],
             "NormalStateID" : 105
         },
+        "weaponThunder":{
+            "weapontype" : 2,
+            "prefab" : "prefabs/Player/Weapon/dartInHand",
+            "name"  : "dartInHand",
+            "id"    : "weaponDart",
+            "Pos"   : "-32.295 , -10.375",
+            "Rotaion": "34.78",
+            "Anchor" : "0.5,1",
+            "WeaponBelong" : 2,   
+
+            "DartPrefab" : "prefabs/Item/dart",
+            "CD"    :   0.2,
+            "ATK"   : 3,
+            "OffsetXY" : [50,300],
+            "NormalStateID" : 110
+        },
 
         "BossDart":{
             "weapontype" : 2,
@@ -83,7 +99,7 @@
             "Anchor" : "0.5,1",
             "WeaponBelong" : 1,   
 
-            "DartPrefab" : "prefabs/Item/dart",
+            "DartPrefab" : "prefabs/Item/Thunder",
             "CD"    :   0.5,
             "Speed" :   9,
             "MoveType" : -1,

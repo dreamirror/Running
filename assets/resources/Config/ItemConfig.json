@@ -52,6 +52,14 @@
         "count" : 120,
         "weight" : 2
     },
+    "weaponThunder":{
+        "type" : 0,
+        "icon" : "Texture/Item/thunder",
+        "name" : "dart",
+        "id" : "weaponThunder",
+        "count" : 120,
+        "weight" : 200
+    },
 
 
     "magnet" : {

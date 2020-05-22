@@ -3,7 +3,11 @@
 */
 var ActorItem = cc.Class({
     properties: {
-        prefab: cc.Prefab,
+        
+        ActorPrefab : {
+            default : null,
+            type :cc.Prefab,
+        },
         id : "NULL",
     },
 

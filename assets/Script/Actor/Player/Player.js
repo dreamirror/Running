@@ -9,6 +9,8 @@ var TestWeaponState = require("TestWeaponState");
 var TestWeaponAttack = require("TestWeaponAttack");
 var FlyWeaNormalState = require("FlyWeaNormalState");
 var FlyWeaAttState = require("FlyWeaAttState");
+var ThunderNormalState = require("ThunderNormalState");
+var ThunderAttackState = require("ThunderAttackState");
 
 /* */
 var GravityManager = require("GravityManager");
@@ -164,13 +166,22 @@ var Player = cc.Class({
             WeaponFlyWeaAttState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartAttack);
             WeaponFlyWeaAttState.AddCondition(FSMUtil.TransConditionID.DartAttToNormal , FSMUtil.FSMStateID.ArmDartNormal);     
 
-
+            /*添加 雷电的状态机 */
+            var ThunderWeNormalState = new ThunderNormalState();
+            ThunderWeNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
+            
+            var ThunderWeAttackState = new ThunderAttackState();
+            ThunderWeAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
+            
             this.RightArmFSMMgr.Init( FSMUtil.FSMStateID.ArmDefaultWeapon , DefaultWeaponState);
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDefaultWeaponAtt, DefaultWeaponAttack );
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmSwordNoraml, WeaponSwordNormalState );    //注册剑的普通状态
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmSwordAttack, WeaponSwordAttackState );    //注册剑的攻击状态
-            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartNormal, WeaponFlyWeaponState );    //注册剑的普通状态
-            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartAttack, WeaponFlyWeaAttState );    //注册剑的攻击状态          
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartNormal, WeaponFlyWeaponState );    //注册dart的普通状态
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartAttack, WeaponFlyWeaAttState );  
+
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderNormal, ThunderWeNormalState );    
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderAttack, ThunderWeAttackState );                      
 
             DefaultWeaponState.BeforeEnter();
 
