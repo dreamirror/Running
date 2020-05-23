@@ -23,7 +23,7 @@ var TestWeaponState = cc.Class({
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
 
-            this.ArmJS.PlayAnimation("TestWeaponIdle");
+            this.ArmJS.PlayAnimation("LiuRunHand");
         }   
     },
 

@@ -63,6 +63,14 @@ var Player = cc.Class({
             default : null,
             type : cc.Component,
         },
+        BodyActor : {
+            default : null,
+            type : cc.Node,
+        },
+        UperActor : {
+            default : null,
+            type : cc.Node,
+        },
 
         /* 自身配置数据 */
         PlayerConfig : null,
@@ -87,13 +95,6 @@ var Player = cc.Class({
         //初始化玩家数据
         this.PlayerInfo = new PlayerInfo();
         this.PlayerInfo.InitPlayerInfo();
-             
-        //this.TestScriptAddWeapon();
-
-        //模拟重力的系统需要添加一个
-        //if(this.BUseGravity && GravityManager._instance){
-        //    GravityManager._instance.RigisterToGravity(this , this.UpdateGravity);
-        //}  
 
         //添加一个碰撞后的反馈函数，用来判断是否死亡之类的
         this.AddCollisionStartCall( this.PlayerCollisionCall , this , null);
@@ -129,6 +130,22 @@ var Player = cc.Class({
             var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerMagnet() == false) {
                 this.removeMegnetEffect();
+            }
+        }
+    },
+
+    /****************** 需要对行走动画做处理  */
+    PlayerRunAnima : function (){
+        if( this.BodyActor ){
+            var BodyJS = this.BodyActor.getComponent("ActorBase");
+            if(BodyJS != null && BodyJS != undefined){
+                BodyJS.PlayAnimation("LiuRun");
+            }
+        }
+        if( this.UperActor ){
+            var UperJS = this.UperActor.getComponent("ActorBase");
+            if(UperJS != null && UperJS != undefined){
+                UperJS.PlayAnimation("LiuRunUper");
             }
         }
     },
