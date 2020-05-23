@@ -17,14 +17,19 @@ var FlashNormalState = cc.Class({
 
     properties: {
         CD:0,
-        deltaCD :0
+        deltaCD :3
     },
 
     /*******************  状态运行相关  ******************* */
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
         this.ArmJS = this.TargetObj.getComponent("RightArm");
-        this.CD = InParamObj.CD;
+        if (InParamObj.BAttSendCD == true ){
+            this.CD = InParamObj.CD;
+        }
+        else{
+            this.WeaponParam = InParamObj;
+        }
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
 
@@ -46,21 +51,33 @@ var FlashNormalState = cc.Class({
 
     /*******************  响应点击   ******************* */
     OnTouchStart : function(event){
+        if (this.CD > 0){
+            cc.log("武器还在冷却中！");
+            return;
+        }
+
         if(this.ArmJS.PlayerJS)
         {
             cc.log("点击冲刺")
-            this.ArmJS.PlayerJS.playerFlash();
+            this.ArmJS.PlayerJS.playerFlash(80,0.1);
         }
+        this.CD = this.deltaCD
         this._super(event);
         
     },
 
 	OnTouchEnd : function(event){
+        if (this.CD > 0){
+            return;
+        }
         this._super(event);
     },
 
     //触摸移开屏幕
     OnTouchCancel : function(event){
+        if (this.CD > 0){
+            return;
+        }
         this._super(event);
     },
 
@@ -70,6 +87,7 @@ var FlashNormalState = cc.Class({
         if (this.CD > 0){
             this.CD -= dt;
         }
+        
     },
 
 });

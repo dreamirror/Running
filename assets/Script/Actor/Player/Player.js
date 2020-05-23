@@ -427,14 +427,16 @@ var Player = cc.Class({
     },
 
     //冲刺的效果
-    playerFlash:function(){
+    //dis冲刺长度
+    //冲刺时间
+    playerFlash:function(dis,time){
         cc.log("冲刺")
         if(this.originPos == null)
         {
             this.originPos = this.node.getPosition();
         }
         var originPos = this.originPos;
-        let action = cc.moveTo(0.1, this.node.getPosition().x + 50, this.node.getPosition().y)
+        let action = cc.moveTo(time, this.node.getPosition().x + dis, this.node.getPosition().y)
         this.node.runAction(action);
         var originSpeed = window.SceneData.Speed;
         var self = this;
