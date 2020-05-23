@@ -1,6 +1,6 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "LiuRush",
+  "_name": "LiRush",
   "_objFlags": 0,
   "_native": "",
   "_duration": 0.016666666666666666,
@@ -21,16 +21,6 @@
       }
     },
     "props": {
-      "position": [
-        {
-          "frame": 0,
-          "value": [
-            -5.142,
-            47.411,
-            0
-          ]
-        }
-      ],
       "angle": [
         {
           "frame": 0,
