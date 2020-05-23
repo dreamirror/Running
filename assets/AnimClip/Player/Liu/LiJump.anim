@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "LiJump",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.4,
+  "sample": 10,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "f9e94dc5-235b-476e-a489-6cc5a3dd080e"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "cf22f8b4-4263-4b52-870d-befaba4a7f32"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "e4f1a341-1240-4a4b-9a6e-ec661ba41678"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "11a32bc3-15e5-4dbe-bfae-5b10954c42f6"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

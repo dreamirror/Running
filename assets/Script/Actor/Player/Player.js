@@ -150,6 +150,27 @@ var Player = cc.Class({
         }
     },
 
+    PlayerJumpAnima : function() {
+        if( this.BodyActor ){
+            var BodyJS = this.BodyActor.getComponent("ActorBase");
+            if(BodyJS != null && BodyJS != undefined){
+                BodyJS.PlayAnimation("LiJump");
+            }
+        }
+        if( this.UperActor ){
+            var UperJS = this.UperActor.getComponent("ActorBase");
+            if(UperJS != null && UperJS != undefined){
+                UperJS.PlayAnimation("LiJumpUper");
+            }
+        }
+        /*if(this.RightArm){
+            var RightArmJS = this.RightArm.getComponent("RightArm");
+            if(RightArmJS != null && RightArmJS != undefined){
+                RightArmJS.PlayAnimation("LiJumpHand");
+            }
+        }*/
+    },
+
 
     InitFSM : function(){
         //4.26 再创建一个用来管理手部的状态机

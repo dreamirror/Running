@@ -39,7 +39,7 @@ cc.Class({
 
         //进入时设置Node对象播放跳跃动画
         if(this.playerJS ){//&& (this.playerJS instanceof Player)){
-            this.playerJS.PlayAnimation("PlayerJump");
+            this.playerJS.PlayerJumpAnima();//PlayAnimation("PlayerJump");
         }
 
         //该状态通过向Player中注册一个碰撞的回调，来处理接触地面等的事件
