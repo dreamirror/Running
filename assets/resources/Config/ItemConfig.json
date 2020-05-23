@@ -57,6 +57,14 @@
         "name" : "dart",
         "id" : "weaponFlySword",
         "count" : 12,
+        "weight" : 0
+    },
+    "weaponFlash":{
+        "type" : 0,
+        "icon" : "Texture/Item/flashIcon",
+        "name" : "flash",
+        "id" : "weaponFlash",
+        "count" : 12,
         "weight" : 200
     },
 

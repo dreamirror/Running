@@ -21,6 +21,8 @@ var FSMStateID = {
     ArmThunderNormal   :   110,     //雷电普通状态
     ArmThunderAttack   :   111,     //雷电攻击状态
 
+    ArmFlashNormal     :  1110,   //冲刺普通状态
+    ArmFlashAttack     :  1111,   //冲刺普通状态
     /***************   敌人状态枚举 **************/
     EnemyIdle       :   500,    //敌人Idle状态
     EnemyCloseAttack    :   501,    //敌人近程攻击状态

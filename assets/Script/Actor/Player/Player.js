@@ -12,6 +12,10 @@ var FlyWeaAttState = require("FlyWeaAttState");
 var ThunderNormalState = require("ThunderNormalState");
 var ThunderAttackState = require("ThunderAttackState");
 
+
+var FlashNormalState = require("FlashNormalState");
+var FlashAttackState = require("FlashAttackState");
+
 var FlySwordNormalST = require("FlySwordNormalST");
 var FlySwordAttackST = require("FlySwordAttackST");
 
@@ -193,6 +197,14 @@ var Player = cc.Class({
             var ThunderWeAttackState = new ThunderAttackState();
             ThunderWeAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
 
+              /*添加 衝刺的状态机 */
+              var FlashWeNormalState = new FlashNormalState();
+              FlashWeNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
+              
+              var FlashWeAttackState = new FlashAttackState();
+              FlashWeAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
+
+              
             /*添加 飞剑的状态机 */
             var FlySwordNormalState = new FlySwordNormalST();
             FlySwordNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.FlySwordNormalTag);
@@ -207,7 +219,10 @@ var Player = cc.Class({
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmDartAttack, WeaponFlyWeaAttState );  
 
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderNormal, ThunderWeNormalState );    
-            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderAttack, ThunderWeAttackState ); 
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmThunderAttack, ThunderWeAttackState );
+            
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmFlashNormal, FlashWeNormalState );    
+            this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.ArmFlashAttack, FlashWeAttackState ); 
             
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.FlySwordNormalTag, FlySwordNormalState );    
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.FlySwordAttackTag, FlySwordAttState )
@@ -414,7 +429,11 @@ var Player = cc.Class({
     //冲刺的效果
     playerFlash:function(){
         cc.log("冲刺")
-        var originPos = this.node.getPosition();
+        if(this.originPos == null)
+        {
+            this.originPos = this.node.getPosition();
+        }
+        var originPos = this.originPos;
         let action = cc.moveTo(0.1, this.node.getPosition().x + 50, this.node.getPosition().y)
         this.node.runAction(action);
         var originSpeed = window.SceneData.Speed;
