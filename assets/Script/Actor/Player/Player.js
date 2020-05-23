@@ -438,12 +438,12 @@ var Player = cc.Class({
         var originPos = this.originPos;
         let action = cc.moveTo(time, this.node.getPosition().x + dis, this.node.getPosition().y)
         this.node.runAction(action);
-        var originSpeed = window.SceneData.Speed;
+        var originSpeed = window.SceneData.OriginSpeed;
         var self = this;
         let callBack = function(){
             cc.log("冲刺结束")
-            window.SceneData.Speed = window.SceneData.Speed * 0.8
-            var call2 = function(){ window.SceneData.Speed = originSpeed};
+            window.SceneData.OriginSpeed = window.SceneData.OriginSpeed * 0.8
+            var call2 = function(){ window.SceneData.OriginSpeed = originSpeed};
             let action = cc.moveTo(0.5,originPos.x, originPos.y)
             self.node.runAction(cc.sequence(action,cc.callFunc(call2)));
             

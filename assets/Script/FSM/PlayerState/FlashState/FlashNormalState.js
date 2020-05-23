@@ -24,12 +24,12 @@ var FlashNormalState = cc.Class({
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
         this.ArmJS = this.TargetObj.getComponent("RightArm");
-        if (InParamObj.BAttSendCD == true ){
-            this.CD = InParamObj.CD;
-        }
-        else{
+
+            this.deltaCD = InParamObj.CD;
+            cc.log(1111111111111111)
+            cc.log(InParamObj.CD)
             this.WeaponParam = InParamObj;
-        }
+
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
 
@@ -59,7 +59,7 @@ var FlashNormalState = cc.Class({
         if(this.ArmJS.PlayerJS)
         {
             cc.log("点击冲刺")
-            this.ArmJS.PlayerJS.playerFlash(80,0.1);
+            this.ArmJS.PlayerJS.playerFlash(this.WeaponParam.dis,this.WeaponParam.time);
         }
         this.CD = this.deltaCD
         this._super(event);
