@@ -37,11 +37,11 @@ var FlashNormalState = cc.Class({
     },
 
     BreakCondition :function( ) {
-        if (this.bAttack){
-            this.FSMMgr.TransState(FSMUtil.TransConditionID.SwordNormalToAtt, null, this);
+        //if (this.bAttack){
+        //    this.FSMMgr.TransState(FSMUtil.TransConditionID.SwordNormalToAtt, null, this);
 
-            return;
-        }
+        //   return;
+        //}
     },
 
     BeforeExit :function( InParamObj ) {
@@ -55,7 +55,7 @@ var FlashNormalState = cc.Class({
             return;
         }
 
-        if(this.ArmJS.PlayerJS)
+        /*if(this.ArmJS.PlayerJS)
         {
             cc.log("点击冲刺")
             //设置玩家冲刺状态 5.23
@@ -63,7 +63,7 @@ var FlashNormalState = cc.Class({
 
             this.ArmJS.PlayerJS.playerFlash(this.WeaponParam.dis,this.WeaponParam.time);
         }
-        this.CD = this.deltaCD
+        this.CD = this.deltaCD*/
         this._super(event);
         
     },
@@ -88,6 +88,19 @@ var FlashNormalState = cc.Class({
 
         if (this.CD > 0){
             this.CD -= dt;
+        }
+
+        if (this.bAttack == true ){
+            if(this.ArmJS.PlayerJS)
+            {
+                cc.log("点击冲刺")
+                //设置玩家冲刺状态 5.23
+                this.ArmJS.PlayerJS.PlayerSetRush();
+
+                this.ArmJS.PlayerJS.playerFlash(this.WeaponParam.dis,this.WeaponParam.time);
+            }
+            this.CD = this.deltaCD;
+            this.bAttack = false;
         }
         
     },
