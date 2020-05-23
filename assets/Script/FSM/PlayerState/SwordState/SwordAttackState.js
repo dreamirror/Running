@@ -27,7 +27,7 @@ var SwordAttackState = cc.Class({
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
             //cc.log("00000");
-            this.ArmJS.PlayAnimation("SwordAtt");
+            this.ArmJS.PlayAnimation("LiuHandAtt");//("SwordAtt");
             var ArmAnimation = this.ArmJS.GetAnimation();
             if (ArmAnimation != null)
             {

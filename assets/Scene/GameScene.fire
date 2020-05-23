@@ -192,7 +192,7 @@
       "array": [
         0,
         0,
-        377.5870760500153,
+        400.0978774847897,
         0,
         0,
         0,
@@ -1836,7 +1836,7 @@
     },
     "_enabled": true,
     "Player": {
-      "__uuid__": "5755b6fe-1000-4ebf-8931-3d54e18b1acd"
+      "__uuid__": "27cbb8c0-fc55-48b9-811f-09f71ffd735b"
     },
     "Dart": {
       "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
@@ -1858,18 +1858,21 @@
     "_id": "0ao/KQtKhCj4KS9E5Nz3cq"
   },
   {
+    "__type__": "ActorItem",
     "ActorPrefab": {
       "__uuid__": "95a13202-2f27-4dec-8e35-98c396076c98"
     },
     "id": "en_TestBoss"
   },
   {
+    "__type__": "ActorItem",
     "ActorPrefab": {
       "__uuid__": "478816c2-26ac-4ff0-b6b3-c47e71ecc9fb"
     },
     "id": "en_LowBee"
   },
   {
+    "__type__": "ActorItem",
     "ActorPrefab": {
       "__uuid__": "55a63767-fbac-459c-ac31-a6daaeecb60c"
     },
@@ -2057,7 +2060,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Thunder",
+    "_name": "Li",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -2113,7 +2116,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "_id": "247u8rmG5DT6nFCtb9IY2d"
+    "_id": "86UVGkIJ1HjqH2hF+nEiyG"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -2121,9 +2124,9 @@
       "__id__": 51
     },
     "asset": {
-      "__uuid__": "b848b0c0-4df6-4e72-96dd-1077fff7d466"
+      "__uuid__": "27cbb8c0-fc55-48b9-811f-09f71ffd735b"
     },
-    "fileId": "247u8rmG5DT6nFCtb9IY2d",
+    "fileId": "86UVGkIJ1HjqH2hF+nEiyG",
     "sync": false
   }
 ]

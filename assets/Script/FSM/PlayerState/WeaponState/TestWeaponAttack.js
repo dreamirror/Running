@@ -23,7 +23,7 @@ var TestWeaponAttack = cc.Class({
 
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
-            this.ArmJS.PlayAnimation("TestWeaponAttack");
+            this.ArmJS.PlayAnimation("LiuHandAtt");//("TestWeaponAttack");
 
             var ArmAnimation = this.ArmJS.GetAnimation();
             if (ArmAnimation != null)
