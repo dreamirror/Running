@@ -32,7 +32,6 @@ var FlashNormalState = cc.Class({
 
         //进入时设置Node对象播放跑步动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
-
             this.ArmJS.PlayAnimation("SwordNormal");
         }   
     },
@@ -59,6 +58,9 @@ var FlashNormalState = cc.Class({
         if(this.ArmJS.PlayerJS)
         {
             cc.log("点击冲刺")
+            //设置玩家冲刺状态 5.23
+            this.ArmJS.PlayerJS.PlayerSetRush();
+
             this.ArmJS.PlayerJS.playerFlash(this.WeaponParam.dis,this.WeaponParam.time);
         }
         this.CD = this.deltaCD

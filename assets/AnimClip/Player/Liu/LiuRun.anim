@@ -61,6 +61,24 @@
           }
         ]
       }
+    },
+    "props": {
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        }
+      ],
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            58,
+            0
+          ]
+        }
+      ]
     }
   },
   "events": []

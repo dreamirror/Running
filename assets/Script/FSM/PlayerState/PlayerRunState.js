@@ -128,6 +128,7 @@ var PlayerRunState = cc.Class({
     BreakCondition :function( ) {
         if (this.bTransToJump){
             this.FSMMgr.TransState(FSMUtil.TransConditionID.RunToJump, null, this);
+            //this.playerJS.PlayerSetRush();
             return;
         }
     },

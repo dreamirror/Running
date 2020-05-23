@@ -37,6 +37,24 @@
           }
         ]
       }
+    },
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            58,
+            0
+          ]
+        }
+      ],
+      "angle": [
+        {
+          "frame": 0,
+          "value": 0
+        }
+      ]
     }
   },
   "events": []

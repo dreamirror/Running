@@ -4,6 +4,7 @@ var FSMStateID = {
     NONE    : 0,
     RUN     : 1,
     JUMP    : 2,
+    RUSH    : 3,
 
     /********* 以下为手臂武器状态相关 **********/
     ArmNormal       : 100,      //没有武器的普通手

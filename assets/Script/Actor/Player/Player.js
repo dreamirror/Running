@@ -78,6 +78,9 @@ var Player = cc.Class({
 
         /* 自身配置数据 */
         PlayerConfig : null,
+
+        //自身状态机
+        FSMMgr : null,
     },
 
     onLoad () {  
@@ -173,6 +176,25 @@ var Player = cc.Class({
                 RightArmJS.PlayAnimation("LiJumpHand");
             }
         }*/
+    },
+
+    //切换到冲刺状态
+    PlayerSetRush : function(){
+        if(this.FSMMgr != null){
+            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.RUSH, null, null);
+        }
+    },
+
+    //结束冲刺状态 
+    PlayerFinishRush : function(){
+        if(this.FSMMgr != null){
+            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.RUN, null, null);
+        }
+    },
+
+    //播放冲刺动画
+    PlayerRush : function() {
+        this.BodyActor.getComponent("ActorBase").PlayAnimation("LiRush");
     },
 
 
@@ -468,6 +490,8 @@ var Player = cc.Class({
             let action = cc.moveTo(0.5,originPos.x, originPos.y)
             self.node.runAction(cc.sequence(action,cc.callFunc(call2)));
             
+            //结束冲刺状态
+            self.PlayerFinishRush();
         }
 
         this.node.runAction(cc.sequence(action,cc.callFunc(callBack)))

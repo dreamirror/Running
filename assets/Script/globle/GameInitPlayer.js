@@ -2,6 +2,7 @@
 //Include下状态
 var PlayerRunState = require("PlayerRunState");
 var PlayerJumpState = require("PlayerJumpState");
+var PlayerRushState = require("PlayerRushState");
 var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
 var Player = require("Player");
@@ -115,6 +116,8 @@ var GameInitPlayer = cc.Class({
         {
             this.FSMMgr.InitVariable();
 
+            this.PlayerJS.FSMMgr = this.FSMMgr;
+
             //创建一个普通的跑路状态
             var playerRunState = new PlayerRunState();
             playerRunState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.RUN);
@@ -126,10 +129,16 @@ var GameInitPlayer = cc.Class({
             playerJumpState.AddCondition(FSMUtil.TransConditionID.JumpToRun , FSMUtil.FSMStateID.RUN);      
             playerJumpState.InitJumpData(PlayerConfig.InitialSpeed);//this.InitialSpeed);
 
+            //添加一个rush
+            var playerRush = new PlayerRushState();
+            playerRush.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.RUSH); 
+
             //设置状态机的初始状态
             this.FSMMgr.Init( FSMUtil.FSMStateID.RUN , playerRunState);
             //将状态添加进状态机
             this.FSMMgr.AddState( FSMUtil.FSMStateID.JUMP, playerJumpState );
+            this.FSMMgr.AddState( FSMUtil.FSMStateID.RUSH, playerRush );
+
             playerRunState.BeforeEnter();
 
             cc.log( "FSMMgr Init!" );
