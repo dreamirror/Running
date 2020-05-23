@@ -18,7 +18,13 @@ var RightArm = cc.Class({
         CurrentWeaponCtl : {
             default : null,
             type : cc.Node,
-        }
+        },
+
+        //武器插槽
+        WeaponSlot : {
+            default : null,
+            type : cc.Node,
+        },
 
     },
 
@@ -65,7 +71,7 @@ var RightArm = cc.Class({
                                         self.node.getParent().getChildByName("Back").addChild(CurWeapon);
                                     } else {
                                         //添加到手上
-                                        self.node.addChild(CurWeapon);
+                                        self.WeaponSlot.addChild(CurWeapon);
                                     }
 
                                     if(CurWeaponData.Pos){

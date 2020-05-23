@@ -2,14 +2,22 @@
 * 用来进行Actor的创建等的管理类
 */
 var ActorItem = cc.Class({
+
+    name: 'ActorItem',
     properties: {
+        ActorPrefab: cc.Prefab,
+        id : "default"
+    },
+
+    /*properties: {
         
         ActorPrefab : {
             default : null,
             type :cc.Prefab,
         },
+        
         id : "NULL",
-    },
+    },*/
 
     ctor () {
     },
