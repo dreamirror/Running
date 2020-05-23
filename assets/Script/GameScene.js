@@ -184,8 +184,6 @@ var GameScene = cc.Class({
 
     },
     spawnRoad : function(x,interval,hightOffset){
-        cc.log("生成路interval="+interval);
-        cc.log(this.hightOffset)
         var road =null;
         if(interval > 0 )
         {

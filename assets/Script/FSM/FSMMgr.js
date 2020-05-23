@@ -138,7 +138,7 @@ cc.Class({
         };
 
         if (!this.StateMap.has(InStateID))
-            return cc.log( '当前状态机中没有要切换的状态ID！' );
+            return cc.log( '当前状态机中没有要切换的状态ID！InStateID='+InStateID );
 
         var NextFSMState = this.StateMap.get(InStateID);
 

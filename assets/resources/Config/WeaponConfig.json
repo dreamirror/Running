@@ -88,6 +88,24 @@
             "OffsetXY" : [50,300],
             "NormalStateID" : 110
         },
+        "weaponFlash":{
+            "weapontype" : 2,
+            "prefab" : "prefabs/Player/Weapon/flash",
+            "name"  : "flash",
+            "id"    : "weaponFlash",
+            "Pos"   : "-32.295 , -10.375",
+            "Rotaion": "34.78",
+            "Anchor" : "0.5,1",
+            "WeaponBelong" : 2,   
+
+            "DartPrefab" : "prefabs/Item/thunder",
+            "CD"    :   2,
+            "ATK"   : 3,
+            "OffsetXY" : [50,300],
+            "NormalStateID" : 1110,
+            "dis": 80,
+            "time":0.1
+        },
 
         "weaponFlySword":{
             "weapontype" : 2,
