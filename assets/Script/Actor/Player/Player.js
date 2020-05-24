@@ -143,6 +143,14 @@ var Player = cc.Class({
                 this.removeMegnetEffect();
             }
         }
+
+        //更新检测磁铁的效果
+        if (this.needCheckShadow) {
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if (GameData && GameData.checkPlayerShadow() == false) {
+            this.removeShadowDebuff();
+        }
+        }
     },
 
     /****************** 需要对行走动画做处理  */
@@ -384,6 +392,10 @@ var Player = cc.Class({
         if (GameData && GameData.checkPlayerMagnet() == true) {
             this.addMagnetEffect();
         }
+        if(GameData && GameData.checkPlayerShadow() == true)
+        {
+            this.addShadowDebuff();
+        }
         
         
     },
@@ -445,6 +457,37 @@ var Player = cc.Class({
             self.node.addChild(node);
             node.setPosition(0,-20);
         });
+    },
+
+    //获得遮罩Debuff
+    addShadowDebuff: function(){
+        let self = this;
+        this.needCheckShadow = true;
+        cc.loader.loadRes('Texture/Effect/shadow', cc.SpriteFrame,function(err,spriteFrame){
+            if (err) {
+                cc.log(err)
+                return
+            }
+            
+            //创建一个新的节点，因为cc.Sprite是组件不能直接挂载到节点上，只能添加到为节点的一个组件
+            var node = new cc.Node('EffectNodeShield');
+            node.setAnchorPoint(0.5,0);
+            const sprite = node.addComponent(cc.Sprite);
+            sprite.spriteFrame = spriteFrame;
+            cc.find("Canvas/GameScene").addChild(node)
+            self.shadow = node;
+            node.setPosition(0,-20);
+        });
+    },
+
+    //移除遮罩的效果
+    removeShadowDebuff(){
+        this.needCheckShadow = false;
+        if(this.shadow)
+        {
+            this.shadow.removeFromParent();
+        }
+
     },
 
     removeShieldEffect : function () {

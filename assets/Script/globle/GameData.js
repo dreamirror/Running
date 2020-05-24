@@ -105,6 +105,18 @@ cc.Class({
         return false;
     },
 
+    //检查是否有近视的debuff
+    checkPlayerShadow: function()
+    {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "shadow") {
+                return true;
+            }
+        }
+        return false;
+    },
+
     //是否有护盾BUFF
     checkPlayerShield : function () {
         for (let index = 0; index < this.tempInfo.buffs.length; index++) {

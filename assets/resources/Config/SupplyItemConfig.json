@@ -17,5 +17,9 @@
     {  
         "id" : "magnet",
         "weight" : 0
+    },
+    {  
+        "id" : "shadow",
+        "weight" : 0
     }
 ]

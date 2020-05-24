@@ -73,7 +73,7 @@
         "name" : "flash",
         "id" : "weaponFlash",
         "count" : 12,
-        "weight" : 100
+        "weight" : 0
     },
 
 
@@ -97,5 +97,18 @@
         "buff" : "shield",
         "buffTime" : 5,
         "weight" : 0
+    },
+
+    
+
+    "shadow" : {
+        "type" : 2,
+        "icon" : "Texture/Item/shadowIcon",
+        "name" : "近视",
+        "id" : "shadow",
+        "buff" : "shadow",
+        "buffTime" : 3,
+        "weight" : 10
     }
+
 }
