@@ -43,6 +43,14 @@
         "count" : 120,
         "weight" : 0
     },
+    "weaponYytc":{
+        "type" : 0,
+        "icon" : "Texture/Item/yytcIcon",
+        "name" : "Yytc",
+        "id" : "weaponYytc",
+        "count" : 120,
+        "weight" : 100
+    },
     "weaponThunder":{
         "type" : 0,
         "icon" : "Texture/Item/thunder",
@@ -65,7 +73,7 @@
         "name" : "flash",
         "id" : "weaponFlash",
         "count" : 12,
-        "weight" : 200
+        "weight" : 0
     },
 
 

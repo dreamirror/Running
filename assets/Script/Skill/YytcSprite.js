@@ -44,9 +44,16 @@ cc.Class({
             this.node.removeFromParent();
             return;
         }
-        var x = pos.x + dt * 1000;
+        var x = pos.x + dt * 500;
         this.node.setPosition(cc.v2(x,pos.y))
 
 
      },
+
+     ReduceWeaponCount : function(id) {
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        if( GameData != null && GameData != undefined){
+            GameData.useWeapon(id);
+        }
+    },
 });

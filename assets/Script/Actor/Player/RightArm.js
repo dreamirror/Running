@@ -129,6 +129,7 @@ var RightArm = cc.Class({
 
     //切换武器 ,还要记录上一个的ID，设为不可见
     ChangeWeapon : function( InWeaponID ) {
+        cc.log("change weapon id:"+InWeaponID)
         if( this.preWeaponId != InWeaponID && this.PlayerPrefabWeapons.has(InWeaponID))
         {
             var WeaponData = this.PlayerPrefabWeapons.get(InWeaponID);

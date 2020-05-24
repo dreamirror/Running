@@ -98,7 +98,6 @@
             "Anchor" : "0.5,1",
             "WeaponBelong" : 2,   
 
-            "DartPrefab" : "prefabs/Item/thunder",
             "CD"    :   2,
             "ATK"   : 3,
             "OffsetXY" : [50,300],
@@ -120,6 +119,21 @@
 
             "ATK"   : 3,
             "NormalStateID" : 107
+        },
+
+        "weaponYytc":{
+            "weapontype" : 2,
+            "prefab" : "prefabs/Player/Weapon/yytc",
+            "name"  : "yytc",
+            "id"    : "weaponYytc",
+            "Pos"   : "0 , 0",
+            "Rotaion": "0",
+            "Anchor" : "0.5,0.5",
+            "WeaponBelong" : 2,
+            "addToBack" : true,
+            "DartPrefab" : "prefabs/Item/yytc",
+            "ATK"   : 3,
+            "NormalStateID" : 1112
         },
 
         "BossDart":{

@@ -24,6 +24,11 @@ var FSMStateID = {
 
     ArmFlashNormal     :  1110,   //冲刺普通状态
     ArmFlashAttack     :  1111,   //冲刺普通状态
+
+    ArmYytcNormal      : 1112,    //月牙普通状态
+    ArmYytcAttack      : 1113,    //月牙攻击状态
+    
+
     /***************   敌人状态枚举 **************/
     EnemyIdle       :   500,    //敌人Idle状态
     EnemyCloseAttack    :   501,    //敌人近程攻击状态
@@ -50,6 +55,10 @@ var TransConditionID = {
 
     DartNormalToAtt            :   105,
     DartAttToNormal            :   106,
+
+    YytcNormalToAtt             : 1201,
+    YytcAttToNor                : 1202,
+    
 
     /***************   敌人状态转换条件 **************/
     EnemyIdelToCloseAttack      :   501,    //敌人Idle状态到近程攻击状态

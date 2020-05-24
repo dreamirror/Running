@@ -19,6 +19,10 @@ var FlashAttackState = require("FlashAttackState");
 var FlySwordNormalST = require("FlySwordNormalST");
 var FlySwordAttackST = require("FlySwordAttackST");
 
+//月牙
+var YytcNormalST = require("YytcNormalSate");
+var YytcAttackST = require("YytcAttackState");
+
 /* */
 var GravityManager = require("GravityManager");
 var FunctionLibrary = require("FunctionLibrary");
@@ -248,6 +252,17 @@ var Player = cc.Class({
               FlashWeAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmDartNormal);
 
               
+
+            //月牙的状态机
+            var YytcWeAttackState = new YytcAttackST();
+            YytcWeAttackState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmYytcAttack);
+            YytcWeAttackState.AddCondition(FSMUtil.TransConditionID.YytcAttToNor , FSMUtil.FSMStateID.ArmYytcNormal);     
+
+            var YytcWeNormalState = new YytcNormalST();
+            YytcWeNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.ArmYytcNormal);
+            YytcWeNormalState.AddCondition(FSMUtil.TransConditionID.YytcNormalToAtt , FSMUtil.FSMStateID.ArmYytcAttack);     
+
+            
             /*添加 飞剑的状态机 */
             var FlySwordNormalState = new FlySwordNormalST();
             FlySwordNormalState.InitVariable(this.RightArmFSMMgr , this.RightArm , FSMUtil.FSMStateID.FlySwordNormalTag);
@@ -270,7 +285,8 @@ var Player = cc.Class({
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.FlySwordNormalTag, FlySwordNormalState );    
             this.RightArmFSMMgr.AddState( FSMUtil.FSMStateID.FlySwordAttackTag, FlySwordAttState )
 
-            DefaultWeaponState.BeforeEnter();
+            this.RightArmFSMMgr.AddState(FSMUtil.FSMStateID.ArmYytcNormal, YytcWeNormalState);
+            this.RightArmFSMMgr.AddState(FSMUtil.FSMStateID.ArmYytcAttack, YytcWeAttackState);
 
             cc.log( "RightArmFSMMgr Init!" );
 
