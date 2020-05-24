@@ -98,6 +98,10 @@ var FlashNormalState = cc.Class({
                 this.ArmJS.PlayerJS.PlayerSetRush();
 
                 this.ArmJS.PlayerJS.playerFlash(this.WeaponParam.dis,this.WeaponParam.time);
+                var GameData = cc.find("GameContainer").getComponent("GameData");
+                if( GameData != null && GameData != undefined){
+                    GameData.useWeapon(this.WeaponParam.id);
+                }
             }
             this.CD = this.deltaCD;
             this.bAttack = false;

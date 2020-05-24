@@ -49,7 +49,7 @@
         "name" : "Yytc",
         "id" : "weaponYytc",
         "count" : 120,
-        "weight" : 100
+        "weight" : 0
     },
     "weaponThunder":{
         "type" : 0,
@@ -73,7 +73,7 @@
         "name" : "flash",
         "id" : "weaponFlash",
         "count" : 12,
-        "weight" : 0
+        "weight" : 100
     },
 
 
