@@ -132,6 +132,44 @@
             }
           ]
         }
+      },
+      "Handpic": {
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "ec81c43c-165c-454c-8833-2189b6f6ecba"
+                }
+              },
+              {
+                "frame": 0.1,
+                "value": {
+                  "__uuid__": "b66dca0c-c2a9-4b77-b54f-6b285a9fe74f"
+                }
+              },
+              {
+                "frame": 0.2,
+                "value": {
+                  "__uuid__": "44df3857-2485-4cd4-bb73-ffb2fb72ddbd"
+                }
+              },
+              {
+                "frame": 0.3,
+                "value": {
+                  "__uuid__": "00df4544-ff69-41a3-a3bb-4f357cc37b67"
+                }
+              },
+              {
+                "frame": 0.4,
+                "value": {
+                  "__uuid__": "ec81c43c-165c-454c-8833-2189b6f6ecba"
+                }
+              }
+            ]
+          }
+        }
       }
     }
   },

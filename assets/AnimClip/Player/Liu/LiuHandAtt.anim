@@ -200,6 +200,62 @@
             }
           ]
         }
+      },
+      "Handpic": {
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "8e092225-b431-4e6b-ae50-be33266b40ce"
+                }
+              },
+              {
+                "frame": 0.05,
+                "value": {
+                  "__uuid__": "e5b0fbd0-0f19-4a29-895c-849492e9ef9b"
+                }
+              },
+              {
+                "frame": 0.1,
+                "value": {
+                  "__uuid__": "6ebb0ae6-9b13-4b97-9ede-89ad52de1708"
+                }
+              },
+              {
+                "frame": 0.15,
+                "value": {
+                  "__uuid__": "0d6992f8-8477-4c96-8553-551d41df7578"
+                }
+              },
+              {
+                "frame": 0.175,
+                "value": {
+                  "__uuid__": "9ad1e527-93b2-4d86-a89b-c194c7868cd6"
+                }
+              },
+              {
+                "frame": 0.2,
+                "value": {
+                  "__uuid__": "84c162bf-ae84-4a0c-af33-ad1c86ce3aeb"
+                }
+              },
+              {
+                "frame": 0.225,
+                "value": {
+                  "__uuid__": "06f8b353-dbaf-46ca-9ecf-7564168af2e8"
+                }
+              },
+              {
+                "frame": 0.25,
+                "value": {
+                  "__uuid__": "8ae0572f-2b7e-41c7-8c7a-237293303f7a"
+                }
+              }
+            ]
+          }
+        }
       }
     }
   },
