@@ -84,7 +84,9 @@
 
             "DartPrefab" : "prefabs/Item/thunder",
             "CD"    :   0.2,
+            "Speed" :   0,
             "ATK"   : 3,
+            "MoveType" : 1,
             "OffsetXY" : [50,300],
             "NormalStateID" : 110
         },

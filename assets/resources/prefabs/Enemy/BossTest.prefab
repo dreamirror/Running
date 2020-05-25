@@ -373,7 +373,7 @@
     },
     "_enabled": true,
     "AYSpeed": 0,
-    "BUseGravity": true,
+    "BUseGravity": false,
     "EnemyType": 0,
     "EnemyAttackType": null,
     "FSMMgr": null,

@@ -203,5 +203,13 @@
       }
     }
   },
-  "events": []
+  "events": [
+    {
+      "frame": 0.2,
+      "func": "AnimationCustomEventOne",
+      "params": [
+        "aa"
+      ]
+    }
+  ]
 }

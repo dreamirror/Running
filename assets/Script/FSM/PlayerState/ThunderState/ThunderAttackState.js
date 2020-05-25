@@ -32,7 +32,7 @@ var ThunderAttackState = cc.Class({
 
         //进入时设置Node对象播放扔飞镖动画
         if(this.ArmJS && (this.ArmJS instanceof RightArm)){
-            this.ArmJS.PlayAnimation("DartAtt");
+            this.ArmJS.PlayAnimation("LiuHandAtt");
             var ArmAnimation = this.ArmJS.GetAnimation();
             if (ArmAnimation != null)
             {
@@ -98,22 +98,27 @@ var ThunderAttackState = cc.Class({
         if (TargetEnemy == null || TargetEnemy == undefined){
             return;
         }
+
+        //获取敌人层
+        var EnemyScene = cc.find("Canvas/GameScene/EnemyScene");
+        if (EnemyScene == null || EnemyScene == undefined){
+            cc.log("播放闪电时，敌人层没找到！");
+            return;
+        }
+        
             
         //创建飞镖
         if ( this.WeaponParam.id ){
             var CurWeapon = ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id); //PoolManager.request(this.WeaponParam.id);//
             if (CurWeapon){
-                CurWeapon.parent = cc.find("Canvas/GameScene/PlayerScene")//cc.director.getScene();
-                //获取当前手的位置
-                var ArmPos = this.TargetObj.parent.convertToWorldSpaceAR(cc.v2(0, 0));
-                var ArmSize = this.TargetObj.getContentSize();
+                CurWeapon.parent = EnemyScene;//cc.director.getScene();
 
-                //计算下位置再转回来
-                var WeaponPos = cc.v2(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
-                var PlayerScene = cc.find("Canvas/GameScene/PlayerScene");
-                WeaponPos = PlayerScene.convertToNodeSpaceAR(WeaponPos);
+                //获取闪电位置，在敌人头上
+                var ThunderPos = TargetEnemy.getPosition();
+                ThunderPos.y += CurWeapon.height;  //TargetEnemy.height + 
 
-                CurWeapon.setPosition(WeaponPos);//(ArmPos.x + ArmSize.width , ArmPos.y + ArmSize.height / 1.3);
+                CurWeapon.setPosition(ThunderPos);
+
                 var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");
                 FlyWeaponJS.InitWeaponData(this.WeaponParam);
 

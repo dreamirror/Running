@@ -27,10 +27,13 @@
       },
       {
         "__id__": 4
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -145,6 +148,23 @@
     "BInAttack": false,
     "ATK": 0,
     "WeaponData": null,
+    "_id": ""
+  },
+  {
+    "__type__": "5e309WV8W9B85qdqLv6gIXS",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "AYSpeed": 0,
+    "BUseGravity": false,
+    "BInAttack": false,
+    "ATK": 0,
+    "WeaponData": null,
+    "MoveDirection": 1,
+    "MoveSpeed": 0,
     "_id": ""
   },
   {

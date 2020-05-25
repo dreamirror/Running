@@ -186,7 +186,7 @@
       "array": [
         0,
         0,
-        212.1762239271875,
+        396.4940171161717,
         0,
         0,
         0,
@@ -1849,6 +1849,9 @@
       },
       {
         "__id__": 45
+      },
+      {
+        "__id__": 46
       }
     ],
     "EnemyInstanceList": null,
@@ -1859,14 +1862,14 @@
     "ActorPrefab": {
       "__uuid__": "95a13202-2f27-4dec-8e35-98c396076c98"
     },
-    "id": "en_TestBoss"
+    "id": "TestBoss"
   },
   {
     "__type__": "ActorItem",
     "ActorPrefab": {
       "__uuid__": "478816c2-26ac-4ff0-b6b3-c47e71ecc9fb"
     },
-    "id": "en_LowBee"
+    "id": "EnemyLowBee"
   },
   {
     "__type__": "ActorItem",
@@ -1881,5 +1884,12 @@
       "__uuid__": "af1b170d-016c-4b11-b63c-c2be8b0660a7"
     },
     "id": "weaponYytc"
+  },
+  {
+    "__type__": "ActorItem",
+    "ActorPrefab": {
+      "__uuid__": "b848b0c0-4df6-4e72-96dd-1077fff7d466"
+    },
+    "id": "weaponThunder"
   }
 ]

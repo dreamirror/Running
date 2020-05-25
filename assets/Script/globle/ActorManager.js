@@ -147,6 +147,12 @@ var ActorManager = cc.Class({
     },
     /* 获取当前场景中的敌人 */
     GetEnemy : function ( Index ){
+
+        if( this.EnemyInstanceList.length <= 0)
+        {
+            return null;
+        }
+
         if( Index != null && Index != undefined && Index > -1 && this.EnemyInstanceList.length > Index){
             return this.EnemyInstanceList[Index];
         }

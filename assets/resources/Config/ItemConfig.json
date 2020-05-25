@@ -56,8 +56,8 @@
         "icon" : "Texture/Item/thunder",
         "name" : "dart",
         "id" : "weaponThunder",
-        "count" : 120,
-        "weight" : 0
+        "count" : 10,
+        "weight" : 100
     },
     "weaponFlySword":{
         "type" : 0,

@@ -15,7 +15,7 @@ cc.Class({
         this.FlyingBack = false;//飞回来
 
         this.OriginPos = this.node.position;//保存原始点
-        this.OriginRotation = this.node.rotation;
+        this.OriginRotation = this.node.angle;//this.node.rotation;
     },
 
     //飞剑装备上之后 自动搜索屏幕内的敌人，自动攻击
