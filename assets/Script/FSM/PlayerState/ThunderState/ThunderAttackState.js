@@ -119,11 +119,11 @@ var ThunderAttackState = cc.Class({
 
                 CurWeapon.setPosition(ThunderPos);
 
-                var FlyWeaponJS = CurWeapon.getComponent("FlyWeaponBase");
-                FlyWeaponJS.InitWeaponData(this.WeaponParam);
+                var WeaponJS = CurWeapon.getComponent("WeaponBase");
+                WeaponJS.InitWeaponData(this.WeaponParam);
 
-                FlyWeaponJS.SetAttackType();
-                FlyWeaponJS.ReduceWeaponCount();
+                WeaponJS.SetAttackType();
+                WeaponJS.ReduceWeaponCount();
             }
             //PoolManager.
         }

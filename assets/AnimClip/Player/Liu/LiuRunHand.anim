@@ -188,6 +188,62 @@
             }
           ]
         }
+      },
+      "Handpic": {
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "0457b2c3-3131-46d3-a897-bca94a33bf3e"
+                }
+              },
+              {
+                "frame": 0.06666666666666667,
+                "value": {
+                  "__uuid__": "e24abb1f-356b-45ed-9e52-0bd494c08e7e"
+                }
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": {
+                  "__uuid__": "7629e971-5ef9-4ec3-9781-95f7d902acfe"
+                }
+              },
+              {
+                "frame": 0.2,
+                "value": {
+                  "__uuid__": "153c484a-c198-4cea-be87-b64de12c7d2f"
+                }
+              },
+              {
+                "frame": 0.26666666666666666,
+                "value": {
+                  "__uuid__": "7401eec4-9302-43c7-8cf8-4a23fe047743"
+                }
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": {
+                  "__uuid__": "3cdca746-d4ce-41f4-90ca-7078704453da"
+                }
+              },
+              {
+                "frame": 0.4,
+                "value": {
+                  "__uuid__": "ac5865dd-1508-4c0e-ac43-0549b6b5c50e"
+                }
+              },
+              {
+                "frame": 0.4666666666666667,
+                "value": {
+                  "__uuid__": "c7fbaae4-878e-433b-b652-33afbada8301"
+                }
+              }
+            ]
+          }
+        }
       }
     }
   },
