@@ -1,9 +1,9 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "Idle",
+  "_name": "LowBeeIdle",
   "_objFlags": 0,
   "_native": "",
-  "_duration": 0.26666666666666666,
+  "_duration": 0.5333333333333333,
   "sample": 15,
   "speed": 1,
   "wrapMode": 2,
@@ -14,13 +14,25 @@
           {
             "frame": 0.06666666666666667,
             "value": {
-              "__uuid__": "d38e4e30-4cac-4196-90c7-fae4fc5af734"
+              "__uuid__": "31647f8d-8b5b-44ae-bf29-f9dc35aa2bcd"
             }
           },
           {
             "frame": 0.2,
             "value": {
-              "__uuid__": "2dc135e7-69f4-49c1-94ea-11912b7c5dc8"
+              "__uuid__": "8a365901-1bad-43b8-bb03-d4093e993f8d"
+            }
+          },
+          {
+            "frame": 0.3333333333333333,
+            "value": {
+              "__uuid__": "f63bae08-2383-4cbe-8b64-d82243b35f43"
+            }
+          },
+          {
+            "frame": 0.4666666666666667,
+            "value": {
+              "__uuid__": "6966980f-0c7d-471a-8325-91247ee15356"
             }
           }
         ]

@@ -45,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 59,
-      "height": 106
+      "width": 174,
+      "height": 378
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -98,7 +98,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "d38e4e30-4cac-4196-90c7-fae4fc5af734"
+      "__uuid__": "6966980f-0c7d-471a-8325-91247ee15356"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -112,7 +112,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "59271984-5b84-490f-a76f-392915a86894"
+      "__uuid__": "6704f214-8aae-46f6-8164-6593955ddc81"
     },
     "_id": ""
   },
@@ -173,6 +173,8 @@
     "EnemyType": 0,
     "EnemyAttackType": 0,
     "FSMMgr": null,
+    "HP": 2,
+    "EmenyData": null,
     "BStartAI": false,
     "_id": ""
   },
