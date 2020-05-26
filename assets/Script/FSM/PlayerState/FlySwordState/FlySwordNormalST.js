@@ -37,6 +37,10 @@ var FlySwordNormalST = cc.Class({
 
     BeforeExit :function( InParamObj ) {
         this._super();
+        
+        let BackNode = this.TargetObj.getParent().getChildByName("Back");
+        BackNode.x = this.originx;
+        BackNode.y = this.originy;
     },
 
     Update : function(dt){

@@ -13,14 +13,23 @@ cc.Class({
 
         this.FlyingOut = false;//飞出去
         this.FlyingBack = false;//飞回来
+        this.setOutFace = false;
 
-        this.OriginPos = this.node.position;//保存原始点
-        this.OriginRotation = this.node.angle;//this.node.rotation;
+        this.OriginPos = this.node.getPosition();//保存原始点
+        this.OriginRotation = this.node.angle;
+
+        this.index11 = false;
     },
 
     //飞剑装备上之后 自动搜索屏幕内的敌人，自动攻击
-    //每次攻击完飞回来，飞回来的途中发现敌人就转弯 去攻击
+    //每次攻击完飞回来，飞回来的途中发现敌人也得等归位了才能攻击第二次
     update (dt) {
+        //先判断飞回来
+        if (this.FlyingBack == true) {
+            this.flyBack(dt);
+            return;
+        }
+        
         //每帧检查场景中是否有敌人（可适当增加检查的间隔来减少开销）
         this.searchEnemy();
 
@@ -34,15 +43,24 @@ cc.Class({
             this.flyToEnemy(dt);
             return;
         }
-
-        if (this.FlyingBack == true) {
-            this.flyBack(dt);
-            return;
+        if (this.waitToAttck.length == 0) {
+            this.index11 = false;
         }
     },
 
 
     searchEnemy(){
+        //测试
+        /**
+        if (this.index11 == false) {
+            
+            let en = ActorManager._instance.GetEnemy()
+            this.waitToAttck.push(en[0]);
+
+            this.index11 = true;
+        }
+        return
+         */
         let EnemyLayer = cc.find("Canvas/GameScene/EnemyScene");
         if (EnemyLayer) {
             let enemys =  ActorManager._instance.GetEnemy()//EnemyLayer.children;
@@ -59,14 +77,58 @@ cc.Class({
     },
 
     flyToEnemy(dt){
-        let targetposInWorld = this.targetEnemy.convertToWorldSpaceAR(cc.v2(0,0)); //敌人的世界坐标
-        let targetposInLocal = this.node.convertToNodeSpaceAR(targetposInWorld); //敌人在本武器layer的坐标
+        this.adjustFaceOritation();
+
+         //根据方向向量移动位置
+         var moveSpeed = 200;
+         this.node.x += dt * this.directionVec.x * moveSpeed;
+         this.node.y += dt * this.directionVec.y * moveSpeed;
+    },
+
+    flyBack(dt){
+        this.adjustFaceOritation(true);
+
+        if (this.node.x <= this.OriginPos.x) {
+            this.node.angle = -this.OriginRotation;
+            this.FlyingBack = false;
+            this.setOutFace = false;
+            this.node.position = this.OriginPos;
+
+            this.node.getParent().getParent().getComponent("Player").RightArmFSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FlySwordNormalTag);
+            this.SetAttackOver();
+            return
+        }
+
+        var moveSpeed = 200;
+        this.node.x += dt * this.directionVec.x * moveSpeed;
+        this.node.y += dt * this.directionVec.y * moveSpeed;
+    },
+
+    //设置朝向并获取向量
+    //参数： 是否是飞回来
+    adjustFaceOritation(isBack){
+        //先这样吧。正常来讲应该是把飞剑放到enemyscene上，去做追踪 以免角色起跳对起朝向和移动向量的影响。但是，由于屏幕很窄，基本看不出跳动就先不改了
+        // if (this.setOutFace == true) {
+        //     return;
+        // }
+        // this.setOutFace = true;
+        let targetposInLocal;
+        if (isBack != undefined && isBack == true) {
+            targetposInLocal = this.OriginPos;
+        } else {
+            if (this.targetEnemy == null || this.targetEnemy == undefined) {
+                cc.log("#### error cannot find enemy ##### ")
+                return
+            }
+            let targetposInWorld = this.targetEnemy.convertToWorldSpaceAR(cc.v2(0,0)); //敌人的世界坐标
+            targetposInLocal = this.node.getParent().convertToNodeSpaceAR(targetposInWorld); //敌人在本武器layer的坐标
+        }
 
         /**
          * 1.朝向目标
          */
         //计算出朝向
-        var dir = cc.v2(targetposInLocal.x, targetposInLocal.y ).sub(cc.v2( this.node.x, this.node.y));
+        var dir = cc.v2(targetposInLocal.x, targetposInLocal.y ).sub(cc.v2(this.node.x,this.node.y));
     
         //根据朝向计算出夹角弧度
         let angle = dir.signAngle(cc.v2(0,1));
@@ -75,42 +137,21 @@ cc.Class({
         //赋值给节点
         this.node.angle = -degree;
 
-        /**
-         * 2.往目标移动
-         */
-         //单位化向量
-         dir.normalizeSelf();
-         //根据方向向量移动位置
-         var moveSpeed = 950;
-         this.node.x += dt * dir.x * moveSpeed;
-         this.node.y += dt * dir.y * moveSpeed;
-    },
-
-    flyBack(dt){
-        if (this.node.x == this.OriginPos.x && this.node.y == this.OriginPos.y) {
-            this.node.angle = -this.OriginRotation;
-            this.FlyingBack = false;
-
-            this.node.getParent().getParent().getComponent("Player").RightArmFSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FlySwordNormalTag);
-            this.SetAttackOver();
-            return
-        }
-
-        var dir = cc.v2(this.OriginPos.x, this.OriginPos.y ).sub(cc.v2( this.node.x, this.node.y));
+        //单位化向量
         dir.normalizeSelf();
-        var moveSpeed = 1050;
-        this.node.x += dt * dir.x * moveSpeed;
-        this.node.y += dt * dir.y * moveSpeed;
+        this.directionVec = dir;
     },
 
     //当飞剑碰到目标物
     onCollisionEnter: function (other, self) {
-        if (this.waitToAttck.indexOf(other) != -1) {
-            this.waitToAttck.splice(this.waitToAttck.indexOf(other),1);
+        if (this.waitToAttck.indexOf(other.node) != -1) {
+            this.waitToAttck.splice(this.waitToAttck.indexOf(other.node),1);
         }
-        if (this.targetEnemy  == other ){ //命中目标，则返回，如果是路上命中其他目标了，则继续飞向原来的目标
+        if (this.targetEnemy  == other.node ){ //命中目标，则返回，如果是路上命中其他目标了，则继续飞向原来的目标
             this.targetEnemy = null;
-            this.flyBack();
+            this.setOutFace = false;
+            this.FlyingOut = false;
+            this.FlyingBack = true;
         }
     },
 });

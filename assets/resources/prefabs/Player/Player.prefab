@@ -127,8 +127,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -33.516,
-        37.869,
+        -43,
+        32,
         0,
         0,
         0,
@@ -314,6 +314,7 @@
     "PlayerJS": null,
     "RightArmFSMMgr": null,
     "CurrentWeaponCtl": null,
+    "WeaponSlot": null,
     "_id": ""
   },
   {
@@ -617,7 +618,10 @@
       "__id__": 4
     },
     "RightArmFSMMgr": null,
+    "BodyActor": null,
+    "UperActor": null,
     "PlayerConfig": null,
+    "FSMMgr": null,
     "_id": ""
   },
   {
