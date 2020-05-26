@@ -151,7 +151,7 @@
     "_id": ""
   },
   {
-    "__type__": "5e309WV8W9B85qdqLv6gIXS",
+    "__type__": "310beiprktNc61hYvmXW3mS",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -163,8 +163,7 @@
     "BInAttack": false,
     "ATK": 0,
     "WeaponData": null,
-    "MoveDirection": 1,
-    "MoveSpeed": 0,
+    "DispareCD": 5,
     "_id": ""
   },
   {
