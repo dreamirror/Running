@@ -3,6 +3,7 @@
 var PlayerRunState = require("PlayerRunState");
 var PlayerJumpState = require("PlayerJumpState");
 var PlayerRushState = require("PlayerRushState");
+var PlayerFlypyBirdState = require("PlayerFlypyBirdState");
 var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
 var Player = require("Player");
@@ -133,11 +134,16 @@ var GameInitPlayer = cc.Class({
             var playerRush = new PlayerRushState();
             playerRush.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.RUSH); 
 
+            //添加一个风筝的Flypybird状态
+            var FlypyBirdState = new PlayerFlypyBirdState();
+            FlypyBirdState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.FlypyBird); 
+
             //设置状态机的初始状态
             this.FSMMgr.Init( FSMUtil.FSMStateID.RUN , playerRunState);
             //将状态添加进状态机
             this.FSMMgr.AddState( FSMUtil.FSMStateID.JUMP, playerJumpState );
             this.FSMMgr.AddState( FSMUtil.FSMStateID.RUSH, playerRush );
+            this.FSMMgr.AddState( FSMUtil.FSMStateID.FlypyBird, FlypyBirdState );
 
             playerRunState.BeforeEnter();
 

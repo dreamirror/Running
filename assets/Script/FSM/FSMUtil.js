@@ -5,6 +5,8 @@ var FSMStateID = {
     RUN     : 1,
     JUMP    : 2,
     RUSH    : 3,
+    FALL    : 4, //5.27 需要增加一个下落状态,从FlypyBird上掉下来或是其他
+    FlypyBird:5,
 
     /********* 以下为手臂武器状态相关 **********/
     ArmNormal       : 100,      //没有武器的普通手
