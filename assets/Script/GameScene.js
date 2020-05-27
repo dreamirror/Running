@@ -542,6 +542,8 @@ var GameScene = cc.Class({
            
         }
 
+        //cc.find("Canvas/GameScene/BackGround").getComponent("EnemyCreator").createEnemy();
+        
         if(this.back_2.getPosition().x <= -this.back_2.width){
             this.back_2.setPosition(this.back_1.getPosition().x +this.back_2.width,0);
             //临时清除屏幕外的道具

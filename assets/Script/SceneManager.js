@@ -226,6 +226,13 @@ window.SceneData = {
         return {"cd":cd,"num":num}
     },
 
+    getSpawnEnemyCD : function()
+    {
+        var barrierData = this.getConfigData();
+        var cd = this.random4(barrierData.enemyCD[0],barrierData.enemyCD[1]);
+        return cd
+    },
+
     getIntervalData : function()
     {
         var intervalData;

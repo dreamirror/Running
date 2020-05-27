@@ -1,0 +1,19 @@
+{
+
+    "1":
+        {    "EnemyLowBee":{
+
+            "id":"EnemyLowBee",
+            "controllerType" : "1",
+            "weight" : 10
+        },
+        "EnemyLowBee2":{
+
+            "id":"EnemyLowBee",
+            "controllerType" : "1",
+            "weight" : 10
+        }
+    }
+
+
+}
