@@ -151,6 +151,14 @@ var Player = cc.Class({
             this.removeShadowDebuff();
         }
         }
+
+        //检测风筝的效果
+        if (this.needCheckKite) {
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            if (GameData && GameData.checkPlayerKite() == false) {
+                this.removeKiteEffect();
+            }
+        }
     },
 
     /****************** 需要对行走动画做处理  */
@@ -188,6 +196,21 @@ var Player = cc.Class({
                 RightArmJS.PlayAnimation("LiJumpHand");
             }
         }*/
+    },
+
+    PlayFallAnima : function( InAnimName ) {
+        if( this.BodyActor ){
+            var BodyJS = this.BodyActor.getComponent("ActorBase");
+            if(BodyJS != null && BodyJS != undefined){
+                BodyJS.PlayAnimation("LiuFall");
+            }
+        }
+        if( this.UperActor ){
+            var UperJS = this.UperActor.getComponent("ActorBase");
+            if(UperJS != null && UperJS != undefined){
+                UperJS.PlayAnimation("LiFallUper");
+            }
+        }
     },
 
     //切换到冲刺状态
@@ -396,7 +419,10 @@ var Player = cc.Class({
         {
             this.addShadowDebuff();
         }
-        
+        if(GameData && GameData.checkPlayerKite() == true)
+        {
+            this.addKiteEffect();
+        }
         
     },
     /**
@@ -526,6 +552,18 @@ var Player = cc.Class({
             effnode.removeFromParent();
             effnode.destroy();
         }
+    },
+
+    //风筝效果
+    addKiteEffect : function() {
+        
+        this.needCheckKite = true;
+        this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FlypyBird, null, this);
+    },
+    //在此切换玩家状态为下落
+    removeKiteEffect : function (){
+        this.needCheckKite = false;
+        this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FALL, null, this);
     },
 
     //冲刺的效果

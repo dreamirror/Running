@@ -7,34 +7,6 @@
         "weight" : 0
     },
 
-
-
-    "weapon01":{
-        "type" : 0,
-        "icon" : "Texture/weapon01",
-        "name" : "light",
-        "id" : "weapon01",
-        "count" : 20,
-        "weight" : 0
-    },
-
-    "weapon02":{
-        "type" : 0,
-        "icon" : "Texture/weapon02",
-        "name" : "sword",
-        "id" : "weapon02",
-        "count" : 20,
-        "weight" : 0
-    },
-
-    "weapon03":{
-        "type" : 0,
-        "icon" : "Texture/weapon03",
-        "name" : "sword",
-        "id" : "weapon03",
-        "count" : 20,
-        "weight" : 0
-    },
     "weaponDart":{
         "type" : 0,
         "icon" : "Texture/Item/dart",
@@ -57,7 +29,7 @@
         "name" : "dart",
         "id" : "weaponThunder",
         "count" : 10,
-        "weight" : 100
+        "weight" : 0
     },
     "weaponFlySword":{
         "type" : 0,
@@ -75,9 +47,6 @@
         "count" : 12,
         "weight" : 0
     },
-
-
-
 
     "magnet" : {
         "type" : 2,
@@ -99,7 +68,15 @@
         "weight" : 0
     },
 
-    
+    "kite" : {
+        "type" : 2,
+        "icon" : "Texture/item02",
+        "name" : "风筝",
+        "id" : "kite",
+        "buff" : "kite",
+        "buffTime" : 5,
+        "weight" : 0
+    },
 
     "shadow" : {
         "type" : 2,

@@ -24,6 +24,11 @@ var GravityManager = cc.Class({
         //一个向下的重力
         GravityVal : 0.6,
 
+        MaxUpSpeed : 10,
+
+        //下降的最快速度
+        MaxDown : -10,
+
     },
 
     statics: {
@@ -57,6 +62,9 @@ var GravityManager = cc.Class({
             if(value.bOnGround == false){
                 //获取加速度
                 key.AYSpeed = key.AYSpeed - this.GravityVal;
+                if(key.AYSpeed <= this.MaxDown){
+                    key.AYSpeed = this.MaxDown;
+                }
                 //还在空中更新重力位置，此时传回Y加速度更新位置
                 var CurGravityActorData = this.GravityActorList.get(key);
                 CurGravityActorData.CallFunction( key , key.AYSpeed , false , null );
@@ -130,6 +138,23 @@ var GravityManager = cc.Class({
         CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
     },
 
+    /*
+    让一个Actor跳起来，在原有加速度的基础上，再添加加速度 
+    */
+    AddJump : function( InActor , InASpeed){
+        if(!this.GravityActorList.has(InActor)){
+            cc.log("error!!!!!! 返回的Actor不在重力系统中");
+        }
+
+        var CurGravityActorData = this.GravityActorList.get(InActor);
+ 
+        InActor.AYSpeed += InASpeed;
+        if (InActor.AYSpeed >= this.MaxUpSpeed){
+            InActor.AYSpeed = this.MaxUpSpeed;
+        }
+            
+        CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
+    },
 
     /**
      * 一个Actor碰撞到物体的回调，会在此判断是否碰撞到了地面,先暂时，在这里设置位置？

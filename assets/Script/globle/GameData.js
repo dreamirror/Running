@@ -128,6 +128,17 @@ cc.Class({
         return false;
     },
 
+    //是否有风筝buff
+    checkPlayerKite : function() {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "kite") {
+                return true;
+            }
+        }
+        return false;
+    },
+
     //添加或替换武器
     addOrReplaceWeapon(_weapon){
         //已经有了就捡不起来

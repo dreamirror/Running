@@ -57,6 +57,8 @@ cc.Class({
         var GameContainer = cc.find("GameContainer");
         if (GameContainer)
             this.GameManager = cc.find("GameContainer").getComponent("GameManager");
+
+        
     },
 
     /*****************  Player 的方法  *******************/
@@ -143,6 +145,16 @@ cc.Class({
             InActor.node.setPosition(TempPos.x , NodePos.y);
             //InActor.node.setPosition(cc.v2(TempPos.x , Bounds.top));
         }
+
+        //设置一个屏幕的最高高度 5.27
+        var windowSize = cc.winSize; 
+        var ActorPos = InActor.node.getPosition();
+        var ScenePos = InActor.node.parent.convertToNodeSpaceAR(cc.v2(0 , windowSize.height));
+        if(ActorPos.y >= ScenePos.y - InActor.node.width)
+        {
+            ActorPos.y = ScenePos.y - InActor.node.width;
+        }
+        InActor.node.setPosition(TempPos.x , ActorPos.y);
 
         //5.7 判断下 当前的Node如果低于死亡高度，则设置角色死亡
         if (InActor.GameManager != null && InActor.GameManager != undefined){

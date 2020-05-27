@@ -4,6 +4,8 @@ var PlayerRunState = require("PlayerRunState");
 var PlayerJumpState = require("PlayerJumpState");
 var PlayerRushState = require("PlayerRushState");
 var PlayerFlypyBirdState = require("PlayerFlypyBirdState");
+var PlayerFallState = require("PlayerFallState");
+
 var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
 var Player = require("Player");
@@ -87,7 +89,7 @@ var GameInitPlayer = cc.Class({
         this.CreatePlayer();
 
         //5.15 测试添加一个BOSS
-        if (ActorManager._instance != null && ActorManager._instance != undefined)
+        /*if (ActorManager._instance != null && ActorManager._instance != undefined)
         {
             this.TestBoss = ActorManager._instance.CreateBoss("TestBoss");
             this.TestBoss.parent = cc.find("Canvas/GameScene/EnemyScene")
@@ -95,7 +97,7 @@ var GameInitPlayer = cc.Class({
             
             this.TestBoss.setPosition(100, 10);
    
-        }
+        }*/
     },
 
     //将人物FSMupdate
@@ -138,12 +140,17 @@ var GameInitPlayer = cc.Class({
             var FlypyBirdState = new PlayerFlypyBirdState();
             FlypyBirdState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.FlypyBird); 
 
+            //添加一个下落状态
+            var FallState = new PlayerFallState();
+            FallState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.FALL);
+
             //设置状态机的初始状态
             this.FSMMgr.Init( FSMUtil.FSMStateID.RUN , playerRunState);
             //将状态添加进状态机
             this.FSMMgr.AddState( FSMUtil.FSMStateID.JUMP, playerJumpState );
             this.FSMMgr.AddState( FSMUtil.FSMStateID.RUSH, playerRush );
             this.FSMMgr.AddState( FSMUtil.FSMStateID.FlypyBird, FlypyBirdState );
+            this.FSMMgr.AddState( FSMUtil.FSMStateID.FALL, FallState );
 
             playerRunState.BeforeEnter();
 

@@ -8,6 +8,7 @@
 */
 var FSMUtil = require("FSMUtil");
 var FSMStateBase = require("FSMStateBase");
+var GravityManager = require("GravityManager");
 
 var PlayerFlypyBirdState = cc.Class({
     extends : FSMStateBase,
@@ -17,7 +18,9 @@ var PlayerFlypyBirdState = cc.Class({
 
     properties: {
         
-        CurFlotage : 30, //不按按键的浮力，不需要自定义，直接是Update的dt的一半就好了 
+        Flotage : 8,
+
+        CurFlotage : 0, //不按按键的浮力，不需要自定义，直接是Update的dt的一半就好了 
 
         bFlyOver : false,
 
@@ -28,7 +31,7 @@ var PlayerFlypyBirdState = cc.Class({
 /*******************  响应点击   ******************* */
     OnTouchStart : function(event){
         this.bStartClick = true;
-        this.CurFlotage = 0;
+        this.CurFlotage = 0;//this.Flotage;
     },
 
 	OnTouchMove : function(event){
@@ -36,13 +39,14 @@ var PlayerFlypyBirdState = cc.Class({
 
 	OnTouchEnd : function(event){
         if(this.bStartClick == true){
-            this.CurFlotage = 30;
+            this.CurFlotage = this.Flotage;
+            this.bStartClick = false;
         }
     },
     //触摸移开屏幕
     OnTouchCancel : function(event){
         if(this.bStartClick == true){
-            this.CurFlotage = 30;
+            this.CurFlotage = this.Flotage;
         }
     },
 
@@ -60,11 +64,13 @@ var PlayerFlypyBirdState = cc.Class({
 
 
         //进来的时候直接先给一个上升的力
-        this.CurFlotage = 60;
+        //设置一个跳跃
+        //GravityManager._instance.AddJump(this.playerJS , this.Flotage);
     },
 
     Update : function(dt){
-        this.playerJS.AYSpeed += dt/2 + this.CurFlotage;
+        var AYSpeed = dt/2 + this.CurFlotage;
+        GravityManager._instance.AddJump(this.playerJS , AYSpeed);
         this.CurFlotage = 0;
     },
 

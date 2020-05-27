@@ -14,46 +14,6 @@
             
             "NormalStateID" : 101
         },
-
-        "weapon01":{
-            "weapontype" : 1,
-            "prefab" : "prefabs/Player/Weapon/sword",
-            "name"  : "sword",
-            "id"    : "weapon01",
-            "Pos"   : "-32.295 , -10.375",
-            "Rotaion": "34.78",
-            "Anchor" : "0.5,1",
-            "ATK"   : 2,
-            "WeaponBelong" : 2,
-
-            "NormalStateID" : 103
-        },
-        "weapon02":{
-            "weapontype" : 1,
-            "prefab" : "prefabs/Player/Weapon/sword01",
-            "name"  : "sword01",
-            "id"    : "weapon02",
-            "Pos"   : "-32.295 , -10.375",
-            "Rotaion": "34.78",
-            "Anchor" : "0.5,1",
-            "ATK"   : 2,
-            "WeaponBelong" : 2,
-
-            "NormalStateID" : 103
-        },
-        "weapon03":{
-            "weapontype" : 1,
-            "prefab" : "prefabs/Player/Weapon/sword02",
-            "name"  : "sword02",
-            "id"    : "weapon03",
-            "Pos"   : "-32.295 , -10.375",
-            "Rotaion": "34.78",
-            "Anchor" : "0.5,1",
-            "ATK"   : 2,
-            "WeaponBelong" : 2,
-
-            "NormalStateID" : 103
-        },
         "weaponDart":{
             "weapontype" : 2,
             "prefab" : "prefabs/Player/Weapon/dartInHand",
