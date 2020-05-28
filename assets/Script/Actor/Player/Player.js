@@ -79,6 +79,10 @@ var Player = cc.Class({
             default : null,
             type : cc.Node,
         },
+        HP : {
+            default : 2,
+            override: true
+        },
 
         /* 自身配置数据 */
         PlayerConfig : null,
@@ -331,6 +335,10 @@ var Player = cc.Class({
         }
     },
 
+    ReBorn : function (){
+        this.HP = 2;
+    },
+
     /**
      * 碰撞回调
      */
@@ -343,17 +351,30 @@ var Player = cc.Class({
             return;
         }
 
-        //如果撞到障碍物，直接死了
+        //如果撞到障碍物
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
-            //Target.ActorDead();
+            if(Target.OnAttackHP() == false)
+                Target.ActorDead();
         }
 
-        //如果被敌人攻击，直接死
+        //如果被敌人攻击
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            //Target.ActorDead();
+            if(Target.OnAttackHP() == false)
+                Target.ActorDead();
             
         }
+    },
+
+    //判断自身血量 5.28 
+    OnAttackHP : function(){
+        //再播放个出血粒子
+
+        //记录下本次攻击敌人，是不是上次攻击的敌人，如果是，return
+        //this.LastHitEnemy = false;
+
+        this.HP --;
+        return this.HP >= 1;
     },
 
     /* 切换武器 */

@@ -16,6 +16,9 @@ cc.Class({
 
         //是否注册重力
         BUseGravity : false,
+
+        //血量
+        HP : 1,
     },
 
     // LIFE-CYCLE CALLBACKS:

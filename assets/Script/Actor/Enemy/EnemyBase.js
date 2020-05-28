@@ -25,7 +25,7 @@ cc.Class({
         FSMMgr : null,
 
         //HP 
-        HP      :   2,
+        //HP      :   2,
 
         //敌人的配置
         EmenyData : null,
@@ -40,6 +40,10 @@ cc.Class({
         //this.BUseGravity = false;
         this._super();
         this.node.on(GlobalEventName.PlayerAttack, this.OnAttacked ,this );
+    },
+
+    onDestroy(){
+        this.node.off(GlobalEventName.PlayerAttack, this.OnAttacked ,this );
     },
 
     start () {

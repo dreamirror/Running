@@ -58,12 +58,16 @@ var GravityManager = cc.Class({
     update (dt) {
         //遍历所有需要进行重力处理的Actor
         for (var [key, value] of this.GravityActorList) {
-            //在空中的才需要更新
-            if(value.bOnGround == false){
+            //在空中的才需要更新  
+            if(value.bOnGround == false && value.bConstant != true){
                 //获取加速度
                 key.AYSpeed = key.AYSpeed - this.GravityVal;
                 if(key.AYSpeed <= this.MaxDown){
                     key.AYSpeed = this.MaxDown;
+                }
+                //5.28 新添加暂停 是否保持恒定重力 
+                if (value.bConstant == true){
+                    key.AYSpeed = value.ConstantSpeed;
                 }
                 //还在空中更新重力位置，此时传回Y加速度更新位置
                 var CurGravityActorData = this.GravityActorList.get(key);
@@ -155,6 +159,35 @@ var GravityManager = cc.Class({
             
         CurGravityActorData.CallFunction( InActor , InActor.AYSpeed , false , null );
     },
+
+    //添加接口，暂停重力
+    ConstantGravity : function ( InActor , InSpeed){
+        if(!this.GravityActorList.has(InActor)){
+            cc.log("error!!!!!! 返回的Actor不在重力系统中");
+        }
+
+        var CurGravityActorData = this.GravityActorList.get(InActor);
+        CurGravityActorData.bConstant = true;
+        CurGravityActorData.ConstantSpeed = InSpeed;
+
+        //重新设置下List的值
+        this.GravityActorList.set(InActor , CurGravityActorData);
+
+    },
+
+    //添加接口，启动重力
+    CancleConstantGravity : function (InActor){
+        if(!this.GravityActorList.has(InActor)){
+            cc.log("error!!!!!! 返回的Actor不在重力系统中");
+        }
+
+        var CurGravityActorData = this.GravityActorList.get(InActor);
+        CurGravityActorData.bConstant = false;
+
+        //重新设置下List的值
+        this.GravityActorList.set(InActor , CurGravityActorData);
+    },
+
 
     /**
      * 一个Actor碰撞到物体的回调，会在此判断是否碰撞到了地面,先暂时，在这里设置位置？

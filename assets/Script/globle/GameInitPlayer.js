@@ -239,6 +239,7 @@ var GameInitPlayer = cc.Class({
         //重新设置一下武器状态
         this.PlayerJS.ChangeWeapon(this.PlayerJS.PlayerConfig.DefaultWeaponID);
 
+        this.PlayerJS.ReBorn();
 
         //为其添加一个护盾
         if (BAddShield == true){
