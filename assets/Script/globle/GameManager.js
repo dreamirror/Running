@@ -135,7 +135,7 @@ var GameManager = cc.Class({
                     var GameOverPlJS = self.GameOverUI.getComponent("CommonTipsPl");
                     if(GameOverPlJS){
                         GameOverPlJS.SetOkBtnCall(self , "GameManager" , "ShareSuccessCallBack" , self);
-                        GameOverPlJS.SetCancelBtnCall(self , "GameManager" , "ShareCancel" , self);
+                        GameOverPlJS.SetCancelBtnCall(self , "GameManager" , "ReLoadScene" , self);
                     }
                 }
             };

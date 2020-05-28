@@ -30,7 +30,7 @@ var PlayerFlypyBirdState = cc.Class({
         bStartClick : false,
 
         //下降重力
-        GravitySpeed : 0.5,
+        GravitySpeed : 0.6,
 
         //最快下降速度
         MaxGravitySpeed : -2,
@@ -83,6 +83,7 @@ var PlayerFlypyBirdState = cc.Class({
         this.playerJS.node.setPosition(cc.v2(pos.x , pos.y + 150));
 
         this.Speed = 0;
+        this.CurFlotage = 0;
     },
 
     Update : function(dt){
@@ -98,6 +99,8 @@ var PlayerFlypyBirdState = cc.Class({
             this.Speed = this.MaxGravitySpeed;
         }
         var pos = this.playerJS.node.getPosition();
+        cc.log(this.Speed);
+
         this.playerJS.node.setPosition(cc.v2(pos.x , pos.y + this.Speed));
         
         //设置一个屏幕的最高高度 5.27
@@ -109,6 +112,7 @@ var PlayerFlypyBirdState = cc.Class({
             ActorPos.y = ScenePos.y - this.playerJS.node.width;
         }
         this.playerJS.node.setPosition(ActorPos.x , ActorPos.y);
+        //cc.log(ActorPos.y);
 
         this.CurFlotage = 0;
     },
