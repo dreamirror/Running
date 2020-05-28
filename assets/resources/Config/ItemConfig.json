@@ -75,7 +75,7 @@
         "id" : "kite",
         "buff" : "kite",
         "buffTime" : 5,
-        "weight" : 0
+        "weight" : 100
     },
 
     "shadow" : {
@@ -85,7 +85,7 @@
         "id" : "shadow",
         "buff" : "shadow",
         "buffTime" : 3,
-        "weight" : 10
+        "weight" : 0
     }
 
 }

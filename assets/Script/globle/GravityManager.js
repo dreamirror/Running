@@ -183,6 +183,7 @@ var GravityManager = cc.Class({
 
         var CurGravityActorData = this.GravityActorList.get(InActor);
         CurGravityActorData.bConstant = false;
+        InActor.AYSpeed = 0;
 
         //重新设置下List的值
         this.GravityActorList.set(InActor , CurGravityActorData);

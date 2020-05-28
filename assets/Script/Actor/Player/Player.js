@@ -354,14 +354,14 @@ var Player = cc.Class({
         //如果撞到障碍物
         if(CollisionType == CommonUtil.EObjType.TYPE_BARRIER)
         {
-            if(Target.OnAttackHP() == false)
-                Target.ActorDead();
+            //if(Target.OnAttackHP() == false)
+                //Target.ActorDead();
         }
 
         //如果被敌人攻击
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            if(Target.OnAttackHP() == false)
-                Target.ActorDead();
+            //if(Target.OnAttackHP() == false)
+                //Target.ActorDead();
             
         }
     },
@@ -585,6 +585,7 @@ var Player = cc.Class({
     removeKiteEffect : function (){
         this.needCheckKite = false;
         this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FALL, null, this);
+        GravityManager._instance.CancleConstantGravity(this);
     },
 
     //冲刺的效果

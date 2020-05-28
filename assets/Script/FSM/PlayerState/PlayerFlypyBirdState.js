@@ -20,7 +20,7 @@ var PlayerFlypyBirdState = cc.Class({
 
     properties: {
         
-        Flotage :7,
+        Flotage :6.5,
 
         CurFlotage : 0, //不按按键的浮力，不需要自定义，直接是Update的dt的一半就好了 
 
@@ -79,19 +79,15 @@ var PlayerFlypyBirdState = cc.Class({
         //该状态通过向Player中注册一个碰撞的回调，来处理接触地面等的事件
         this.playerJS.AddCollisionStartCall( this.CollisionStartCallBack , this );
 
-        var pos = this.playerJS.node.getPosition();
-        this.playerJS.node.setPosition(cc.v2(pos.x , pos.y + 150));
+        //var pos = this.playerJS.node.getPosition();
+        //this.playerJS.node.setPosition(cc.v2(pos.x , pos.y + 150));
 
         this.Speed = 0;
-        this.CurFlotage = 0;
+        this.CurFlotage = 10;
+        this.bFallOnGround = false;
     },
 
     Update : function(dt){
-        //var AYSpeed = this.CurFlotage ;//- this.GravitySpeed;
-        //if (AYSpeed <= this.MaxGravitySpeed){
-        //    AYSpeed = this.MaxGravitySpeed;
-        //}
-        //GravityManager._instance.AddJump(this.playerJS , AYSpeed);
         //cc.log(AYSpeed);
         this.Speed += this.CurFlotage;
         this.Speed -= this.GravitySpeed;
