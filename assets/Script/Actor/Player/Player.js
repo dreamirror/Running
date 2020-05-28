@@ -202,6 +202,21 @@ var Player = cc.Class({
         }*/
     },
 
+    PlayFlyAnima : function() {
+        if( this.BodyActor ){
+            var BodyJS = this.BodyActor.getComponent("ActorBase");
+            if(BodyJS != null && BodyJS != undefined){
+                BodyJS.PlayAnimation("LiFly");
+            }
+        }
+        if( this.UperActor ){
+            var UperJS = this.UperActor.getComponent("ActorBase");
+            if(UperJS != null && UperJS != undefined){
+                UperJS.PlayAnimation("LiEmpty");
+            }
+        }
+    },
+
     PlayFallAnima : function( InAnimName ) {
         if( this.BodyActor ){
             var BodyJS = this.BodyActor.getComponent("ActorBase");
@@ -584,8 +599,9 @@ var Player = cc.Class({
     //在此切换玩家状态为下落
     removeKiteEffect : function (){
         this.needCheckKite = false;
-        this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FALL, null, this);
-        GravityManager._instance.CancleConstantGravity(this);
+        //this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.FALL, null, this);
+        //GravityManager._instance.CancleConstantGravity(this);
+        this.FSMMgr.TransState(FSMUtil.TransConditionID.FlyToFall, null, this);
     },
 
     //冲刺的效果

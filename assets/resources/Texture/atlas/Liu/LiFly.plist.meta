@@ -1,0 +1,34 @@
+{
+  "ver": "1.2.4",
+  "uuid": "eb76c5a6-476a-490a-9852-a891545cf7d7",
+  "rawTextureUuid": "7fe83ab5-8514-4f0c-85d1-b6838434a428",
+  "size": {
+    "width": 114,
+    "height": 135
+  },
+  "type": "Texture Packer",
+  "subMetas": {
+    "LiFly.png": {
+      "ver": "1.0.4",
+      "uuid": "569f1293-50c9-4b84-b47b-4d702df5d76f",
+      "rawTextureUuid": "7fe83ab5-8514-4f0c-85d1-b6838434a428",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 112,
+      "height": 133,
+      "rawWidth": 112,
+      "rawHeight": 133,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    }
+  }
+}

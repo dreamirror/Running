@@ -58,6 +58,8 @@ var TransConditionID = {
     DartNormalToAtt            :   105,
     DartAttToNormal            :   106,
 
+    FlyToFall                   : 107,  //风筝转下降
+
     YytcNormalToAtt             : 1201,
     YytcAttToNor                : 1202,
     

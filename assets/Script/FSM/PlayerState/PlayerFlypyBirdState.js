@@ -65,11 +65,12 @@ var PlayerFlypyBirdState = cc.Class({
 
         //进入时设置Node对象播放飞起动画
         if(this.playerJS ){
-            this.playerJS.PlayerRunAnima();
+            this.playerJS.PlayFlyAnima();
         }   
 
         //将手臂状态机设置为起飞状态或是直接隐藏掉
-
+        this.playerJS.RightArm.opacity = 0;
+        this.playerJS.UperActor.opacity = 0;
 
         //进来的时候直接先给一个上升的力
         //设置一个跳跃
@@ -88,14 +89,12 @@ var PlayerFlypyBirdState = cc.Class({
     },
 
     Update : function(dt){
-        //cc.log(AYSpeed);
         this.Speed += this.CurFlotage;
         this.Speed -= this.GravitySpeed;
         if( this.Speed < this.MaxGravitySpeed){
             this.Speed = this.MaxGravitySpeed;
         }
         var pos = this.playerJS.node.getPosition();
-        cc.log(this.Speed);
 
         this.playerJS.node.setPosition(cc.v2(pos.x , pos.y + this.Speed));
         
@@ -108,7 +107,6 @@ var PlayerFlypyBirdState = cc.Class({
             ActorPos.y = ScenePos.y - this.playerJS.node.width;
         }
         this.playerJS.node.setPosition(ActorPos.x , ActorPos.y);
-        //cc.log(ActorPos.y);
 
         this.CurFlotage = 0;
     },
@@ -116,14 +114,33 @@ var PlayerFlypyBirdState = cc.Class({
     //暂时只有跳起时的状态切换
     BreakCondition :function( ) {
         if (this.bFlyOver || this.bFallOnGround == true){
-            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.RUN, null, this);
+
+            //将手臂状态机设置为起飞状态或是直接隐藏掉
+            //this.playerJS.RightArm.active = true;
+            //this.playerJS.UperActor.active = true;
+
+            this.FSMMgr.TransState(FSMUtil.TransConditionID.FlyToFall, null, this);
             //回复重力
-            GravityManager._instance.CancleConstantGravity(this.playerJS);
+            //GravityManager._instance.CancleConstantGravity(this.playerJS);
             //取消BUFF
-            this.playerJS.needCheckKite = false;
+            //this.playerJS.needCheckKite = false;
             
             return;
         }
+    },
+
+    BeforeExit : function() {
+        this._super();
+
+        //将手臂状态机设置为起飞状态或是直接隐藏掉
+        this.playerJS.RightArm.opacity = 255;
+        this.playerJS.UperActor.opacity = 255;
+
+        //回复重力
+        GravityManager._instance.CancleConstantGravity(this.playerJS);
+        //取消BUFF
+        this.playerJS.needCheckKite = false;
+        this.bFlyOver = false;
     },
 
 

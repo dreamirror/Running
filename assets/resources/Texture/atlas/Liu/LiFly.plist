@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>LiFly.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{112,133}</string>
+                <key>spriteSourceSize</key>
+                <string>{112,133}</string>
+                <key>textureRect</key>
+                <string>{{1,1},{112,133}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>3</integer>
+            <key>pixelFormat</key>
+            <string>RGBA8888</string>
+            <key>premultiplyAlpha</key>
+            <false/>
+            <key>realTextureFileName</key>
+            <string>LiFly.png</string>
+            <key>size</key>
+            <string>{114,135}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:d6b5d2b29bb4690e3ed4d6859ce63b88:12c30f123ca9d36d2a59002a7ac79bf6:5eebaf6178b58f490acc8b78d3193861$</string>
+            <key>textureFileName</key>
+            <string>LiFly.png</string>
+        </dict>
+    </dict>
+</plist>

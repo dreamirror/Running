@@ -288,6 +288,9 @@
       },
       {
         "__uuid__": "84f368c9-e770-4e3d-aa4d-4618d86bf7c2"
+      },
+      {
+        "__uuid__": "38b8c711-a2b1-4270-949f-2fbb46b3e95d"
       }
     ],
     "playOnLoad": false,
@@ -303,6 +306,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "HP": 1,
     "_id": ""
   },
   {
@@ -625,6 +629,9 @@
       },
       {
         "__uuid__": "d0ec108c-a5d3-45a8-ac77-1fcc87e0fcfa"
+      },
+      {
+        "__uuid__": "58955bfd-abaa-4129-9c31-5030a0c29b3b"
       }
     ],
     "playOnLoad": false,
@@ -640,6 +647,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "HP": 1,
     "PlayerJS": null,
     "RightArmFSMMgr": null,
     "CurrentWeaponCtl": null,
@@ -781,6 +789,9 @@
       },
       {
         "__uuid__": "b6a81ceb-5e9c-4ed6-9069-7d59b64296ce"
+      },
+      {
+        "__uuid__": "58955bfd-abaa-4129-9c31-5030a0c29b3b"
       }
     ],
     "playOnLoad": false,
@@ -796,6 +807,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": false,
+    "HP": 1,
     "_id": ""
   },
   {
@@ -997,6 +1009,7 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": true,
+    "HP": 2,
     "RightArm": {
       "__id__": 9
     },

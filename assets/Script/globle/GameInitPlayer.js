@@ -139,6 +139,7 @@ var GameInitPlayer = cc.Class({
             //添加一个风筝的Flypybird状态
             var FlypyBirdState = new PlayerFlypyBirdState();
             FlypyBirdState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.FlypyBird); 
+            FlypyBirdState.AddCondition(FSMUtil.TransConditionID.FlyToFall , FSMUtil.FSMStateID.FALL);   
 
             //添加一个下落状态
             var FallState = new PlayerFallState();
