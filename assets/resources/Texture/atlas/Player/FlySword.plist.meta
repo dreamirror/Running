@@ -1,0 +1,34 @@
+{
+  "ver": "1.2.4",
+  "uuid": "32bde91f-2ac4-4a30-b40f-b4986480e192",
+  "rawTextureUuid": "4857b793-c7e6-4d21-88d1-d1b1b1de1256",
+  "size": {
+    "width": 174,
+    "height": 137
+  },
+  "type": "Texture Packer",
+  "subMetas": {
+    "FlySword.png": {
+      "ver": "1.0.4",
+      "uuid": "77fdb232-8666-43e4-b2fa-9d2954f4eb16",
+      "rawTextureUuid": "4857b793-c7e6-4d21-88d1-d1b1b1de1256",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 172,
+      "height": 135,
+      "rawWidth": 172,
+      "rawHeight": 135,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "spriteType": "normal",
+      "subMetas": {}
+    }
+  }
+}

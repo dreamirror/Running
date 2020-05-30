@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "RangeAtt",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.325,
+  "sample": 40,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "a83b5522-3649-4bcd-8087-f6c0cb11cbb7"
+            }
+          },
+          {
+            "frame": 0.125,
+            "value": {
+              "__uuid__": "9dc6da4c-5a66-4ecc-8e11-aa5994ba2ebc"
+            }
+          },
+          {
+            "frame": 0.25,
+            "value": {
+              "__uuid__": "129eb3e2-63fb-40ea-9c07-95ee0bbbe8b2"
+            }
+          },
+          {
+            "frame": 0.3,
+            "value": {
+              "__uuid__": "9dc6da4c-5a66-4ecc-8e11-aa5994ba2ebc"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.25,
+      "func": "AnimationCustomEventOne",
+      "params": []
+    }
+  ]
+}
