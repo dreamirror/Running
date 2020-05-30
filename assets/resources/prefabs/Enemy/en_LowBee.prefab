@@ -112,7 +112,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "6704f214-8aae-46f6-8164-6593955ddc81"
+      "__uuid__": "2deee310-6050-44ec-8422-9d934ae7fa33"
     },
     "_id": ""
   },
@@ -170,10 +170,10 @@
     "_enabled": true,
     "AYSpeed": 0,
     "BUseGravity": true,
+    "HP": 2,
     "EnemyType": 0,
     "EnemyAttackType": 0,
     "FSMMgr": null,
-    "HP": 2,
     "EmenyData": null,
     "BStartAI": false,
     "_id": ""
