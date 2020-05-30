@@ -380,7 +380,7 @@ var Player = cc.Class({
         
         //如果有护盾。碰啥都死不了
         var GameData = cc.find("GameContainer").getComponent("GameData");
-        if (GameData && GameData.checkPlayerShield()) {
+        if (GameData && (GameData.checkPlayerShield() || GameData.checkSwordRush())) {
             return;
         }
 
