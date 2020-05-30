@@ -68,6 +68,16 @@
         "weight" : 0
     },
 
+    "swordRush" :{
+        "type" : 2,
+        "icon" : "Texture/Item/yujian",
+        "name" : "护盾",
+        "id" : "swordRush",
+        "buff" : "swordRush",
+        "buffTime" : 10,
+        "weight" : 1000
+    },
+
     "kite" : {
         "type" : 2,
         "icon" : "Texture/item02",
@@ -75,7 +85,7 @@
         "id" : "kite",
         "buff" : "kite",
         "buffTime" : 5,
-        "weight" : 200
+        "weight" : 0
     },
 
     "shadow" : {

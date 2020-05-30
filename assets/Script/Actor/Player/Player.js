@@ -132,9 +132,9 @@ var Player = cc.Class({
             this.RightArmFSMMgr.Update(dt);
         }
 
+        var GameData = cc.find("GameContainer").getComponent("GameData");
         //更新检测护盾的效果
         if (this.needCheckShield) {
-            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerShield() == false) {
                 this.removeShieldEffect();
             }
@@ -142,25 +142,28 @@ var Player = cc.Class({
 
          //更新检测磁铁的效果
         if (this.needCheckMagnet) {
-            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerMagnet() == false) {
                 this.removeMegnetEffect();
             }
         }
 
-        //更新检测磁铁的效果
+        //更新
         if (this.needCheckShadow) {
-        var GameData = cc.find("GameContainer").getComponent("GameData");
-        if (GameData && GameData.checkPlayerShadow() == false) {
-            this.removeShadowDebuff();
-        }
+            if (GameData && GameData.checkPlayerShadow() == false) {
+                this.removeShadowDebuff();
+            }
         }
 
         //检测风筝的效果
         if (this.needCheckKite) {
-            var GameData = cc.find("GameContainer").getComponent("GameData");
             if (GameData && GameData.checkPlayerKite() == false) {
                 this.removeKiteEffect();
+            }
+        }
+        //检测御剑
+        if (this.needCheckSwordRush) {
+            if (GameData && GameData.checkSwordRush() == false) {
+                this.removeSwordRushEffect();
             }
         }
     },
@@ -228,6 +231,21 @@ var Player = cc.Class({
             var UperJS = this.UperActor.getComponent("ActorBase");
             if(UperJS != null && UperJS != undefined){
                 UperJS.PlayAnimation("LiFallUper");
+            }
+        }
+    },
+    //御剑
+    PlaySwordRushAnima : function() {
+        if( this.BodyActor ){
+            var BodyJS = this.BodyActor.getComponent("ActorBase");
+            if(BodyJS != null && BodyJS != undefined){
+                BodyJS.PlayAnimation("LiFly");
+            }
+        }
+        if( this.UperActor ){
+            var UperJS = this.UperActor.getComponent("ActorBase");
+            if(UperJS != null && UperJS != undefined){
+                UperJS.PlayAnimation("LiEmpty");
             }
         }
     },
@@ -456,6 +474,9 @@ var Player = cc.Class({
         {
             this.addKiteEffect();
         }
+        if (GameData && GameData.checkSwordRush() == true) {
+            this.addSwordRushEffect();
+        }
         
     },
     /**
@@ -600,6 +621,19 @@ var Player = cc.Class({
         //GravityManager._instance.CancleConstantGravity(this);
         this.FSMMgr.TransState(FSMUtil.TransConditionID.FlyToFall, null, this);
     },
+
+    //御剑
+    addSwordRushEffect(){
+        this.needCheckSwordRush = true;
+        this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.SwordRush, null, this);
+
+    },
+    removeSwordRushEffect(){
+        this.needCheckSwordRush = false;
+        this.FSMMgr.TransState(FSMUtil.TransConditionID.FlyToFall, null, this);
+    },
+
+
 
     //冲刺的效果
     //dis冲刺长度

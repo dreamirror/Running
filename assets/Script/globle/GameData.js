@@ -78,22 +78,19 @@ cc.Class({
         return this.tempInfo;
     },
 
+    //获取玩家金币
     getPlayerGold : function() {
         return this.playerInfo.gold;
     },
     
-    //获得金币(传负数就是扣除金币)
-    //返回操作成功或失败
-    addPlayerGold : function (num) {
-        if (num < 0 && this.playerInfo.gold < Math.abs(num)) {
-            cc.log("## 金币不足 ##")
-            return false;
-        }
-        this.playerInfo.gold = this.playerInfo.gold + num;
-        EventCenter.emit(EventName.GoldChange,this);
-        return true;
+    //清空身上的临时数据(BUFF和武器)
+    clearTemp : function (params) {
+        this.tempInfo.buffs.splice(0);
+        this.tempInfo.weapons.splice(0);
     },
 
+
+    ////////////////////////  BUFF  ///////////////////////////
     //是否有磁铁BUFF
     checkPlayerMagnet : function () {
         for (let index = 0; index < this.tempInfo.buffs.length; index++) {
@@ -139,6 +136,29 @@ cc.Class({
         return false;
     },
 
+    //是否有御剑BUFF
+    checkSwordRush : function() {
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == "swordRush") {
+                return true;
+            }
+        }
+        return false;
+    },
+
+
+
+    //添加护盾（重生时加个盾）
+    applyShield : function (){
+        let item = new ItemBase();
+        item.init("shield","shield",null,EItemType.BUFF);
+        this.useItem(item);
+    },
+
+    ///////////////////////////////// BUFF  END ////////////////////////
+
+    ///////////////////////  武器道具数据  、//////////////////////////
     //添加或替换武器
     addOrReplaceWeapon(_weapon){
         //已经有了就捡不起来
@@ -209,7 +229,12 @@ cc.Class({
                     return;
                 }
             }
+            //BUFF互斥。如果有御剑了 咋碰到风筝也不生效
+            if (_ItemBase.buff == "kite" && this.checkSwordRush() == true ) {
+                return;
+            }
 
+            //添加新BUFF
             this.tempInfo.buffs.push({ buff : _ItemBase.buff, buffTime : _ItemBase.buffTime});
             
             //广播下BUFF
@@ -245,19 +270,21 @@ cc.Class({
         }
     },
 
-    //添加护盾（重生时加个盾）
-    applyShield : function (){
-        let item = new ItemBase();
-        item.init("shield","shield",null,EItemType.BUFF);
-        this.useItem(item);
+
+    //操作金币(传负数就是扣除金币)
+    //返回操作成功或失败
+    addPlayerGold : function (num) {
+        if (num < 0 && this.playerInfo.gold < Math.abs(num)) {
+            cc.log("## 金币不足 ##")
+            return false;
+        }
+        this.playerInfo.gold = this.playerInfo.gold + num;
+        EventCenter.emit(EventName.GoldChange,this);
+        return true;
     },
 
+    ///////////////////////  武器道具数据 END //////////////////////////
 
-    //清空身上的临时数据(BUFF和武器)
-    clearTemp : function (params) {
-        this.tempInfo.buffs.splice(0);
-        this.tempInfo.weapons.splice(0);
-    },
 
     //更新BUFF和体力回复(TODO：先在这儿更新吧。正常来说最好自定义个定时器，不用了就干掉，性能会好点)
     update(dt){
@@ -268,8 +295,6 @@ cc.Class({
                 this.doRecoverPoint();
             }
         }
-
-
         //下面是BUFF的逻辑
         if (this.tempInfo.buffs.length == 0) {
             return;
@@ -294,7 +319,7 @@ cc.Class({
     },
 
 
-
+    //////////////////////   体力    /////////////////////////
     //检查离线回复的体力
     checkOfflineActivePoint() {
         if (this.playerInfo.activePoint < MaxActivePoint) {
@@ -359,6 +384,7 @@ cc.Class({
     {
         return (new Date).getTime();
     },
+    //////////////////////   体力   END /////////////////////////
 
 
 
@@ -366,9 +392,7 @@ cc.Class({
 
 
 
-
-    //////////////////////////////////////////////////////////
-    
+    //////////////////////  数据存放  //////////////////////////
     //写数据到本地
     setInfoToLocal : function(){
         cc.sys.localStorage.setItem("playerinfo",JSON.stringify(this.playerInfo));
@@ -388,11 +412,7 @@ cc.Class({
                 }
             }
         }
-
-        // let tempInfo = cc.sys.localStorage.getItem("tempInfo");
-        // if (tempInfo != null) {
-        //     this.tempInfo =  JSON.parse(tempInfo);
-        // }
-        
     },
+     //////////////////////  数据存放  END //////////////////////////
+
 });

@@ -5,6 +5,8 @@ var PlayerJumpState = require("PlayerJumpState");
 var PlayerRushState = require("PlayerRushState");
 var PlayerFlypyBirdState = require("PlayerFlypyBirdState");
 var PlayerFallState = require("PlayerFallState");
+var PlayerSwordRushState = require("PlayerSwordRushState");
+
 
 var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
@@ -141,6 +143,12 @@ var GameInitPlayer = cc.Class({
             FlypyBirdState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.FlypyBird); 
             FlypyBirdState.AddCondition(FSMUtil.TransConditionID.FlyToFall , FSMUtil.FSMStateID.FALL);   
 
+            //御剑状态
+            var SwordRushState = new PlayerSwordRushState();
+            SwordRushState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.SwordRush); 
+            SwordRushState.AddCondition(FSMUtil.TransConditionID.FlyToFall , FSMUtil.FSMStateID.FALL);   
+            
+
             //添加一个下落状态
             var FallState = new PlayerFallState();
             FallState.InitVariable(this.FSMMgr , this.Player , FSMUtil.FSMStateID.FALL);
@@ -152,6 +160,7 @@ var GameInitPlayer = cc.Class({
             this.FSMMgr.AddState( FSMUtil.FSMStateID.RUSH, playerRush );
             this.FSMMgr.AddState( FSMUtil.FSMStateID.FlypyBird, FlypyBirdState );
             this.FSMMgr.AddState( FSMUtil.FSMStateID.FALL, FallState );
+            this.FSMMgr.AddState( FSMUtil.FSMStateID.SwordRush, SwordRushState );
 
             playerRunState.BeforeEnter();
 
