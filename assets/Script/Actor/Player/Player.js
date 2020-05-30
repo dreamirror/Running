@@ -239,7 +239,7 @@ var Player = cc.Class({
         if( this.BodyActor ){
             var BodyJS = this.BodyActor.getComponent("ActorBase");
             if(BodyJS != null && BodyJS != undefined){
-                BodyJS.PlayAnimation("LiFly");
+                BodyJS.PlayAnimation("LiYujian");
             }
         }
         if( this.UperActor ){
