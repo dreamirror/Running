@@ -86,8 +86,14 @@ var EnemyIdleState = cc.Class({
     BreakCondition :function( ) {
         if(this.bTransCloseAttack == true){
             //应该先切换到Hold状态
-            this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyPoised, null, this);
+            //this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyPoised, null, this);
             //this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyCloseAttack, null, this);
+            if (this.EnemyJS.EmenyData.BBoss != true){
+                this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyCloseAttack, null, this);
+            }
+            else{
+                this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.EnemyPoised, null, this);
+            }
             return;
         }
 

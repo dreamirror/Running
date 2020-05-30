@@ -51,7 +51,7 @@ var PlayerFallState = cc.Class({
 
         if (this.bFallOnGround){
             this.FSMMgr.ForceSetFSMState(FSMUtil.FSMStateID.RUN, null, null);
-            this.playerJS.RemoveCollisionStartCall( this.CollisionStartCallBack );
+            //this.playerJS.RemoveCollisionStartCall( this.CollisionStartCallBack );
             this.bFallOnGround = false;
             this.JumpInitialSpeed = this.InitialSpeed;
             return;
@@ -69,6 +69,7 @@ var PlayerFallState = cc.Class({
         if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ROAD)
         {
             InTarget.bFallOnGround = true;
+            InTarget.playerJS.RemoveCollisionStartCall( InTarget.CollisionStartCallBack );
         }
     },
 

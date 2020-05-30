@@ -5,14 +5,15 @@
             "Name" : "en_LowBee",
             "Prefab" : "prefabs/Enemy/en_LowBee",
             "HP" : 1,
+            "BBoss" : false,
             "EnemyType" : 1,
             "EnemyAttackType" : [1]
         }
     },
 
     "AttackDistance":{  
-        "CloseAttack" : 40,
-        "DartAttack"  : 150
+        "CloseAttack" : 100,
+        "DartAttack"  : 250
     },
 
     "BossConfig" : {

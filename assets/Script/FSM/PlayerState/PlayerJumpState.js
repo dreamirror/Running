@@ -48,6 +48,8 @@ cc.Class({
         //设置一个跳跃
         GravityManager._instance.SetJump(this.playerJS , this.JumpInitialSpeed);
 
+        this.bFallOnGround = false;
+
     },
 
     /** 当落到地面时，结束跳跃状态切换为行走状态
@@ -57,7 +59,7 @@ cc.Class({
 
         if (this.bFallOnGround){
             this.FSMMgr.TransState(FSMUtil.TransConditionID.JumpToRun, null, null);
-            this.playerJS.RemoveCollisionStartCall( this.CollisionStartCallBack );
+            //this.playerJS.RemoveCollisionStartCall( this.CollisionStartCallBack );
             this.bFallOnGround = false;
             this.JumpInitialSpeed = this.InitialSpeed;
             return;
@@ -84,6 +86,8 @@ cc.Class({
         if(FunctionLibrary.GetCollisionType(other) == CommonUtil.EObjType.TYPE_ROAD)
         {
             InTarget.bFallOnGround = true;
+
+            InTarget.playerJS.RemoveCollisionStartCall( InTarget.CollisionStartCallBack );
 
             //再重新设置一下Player的位置
             //var Bounds = FunctionLibrary.GetCollisionBoundsByBoxCollision(other);

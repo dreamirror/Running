@@ -375,8 +375,8 @@ var Player = cc.Class({
 
         //如果被敌人攻击
         if (CollisionType == CommonUtil.EObjType.TYPE_ENEMY){
-            //if(Target.OnAttackHP() == false)
-                //Target.ActorDead();
+            if(Target.OnAttackHP() == false)
+                Target.ActorDead();
             
         }
     },
@@ -384,9 +384,6 @@ var Player = cc.Class({
     //判断自身血量 5.28 
     OnAttackHP : function(){
         //再播放个出血粒子
-
-        //记录下本次攻击敌人，是不是上次攻击的敌人，如果是，return
-        //this.LastHitEnemy = false;
 
         this.HP --;
         return this.HP >= 1;

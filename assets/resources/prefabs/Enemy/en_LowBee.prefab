@@ -45,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 174,
-      "height": 378
+      "width": 87,
+      "height": 189
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -112,7 +112,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": {
-      "__uuid__": "2deee310-6050-44ec-8422-9d934ae7fa33"
+      "__uuid__": "6704f214-8aae-46f6-8164-6593955ddc81"
     },
     "_id": ""
   },
