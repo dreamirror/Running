@@ -6,10 +6,10 @@
     },
     "shadow":{
         "id":"shadow",
-        "weight":60
+        "weight":30
     }
     ,"yytc":{
         "id":"yytc",
-        "weight":0
+        "weight":30
     }
 }

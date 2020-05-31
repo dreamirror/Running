@@ -21,7 +21,6 @@ var YytcAttackState = cc.Class({
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
 
-        cc.log("sdsdsd")
         this.ArmJS = this.TargetObj.getComponent("RightArm");
         this.bAttackOver = false;
 

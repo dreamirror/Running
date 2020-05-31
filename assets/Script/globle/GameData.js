@@ -194,11 +194,24 @@ cc.Class({
         }
     },
 
+    //清除一个buff
+    removeBuff(name)
+    {
+        for (let index = this.tempInfo.buffs.length - 1; index >= 0 ; index--) {
+            let element = this.tempInfo.buffs[index];
+            if (element) {
+                if ( this.tempInfo.buffs[index].buff == name ) {
+                    this.tempInfo.buffs.splice(index,1);
+                }
+            }
+        }
+    },
+
     //清除所有武器
     clearAllWeapon()
     {
         this.tempInfo.weapons = {};
-        
+
     },
 
     //点击后重新排序

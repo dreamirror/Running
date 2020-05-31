@@ -30,9 +30,9 @@ var CommonUtil = require("CommonUtil");
 var GameManager = require("GameManager");
 
 const EventName = require("GlobalEventName");
-
+const EItemType = require('ItemBase').EItemType;
 /* 道具 */
-var ItemBase = require("ItemBase"); 
+var ItemBase = require("ItemBase").ItemBase; 
 
 /* 玩家数据类 */
 var PlayerInfo = cc.Class({
@@ -658,49 +658,53 @@ var Player = cc.Class({
     },
     //获得随机Buff
     addRandomBuff(){
+        var GameData = cc.find("GameContainer").getComponent("GameData");
+        GameData.removeBuff("randomItem")
         if(this.randomItemConfig)
         {
-            var resultData;
-            var totalWight = 0
-            for(var index in this.randomItemConfig)
+            let resultData;
+            let totalWight = 0
+            for(let index in this.randomItemConfig)
             {
-                var data = this.randomItemConfig[index]
+                let data = this.randomItemConfig[index]
                 if(data)
                 {
                     totalWight += data.weight;
                 }
             }
 
-            var resultWeight = this.random4(0,totalWight)
-            for(var index in this.randomItemConfig)
+            let resultWeight = this.random4(0,totalWight)
+            let addWeight = 0 
+            for(let index in this.randomItemConfig)
             {
-                var data = this.randomItemConfig[index]
+                let data = this.randomItemConfig[index]
+                addWeight += data.weight
                 if(data)
                 {
-                    if(resultWeight <data.weight)
+                    if(resultWeight <addWeight)
                     {
                         resultData = data;
+                        break;
                     }
 
                 }
             }
+            cc.log(resultWeight)
 
-            var GameData = cc.find("GameContainer").getComponent("GameData");
             //判断随机buff的种类
-            cc.log("随机道具 id =="+data.id)
-            data.id = "shadow"
-            if(data.id == "clearWeapon")
+            cc.log("随机道具 id =="+resultData.id)
+            if(resultData.id == "clearWeapon")
             {
                 GameData.clearAllWeapon();
-            }else if(data.id == "shadow")
+            }else if(resultData.id == "shadow")
             {
                 let item = new ItemBase();
                 item.init("shadow","shadow",null,EItemType.BUFF);
                 GameData.useItem(item);
-            }else if(data.id == "yytc")
+            }else if(resultData.id == "yytc")
             {  
-                 let item = new ItemBase();
-                item.init("yytc","yytc",null,EItemType.Weapon);
+                let item = new ItemBase();
+                item.init("weaponYytc","weaponYytc",null,EItemType.Weapon);
                 GameData.addOrReplaceWeapon(item);
 
             }
