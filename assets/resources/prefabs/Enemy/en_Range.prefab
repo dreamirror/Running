@@ -27,10 +27,13 @@
       },
       {
         "__id__": 4
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 6
     },
     "_opacity": 255,
     "_color": {
@@ -149,9 +152,30 @@
       },
       {
         "__uuid__": "37e888d0-1cea-4f50-8b29-9ca779375efc"
+      },
+      {
+        "__uuid__": "8079e948-7ae5-4c0c-918c-b5151d2e60bd"
       }
     ],
     "playOnLoad": false,
+    "_id": ""
+  },
+  {
+    "__type__": "96e7dAFUZNAxL2GxBcz9hs9",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "AYSpeed": 0,
+    "BUseGravity": true,
+    "HP": 1,
+    "EnemyType": 0,
+    "EnemyAttackType": null,
+    "FSMMgr": null,
+    "EmenyData": null,
+    "BStartAI": false,
     "_id": ""
   },
   {

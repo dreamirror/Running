@@ -7,13 +7,29 @@
             "HP" : 1,
             "BBoss" : false,
             "EnemyType" : 1,
+            "ActionCD" : 2.5,
             "EnemyAttackType" : [1]
+        },
+        "EnemyRange":{
+            "id" : "EnemyRange",
+            "Name" : "en_Range",
+            "Prefab" : "prefabs/Enemy/en_Range",
+            "HP" : 1,
+            "BBoss" : false,
+            "EnemyType" : 2,
+            "ActionCD" : 2.5,
+            "EnemyAttackType" : [2],
+
+            "DisAttackParam" : {
+                "id" : "BossDart",
+                "ShowPos" : [-100,200]
+            }
         }
     },
 
     "AttackDistance":{  
         "CloseAttack" : 100,
-        "DartAttack"  : 250
+        "DartAttack"  : 550
     },
 
     "BossConfig" : {

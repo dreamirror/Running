@@ -99,14 +99,14 @@
         "BossDart":{
             "weapontype" : 2,
             "prefab" : "prefabs/Player/Weapon/dart",
-            "name"  : "dartInHand",
+            "name"  : "en_dartInHand",
             "id"    : "BossDart",
             "Pos"   : "-32.295 , -10.375",
             "Rotaion": "34.78",
             "Anchor" : "0.5,1",
             "WeaponBelong" : 1,   
 
-            "DartPrefab" : "prefabs/Item/Thunder",
+            "DartPrefab" : "prefabs/Item/dart",
             "CD"    :   0.5,
             "Speed" :   9,
             "MoveType" : -1,

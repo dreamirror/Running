@@ -21,6 +21,8 @@ var EnemyAI = cc.Class({
     Init(InEnemyNode , InEnemyJS){
         this.EnemyNode = InEnemyNode;
         this.EnemyJS = InEnemyJS;
+
+        this.BaseCurCDTime = 0;
     },
 
     InitBossAI : function( InBossConfig , InEnemyNode , InEnemyJS) {
@@ -50,7 +52,13 @@ var EnemyAI = cc.Class({
     /**
      * 基本AI相关，根据自身的攻击类型以及玩家位置玩家操作等，为当前行为作出一个运算。
      */
-    RunBaseAI : function() {
+    RunBaseAI : function(dt) {
+        //如果距离上一个动作完成的CD时间还没有到，继续倒计时
+        if(this.BaseCurCDTime > 0){
+            this.BaseCurCDTime -= dt;
+            return;
+        }
+
         //获取一下Player
         if(this.TargetPlayer == null || this.TargetPlayer == undefined){
             var player = cc.find("Canvas/GameScene/PlayerScene/Player");
@@ -83,6 +91,7 @@ var EnemyAI = cc.Class({
         {
             if (this.GameManager.EnemyConfigData.AttackDistance.CloseAttack >= distance )
             {
+                this.BaseCurCDTime = this.EnemyJS.ActionCD;
                 return CommonUtil.EnemyRunAIResult.CloseAttack;
             }
 
@@ -92,6 +101,7 @@ var EnemyAI = cc.Class({
         {
             if (this.GameManager.EnemyConfigData.AttackDistance.DartAttack >= distance )
             {
+                this.BaseCurCDTime = this.EnemyJS.ActionCD;
                 return CommonUtil.EnemyRunAIResult.DistanceAttack;
             }
         }

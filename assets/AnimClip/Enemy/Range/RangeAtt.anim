@@ -43,7 +43,9 @@
     {
       "frame": 0.25,
       "func": "AnimationCustomEventOne",
-      "params": []
+      "params": [
+        "fc"
+      ]
     }
   ]
 }

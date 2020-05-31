@@ -26,7 +26,7 @@ var EnemyDisAttState = cc.Class({
     /*******************  状态运行相关  ******************* */
     BeforeEnter :function( InParamObj ) {
         //从TargetOBJ上获取对应的PlayerJS
-        this.EnemyJS = this.TargetObj.getComponent(EnemyBase);
+        this.EnemyJS = this.TargetObj.getComponent("EnemyBase");
         this.bAttackOver = false;
 
         //根据传入的飞行道具参数，初始化攻击状态
@@ -35,7 +35,7 @@ var EnemyDisAttState = cc.Class({
         }
 
         //进入时设置Node对象播放远程攻击动作
-        if(this.EnemyJS && (this.EnemyJS instanceof EnemyBase)){
+        if(this.EnemyJS ){//&& (this.EnemyJS instanceof EnemyBase)){
 
             this.EnemyJS.DisAttAnima(this, this.OnAttackPlayOver , this);
 

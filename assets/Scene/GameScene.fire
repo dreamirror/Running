@@ -186,7 +186,7 @@
       "array": [
         0,
         0,
-        212.1762239271875,
+        398.36585204113265,
         0,
         0,
         0,
@@ -1303,6 +1303,7 @@
     },
     "_enabled": true,
     "enemyCache": [],
+    "createCD": 5,
     "_id": "f7SQONqb1F8K+pTc7/8EmQ"
   },
   {
@@ -1833,6 +1834,8 @@
     },
     "_enabled": true,
     "GravityVal": 0.6,
+    "MaxUpSpeed": 10,
+    "MaxDown": -10,
     "_id": "7dNSzjozxDs4boVm6GRu1A"
   },
   {
@@ -1855,17 +1858,20 @@
       },
       {
         "__id__": 44
+      },
+      {
+        "__id__": 45
       }
     ],
     "WeaponPrefabList": [
-      {
-        "__id__": 45
-      },
       {
         "__id__": 46
       },
       {
         "__id__": 47
+      },
+      {
+        "__id__": 48
       }
     ],
     "EnemyInstanceList": null,
@@ -1884,6 +1890,13 @@
       "__uuid__": "478816c2-26ac-4ff0-b6b3-c47e71ecc9fb"
     },
     "id": "EnemyLowBee"
+  },
+  {
+    "__type__": "ActorItem",
+    "ActorPrefab": {
+      "__uuid__": "b024a361-a7d8-491b-8f87-a906113dd859"
+    },
+    "id": "EnemyRange"
   },
   {
     "__type__": "ActorItem",

@@ -108,6 +108,7 @@ var TestBoss = cc.Class({
             var CurWeapon = PoolManager.request(this.EmenyData.DisWeaponData.id);//ActorManager._instance.CreateFlyWeapon(this.WeaponParam.id);
             if (CurWeapon){
                 CurWeapon.parent = cc.find("Canvas/GameScene/EnemyScene")//cc.director.getScene();
+                CurWeapon.name = this.EmenyData.DisWeaponData.name;
                 //获取当前手的位置
                 var ArmPos = this.HandNode.convertToWorldSpaceAR(cc.v2(0, 0));
                 var ArmSize = this.HandNode.getContentSize();
@@ -122,7 +123,7 @@ var TestBoss = cc.Class({
                 FlyWeaponJS.InitWeaponData(this.EmenyData.DisWeaponData);
 
                 FlyWeaponJS.SetAttackType();
-                FlyWeaponJS.ReduceWeaponCount();
+                //FlyWeaponJS.ReduceWeaponCount();
             }
             //PoolManager.
         }

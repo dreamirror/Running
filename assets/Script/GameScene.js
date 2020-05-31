@@ -153,6 +153,8 @@ var GameScene = cc.Class({
             var barrier = cc.instantiate(baPrefab);
             //test
             //var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
+            //var barrier = ActorManager._instance.CreateEnemy("EnemyRange");
+
             var lastRoad = this.roads[this.roads.length - 1];
             var backIndex = 0;
             //如果当前的路是有间隔的就往左边再选一个路知道没有间隔或者选得次数超过最大次数

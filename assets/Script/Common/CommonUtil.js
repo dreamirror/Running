@@ -33,7 +33,7 @@ var WeaponBelong = {
 var EnemyType = {
     Default     :   0,
     LowBee      :   1,      //杂兵一号
-
+    Range       :   2,      //远程兵
 };
 
 /**

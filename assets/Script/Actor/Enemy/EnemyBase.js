@@ -10,6 +10,7 @@ var FSMUtil = require("FSMUtil");
 var FSMMgr = require("FSMMgr");
 var EnemyIdleState = require("EnemyIdleState");
 var EnemyCloseAttState = require("EnemyCloseAttState");
+var EnemyDisAttState = require("EnemyDisAttState");
 var GravityManager = require("GravityManager");
 
 cc.Class({
@@ -84,6 +85,7 @@ cc.Class({
         this.EmenyData = InEnemyData;
         this.HP = InEnemyData.HP;
         this.EnemyType = InEnemyData.EnemyType;
+        this.ActionCD = InEnemyData.ActionCD;
 
         this.EnemyAttackType = new Map();
         for( var AttackTypeCount = 0 ; AttackTypeCount < InEnemyData.EnemyAttackType.length ; AttackTypeCount++){
@@ -113,8 +115,13 @@ cc.Class({
         CloseAttState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyCloseAttack);        
         CloseAttState.SetJSComponentName(InNodeJSComponentName);
 
+        /* 远距离攻击状态 */
+        var RangeAttState = new EnemyDisAttState();
+        RangeAttState.InitVariable(this.FSMMgr , this.node ,FSMUtil.FSMStateID.EnemyDistanceAttack);       
+
         this.FSMMgr.Init( FSMUtil.FSMStateID.EnemyIdle , IdleState);
         this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyCloseAttack, CloseAttState );
+        this.FSMMgr.AddState( FSMUtil.FSMStateID.EnemyDistanceAttack, RangeAttState );
 
         IdleState.BeforeEnter();    
     },
@@ -270,4 +277,10 @@ cc.Class({
     SetBossActionOver :function() {
         this.AI.BossAIRunOver();
     },
+
+    /******************  创建攻击相关 *******************/
+    //创建远程攻击
+    CreateDisAtt : function( ){
+    },
+
 });
