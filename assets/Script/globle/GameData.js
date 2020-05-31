@@ -114,6 +114,17 @@ cc.Class({
         return false;
     },
 
+    //检查是不是有随机道具
+    checkBuff:function(buffname){
+        for (let index = 0; index < this.tempInfo.buffs.length; index++) {
+            let element = this.tempInfo.buffs[index];
+            if (element && element.buff == buffname) {
+                return true;
+            }
+        }
+        return false;
+    },
+
     //是否有护盾BUFF
     checkPlayerShield : function () {
         for (let index = 0; index < this.tempInfo.buffs.length; index++) {
@@ -181,6 +192,13 @@ cc.Class({
             this.tempInfo.weapons.shift(); //删除第一个
             this.tempInfo.weapons.unshift(_weapon); //并插入到第一个
         }
+    },
+
+    //清除所有武器
+    clearAllWeapon()
+    {
+        this.tempInfo.weapons = {};
+        
     },
 
     //点击后重新排序

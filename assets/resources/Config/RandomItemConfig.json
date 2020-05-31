@@ -1,0 +1,15 @@
+{
+
+    "clearWeapon":{
+        "id":"clearWeapon",
+        "weight":30
+    },
+    "shadow":{
+        "id":"shadow",
+        "weight":60
+    }
+    ,"yytc":{
+        "id":"yytc",
+        "weight":0
+    }
+}

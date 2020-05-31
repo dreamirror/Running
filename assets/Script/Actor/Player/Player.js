@@ -122,6 +122,20 @@ var Player = cc.Class({
         EventCenter.on(EventName.OnWeaponClear, this.OnWeaponClear , this);
 
         EventCenter.on(EventName.GetBuff , this.OnGetBuffs , this);
+        this.randomItemConfig = {};
+
+        var self = this;
+        //初始化随机道具表
+        cc.loader.loadRes("Config/RandomItemConfig",function(err,obj){
+            if(err)
+            {
+                cc.log(err)
+                return;
+            }
+
+            self.randomItemConfig = obj.json;
+
+        })
     },
 
     update (dt) {
@@ -477,6 +491,11 @@ var Player = cc.Class({
         if (GameData && GameData.checkSwordRush() == true) {
             this.addSwordRushEffect();
         }
+
+        if(GameData && GameData.checkBuff("randomItem") == true)
+        {
+            this.addRandomBuff();
+        }
         
     },
     /**
@@ -633,7 +652,61 @@ var Player = cc.Class({
         this.FSMMgr.TransState(FSMUtil.TransConditionID.FlyToFall, null, this);
     },
 
+    random4 : function (n, m){
+        var random = Math.floor(Math.random()*(m-n+1)+n);
+        return random;
+    },
+    //获得随机Buff
+    addRandomBuff(){
+        if(this.randomItemConfig)
+        {
+            var resultData;
+            var totalWight = 0
+            for(var index in this.randomItemConfig)
+            {
+                var data = this.randomItemConfig[index]
+                if(data)
+                {
+                    totalWight += data.weight;
+                }
+            }
 
+            var resultWeight = this.random4(0,totalWight)
+            for(var index in this.randomItemConfig)
+            {
+                var data = this.randomItemConfig[index]
+                if(data)
+                {
+                    if(resultWeight <data.weight)
+                    {
+                        resultData = data;
+                    }
+
+                }
+            }
+
+            var GameData = cc.find("GameContainer").getComponent("GameData");
+            //判断随机buff的种类
+            cc.log("随机道具 id =="+data.id)
+            data.id = "shadow"
+            if(data.id == "clearWeapon")
+            {
+                GameData.clearAllWeapon();
+            }else if(data.id == "shadow")
+            {
+                let item = new ItemBase();
+                item.init("shadow","shadow",null,EItemType.BUFF);
+                GameData.useItem(item);
+            }else if(data.id == "yytc")
+            {  
+                 let item = new ItemBase();
+                item.init("yytc","yytc",null,EItemType.Weapon);
+                GameData.addOrReplaceWeapon(item);
+
+            }
+        }
+
+    },
 
     //冲刺的效果
     //dis冲刺长度
@@ -644,15 +717,16 @@ var Player = cc.Class({
         {
             this.originPos = this.node.getPosition();
         }
+        var GameSpeed = cc.find("Canvas/GameScene/BackGround").getComponent("GameScene").updateSpeed;
         var originPos = this.originPos;
         let action = cc.moveTo(time, this.node.getPosition().x + dis, this.node.getPosition().y)
         this.node.runAction(action);
-        var originSpeed = window.SceneData.OriginSpeed;
+        var originSpeed = GameSpeed
         var self = this;
         let callBack = function(){
             cc.log("冲刺结束")
-            window.SceneData.OriginSpeed = window.SceneData.OriginSpeed * 0.8
-            var call2 = function(){ window.SceneData.OriginSpeed = originSpeed};
+            cc.find("Canvas/GameScene/BackGround").getComponent("GameScene").changeSpeed(0.8);
+            var call2 = function(){ cc.find("Canvas/GameScene/BackGround").getComponent("GameScene").resetSpeed()};
             let action = cc.moveTo(0.5,originPos.x, originPos.y)
             self.node.runAction(cc.sequence(action,cc.callFunc(call2)));
             

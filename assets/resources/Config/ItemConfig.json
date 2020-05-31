@@ -75,7 +75,7 @@
         "id" : "swordRush",
         "buff" : "swordRush",
         "buffTime" : 10,
-        "weight" : 1000
+        "weight" : 0
     },
 
     "kite" : {
@@ -96,6 +96,15 @@
         "buff" : "shadow",
         "buffTime" : 3,
         "weight" : 0
+    },
+    "randomItem" :{
+        "type" : 2,
+        "icon" : "Texture/Item/yujian",
+        "name" : "随机道具",
+        "id" : "randomItem",
+        "buff" : "randomItem",
+        "buffTime" : 1,
+        "weight" : 100  
     }
 
 }

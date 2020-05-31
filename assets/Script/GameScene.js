@@ -104,7 +104,7 @@ var GameScene = cc.Class({
      onLoad () {
 
         GameScene._instance = this;
-
+        this.updateSpeed = window.SceneData.OriginSpeed
         //加载预制体
         var self = this;
         var prefabNum = window.SceneData.barrierPath.length;
@@ -315,7 +315,7 @@ var GameScene = cc.Class({
     {
         window.SceneData.TaltleDistance = 0;
         window.SceneData.Speed =window.SceneData.OriginSpeed;
-        
+        this.updateSpeed = window.SceneData.OriginSpeed
         if(this.barriers.length > 0)
         {
             for(var index in this.barriers)
@@ -443,6 +443,17 @@ var GameScene = cc.Class({
         }
     },
 
+    //
+    changeSpeed(param){
+        this.updateSpeed = this.updateSpeed * param;
+
+    },
+
+    resetSpeed(){
+        this.updateSpeed = window.SceneData.OriginSpeed
+
+    },
+
     changeLevel(){
         this.CurrentLevel = 2
     },
@@ -555,7 +566,7 @@ var GameScene = cc.Class({
         //更新速度
         if(window.SceneData.Speed < window.SceneData.MaxSpeed)
         {
-            window.SceneData.Speed =window.SceneData.OriginSpeed + window.SceneData.SpeedReCordDis * window.SceneData.DisToSpeed;
+            window.SceneData.Speed = this.updateSpeed + window.SceneData.SpeedReCordDis * window.SceneData.DisToSpeed;
         }
          var self = this;
          self.obj = null;
