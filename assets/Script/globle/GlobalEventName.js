@@ -17,6 +17,8 @@ var EventName = {
 
     ActivePointChange : "_ActivePointChange", //体力变化
     GoldChange : "_GoldChange", //金币变化
+
+    BloodChange : "_BloodChange", //血量变化
     
 };
 
