@@ -22,6 +22,9 @@ var GameManager = cc.Class({
     onLoad () {
         GameManager._instance = this;
 
+        if(cc.director.setDisplayStats != null || cc.director.setDisplayStats!= undefined)
+            cc.director.setDisplayStats(false);
+
         this.LoadGameConfig();
         //让此Node不被destory
         cc.game.addPersistRootNode(this.node);
@@ -95,8 +98,8 @@ var GameManager = cc.Class({
             return ;
         }
 
-        wx.offAppShow(this.OnAppShowFront);
-        wx.offAppHide(this.OnAppShowBack);
+        //wx.offAppShow(this.OnAppShowFront);
+        //wx.offAppHide(this.OnAppShowBack);
     },
 
     OnAppShowFront : function(){
@@ -134,7 +137,7 @@ var GameManager = cc.Class({
                     //再为UI的两个按钮绑定两个回调
                     var GameOverPlJS = self.GameOverUI.getComponent("CommonTipsPl");
                     if(GameOverPlJS){
-                        GameOverPlJS.SetOkBtnCall(self , "GameManager" , "ShareSuccessCallBack" , self);
+                        GameOverPlJS.SetOkBtnCall(self , "GameManager" , "ShareCall" , self);
                         GameOverPlJS.SetCancelBtnCall(self , "GameManager" , "ReLoadScene" , self);
                     }
                 }

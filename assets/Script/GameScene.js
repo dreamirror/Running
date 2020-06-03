@@ -150,9 +150,9 @@ var GameScene = cc.Class({
         {   
                     
             var width = DesignSize;
-            var barrier = cc.instantiate(baPrefab);
+            //var barrier = cc.instantiate(baPrefab);
             //test
-            //var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
+            var barrier = ActorManager._instance.CreateEnemy("EnemyLowBee");
             //var barrier = ActorManager._instance.CreateEnemy("EnemyRange");
 
             var lastRoad = this.roads[this.roads.length - 1];
