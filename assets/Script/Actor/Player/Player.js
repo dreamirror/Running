@@ -416,8 +416,11 @@ var Player = cc.Class({
     //判断自身血量 5.28 
     OnAttackHP : function(){
         //再播放个出血粒子
-
+        
         this.HP --;
+
+        EventCenter.emit(EventName.BloodChange,this.HP);
+        
         return this.HP >= 1;
     },
 
